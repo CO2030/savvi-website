@@ -79,11 +79,23 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       }, 250);
     },
     onError: (error: any) => {
-      toast({
-        title: "Error submitting form",
-        description: error.message || "Something went wrong. Please try again.",
-        variant: "destructive"
-      });
+      // Check if it's the email already registered error
+      if (error.message && (error.message.includes("already registered") || error.alreadyRegistered)) {
+        // Handle the duplicate email gracefully by showing success anyway
+        setSuccess(true);
+        
+        toast({
+          title: "Welcome back!",
+          description: "You're already on our waitlist. We'll be in touch soon!",
+          variant: "default"
+        });
+      } else {
+        toast({
+          title: "Error submitting form",
+          description: error.message || "Something went wrong. Please try again.",
+          variant: "destructive"
+        });
+      }
     }
   });
 
@@ -358,7 +370,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               </div>
               
               <Button 
-                className="w-full"
+                className="w-full hover:bg-orange-500 transition-colors"
                 onClick={handleClose}
               >
                 Close
