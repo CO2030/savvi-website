@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { SocialShare } from "./SocialShare";
 
 interface HeroProps {
   onWaitlistClick: () => void;
@@ -24,25 +23,14 @@ export function Hero({ onWaitlistClick }: HeroProps) {
           <p className="text-xl md:text-2xl text-white opacity-90 mb-8 animate-slide-in">
             Be the first to test our beta and shape the future of personalized nutrition.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button 
-              onClick={onWaitlistClick}
-              variant="outline" 
-              size="lg"
-              className="bg-white hover:bg-gray-100 text-primary hover:text-primary-dark font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in"
-            >
-              Join the Waitlist
-            </Button>
-            
-            <SocialShare
-              url={typeof window !== 'undefined' ? window.location.href : ''}
-              title="Discover SavviWell - AI-powered nutrition recommendations tailored to your needs!"
-              description="SavviWell uses AI to deliver personalized nutrition recommendations. Join the waitlist for early access!"
-              className="bg-white hover:bg-gray-100 text-primary hover:text-primary-dark font-bold shadow-md animate-slide-in"
-              buttonText="Share SavviWell"
-              showButtonText={true}
-            />
-          </div>
+          <Button 
+            onClick={onWaitlistClick}
+            variant="outline" 
+            size="lg"
+            className="bg-white hover:bg-gray-100 text-primary hover:text-primary-dark font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in"
+          >
+            Join the Waitlist
+          </Button>
         </div>
       </div>
     </section>
