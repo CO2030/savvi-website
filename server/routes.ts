@@ -4,6 +4,8 @@ import { storage } from "./storage";
 import { insertWaitlistSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
+import { submitToGoogleScript } from "./services/googleScripts";
+import { config } from "./config";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Waitlist endpoint
@@ -21,8 +23,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      // Create waitlist entry
+      // Create waitlist entry in local storage
       const newEntry = await storage.createWaitlistEntry(validatedData);
+      
+      // Get Google Script deployment URL from environment variables
+      const deploymentUrl = process.env.GOOGLE_SCRIPT_DEPLOYMENT_URL;
+      
+      // Submit to Google Sheet if deployment URL is available
+      if (deploymentUrl) {
+        const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
+          name: validatedData.name,
+          email: validatedData.email,
+          userType: validatedData.userType,
+          healthGoal: validatedData.healthGoal,
+          dietaryConcern: validatedData.dietaryConcern
+        });
+        
+        if (!googleSubmitResult.success) {
+          console.warn("Google Sheet submission failed:", googleSubmitResult.message);
+          // Continue with local storage only
+        }
+      } else {
+        console.warn("No Google Script deployment URL set in environment variables");
+      }
       
       // Return success response
       return res.status(201).json({
