@@ -6,6 +6,7 @@ import { About } from "@/components/About";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { WaitlistModal } from "@/components/WaitlistModal";
+import { FloatingShareButton } from "@/components/FloatingShareButton";
 import { Helmet } from "react-helmet";
 
 export default function Home() {
@@ -40,6 +41,7 @@ export default function Home() {
       </main>
       <Footer />
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
+      <FloatingShareButton />
     </>
   );
 }

@@ -6,8 +6,19 @@ import {
   Twitter, 
   Instagram, 
   Linkedin, 
-  Send
+  Send,
+  Share
 } from "lucide-react";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon
+} from 'react-share';
 
 export function Footer() {
   return (
@@ -65,7 +76,50 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
+        {/* Share With Friends Section */}
+        <div className="border-t border-gray-800 mt-8 pt-8 pb-4 flex flex-col items-center justify-center">
+          <h3 className="text-xl font-bold mb-4 font-heading">Share SavviWell with Friends</h3>
+          <p className="text-gray-300 mb-4 text-center max-w-md">
+            Help us spread the word about AI-powered nutrition recommendations!
+          </p>
+          
+          <div className="flex gap-4 mb-6">
+            <FacebookShareButton 
+              url={typeof window !== 'undefined' ? window.location.href : ''} 
+              hashtag="#SavviWell"
+              className="transition-transform hover:scale-110"
+            >
+              <FacebookIcon size={40} round />
+            </FacebookShareButton>
+            
+            <TwitterShareButton 
+              url={typeof window !== 'undefined' ? window.location.href : ''} 
+              title="Join me in exploring AI-powered nutrition recommendations with SavviWell!" 
+              className="transition-transform hover:scale-110"
+            >
+              <TwitterIcon size={40} round />
+            </TwitterShareButton>
+            
+            <LinkedinShareButton 
+              url={typeof window !== 'undefined' ? window.location.href : ''} 
+              title="SavviWell - AI-Powered Nutrition"
+              summary="Personalized nutrition recommendations powered by AI. Join the waitlist for early access!" 
+              className="transition-transform hover:scale-110"
+            >
+              <LinkedinIcon size={40} round />
+            </LinkedinShareButton>
+            
+            <WhatsappShareButton 
+              url={typeof window !== 'undefined' ? window.location.href : ''} 
+              title="Check out SavviWell - AI-powered nutrition recommendations!"
+              className="transition-transform hover:scale-110"
+            >
+              <WhatsappIcon size={40} round />
+            </WhatsappShareButton>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-300">
           <p>&copy; {new Date().getFullYear()} SavviWell. All rights reserved.</p>
         </div>
       </div>
