@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,13 +18,41 @@ import {
   Search, 
   ArrowUpDown, 
   X,
-  LogOut
+  LogOut,
+  Filter,
+  FileJson,
+  FileText
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState<keyof WaitlistEntry>("createdAt");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [filterType, setFilterType] = useState<string | null>(null);
+  const [filterValue, setFilterValue] = useState<string | null>(null);
+  const [passwordProtected, setPasswordProtected] = useState<boolean>(true);
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>("");
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
 
   // Fetch all waitlist entries
