@@ -44,8 +44,8 @@ export function About() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img 
-              src="https://images.unsplash.com/photo-1543076499-a6133cb932fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=700" 
-              alt="Fresh green lemons and leaves" 
+              src="https://images.unsplash.com/photo-1606791422814-b32c705e3e2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=700" 
+              alt="Woman cooking healthy food in kitchen" 
               className="rounded-lg shadow-md h-48 md:h-auto object-cover w-full"
             />
             <img 
