@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLocation } from "wouter";
 
 interface HeaderProps {
   onWaitlistClick: () => void;
@@ -11,6 +12,7 @@ interface HeaderProps {
 export function Header({ onWaitlistClick }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,12 +60,21 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             About
           </button>
         </nav>
-        <Button 
-          onClick={onWaitlistClick}
-          className="hidden md:block"
-        >
-          Join the Waitlist
-        </Button>
+        <div className="hidden md:flex space-x-3">
+          <Button 
+            onClick={() => setLocation('/demo')}
+            variant="outline"
+            className="border-[#3a925d] text-[#3a925d] hover:bg-[#eaffea] hover:text-[#2e7d4c]"
+          >
+            Try Demo
+          </Button>
+          <Button 
+            onClick={onWaitlistClick}
+            className="bg-[#3a925d] hover:bg-[#2e7d4c]"
+          >
+            Join the Waitlist
+          </Button>
+        </div>
         <Button 
           variant="ghost" 
           size="icon"
@@ -92,10 +103,20 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             </button>
             <Button 
               onClick={() => {
+                setLocation('/demo');
+                closeMobileMenu();
+              }}
+              variant="outline"
+              className="w-full border-[#3a925d] text-[#3a925d] hover:bg-[#eaffea] hover:text-[#2e7d4c] mb-2"
+            >
+              Try Demo
+            </Button>
+            <Button 
+              onClick={() => {
                 onWaitlistClick();
                 closeMobileMenu();
               }}
-              className="w-full"
+              className="w-full bg-[#3a925d] hover:bg-[#2e7d4c]"
             >
               Join the Waitlist
             </Button>

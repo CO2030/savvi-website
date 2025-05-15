@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SavviWell AI Assistant</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5fff7;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      color: #2e3c2f;
+    }
+    h1 {
+      text-align: center;
+      color: #2e3c2f;
+      margin-bottom: 0.5rem;
+    }
+    p.intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .prompt-block {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #d5e5d4;
+      box-shadow: 0 2px 6px rgba(120, 200, 140, 0.1);
+    }
+    .prompt-label {
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .prompt-content {
+      margin-top: 0.75rem;
+      background: #eaffea;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid #6acb7d;
+    }
+    .btn {
+      background: #3a925d;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #2e7d4c;
+    }
+    .btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+    .demo-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+    .waitlist-form {
+      margin-top: 2rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #d5e5d4;
+      text-align: center;
+    }
+    .waitlist-form input[type="email"] {
+      width: 60%;
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #d5e5d4;
+      border-radius: 6px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 1rem;
+    }
+    .footer a {
+      text-decoration: none;
+      color: #3a925d;
+      font-weight: bold;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Try SavviWell – Your Smart Meal Planning Assistant</h1>
+  <p class="intro">Explore AI-powered responses to real-life family and health goals.</p>
+  
+  <!-- Demo Container -->
+  <div id="demo-container">
+    <!-- Prompt 1 -->
+    <div id="prompt1" class="prompt-block">
+      <div class="prompt-label">
+        💬 I'm a mom with two kids. One is gluten-free. I want budget-friendly dinners.
+      </div>
+      <button id="generateBtn1" class="btn">Generate Meal Plan</button>
+      <div id="response1" class="prompt-content hidden">
+        ✅ <strong>Meal Plan Summary:</strong> A kid-friendly, gluten-free week of dinners under $125.<br><br>
+        🍽️ <strong>Sample Day:</strong><br>
+        Dinner: Turkey taco bowls with rice, beans, and avocado.<br>
+        <em>Swap for kids:</em> Rice + shredded cheese + turkey<br><br>
+        🛒 <strong>Grocery List:</strong><br>
+        Ground turkey, brown rice, corn, black beans, avocados, apples.
+        
+        <div class="demo-controls">
+          <button id="joinWaitlist1" class="btn">Get My Personalized Plan</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Prompt 2 -->
+    <div id="prompt2" class="prompt-block">
+      <div class="prompt-label">
+        💬 I want to boost my energy and avoid sugar. I'm vegetarian.
+      </div>
+      <button id="generateBtn2" class="btn">Generate Meal Plan</button>
+      <div id="response2" class="prompt-content hidden">
+        ✅ <strong>Meal Plan Summary:</strong> Vegetarian, low-sugar meals to improve energy.<br><br>
+        🍽️ <strong>Sample Day:</strong><br>
+        Breakfast: Greek yogurt with chia & berries<br>
+        Lunch: Lentil-spinach bowl with tahini<br>
+        Dinner: Tofu stir-fry with brown rice<br>
+        Snack: Almonds + orange slices<br><br>
+        🛒 <strong>Grocery List:</strong><br>
+        Tofu, spinach, lentils, tahini, berries, almonds.
+        
+        <div class="demo-controls">
+          <button id="joinWaitlist2" class="btn">Get My Personalized Plan</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Prompt 3 -->
+    <div id="prompt3" class="prompt-block">
+      <div class="prompt-label">
+        💬 I need high-protein meals for a diabetic adult and a picky 8-year-old.
+      </div>
+      <button id="generateBtn3" class="btn">Generate Meal Plan</button>
+      <div id="response3" class="prompt-content hidden">
+        ✅ <strong>Meal Plan Summary:</strong> Balanced meals with high protein and low sugar, kid-friendly options included.<br><br>
+        🍽️ <strong>Sample Day:</strong><br>
+        Breakfast: Scrambled eggs + berries + whole wheat toast<br>
+        Lunch: Grilled chicken wraps with spinach + hummus<br>
+        Dinner: Baked salmon, quinoa, and steamed broccoli<br>
+        Snack: Cheese cubes + apple slices<br><br>
+        🛒 <strong>Grocery List:</strong><br>
+        Eggs, berries, chicken, whole wheat wraps, salmon, quinoa, broccoli, apples, cheese.
+        
+        <div class="demo-controls">
+          <button id="joinWaitlist3" class="btn">Get My Personalized Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Waitlist Form (initially hidden) -->
+  <div id="waitlist-container" class="waitlist-form hidden">
+    <h2>Join the SavviWell Waitlist</h2>
+    <p>Be one of the first to get personalized AI meal planning!</p>
+    <form id="waitlist-form">
+      <input type="email" id="email" placeholder="Your email address" required>
+      <button type="submit" class="btn">Join Waitlist</button>
+    </form>
+    <p id="confirmation-message" class="hidden" style="color: #3a925d; font-weight: bold; margin-top: 10px;">
+      Thanks for joining! We'll contact you soon.
+    </p>
+    <button id="backToDemo" class="btn" style="margin-top: 15px; background: #666;">Back to Demo</button>
+  </div>
+
+  <script>
+    // Demo interaction handling
+    document.addEventListener('DOMContentLoaded', function() {
+      // Generate buttons
+      document.getElementById('generateBtn1').addEventListener('click', function() {
+        // Simulate loading
+        this.textContent = "Generating...";
+        this.disabled = true;
+        
+        // Show response after a short delay to simulate AI generation
+        setTimeout(() => {
+          document.getElementById('response1').classList.remove('hidden');
+          this.classList.add('hidden');
+        }, 1500);
+      });
+      
+      document.getElementById('generateBtn2').addEventListener('click', function() {
+        this.textContent = "Generating...";
+        this.disabled = true;
+        setTimeout(() => {
+          document.getElementById('response2').classList.remove('hidden');
+          this.classList.add('hidden');
+        }, 1500);
+      });
+      
+      document.getElementById('generateBtn3').addEventListener('click', function() {
+        this.textContent = "Generating...";
+        this.disabled = true;
+        setTimeout(() => {
+          document.getElementById('response3').classList.remove('hidden');
+          this.classList.add('hidden');
+        }, 1500);
+      });
+      
+      // Waitlist buttons
+      const joinWaitlistButtons = document.querySelectorAll('[id^="joinWaitlist"]');
+      joinWaitlistButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          document.getElementById('demo-container').classList.add('hidden');
+          document.getElementById('waitlist-container').classList.remove('hidden');
+        });
+      });
+      
+      document.getElementById('backToDemo').addEventListener('click', function() {
+        document.getElementById('waitlist-container').classList.add('hidden');
+        document.getElementById('demo-container').classList.remove('hidden');
+      });
+      
+      // Waitlist form submission
+      document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Simulate form submission
+        document.getElementById('confirmation-message').classList.remove('hidden');
+        document.getElementById('email').value = '';
+      });
+    });
+  </script>
+</body>
+</html>
