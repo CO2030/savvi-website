@@ -26,8 +26,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create waitlist entry in local storage
       const newEntry = await storage.createWaitlistEntry(validatedData);
       
-      // Get Google Script deployment URL from environment variables
-      const deploymentUrl = process.env.GOOGLE_SCRIPT_DEPLOYMENT_URL;
+      // Get Google Script deployment URL from config
+      const deploymentUrl = config.googleScriptDeploymentUrl;
       
       // Submit to Google Sheet if deployment URL is available
       if (deploymentUrl) {
