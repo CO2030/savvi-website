@@ -158,15 +158,6 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-md mx-auto">
         <div className="relative">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="absolute right-0 top-0"
-            onClick={handleClose}
-          >
-            <X className="h-4 w-4" />
-          </Button>
-          
           <div className="w-full mb-4">
             <Progress value={progressPercentage} className="h-1" />
           </div>
