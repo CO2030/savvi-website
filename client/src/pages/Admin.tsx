@@ -66,7 +66,7 @@ export default function AdminDashboard() {
     
     const csvContent = [
       headers.join(","),
-      ...rows.map(row => row.join(","))
+      ...rows.map((row: any[]) => row.join(","))
     ].join("\\n");
 
     // Create and download the file
