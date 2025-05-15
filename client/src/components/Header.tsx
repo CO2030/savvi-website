@@ -64,7 +64,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           <Button 
             onClick={() => setLocation('/demo')}
             variant="outline"
-            className="border-primary text-primary hover:bg-primary/10 hover:text-primary transition-colors"
+            className="border-[#3a925d] text-[#3a925d] hover:bg-[#eaffea] hover:text-[#2e7d4c] transition-colors"
           >
             Try Demo
           </Button>
@@ -107,7 +107,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
                 closeMobileMenu();
               }}
               variant="outline"
-              className="w-full border-primary text-primary hover:bg-primary/10 hover:text-primary transition-colors mb-2"
+              className="w-full border-[#3a925d] text-[#3a925d] hover:bg-[#eaffea] hover:text-[#2e7d4c] transition-colors mb-2"
             >
               Try Demo
             </Button>
