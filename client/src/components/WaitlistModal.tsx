@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import confetti from "canvas-confetti";
+import { ShareSuccess } from "./ShareSuccess";
 
 interface FormValues {
   name: string;
@@ -359,6 +360,12 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               <DialogDescription className="mb-6">
                 Thanks for joining our waitlist. We'll notify you as soon as we're ready to welcome our first beta users.
               </DialogDescription>
+              
+              {/* Share Success Component */}
+              <div className="mb-6">
+                <ShareSuccess />
+              </div>
+              
               <Button 
                 className="w-full"
                 onClick={handleClose}
