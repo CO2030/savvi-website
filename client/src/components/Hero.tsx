@@ -18,10 +18,13 @@ export function Hero({ onWaitlistClick }: HeroProps) {
       <div className="container mx-auto relative z-10">
         <div className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-heading leading-tight mb-4 animate-fade-in">
-            Smarter meals.<br/>Healthier lives.
+            Welcome to SavviWell
           </h1>
-          <p className="text-xl md:text-2xl text-white opacity-90 mb-8 animate-slide-in">
-            Be the first to test our beta and shape the future of personalized nutrition.
+          <p className="text-xl md:text-2xl text-white opacity-90 mb-4 animate-slide-in">
+            Your Personalized nutrition and lifestyle AI assistant for Everyday Wellness—for Individuals and Families Alike
+          </p>
+          <p className="text-lg md:text-xl text-white opacity-95 mb-8 animate-slide-in" style={{animationDelay: "0.2s"}}>
+            Join our beta program today and help shape the future of personalized nutrition!
           </p>
           <Button 
             onClick={onWaitlistClick}
