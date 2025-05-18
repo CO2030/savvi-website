@@ -106,14 +106,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           await submitToGoogleScript(config.googleScriptDeploymentUrl, {
             email: validatedData.email,
-            source: "newsletter",
             name: "Newsletter Subscriber",
             userType: "newsletter",
             healthGoal: "n/a", 
-            dietaryConcern: "n/a"
+            dietaryConcern: "n/a",
+            source: "newsletter"
           });
         } catch (error) {
-          console.error("Google Sheet submission failed:", error.message);
+          const errorMessage = error instanceof Error ? error.message : "Unknown error";
+          console.error("Google Sheet submission failed:", errorMessage);
         }
       }
       

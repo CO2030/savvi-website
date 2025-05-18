@@ -10,9 +10,9 @@ import {
   Share,
   Check
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -51,19 +51,30 @@ export function Footer() {
         body: JSON.stringify({ email })
       });
       
+      const result = await response.json();
+      
+      // Handle already subscribed case
+      if (result.alreadySubscribed) {
+        toast({
+          title: "Already subscribed",
+          description: "This email is already subscribed to our newsletter.",
+          variant: "default"
+        });
+      } else {
+        toast({
+          title: "Successfully subscribed!",
+          description: "Thank you for subscribing to our newsletter.",
+          variant: "default"
+        });
+      }
+      
       setIsSubscribed(true);
       setEmail("");
-      
-      toast({
-        title: "Successfully subscribed!",
-        description: "Thank you for subscribing to our newsletter.",
-        variant: "default"
-      });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Newsletter subscription error:", error);
       toast({
         title: "Subscription failed",
-        description: "There was an error subscribing to the newsletter. Please try again.",
+        description: error.message || "There was an error subscribing to the newsletter. Please try again.",
         variant: "destructive"
       });
     } finally {

@@ -9,6 +9,7 @@ export async function submitToGoogleScript(
     userType: string;
     healthGoal: string;
     dietaryConcern: string;
+    source?: string;
   }
 ): Promise<{ success: boolean; message?: string }> {
   try {
