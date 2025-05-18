@@ -73,6 +73,30 @@ export class MemStorage implements IStorage {
   async getAllWaitlistEntries(): Promise<WaitlistEntry[]> {
     return Array.from(this.waitlistEntries.values());
   }
+
+  async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
+    const id = this.currentNewsletterId++;
+    const createdAt = new Date().toISOString();
+    
+    const newSubscriber: NewsletterSubscriber = { 
+      ...subscriber, 
+      id, 
+      createdAt 
+    };
+    
+    this.newsletterSubscribers.set(id, newSubscriber);
+    return newSubscriber;
+  }
+
+  async getNewsletterSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
+    return Array.from(this.newsletterSubscribers.values()).find(
+      (subscriber) => subscriber.email === email
+    );
+  }
+
+  async getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    return Array.from(this.newsletterSubscribers.values());
+  }
 }
 
 export const storage = new MemStorage();

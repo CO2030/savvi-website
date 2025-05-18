@@ -1,7 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertWaitlistSchema } from "@shared/schema";
+import { insertWaitlistSchema, insertNewsletterSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript } from "./services/googleScripts";
@@ -78,6 +78,74 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Error fetching waitlist entries:", error);
       return res.status(500).json({
         message: "An error occurred while fetching waitlist entries"
+      });
+    }
+  });
+  
+  // Newsletter subscription endpoint
+  app.post("/api/newsletter", async (req: Request, res: Response) => {
+    try {
+      // Validate the request body
+      const validatedData = insertNewsletterSchema.parse(req.body);
+      
+      // Check if email already exists
+      const existingSubscriber = await storage.getNewsletterSubscriberByEmail(validatedData.email);
+      
+      if (existingSubscriber) {
+        return res.status(200).json({
+          message: "Email already subscribed to the newsletter",
+          alreadySubscribed: true
+        });
+      }
+      
+      // Create newsletter subscription in local storage
+      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+      
+      // Try to submit to Google Sheet if URL is provided
+      if (config.googleScriptDeploymentUrl) {
+        try {
+          await submitToGoogleScript(config.googleScriptDeploymentUrl, {
+            email: validatedData.email,
+            source: "newsletter",
+            name: "Newsletter Subscriber",
+            userType: "newsletter",
+            healthGoal: "n/a", 
+            dietaryConcern: "n/a"
+          });
+        } catch (error) {
+          console.error("Google Sheet submission failed:", error.message);
+        }
+      }
+      
+      return res.status(201).json({
+        message: "Successfully subscribed to the newsletter",
+        id: newSubscriber.id
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({
+          message: "Validation error",
+          details: validationError.message
+        });
+      }
+      
+      console.error("Error subscribing to newsletter:", error);
+      return res.status(500).json({
+        message: "An error occurred while processing your request"
+      });
+    }
+  });
+  
+  // Get all newsletter subscribers (for admin)
+  app.get("/api/newsletter", async (req: Request, res: Response) => {
+    try {
+      const subscribers = await storage.getAllNewsletterSubscribers();
+      return res.status(200).json(subscribers);
+    } catch (error) {
+      console.error("Error fetching newsletter subscribers:", error);
+      return res.status(500).json({
+        message: "An error occurred while fetching newsletter subscribers"
       });
     }
   });

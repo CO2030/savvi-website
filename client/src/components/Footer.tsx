@@ -7,8 +7,12 @@ import {
   Instagram, 
   Linkedin, 
   Send,
-  Share
+  Share,
+  Check
 } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -21,6 +25,52 @@ import {
 } from 'react-share';
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubscribe = async () => {
+    if (!email || !email.includes('@')) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+      
+      setIsSubscribed(true);
+      setEmail("");
+      
+      toast({
+        title: "Successfully subscribed!",
+        description: "Thank you for subscribing to our newsletter.",
+        variant: "default"
+      });
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      toast({
+        title: "Subscription failed",
+        description: "There was an error subscribing to the newsletter. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="container mx-auto">
@@ -64,16 +114,35 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 font-heading">Stay Updated</h3>
             <p className="text-gray-300 mb-4">Subscribe to our newsletter for the latest updates.</p>
-            <div className="flex">
-              <Input 
-                type="email" 
-                placeholder="Your email" 
-                className="rounded-r-none border-gray-700 bg-gray-800 text-white"
-              />
-              <Button className="rounded-l-none" size="icon">
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
+            {!isSubscribed ? (
+              <div className="flex">
+                <Input 
+                  type="email" 
+                  placeholder="Your email" 
+                  className="rounded-r-none border-gray-700 bg-gray-800 text-white"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSubmitting}
+                />
+                <Button 
+                  className="rounded-l-none" 
+                  size="icon" 
+                  onClick={handleSubscribe}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                  ) : (
+                    <Send className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2 bg-primary/20 text-white p-3 rounded-md">
+                <Check className="h-5 w-5 text-primary" />
+                <span>Thank you for subscribing!</span>
+              </div>
+            )}
           </div>
         </div>
         {/* Share With Friends Section */}
