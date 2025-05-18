@@ -27,7 +27,13 @@ import {
 export function Footer() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(() => {
+    // Check if user has already subscribed in localStorage
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('newsletter-subscribed') === 'true';
+    }
+    return false;
+  });
   const { toast } = useToast();
 
   const handleSubscribe = async () => {
@@ -68,6 +74,8 @@ export function Footer() {
         });
       }
       
+      // Save subscription status to localStorage
+      localStorage.setItem('newsletter-subscribed', 'true');
       setIsSubscribed(true);
       setEmail("");
     } catch (error: any) {
