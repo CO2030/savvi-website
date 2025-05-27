@@ -9,7 +9,7 @@ export function Logo({ className, color = "primary" }: LogoProps) {
   return (
     <span 
       className={cn(
-        "text-2xl font-bold font-heading",
+        "text-2xl font-bold font-logo",
         color === "primary" ? "text-primary" : "text-white",
         className
       )}
