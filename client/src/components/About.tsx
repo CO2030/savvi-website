@@ -44,7 +44,7 @@ export function About() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img 
-              src="/attached_assets/mrderraz_Salmn_al_Horno_con_Patatas_y_Esprragos_Ingredientes_-__1064f8d1-9068-4c6f-989f-630823bd90bb.png" 
+              src="/salmon-dish.png" 
               alt="Salmon al Horno con Patatas y Espárragos - healthy meal ingredients" 
               className="rounded-lg shadow-md h-48 md:h-auto object-cover w-full"
             />
