@@ -62,13 +62,6 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         </nav>
         <div className="hidden md:flex space-x-3">
           <Button 
-            onClick={() => setLocation('/demo')}
-            variant="outline"
-            className="border-[#3a925d] text-[#3a925d] hover:bg-[#eaffea] hover:text-[#2e7d4c] transition-colors"
-          >
-            Try Demo
-          </Button>
-          <Button 
             onClick={onWaitlistClick}
             className="bg-primary hover:bg-primary/90 transition-colors"
           >
@@ -101,16 +94,6 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             >
               About
             </button>
-            <Button 
-              onClick={() => {
-                setLocation('/demo');
-                closeMobileMenu();
-              }}
-              variant="outline"
-              className="w-full border-[#3a925d] text-[#3a925d] hover:bg-[#eaffea] hover:text-[#2e7d4c] transition-colors mb-2"
-            >
-              Try Demo
-            </Button>
             <Button 
               onClick={() => {
                 onWaitlistClick();
