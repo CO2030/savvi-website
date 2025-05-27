@@ -29,7 +29,7 @@ export function Hero({ onWaitlistClick }: HeroProps) {
           <Button 
             onClick={onWaitlistClick}
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in"
+            className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in"
           >
             Join the Waitlist
           </Button>
