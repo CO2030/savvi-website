@@ -14,7 +14,7 @@ export function Hero({ onWaitlistClick }: HeroProps) {
         backgroundPosition: "center"
       }}
     >
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/40"></div>
       <div className="container mx-auto relative z-10">
         <div className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-heading leading-tight mb-4 animate-fade-in">
