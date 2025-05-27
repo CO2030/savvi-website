@@ -44,7 +44,7 @@ export function About() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img 
-              src="/salmon-dish.png" 
+              src="/images/salmon-asparagus.png" 
               alt="Roasted salmon with potatoes and asparagus - healthy one-pan meal" 
               className="rounded-lg shadow-md h-48 md:h-auto object-cover w-full"
             />
