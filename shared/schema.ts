@@ -34,6 +34,15 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   createdAt: text("created_at").notNull()
 });
 
+export const contactSubmissions = pgTable("contact_submissions", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  reason: text("reason").notNull(),
+  message: text("message"),
+  createdAt: text("created_at").notNull()
+});
+
 export const insertNewsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
@@ -56,3 +65,6 @@ export type WaitlistEntry = typeof waitlistEntries.$inferSelect;
 
 export type InsertNewsletterSubscriber = z.infer<typeof insertNewsletterSchema>;
 export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+
+export type InsertContactSubmission = z.infer<typeof insertContactSchema>;
+export type ContactSubmission = typeof contactSubmissions.$inferSelect;

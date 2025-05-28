@@ -1,7 +1,8 @@
 import { 
   users, type User, type InsertUser,
   waitlistEntries, type WaitlistEntry, type InsertWaitlistEntry,
-  newsletterSubscribers, type NewsletterSubscriber, type InsertNewsletterSubscriber
+  newsletterSubscribers, type NewsletterSubscriber, type InsertNewsletterSubscriber,
+  contactSubmissions, type ContactSubmission, type InsertContactSubmission
 } from "@shared/schema";
 
 // modify the interface with any CRUD methods
@@ -20,23 +21,31 @@ export interface IStorage {
   createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
   getNewsletterSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined>;
   getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
+
+  // Contact methods
+  createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
+  getAllContactSubmissions(): Promise<ContactSubmission[]>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private waitlistEntries: Map<number, WaitlistEntry>;
   private newsletterSubscribers: Map<number, NewsletterSubscriber>;
+  private contactSubmissions: Map<number, ContactSubmission>;
   currentUserId: number;
   currentWaitlistId: number;
   currentNewsletterId: number;
+  currentContactId: number;
 
   constructor() {
     this.users = new Map();
     this.waitlistEntries = new Map();
     this.newsletterSubscribers = new Map();
+    this.contactSubmissions = new Map();
     this.currentUserId = 1;
     this.currentWaitlistId = 1;
     this.currentNewsletterId = 1;
+    this.currentContactId = 1;
   }
 
   async getUser(id: number): Promise<User | undefined> {
