@@ -163,7 +163,7 @@ export default function AdminDashboard() {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex flex-col md:flex-row items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold mb-4 md:mb-0">Waitlist Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-4 md:mb-0">Admin Dashboard</h1>
         <div className="flex items-center space-x-2">
           <Button variant="outline" onClick={handleExport}>
             <Download className="h-4 w-4 mr-2" />
@@ -174,6 +174,30 @@ export default function AdminDashboard() {
             Logout
           </Button>
         </div>
+      </div>
+
+      {/* Tab Navigation */}
+      <div className="flex space-x-1 mb-6 border-b">
+        <button
+          onClick={() => setActiveTab("waitlist")}
+          className={`px-4 py-2 font-medium text-sm rounded-t-lg ${
+            activeTab === "waitlist"
+              ? "bg-blue-50 text-blue-700 border-b-2 border-blue-700"
+              : "text-gray-500 hover:text-gray-700"
+          }`}
+        >
+          Waitlist ({waitlistEntries?.length || 0})
+        </button>
+        <button
+          onClick={() => setActiveTab("contact")}
+          className={`px-4 py-2 font-medium text-sm rounded-t-lg ${
+            activeTab === "contact"
+              ? "bg-blue-50 text-blue-700 border-b-2 border-blue-700"
+              : "text-gray-500 hover:text-gray-700"
+          }`}
+        >
+          Contact Submissions ({contactSubmissions?.length || 0})
+        </button>
       </div>
 
       <div className="relative mb-6">
@@ -193,6 +217,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="rounded-md border">
+        {activeTab === "waitlist" ? (
         <Table>
           <TableHeader>
             <TableRow>
@@ -283,10 +308,49 @@ export default function AdminDashboard() {
             )}
           </TableBody>
         </Table>
+        ) : (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>ID</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Reason</TableHead>
+              <TableHead>Message</TableHead>
+              <TableHead>Date</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {contactSubmissions && contactSubmissions.length > 0 ? (
+              contactSubmissions.map((submission) => (
+                <TableRow key={submission.id}>
+                  <TableCell>{submission.id}</TableCell>
+                  <TableCell>{submission.name}</TableCell>
+                  <TableCell>{submission.email}</TableCell>
+                  <TableCell className="capitalize">{submission.reason}</TableCell>
+                  <TableCell className="max-w-xs truncate" title={submission.message}>
+                    {submission.message}
+                  </TableCell>
+                  <TableCell>{new Date(submission.createdAt).toLocaleString()}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                  {contactLoading ? "Loading..." : "No contact submissions yet"}
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        )}
       </div>
 
       <div className="mt-4 text-sm text-muted-foreground">
-        {sortedEntries.length} entries found
+        {activeTab === "waitlist" 
+          ? `${sortedEntries.length} entries found`
+          : `${contactSubmissions?.length || 0} submissions found`
+        }
       </div>
     </div>
   );
