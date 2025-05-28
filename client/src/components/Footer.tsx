@@ -10,6 +10,7 @@ import {
   Share,
   Check
 } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -109,6 +110,9 @@ export function Footer() {
               </a>
               <a href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb6QFzD35fLvJkkAOq3N" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <SiWhatsapp className="h-5 w-5" />
               </a>
             </div>
           </div>
