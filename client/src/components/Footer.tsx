@@ -10,6 +10,7 @@ import {
   Share,
   Check
 } from "lucide-react";
+import { FaPinterest } from "react-icons/fa";
 import { SiWhatsapp } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -111,6 +112,9 @@ export function Footer() {
               <a href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
+              <a href="https://www.pinterest.com/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <FaPinterest className="h-5 w-5" />
+              </a>
               <a href="https://whatsapp.com/channel/0029Vb6QFzD35fLvJkkAOq3N" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <SiWhatsapp className="h-5 w-5" />
               </a>
@@ -124,9 +128,8 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold mb-4 font-heading">Support</h3>
+            <h3 className="text-lg font-bold mb-4 font-heading">Legal</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
