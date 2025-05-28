@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
+import { ContactModal } from "./ContactModal";
 import { 
   Facebook, 
   Twitter, 
@@ -8,7 +9,8 @@ import {
   Linkedin, 
   Send,
   Share,
-  Check
+  Check,
+  Mail
 } from "lucide-react";
 import { FaPinterest, FaTiktok } from "react-icons/fa";
 import { SiWhatsapp } from "react-icons/si";
@@ -29,6 +31,7 @@ import {
 export function Footer() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(() => {
     // Check if user has already subscribed in localStorage
     if (typeof window !== 'undefined') {
@@ -131,9 +134,17 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold mb-4 font-heading">Legal</h3>
+            <h3 className="text-lg font-bold mb-4 font-heading">Support</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+              <li>
+                <button 
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="text-gray-300 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <Mail className="h-4 w-4" />
+                  Contact Us
+                </button>
+              </li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
@@ -219,6 +230,11 @@ export function Footer() {
           <p>&copy; {new Date().getFullYear()} SavviWell. All rights reserved.</p>
         </div>
       </div>
+      
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </footer>
   );
 }

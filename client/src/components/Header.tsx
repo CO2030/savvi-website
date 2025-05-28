@@ -102,6 +102,15 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             >
               About
             </button>
+            <button 
+              onClick={() => {
+                setIsContactModalOpen(true);
+                closeMobileMenu();
+              }}
+              className="text-neutral-dark hover:text-primary transition-colors py-2"
+            >
+              Contact
+            </button>
             <Button 
               onClick={() => {
                 onWaitlistClick();
@@ -114,6 +123,11 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           </div>
         </div>
       )}
+      
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </header>
   );
 }
