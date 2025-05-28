@@ -120,8 +120,6 @@ export function Footer() {
             <h3 className="text-lg font-bold mb-4 font-heading">Company</h3>
             <ul className="space-y-2">
               <li><a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Press</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
             </ul>
           </div>
