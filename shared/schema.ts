@@ -34,10 +34,19 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   createdAt: text("created_at").notNull()
 });
 
-export const insertNewsletterSchema = createInsertSchema(newsletterSubscribers).omit({
-  id: true,
-  createdAt: true
+export const insertNewsletterSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
 });
+
+export const insertContactSchema = z.object({
+  name: z.string().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  reason: z.string().min(1, "Please select a reason for contacting us"),
+  message: z.string().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
+});
+
+export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;
+export type InsertContact = z.infer<typeof insertContactSchema>;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;

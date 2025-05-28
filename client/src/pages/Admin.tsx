@@ -92,7 +92,7 @@ export default function AdminDashboard() {
       entry.dietaryConcern,
       new Date(entry.createdAt).toLocaleString()
     ]);
-    
+
     const csvContent = [
       headers.join(","),
       ...rows.map((row: any[]) => row.join(","))
@@ -278,7 +278,7 @@ export default function AdminDashboard() {
           </TableBody>
         </Table>
       </div>
-      
+
       <div className="mt-4 text-sm text-muted-foreground">
         {sortedEntries.length} entries found
       </div>

@@ -1,10 +1,11 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertWaitlistSchema, insertNewsletterSchema } from "@shared/schema";
+import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript } from "./services/googleScripts";
+import { sendContactEmail } from "./services/emailService";
 import { config } from "./config";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -147,6 +148,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Error fetching newsletter subscribers:", error);
       return res.status(500).json({
         message: "An error occurred while fetching newsletter subscribers"
+      });
+    }
+  });
+
+  // Contact form endpoint
+  app.post("/api/contact", async (req: Request, res: Response) => {
+    try {
+      // Validate the request body
+      const validatedData = insertContactSchema.parse(req.body);
+      
+      // Create contact submission in local storage
+      const newSubmission = await storage.createContactSubmission(validatedData);
+      
+      // Send email notification
+      const emailResult = await sendContactEmail(validatedData);
+      
+      if (!emailResult.success) {
+        console.warn("Email sending failed:", emailResult.message);
+        // Continue with success response even if email fails
+      }
+      
+      return res.status(201).json({
+        message: "Contact form submitted successfully",
+        id: newSubmission.id
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({
+          message: "Validation error",
+          details: validationError.message
+        });
+      }
+      
+      console.error("Error processing contact form:", error);
+      return res.status(500).json({
+        message: "An error occurred while processing your request"
+      });
+    }
+  });
+  
+  // Get all contact submissions (for admin)
+  app.get("/api/contact", async (req: Request, res: Response) => {
+    try {
+      const submissions = await storage.getAllContactSubmissions();
+      return res.status(200).json(submissions);
+    } catch (error) {
+      console.error("Error fetching contact submissions:", error);
+      return res.status(500).json({
+        message: "An error occurred while fetching contact submissions"
       });
     }
   });

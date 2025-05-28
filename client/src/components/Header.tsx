@@ -18,7 +18,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -59,6 +59,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           >
             About
           </button>
+          <a href="/contact" className="text-neutral-dark hover:text-primary transition-colors">Contact</a>
         </nav>
         <div className="hidden md:flex space-x-3">
           <Button 
@@ -77,7 +78,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </Button>
       </div>
-      
+
       {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white w-full py-4 animate-fade-in">

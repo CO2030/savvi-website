@@ -10,12 +10,12 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   // Waitlist methods
   createWaitlistEntry(entry: InsertWaitlistEntry): Promise<WaitlistEntry>;
   getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined>;
   getAllWaitlistEntries(): Promise<WaitlistEntry[]>;
-  
+
   // Newsletter methods
   createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
   getNewsletterSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined>;
@@ -55,7 +55,7 @@ export class MemStorage implements IStorage {
     this.users.set(id, user);
     return user;
   }
-  
+
   async createWaitlistEntry(insertEntry: InsertWaitlistEntry): Promise<WaitlistEntry> {
     const id = this.currentWaitlistId++;
     const createdAt = new Date().toISOString();
@@ -63,13 +63,13 @@ export class MemStorage implements IStorage {
     this.waitlistEntries.set(id, entry);
     return entry;
   }
-  
+
   async getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined> {
     return Array.from(this.waitlistEntries.values()).find(
       (entry) => entry.email.toLowerCase() === email.toLowerCase(),
     );
   }
-  
+
   async getAllWaitlistEntries(): Promise<WaitlistEntry[]> {
     return Array.from(this.waitlistEntries.values());
   }
@@ -77,13 +77,13 @@ export class MemStorage implements IStorage {
   async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
     const id = this.currentNewsletterId++;
     const createdAt = new Date().toISOString();
-    
+
     const newSubscriber: NewsletterSubscriber = { 
       ...subscriber, 
       id, 
       createdAt 
     };
-    
+
     this.newsletterSubscribers.set(id, newSubscriber);
     return newSubscriber;
   }
