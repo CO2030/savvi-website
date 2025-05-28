@@ -218,7 +218,7 @@ export default function AdminDashboard() {
 
       <div className="rounded-md border">
         {activeTab === "waitlist" ? (
-        <Table>
+          <Table>
           <TableHeader>
             <TableRow>
               <TableHead 
@@ -322,7 +322,7 @@ export default function AdminDashboard() {
           </TableHeader>
           <TableBody>
             {contactSubmissions && contactSubmissions.length > 0 ? (
-              contactSubmissions.map((submission) => (
+              contactSubmissions.map((submission: ContactSubmission) => (
                 <TableRow key={submission.id}>
                   <TableCell>{submission.id}</TableCell>
                   <TableCell>{submission.name}</TableCell>
