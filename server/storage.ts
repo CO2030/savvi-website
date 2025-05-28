@@ -106,6 +106,20 @@ export class MemStorage implements IStorage {
   async getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
     return Array.from(this.newsletterSubscribers.values());
   }
+
+  async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+    const id = this.currentContactId++;
+    const createdAt = new Date().toISOString();
+    const submission: ContactSubmission = { ...insertSubmission, id, createdAt };
+    this.contactSubmissions.set(id, submission);
+    return submission;
+  }
+
+  async getAllContactSubmissions(): Promise<ContactSubmission[]> {
+    return Array.from(this.contactSubmissions.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
 }
 
 export const storage = new MemStorage();
