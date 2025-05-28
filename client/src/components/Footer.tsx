@@ -139,9 +139,8 @@ export function Footer() {
               <li>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
-                  className="text-gray-300 hover:text-white transition-colors flex items-center gap-2"
+                  className="text-gray-300 hover:text-white transition-colors"
                 >
-                  <Mail className="h-4 w-4" />
                   Contact Us
                 </button>
               </li>
