@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
-import { ContactModal } from "./ContactModal";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLocation } from "wouter";
@@ -13,7 +12,6 @@ interface HeaderProps {
 export function Header({ onWaitlistClick }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [, setLocation] = useLocation();
 
   useEffect(() => {
@@ -61,12 +59,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           >
             About
           </button>
-          <button 
-            onClick={() => setIsContactModalOpen(true)}
-            className="text-neutral-dark hover:text-primary transition-colors"
-          >
-            Contact
-          </button>
+
         </nav>
         <div className="hidden md:flex space-x-3">
           <Button 
@@ -102,15 +95,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             >
               About
             </button>
-            <button 
-              onClick={() => {
-                setIsContactModalOpen(true);
-                closeMobileMenu();
-              }}
-              className="text-neutral-dark hover:text-primary transition-colors py-2"
-            >
-              Contact
-            </button>
+
             <Button 
               onClick={() => {
                 onWaitlistClick();
@@ -123,11 +108,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           </div>
         </div>
       )}
-      
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
-      />
+
     </header>
   );
 }
