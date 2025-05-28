@@ -18,9 +18,8 @@ export function CTASection({ onWaitlistClick }: CTASectionProps) {
         <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">Join our waitlist today and be the first to experience SavviWell's personalized nutrition platform.</p>
         <Button 
           onClick={onWaitlistClick}
-          variant="outline" 
           size="lg"
-          className="bg-white hover:bg-gray-100 text-primary hover:text-primary-dark font-bold shadow-lg transition-all transform hover:scale-105"
+          className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105"
         >
           Join the Waitlist
         </Button>
