@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { WaitlistEntry } from "@shared/schema";
+import { WaitlistEntry, ContactSubmission } from "@shared/schema";
 import { 
   Download, 
   Search, 
@@ -44,6 +44,7 @@ import {
 } from "@/components/ui/dialog";
 
 export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState<"waitlist" | "contact">("waitlist");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState<keyof WaitlistEntry>("createdAt");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
@@ -58,6 +59,11 @@ export default function AdminDashboard() {
   // Fetch all waitlist entries
   const { data: waitlistEntries, isLoading, error } = useQuery<WaitlistEntry[]>({
     queryKey: ["/api/waitlist"],
+  });
+
+  // Fetch all contact submissions
+  const { data: contactSubmissions, isLoading: contactLoading } = useQuery<ContactSubmission[]>({
+    queryKey: ["/api/contact"],
   });
 
   // Handle sorting
