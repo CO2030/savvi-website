@@ -26,7 +26,13 @@ export function About() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">About SavviWell</h2>
             <p className="text-lg mb-6 text-neutral-dark">
-              SavviWell uses AI to personalize meal plans and grocery lists based on your unique goals, preferences, and household needs. Designed for health-conscious individuals, families, and caregivers.
+              The first voice-powered AI meal planning assistant designed to lighten the mental load of healthy eating.
+            </p>
+            <p className="text-lg mb-6 text-neutral-dark">
+              We make it easy to plan meals, nourish your family, and support whole-body wellness—with personalized guidance that starts in your kitchen and grows with your goals.
+            </p>
+            <p className="text-lg mb-6 text-neutral-dark">
+              Simple. Smart. Wellness that starts with food—and lasts a lifetime.
             </p>
             <div className="space-y-4">
               {features.map((feature, index) => (
