@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { WaitlistEntry, ContactSubmission } from "@shared/schema";
 import { Logo } from "@/components/Logo";
 import { apiRequest } from "@/lib/queryClient";
+import { Download } from "lucide-react";
 
 export default function SimpleAdmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,6 +85,82 @@ export default function SimpleAdmin() {
     },
   });
 
+  // Download functions
+  const downloadCSV = (data: any[], filename: string, headers: string[]) => {
+    const csvContent = [
+      headers.join(","),
+      ...data.map((item) => 
+        headers.map(header => {
+          const value = item[header.toLowerCase().replace(/\s+/g, '')];
+          return value ? `"${value.toString().replace(/"/g, '""')}"` : '""';
+        }).join(",")
+      )
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadWaitlistCSV = () => {
+    if (!waitlistEntries || waitlistEntries.length === 0) {
+      toast({
+        title: "No data to download",
+        description: "There are no waitlist entries to export",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const headers = ["Name", "Email", "UserType", "HealthGoal", "DietaryConcern", "CreatedAt"];
+    const formattedData = waitlistEntries.map(entry => ({
+      name: entry.name,
+      email: entry.email,
+      usertype: entry.userType,
+      healthgoal: entry.healthGoal,
+      dietaryconcern: entry.dietaryConcern,
+      createdat: new Date(entry.createdAt).toLocaleDateString()
+    }));
+
+    downloadCSV(formattedData, `waitlist_entries_${new Date().toISOString().split('T')[0]}.csv`, headers);
+    toast({
+      title: "Download started",
+      description: "Waitlist CSV file is being downloaded",
+    });
+  };
+
+  const downloadContactsCSV = () => {
+    if (!contactSubmissions || contactSubmissions.length === 0) {
+      toast({
+        title: "No data to download",
+        description: "There are no contact submissions to export",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const headers = ["Name", "Email", "Reason", "Message", "CreatedAt"];
+    const formattedData = contactSubmissions.map(submission => ({
+      name: submission.name,
+      email: submission.email,
+      reason: submission.reason,
+      message: submission.message,
+      createdat: new Date(submission.createdAt).toLocaleDateString()
+    }));
+
+    downloadCSV(formattedData, `contact_submissions_${new Date().toISOString().split('T')[0]}.csv`, headers);
+    toast({
+      title: "Download started",
+      description: "Contact submissions CSV file is being downloaded",
+    });
+  };
+
   // Show login form if not authenticated
   if (!isAuthenticated) {
     return (
@@ -151,6 +228,22 @@ export default function SimpleAdmin() {
           <div className="flex justify-between items-center py-6">
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
             <div className="flex space-x-2">
+              <Button 
+                onClick={downloadWaitlistCSV} 
+                variant="outline"
+                disabled={!waitlistEntries || waitlistEntries.length === 0}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Waitlist CSV
+              </Button>
+              <Button 
+                onClick={downloadContactsCSV} 
+                variant="outline"
+                disabled={!contactSubmissions || contactSubmissions.length === 0}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Contacts CSV
+              </Button>
               <Button 
                 onClick={() => addTestDataMutation.mutate()} 
                 variant="outline"
