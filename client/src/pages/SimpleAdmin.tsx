@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { WaitlistEntry, ContactSubmission } from "@shared/schema";
 import { Logo } from "@/components/Logo";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function SimpleAdmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   // Check if already authenticated
   useEffect(() => {
@@ -60,6 +62,26 @@ export default function SimpleAdmin() {
   const { data: contactSubmissions, isLoading: contactLoading } = useQuery<ContactSubmission[]>({
     queryKey: ["/api/contact"],
     enabled: isAuthenticated,
+  });
+
+  // Mutation to add test data
+  const addTestDataMutation = useMutation({
+    mutationFn: () => apiRequest("POST", "/api/test/add-sample-data", {}),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
+      toast({
+        title: "Test data added",
+        description: "Sample entries have been added to demonstrate grouping",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to add test data",
+        variant: "destructive",
+      });
+    },
   });
 
   // Show login form if not authenticated
@@ -128,9 +150,18 @@ export default function SimpleAdmin() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <Button onClick={handleLogout} variant="outline">
-              Logout
-            </Button>
+            <div className="flex space-x-2">
+              <Button 
+                onClick={() => addTestDataMutation.mutate()} 
+                variant="outline"
+                disabled={addTestDataMutation.isPending}
+              >
+                {addTestDataMutation.isPending ? "Adding..." : "Add Test Data"}
+              </Button>
+              <Button onClick={handleLogout} variant="outline">
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>

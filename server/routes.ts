@@ -202,6 +202,105 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Test endpoint to add sample data (for testing the admin dashboard grouping)
+  app.post("/api/test/add-sample-data", async (req: Request, res: Response) => {
+    try {
+      // Sample waitlist entries with different user types and health goals
+      const sampleWaitlistEntries = [
+        {
+          name: "Alice Johnson",
+          email: "alice@example.com",
+          userType: "Individual",
+          healthGoal: "Weight Loss",
+          dietaryConcern: "Gluten-free diet"
+        },
+        {
+          name: "Bob Smith",
+          email: "bob@example.com",
+          userType: "Individual",
+          healthGoal: "Weight Loss",
+          dietaryConcern: "Low-carb preferences"
+        },
+        {
+          name: "Carol Williams",
+          email: "carol@example.com",
+          userType: "Healthcare Professional",
+          healthGoal: "Patient Education",
+          dietaryConcern: "Diabetes management"
+        },
+        {
+          name: "David Brown",
+          email: "david@example.com",
+          userType: "Individual",
+          healthGoal: "Muscle Gain",
+          dietaryConcern: "High-protein diet"
+        },
+        {
+          name: "Emma Davis",
+          email: "emma@example.com",
+          userType: "Nutritionist",
+          healthGoal: "Client Support",
+          dietaryConcern: "Food allergies"
+        }
+      ];
+
+      // Sample contact submissions with different reasons
+      const sampleContactSubmissions = [
+        {
+          name: "Frank Wilson",
+          email: "frank@example.com",
+          reason: "partnership",
+          message: "I'm interested in exploring partnership opportunities with SavviWell for our clinic."
+        },
+        {
+          name: "Grace Miller",
+          email: "grace@example.com",
+          reason: "general",
+          message: "When will the platform be available? I'm very excited to try it!"
+        },
+        {
+          name: "Henry Taylor",
+          email: "henry@example.com",
+          reason: "support",
+          message: "I signed up for the waitlist but haven't received a confirmation email."
+        },
+        {
+          name: "Ivy Anderson",
+          email: "ivy@example.com",
+          reason: "partnership",
+          message: "Our hospital would like to discuss integrating SavviWell into our patient care program."
+        },
+        {
+          name: "Jack Thompson",
+          email: "jack@example.com",
+          reason: "general",
+          message: "Does SavviWell support vegetarian meal planning?"
+        }
+      ];
+
+      // Add waitlist entries
+      for (const entry of sampleWaitlistEntries) {
+        await storage.createWaitlistEntry(entry);
+      }
+
+      // Add contact submissions
+      for (const submission of sampleContactSubmissions) {
+        await storage.createContactSubmission(submission);
+      }
+
+      return res.status(200).json({
+        message: "Sample data added successfully",
+        waitlistEntries: sampleWaitlistEntries.length,
+        contactSubmissions: sampleContactSubmissions.length
+      });
+    } catch (error) {
+      console.error("Error adding sample data:", error);
+      return res.status(500).json({
+        message: "Error adding sample data"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
