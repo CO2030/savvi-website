@@ -6,20 +6,19 @@ import { About } from "@/components/About";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { WaitlistModal } from "@/components/WaitlistModal";
-import { FloatingShareButton } from "@/components/FloatingShareButton";
 import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const openModal = () => {
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  
+
   return (
     <>
       <Helmet>
@@ -31,7 +30,7 @@ export default function Home() {
         <meta property="og:url" content="https://savviwell.com" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
       </Helmet>
-      
+
       <Header onWaitlistClick={openModal} />
       <main className="font-sans">
         <Hero onWaitlistClick={openModal} />
@@ -41,7 +40,6 @@ export default function Home() {
       </main>
       <Footer />
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
-      <FloatingShareButton />
     </>
   );
 }
