@@ -68,14 +68,16 @@ export default function AdminDashboard() {
     }
   }, []);
 
-  // Fetch all waitlist entries
+  // Fetch all waitlist entries (only when authenticated)
   const { data: waitlistEntries, isLoading, error } = useQuery<WaitlistEntry[]>({
     queryKey: ["/api/waitlist"],
+    enabled: isAuthenticated,
   });
 
-  // Fetch all contact submissions
+  // Fetch all contact submissions (only when authenticated)
   const { data: contactSubmissions, isLoading: contactLoading } = useQuery<ContactSubmission[]>({
     queryKey: ["/api/contact"],
+    enabled: isAuthenticated,
   });
 
   // Handle sorting
