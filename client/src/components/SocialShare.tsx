@@ -61,8 +61,8 @@ export function SocialShare({
           {showButtonText && buttonText}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-3" align="end">
-        <div className="flex gap-2 flex-wrap">
+      <PopoverContent className="w-auto p-2" align="end">
+        <div className="flex gap-1.5 flex-wrap max-w-[180px]">
           <FacebookShareButton url={shareUrl} hashtag="#SavviWell" className="transition-opacity hover:opacity-80">
             <FacebookIcon size={iconSize} round={rounded} borderRadius={iconRadius} />
           </FacebookShareButton>
