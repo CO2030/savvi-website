@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -21,7 +22,8 @@ import {
   LogOut,
   Filter,
   FileJson,
-  FileText
+  FileText,
+  Lock
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -42,6 +44,7 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import { Logo } from "@/components/Logo";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"waitlist" | "contact">("waitlist");
@@ -50,11 +53,20 @@ export default function AdminDashboard() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [filterType, setFilterType] = useState<string | null>(null);
   const [filterValue, setFilterValue] = useState<string | null>(null);
-  const [passwordProtected, setPasswordProtected] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [passwordDialogOpen, setPasswordDialogOpen] = useState<boolean>(true);
   const [password, setPassword] = useState<string>("");
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
+  // Check authentication on component mount
+  useEffect(() => {
+    const authStatus = sessionStorage.getItem('admin_authenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+      setPasswordDialogOpen(false);
+    }
+  }, []);
 
   // Fetch all waitlist entries
   const { data: waitlistEntries, isLoading, error } = useQuery<WaitlistEntry[]>({
@@ -134,10 +146,36 @@ export default function AdminDashboard() {
     return 0;
   });
 
+  // Handle password authentication
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === "savviwell2025") {
+      setIsAuthenticated(true);
+      setPasswordDialogOpen(false);
+      sessionStorage.setItem('admin_authenticated', 'true');
+      toast({
+        title: "Access granted",
+        description: "Welcome to the admin dashboard",
+      });
+    } else {
+      toast({
+        title: "Access denied",
+        description: "Incorrect password",
+        variant: "destructive",
+      });
+      setPassword("");
+    }
+  };
+
   // Logout function
   const handleLogout = () => {
-    window.location.href = "/";
-    // In a real app, we would clear auth token/session
+    setIsAuthenticated(false);
+    sessionStorage.removeItem('admin_authenticated');
+    setLocation("/");
+    toast({
+      title: "Logged out",
+      description: "You have been logged out successfully",
+    });
   };
 
   if (isLoading) {
@@ -155,6 +193,53 @@ export default function AdminDashboard() {
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
         <div className="text-center py-12 text-red-500">
           Error loading waitlist entries. Please try again.
+        </div>
+      </div>
+    );
+  }
+
+  // Show password dialog if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow">
+          <div className="flex justify-center">
+            <Logo className="h-12" />
+          </div>
+          
+          <div className="text-center">
+            <Lock className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+            <h1 className="text-2xl font-bold">Admin Access Required</h1>
+            <p className="text-gray-600 mt-2">Enter the admin password to continue</p>
+          </div>
+          
+          <form onSubmit={handlePasswordSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="admin-password">Password</Label>
+              <Input
+                id="admin-password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter admin password"
+                required
+                autoFocus
+              />
+            </div>
+            
+            <Button type="submit" className="w-full">
+              Access Dashboard
+            </Button>
+          </form>
+          
+          <div className="text-center">
+            <a 
+              href="/" 
+              className="text-sm text-primary hover:underline"
+            >
+              Back to Home
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -328,7 +413,7 @@ export default function AdminDashboard() {
                   <TableCell>{submission.name}</TableCell>
                   <TableCell>{submission.email}</TableCell>
                   <TableCell className="capitalize">{submission.reason}</TableCell>
-                  <TableCell className="max-w-xs truncate" title={submission.message}>
+                  <TableCell className="max-w-xs truncate" title={submission.message ?? undefined}>
                     {submission.message}
                   </TableCell>
                   <TableCell>{new Date(submission.createdAt).toLocaleString()}</TableCell>
