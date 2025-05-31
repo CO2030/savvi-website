@@ -7,10 +7,9 @@ interface HeroProps {
 export function Hero({ onWaitlistClick }: HeroProps) {
   return (
     <section 
-      className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] md:min-h-screen bg-top md:bg-center bg-no-repeat"
+      className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] md:min-h-screen bg-top md:bg-center bg-cover bg-no-repeat"
       style={{
-        backgroundImage: "url('/images/hero-background.jpeg')",
-        backgroundSize: "50%"
+        backgroundImage: "url('/images/hero-background.jpeg')"
       }}
     >
       <div className="absolute inset-0 bg-black/30"></div>
