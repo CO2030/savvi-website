@@ -144,7 +144,7 @@ export function Footer() {
                   Contact Us
                 </button>
               </li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
           </div>

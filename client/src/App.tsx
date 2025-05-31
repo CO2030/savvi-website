@@ -8,6 +8,7 @@ import AdminLogin from "@/pages/AdminLogin";
 import SimpleAdmin from "@/pages/SimpleAdmin";
 import Demo from "@/pages/Demo";
 import ContactPage from "@/pages/ContactPage";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/dashboard" component={SimpleAdmin} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="*" component={NotFound} />
     </Switch>
   );
