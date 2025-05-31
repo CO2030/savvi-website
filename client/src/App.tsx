@@ -9,6 +9,7 @@ import SimpleAdmin from "@/pages/SimpleAdmin";
 import Demo from "@/pages/Demo";
 import ContactPage from "@/pages/ContactPage";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import TermsOfService from "@/pages/TermsOfService";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/admin/dashboard" component={SimpleAdmin} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="*" component={NotFound} />
     </Switch>
   );
