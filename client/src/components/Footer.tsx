@@ -227,14 +227,6 @@ export function Footer() {
         
         <div className="border-t border-gray-800 pt-8 text-center text-gray-300">
           <p>&copy; {new Date().getFullYear()} SavviWell. All rights reserved.</p>
-          <div className="mt-2">
-            <a 
-              href="/admin/dashboard" 
-              className="text-xs text-gray-500 hover:text-gray-400 transition-colors"
-            >
-              Admin
-            </a>
-          </div>
         </div>
       </div>
       
