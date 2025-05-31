@@ -9,7 +9,7 @@ export function Hero({ onWaitlistClick }: HeroProps) {
     <section 
       className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-screen"
       style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&h=1200')",
+        backgroundImage: "url('/images/hero-background.jpeg')",
         backgroundSize: "cover",
         backgroundPosition: "center"
       }}
