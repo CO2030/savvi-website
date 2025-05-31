@@ -11,10 +11,11 @@ export function Hero({ onWaitlistClick }: HeroProps) {
       style={{
         backgroundImage: "url('/images/hero-background.jpeg')"
       }}
+      aria-label="Hero section"
     >
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/30" aria-hidden="true"></div>
       <div className="container mx-auto relative z-10">
-        <div className="max-w-2xl">
+        <header className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-heading leading-tight mb-4 animate-fade-in">
             Your food. Your wellness—reimagined with AI.
           </h1>
@@ -28,10 +29,11 @@ export function Hero({ onWaitlistClick }: HeroProps) {
             onClick={onWaitlistClick}
             size="lg"
             className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in"
+            aria-label="Join the SavviWell waitlist"
           >
             Join the Waitlist
           </Button>
-        </div>
+        </header>
       </div>
     </section>
   );

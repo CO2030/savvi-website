@@ -3,17 +3,17 @@ import { Brain, Users, ShoppingBasket } from "lucide-react";
 export function About() {
   const features = [
     {
-      icon: <Brain className="text-primary" />,
+      icon: <Brain className="text-primary" aria-hidden="true" />,
       title: "AI-Powered Nutrition",
       description: "Personalized meal recommendations based on your dietary preferences and health goals."
     },
     {
-      icon: <Users className="text-primary" />,
+      icon: <Users className="text-primary" aria-hidden="true" />,
       title: "Family-Focused",
       description: "Tools designed for households with diverse nutritional needs and preferences."
     },
     {
-      icon: <ShoppingBasket className="text-primary" />,
+      icon: <ShoppingBasket className="text-primary" aria-hidden="true" />,
       title: "Smart Grocery Lists",
       description: "Automatically generated shopping lists based on your meal plans to save time and reduce waste."
     }
