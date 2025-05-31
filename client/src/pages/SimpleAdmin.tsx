@@ -28,7 +28,7 @@ export default function SimpleAdmin() {
     e.preventDefault();
     console.log('Login attempt with password:', password);
     
-    if (password === "savviwell2025") {
+    if (password === "KalmarLisbon00025") {
       setIsAuthenticated(true);
       localStorage.setItem('admin_auth', 'true');
       toast({

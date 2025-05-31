@@ -38,7 +38,7 @@ export default function AdminLogin() {
     
     // For now, use a simple hardcoded check
     // In a real app, this would be handled properly on the server
-    if (username === "admin" && password === "savviwell2025") {
+    if (username === "admin" && password === "KalmarLisbon00025") {
       // Skip the server call for now and just navigate
       setLocation("/admin/dashboard");
       toast({

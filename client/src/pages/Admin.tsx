@@ -151,7 +151,7 @@ export default function AdminDashboard() {
   // Handle password authentication
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === "savviwell2025") {
+    if (password === "KalmarLisbon00025") {
       setIsAuthenticated(true);
       setPasswordDialogOpen(false);
       sessionStorage.setItem('admin_authenticated', 'true');
