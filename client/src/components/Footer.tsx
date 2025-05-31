@@ -103,26 +103,26 @@ export function Footer() {
             <Logo color="white" className="mb-4" />
             <p className="text-gray-300 mb-4">Personalized nutrition powered by AI for healthier lives.</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
               <a href="https://www.instagram.com/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="https://www.pinterest.com/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
-                <FaPinterest className="h-5 w-5" />
               </a>
               <a href="https://www.tiktok.com/@savviwell" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <FaTiktok className="h-5 w-5" />
               </a>
+              <a href="https://www.pinterest.com/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <FaPinterest className="h-5 w-5" />
+              </a>
               <a href="https://whatsapp.com/channel/0029Vb6QFzD35fLvJkkAOq3N" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <SiWhatsapp className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
