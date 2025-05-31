@@ -32,11 +32,24 @@ export function Header({ onWaitlistClick }: HeaderProps) {
   };
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      closeMobileMenu();
+    // If we're not on the home page, navigate to home first
+    if (window.location.pathname !== "/") {
+      setLocation("/");
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // We're on home page, just scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    closeMobileMenu();
   };
 
   return (
