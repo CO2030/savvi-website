@@ -184,45 +184,51 @@ export function Footer() {
           </div>
         </div>
         {/* Share With Friends Section */}
-        <div className="border-t border-gray-800 mt-8 pt-8 pb-4 flex flex-col items-center justify-center">
-          <h3 className="text-xl font-bold mb-4 font-heading">Share SavviWell with Friends</h3>
-          <p className="text-gray-300 mb-4 text-center max-w-md">
-            Help us spread the word about AI-powered nutrition recommendations!
-          </p>
+        <div className="border-t border-gray-800 mt-8 pt-8 pb-6">
+          <div className="text-center mb-6">
+            <h3 className="text-xl md:text-2xl font-bold mb-3 font-heading">Share SavviWell with Friends</h3>
+            <p className="text-gray-300 text-sm md:text-base mx-auto max-w-lg px-4">
+              Help us spread the word about AI-powered nutrition recommendations!
+            </p>
+          </div>
           
-          <div className="flex gap-4 mb-6">
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 px-4">
             <FacebookShareButton 
               url={typeof window !== 'undefined' ? window.location.href : ''} 
               hashtag="#SavviWell"
-              className="transition-transform hover:scale-110"
+              className="transition-transform hover:scale-110 active:scale-95"
             >
-              <FacebookIcon size={40} round />
+              <FacebookIcon size={44} round />
             </FacebookShareButton>
             
             <TwitterShareButton 
               url={typeof window !== 'undefined' ? window.location.href : ''} 
               title="Join me in exploring AI-powered nutrition recommendations with SavviWell!" 
-              className="transition-transform hover:scale-110"
+              className="transition-transform hover:scale-110 active:scale-95"
             >
-              <TwitterIcon size={40} round />
+              <TwitterIcon size={44} round />
             </TwitterShareButton>
             
             <LinkedinShareButton 
               url={typeof window !== 'undefined' ? window.location.href : ''} 
               title="SavviWell - AI-Powered Nutrition"
               summary="Personalized nutrition recommendations powered by AI. Join the waitlist for early access!" 
-              className="transition-transform hover:scale-110"
+              className="transition-transform hover:scale-110 active:scale-95"
             >
-              <LinkedinIcon size={40} round />
+              <LinkedinIcon size={44} round />
             </LinkedinShareButton>
             
             <WhatsappShareButton 
               url={typeof window !== 'undefined' ? window.location.href : ''} 
               title="Check out SavviWell - AI-powered nutrition recommendations!"
-              className="transition-transform hover:scale-110"
+              className="transition-transform hover:scale-110 active:scale-95"
             >
-              <WhatsappIcon size={40} round />
+              <WhatsappIcon size={44} round />
             </WhatsappShareButton>
+          </div>
+          
+          <div className="mt-4 text-xs md:text-sm text-center text-gray-400 px-4">
+            Sharing helps us reach more people like you!
           </div>
         </div>
         
