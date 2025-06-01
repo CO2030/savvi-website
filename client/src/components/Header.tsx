@@ -72,6 +72,12 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           >
             About
           </button>
+          <button 
+            onClick={() => setLocation('/story')}
+            className="text-neutral-dark hover:text-primary transition-colors"
+          >
+            Our Story
+          </button>
 
         </nav>
         <div className="hidden md:flex space-x-3">
@@ -107,6 +113,15 @@ export function Header({ onWaitlistClick }: HeaderProps) {
               className="text-neutral-dark hover:text-primary transition-colors py-2"
             >
               About
+            </button>
+            <button 
+              onClick={() => {
+                setLocation('/story');
+                closeMobileMenu();
+              }}
+              className="text-neutral-dark hover:text-primary transition-colors py-2"
+            >
+              Our Story
             </button>
 
             <Button 
