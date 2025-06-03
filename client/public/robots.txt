@@ -1,6 +1,9 @@
 
 User-agent: *
 Allow: /
+Allow: /savviwell-summary.txt
+Allow: /about-savviwell.txt
+Allow: /savviwell-info.txt
 Disallow: /admin/
 Disallow: /admin/*
 
