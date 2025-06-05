@@ -186,9 +186,9 @@ export function Footer() {
         {/* Share With Friends Section */}
         <div className="border-t border-gray-800 mt-8 pt-8 pb-6">
           <div className="text-center mb-6">
-            <h3 className="text-xl md:text-2xl font-bold mb-3 font-heading">Share SavviWell with Friends</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-3 font-heading">Spread the Word</h3>
             <p className="text-gray-300 text-sm md:text-base mx-auto max-w-lg px-4">
-              Help us spread the word about AI-powered nutrition recommendations!
+              Know someone who could use less mealtime stress? Share SavviWell and help them eat better, live healthier.
             </p>
           </div>
           
