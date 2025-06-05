@@ -9,12 +9,12 @@ interface FAQItem {
 
 const faqItems: FAQItem[] = [
   {
-    question: "What is SavviWell AI assistant?",
-    answer: "SavviWell is an AI-powered nutrition assistant that provides personalized meal planning, smart grocery lists, and wellness support tailored to your individual needs and preferences."
+    question: "What is the SavviWell AI Assistant?",
+    answer: "SavviWell is a voice-powered AI wellness assistant that helps families and individuals simplify healthy eating through personalized, nutrition-focused support. It goes beyond traditional meal planning apps by offering smart grocery lists, adaptive meal recommendations based on dietary goals, allergy-friendly swaps, and wellness guidance—tailored to your lifestyle and evolving health needs. Whether you're a parent juggling picky eaters or an individual working toward specific nutrition goals, SavviWell reduces the mental load and empowers long-term, sustainable wellness."
   },
   {
-    question: "How does the AI nutrition assistant work?",
-    answer: "Our AI analyzes your dietary preferences, health goals, allergies, and lifestyle to create customized meal plans and grocery lists that evolve with your wellness journey."
+    question: "How does the SavviWell assistant work?",
+    answer: "SavviWell uses voice-powered AI to streamline your daily wellness routines. It learns your preferences, dietary needs, household dynamics, and health goals to create dynamic meal plans, generate smart grocery lists, and suggest real-time adjustments—like swaps for allergies or picky eaters. As you interact with SavviWell, it continuously adapts to support your evolving lifestyle, making healthy choices easier and more sustainable over time."
   },
   {
     question: "Is Savvi Well free to use?",
@@ -26,7 +26,7 @@ const faqItems: FAQItem[] = [
   },
   {
     question: "Can the AI assistant help with food allergies?",
-    answer: "Yes! Our AI provides allergy-aware ingredient swaps and ensures all meal recommendations are safe for your specific dietary restrictions and allergies."
+    answer: "Yes. SavviWell offers allergy-aware meal planning by letting you set preferences for ingredients you want to avoid. Based on your input, it suggests ingredient swaps and meal ideas that align with your household's dietary restrictions—whether for individuals or families. While SavviWell doesn't provide medical advice, it helps simplify planning around common food sensitivities with smart, customizable recommendations."
   }
 ];
 
