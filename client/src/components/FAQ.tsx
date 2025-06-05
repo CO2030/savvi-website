@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -42,7 +43,7 @@ export function FAQ() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">
           Frequently Asked Questions
         </h2>
-
+        
         <div className="space-y-4">
           {faqItems.map((item, index) => (
             <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
@@ -57,7 +58,7 @@ export function FAQ() {
                   <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
                 )}
               </button>
-
+              
               {openIndex === index && (
                 <div className="px-6 pb-4">
                   <p className="text-gray-700 leading-relaxed">{item.answer}</p>
