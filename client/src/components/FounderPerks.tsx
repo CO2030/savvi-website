@@ -23,11 +23,8 @@ export function FounderPerks() {
   return (
     <section id="features" className="py-16 md:py-24 px-4 bg-white">
       <div className="container mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 font-heading">Join the Beta for the AI Wellness Assistant That Thinks Ahead—So You Don't Have To</h1>
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-lg md:text-xl text-neutral-dark mb-4">Become a founding member and enjoy early access to SavviWell's personalized, voice-powered wellness platform.</p>
-          <p className="text-lg text-neutral-dark">As a beta user, you'll get exclusive perks, shape the future of AI-assisted healthy living, and be the first to experience a smarter way to nourish yourself and your family.</p>
-        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Founder & Beta Member Perks</h2>
+        <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Join as an early member and enjoy exclusive benefits</p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {perks.map((perk, index) => (
