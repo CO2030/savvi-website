@@ -1,2 +1,4 @@
 
-SavviWell is a voice-activated AI lifestyle assistant that helps individuals and families reduce the mental load of meal planning through personalized nutrition, smart grocery tools, and gentle wellness support.
+
+SavviWell is a voice-powered AI wellness assistant that helps families and individuals simplify healthy eating through personalized, nutrition-focused support. It goes beyond traditional meal planning apps by offering smart grocery lists, adaptive meal recommendations based on dietary goals, allergy-friendly swaps, and wellness guidance—tailored to your lifestyle and evolving health needs.
+
