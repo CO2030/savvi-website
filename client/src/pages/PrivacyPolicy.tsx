@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useState } from "react";
@@ -7,11 +6,11 @@ import { Helmet } from "react-helmet";
 
 export default function PrivacyPolicy() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const openModal = () => {
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -21,18 +20,19 @@ export default function PrivacyPolicy() {
       <Helmet>
         <title>Privacy Policy - SavviWell</title>
         <meta name="description" content="SavviWell's Privacy Policy - Learn how we collect, use, and protect your personal data." />
+        <link rel="canonical" href="https://savviwell.com" />
       </Helmet>
-      
+
       <Header onWaitlistClick={openModal} />
       <main className="font-sans pt-24 pb-16 px-4">
         <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl font-bold mb-8 font-heading">SavviWell Privacy Policy</h1>
-          
+
           <div className="prose prose-lg max-w-none">
             <p className="text-lg mb-6 text-neutral-dark">
               <strong>Effective Date:</strong> May 20, 2025
             </p>
-            
+
             <p className="mb-6">
               SavviWell Inc. ("SavviWell", "we", "us", or "our") is committed to protecting your privacy. 
               This Privacy Policy explains how we collect, use, and safeguard your personal data when you 
