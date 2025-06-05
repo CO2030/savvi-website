@@ -24,6 +24,10 @@ export function FounderPerks() {
     <section id="features" className="py-16 md:py-24 px-4 bg-white">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Founder & Beta Member Perks</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 font-heading text-primary">A Voice-Powered AI Assistant to End the 'What's for Dinner?' Dilemma</h2>
+          <p className="text-lg md:text-xl text-neutral-dark font-medium">Smart meal planning, grocery delivery & holistic wellness for families and individuals.</p>
+        </div>
         <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Join as an early member and enjoy exclusive benefits</p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
