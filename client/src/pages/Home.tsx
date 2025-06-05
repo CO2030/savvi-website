@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { FounderPerks } from "@/components/FounderPerks";
 import { About } from "@/components/About";
+import { FAQ } from "@/components/FAQ";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { WaitlistModal } from "@/components/WaitlistModal";
@@ -36,6 +37,7 @@ export default function Home() {
         <Hero onWaitlistClick={openModal} />
         <FounderPerks />
         <About />
+        <FAQ />
         <CTASection onWaitlistClick={openModal} />
       </main>
       <Footer />
