@@ -71,66 +71,104 @@ export default function Story() {
         {/* Our Story Section */}
         <section className="py-16 md:py-24 px-4 bg-white">
           <div className="container mx-auto">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Our Story</h2>
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 font-heading">Our Story</h2>
               
-              <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-                {/* Story Text */}
-                <div className="space-y-6">
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    We started SavviWell because we knew there had to be a better way.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    A way to feed our families without the constant stress, the endless decisions, and the mental juggling act that starts before breakfast and doesn't stop.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    We're both moms, from very different backgrounds—one of us from wellness, the other from early-stage startups—but we shared the same struggle:
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    The daily question of what to cook, what to buy, who's eating what, and how to make it all work with limited time and energy.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    It wasn't just about meals. It was about everything around the meals—
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    Dietary needs, grocery lists, last-minute store runs, figuring out delivery, remembering to defrost something, and hoping it's what everyone wants to eat.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    We didn't need another app to give us more options.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    We needed a system that could take the weight off—one that helped us plan better, shop smarter, and nourish our families (and ourselves) without burning out.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    That's what SavviWell is.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    A supportive, thoughtful tool that simplifies food planning, grocery lists, and delivery—while making space for wellness in the midst of real life.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    Because this isn't just about food.<br/>
-                    It's about creating space.<br/>
-                    For connection.<br/>
-                    For care.<br/>
-                    For calm.<br/>
-                    For daily wellness that feels doable.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    We built the tool we desperately wished we had—<br/>
-                    and now we're building it for all of us.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed font-semibold italic">
-                    — Meara and Christina,<br/>
-                    Co-Founders, SavviWell
-                  </p>
-                </div>
-
-                {/* Founders Image */}
-                <div className="flex justify-center">
-                  <div className="w-80 h-96 bg-gray-200 rounded-xl flex items-center justify-center overflow-hidden shadow-lg">
+              {/* Mobile-First Layout */}
+              <div className="flex flex-col lg:flex-row lg:gap-16 lg:items-start">
+                
+                {/* Founders Image - Mobile First */}
+                <div className="flex justify-center mb-8 lg:mb-0 lg:order-2 lg:flex-shrink-0">
+                  <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-96 bg-gray-200 rounded-2xl flex items-center justify-center overflow-hidden shadow-xl">
                     {/* Placeholder for founders image */}
                     <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
-                      <span className="text-4xl font-bold text-primary opacity-50">Meara & Christina</span>
+                      <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary opacity-50 text-center">Meara &<br/>Christina</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Story Text - Organized in flowing sections */}
+                <div className="lg:order-1 lg:flex-1">
+                  
+                  {/* Opening */}
+                  <div className="bg-primary/5 rounded-xl p-6 mb-6">
+                    <p className="text-lg md:text-xl text-gray-800 leading-relaxed font-medium">
+                      We started SavviWell because we knew there had to be a <strong>better way</strong>.
+                    </p>
+                  </div>
+
+                  {/* The Problem */}
+                  <div className="space-y-4 mb-8">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      A way to feed our families without the constant stress, the endless decisions, and the mental juggling act that starts before breakfast and doesn't stop.
+                    </p>
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      We're both moms, from very different backgrounds—one of us from wellness, the other from early-stage startups—but we shared the same struggle:
+                    </p>
+                    <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-primary">
+                      <p className="text-base md:text-lg text-gray-700 leading-relaxed italic">
+                        "The daily question of what to cook, what to buy, who's eating what, and how to make it all work with limited time and energy."
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* The Deeper Issue */}
+                  <div className="space-y-4 mb-8">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      It wasn't just about meals. It was about <em>everything</em> around the meals—
+                    </p>
+                    <p className="text-base md:text-lg text-gray-600 leading-relaxed pl-4 border-l-2 border-gray-300">
+                      Dietary needs, grocery lists, last-minute store runs, figuring out delivery, remembering to defrost something, and hoping it's what everyone wants to eat.
+                    </p>
+                  </div>
+
+                  {/* The Solution */}
+                  <div className="space-y-4 mb-8">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      We didn't need another app to give us more options.
+                    </p>
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      We needed a system that could <strong>take the weight off</strong>—one that helped us plan better, shop smarter, and nourish our families (and ourselves) without burning out.
+                    </p>
+                  </div>
+
+                  {/* What SavviWell Is */}
+                  <div className="bg-primary/10 rounded-xl p-6 mb-8">
+                    <p className="text-lg md:text-xl text-gray-800 leading-relaxed font-semibold mb-4">
+                      That's what SavviWell is.
+                    </p>
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      A supportive, thoughtful tool that simplifies food planning, grocery lists, and delivery—while making space for wellness in the midst of real life.
+                    </p>
+                  </div>
+
+                  {/* The Vision */}
+                  <div className="text-center space-y-3 mb-8">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      Because this isn't just about food.
+                    </p>
+                    <p className="text-lg md:text-xl font-semibold text-primary">
+                      It's about creating space.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-3 text-sm md:text-base text-gray-600">
+                      <span className="bg-white px-3 py-1 rounded-full shadow-sm">For connection</span>
+                      <span className="bg-white px-3 py-1 rounded-full shadow-sm">For care</span>
+                      <span className="bg-white px-3 py-1 rounded-full shadow-sm">For calm</span>
+                      <span className="bg-white px-3 py-1 rounded-full shadow-sm">For daily wellness that feels doable</span>
+                    </div>
+                  </div>
+
+                  {/* Closing */}
+                  <div className="text-center">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+                      We built the tool we desperately wished we had—<br/>
+                      and now we're building it for all of us.
+                    </p>
+                    <div className="bg-gray-50 rounded-lg p-4 inline-block">
+                      <p className="text-base md:text-lg text-gray-800 font-semibold italic">
+                        — Meara and Christina<br/>
+                        <span className="text-primary text-sm font-normal">Co-Founders, SavviWell</span>
+                      </p>
                     </div>
                   </div>
                 </div>
