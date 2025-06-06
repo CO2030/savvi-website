@@ -37,15 +37,15 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
-  
+
   const progressPercentage = step === 5 ? 100 : step * 25;
-  
+
   const mutation = useMutation({
     mutationFn: (data: FormValues) => 
       apiRequest("POST", "/api/waitlist", data),
     onSuccess: () => {
       setSuccess(true);
-      
+
       // Fire confetti animation
       const duration = 3 * 1000;
       const animationEnd = Date.now() + duration;
@@ -63,14 +63,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         }
 
         const particleCount = 50 * (timeLeft / duration);
-        
+
         // Fire confetti from both sides
         confetti({
           ...defaults,
           particleCount,
           origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
         });
-        
+
         confetti({
           ...defaults,
           particleCount,
@@ -83,7 +83,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       if (error.message && (error.message.includes("already registered") || error.alreadyRegistered)) {
         // Handle the duplicate email gracefully by showing success anyway
         setSuccess(true);
-        
+
         toast({
           title: "Welcome back!",
           description: "You're already on our waitlist. We'll be in touch soon!",
@@ -102,14 +102,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const validateField = (field: keyof FormValues): boolean => {
     let isValid = true;
     const newErrors = { ...errors };
-    
+
     if (field === 'name' && (!formValues.name || formValues.name.length < 2)) {
       newErrors.name = "Name must be at least 2 characters";
       isValid = false;
     } else if (field === 'name') {
       delete newErrors.name;
     }
-    
+
     if (field === 'email') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!formValues.email || !emailRegex.test(formValues.email)) {
@@ -119,7 +119,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         delete newErrors.email;
       }
     }
-    
+
     setErrors(newErrors);
     return isValid;
   };
@@ -128,10 +128,10 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     if (step === 1) {
       const nameValid = validateField('name');
       const emailValid = validateField('email');
-      
+
       if (!nameValid || !emailValid) return;
     }
-    
+
     setStep(step + 1);
   };
 
@@ -173,14 +173,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           <div className="w-full mb-4">
             <Progress value={progressPercentage} className="h-1" />
           </div>
-          
+
           {!success ? (
             <form onSubmit={handleSubmit}>
               <DialogTitle className="text-center text-xl font-bold mb-2">Join the Waitlist</DialogTitle>
               <DialogDescription className="text-center mb-6">
                 Be among the first to experience SavviWell
               </DialogDescription>
-              
+
               {step === 1 && (
                 <div className="space-y-4 animate-fade-in">
                   <div className="space-y-2">
@@ -197,7 +197,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       <p className="text-red-500 text-sm">{errors.name}</p>
                     )}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
                     <Input 
@@ -213,7 +213,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       <p className="text-red-500 text-sm">{errors.email}</p>
                     )}
                   </div>
-                  
+
                   <Button 
                     type="button" 
                     className="w-full"
@@ -223,7 +223,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   </Button>
                 </div>
               )}
-              
+
               {step === 2 && (
                 <div className="space-y-4 animate-fade-in">
                   <div className="space-y-3">
@@ -246,7 +246,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       ))}
                     </RadioGroup>
                   </div>
-                  
+
                   <div className="flex space-x-3">
                     <Button 
                       type="button" 
@@ -266,7 +266,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   </div>
                 </div>
               )}
-              
+
               {step === 3 && (
                 <div className="space-y-4 animate-fade-in">
                   <div className="space-y-3">
@@ -290,7 +290,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       ))}
                     </RadioGroup>
                   </div>
-                  
+
                   <div className="flex space-x-3">
                     <Button 
                       type="button" 
@@ -310,7 +310,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   </div>
                 </div>
               )}
-              
+
               {step === 4 && (
                 <div className="space-y-4 animate-fade-in">
                   <div className="space-y-3">
@@ -333,7 +333,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       ))}
                     </RadioGroup>
                   </div>
-                  
+
                   <div className="flex space-x-3">
                     <Button 
                       type="button" 
@@ -363,12 +363,12 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               <DialogDescription className="mb-6">
                 Thanks for joining our waitlist. We'll notify you as soon as we're ready to welcome our first beta users.
               </DialogDescription>
-              
+
               {/* Share Success Component */}
               <div className="mb-6">
                 <ShareSuccess />
               </div>
-              
+
               <Button 
                 className="w-full hover:bg-orange-500 transition-colors"
                 onClick={handleClose}
