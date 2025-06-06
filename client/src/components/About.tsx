@@ -1,5 +1,5 @@
 import { Brain, Users, ShoppingBasket, ChefHat, RefreshCw, UtensilsCrossed, Mic } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { motion } from 'framer-motion';
 
 export function About() {
   const features = [
@@ -95,9 +95,14 @@ export function About() {
         {/* Features Grid - Desktop */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {features.map((feature, index) => (
-            <div 
+            <motion.div 
               key={index} 
-              className="group bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1"
+              className="group bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
             >
               <div className="flex flex-col items-center text-center">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300">
@@ -110,18 +115,32 @@ export function About() {
                   {feature.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Features Vertical Stack - Mobile */}
-        <div className="md:hidden space-y-4 relative">
+        {/* Features Stacked Cards - Mobile */}
+        <div className="md:hidden relative min-h-[800px]">
           {features.map((feature, index) => (
-            <div 
+            <motion.div 
               key={index} 
-              className="bg-white rounded-xl p-6 shadow-md border border-gray-100 relative z-10 transform transition-all duration-300"
+              className="absolute inset-x-0 bg-white rounded-xl p-6 shadow-lg border border-gray-100"
+              initial={{ opacity: 0, y: 100, scale: 0.9 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: index * 60, 
+                scale: 1 - index * 0.02,
+                zIndex: features.length - index
+              }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
               style={{
-                marginTop: index === 0 ? '0' : '-8px',
+                top: `${index * 20}px`,
                 zIndex: features.length - index
               }}
             >
@@ -138,7 +157,7 @@ export function About() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
