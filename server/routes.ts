@@ -14,23 +14,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Validate the request body
       const validatedData = insertWaitlistSchema.parse(req.body);
-      
+
       // Check if email already exists
       const existingEntry = await storage.getWaitlistEntryByEmail(validatedData.email);
-      
+
       if (existingEntry) {
         return res.status(400).json({
           message: "Email already registered for the waitlist",
           alreadyRegistered: true
         });
       }
-      
+
       // Create waitlist entry in local storage
       const newEntry = await storage.createWaitlistEntry(validatedData);
-      
+
       // Get Google Script deployment URL from config
       const deploymentUrl = config.googleScriptDeploymentUrl;
-      
+
       // Submit to Google Sheet if deployment URL is available
       if (deploymentUrl) {
         const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
@@ -40,7 +40,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           healthGoal: validatedData.healthGoal,
           dietaryConcern: validatedData.dietaryConcern
         });
-        
+
         if (!googleSubmitResult.success) {
           console.warn("Google Sheet submission failed:", googleSubmitResult.message);
           // Continue with local storage only
@@ -48,7 +48,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         console.warn("No Google Script deployment URL set in environment variables");
       }
-      
+
       // Return success response
       return res.status(201).json({
         message: "Successfully joined the waitlist",
@@ -62,14 +62,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           details: validationError.message
         });
       }
-      
+
       console.error("Error creating waitlist entry:", error);
       return res.status(500).json({
         message: "An error occurred while processing your request"
       });
     }
   });
-  
+
   // Get all waitlist entries (would normally be protected)
   app.get("/api/waitlist", async (req: Request, res: Response) => {
     try {
@@ -82,43 +82,138 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
-  
+
   // Newsletter subscription endpoint
   app.post("/api/newsletter", async (req: Request, res: Response) => {
     try {
       // Validate the request body
       const validatedData = insertNewsletterSchema.parse(req.body);
-      
+
       // Check if email already exists
       const existingSubscriber = await storage.getNewsletterSubscriberByEmail(validatedData.email);
-      
+
       if (existingSubscriber) {
         return res.status(200).json({
           message: "Email already subscribed to the newsletter",
           alreadySubscribed: true
         });
       }
-      
-      // Create newsletter subscription in local storage
+
+      // Create newsletter subscriber in database
       const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+
+      // Send email notification immediately
+      // await sendNewsletterNotification({
+      //   email: validatedData.email,
+      //   name: validatedData.name
+      // });
+
+      // Submit to Google Sheet if deployment URL is available
+      //const deploymentUrl = config.googleScriptDeploymentUrl;
+      //if (deploymentUrl) {
+      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+      //    email: validatedData.email,
+      //    name: validatedData.name
+      //  });
+
+      //  if (!googleSubmitResult.success) {
+      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
+      //    // Continue with database storage only
+      //  }
+      //}
+
+      // Create newsletter subscriber in database
+      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+
+      // Send email notification immediately
+      // await sendNewsletterNotification({
+      //   email: validatedData.email,
+      //   name: validatedData.name
+      // });
+
+      // Submit to Google Sheet if deployment URL is available
+      //const deploymentUrl = config.googleScriptDeploymentUrl;
+      //if (deploymentUrl) {
+      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+      //    email: validatedData.email,
+      //    name: validatedData.name
+      //  });
+
+      //  if (!googleSubmitResult.success) {
+      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
+      //    // Continue with database storage only
+      //  }
+      //}
+
+      // Create newsletter subscriber in database
+      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+
+      // Send email notification immediately
+      // await sendNewsletterNotification({
+      //   email: validatedData.email,
+      //   name: validatedData.name
+      // });
+
+      // Submit to Google Sheet if deployment URL is available
+      //const deploymentUrl = config.googleScriptDeploymentUrl;
+      //if (deploymentUrl) {
+      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+      //    email: validatedData.email,
+      //    name: validatedData.name
+      //  });
+
+      //  if (!googleSubmitResult.success) {
+      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
+      //    // Continue with database storage only
+      //  }
+      //}
+
+      // Create newsletter subscriber in database
+      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+
+      // Send email notification immediately
+      // await sendNewsletterNotification({
+      //   email: validatedData.email,
+      //   name: validatedData.name
+      // });
+
+      // Submit to Google Sheet if deployment URL is available
+      //const deploymentUrl = config.googleScriptDeploymentUrl;
+      //if (deploymentUrl) {
+      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+      //    email: validatedData.email,
+      //    name: validatedData.name
+      //  });
+
+      //  if (!googleSubmitResult.success) {
+      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
+      //    // Continue with database storage only
+      //  }
+      //}
       
-      // Try to submit to Google Sheet if URL is provided
-      if (config.googleScriptDeploymentUrl) {
-        try {
-          await submitToGoogleScript(config.googleScriptDeploymentUrl, {
-            email: validatedData.email,
-            name: "Newsletter Subscriber",
-            userType: "newsletter",
-            healthGoal: "n/a", 
-            dietaryConcern: "n/a",
-            source: "newsletter"
-          });
-        } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : "Unknown error";
-          console.error("Google Sheet submission failed:", errorMessage);
-        }
-      }
-      
+      // Create newsletter subscriber in database
+      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+
+      // Send email notification immediately
+      // await sendNewsletterNotification({
+      //   email: validatedData.email,
+      //   name: validatedData.name
+      // });
+
+      // Submit to Google Sheet if deployment URL is available
+      //const deploymentUrl = config.googleScriptDeploymentUrl;
+      //if (deploymentUrl) {
+      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+      //    email: validatedData.email,
+      //    name: validatedData.name
+      //  });
+
+      //  if (!googleSubmitResult.success) {
+      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
+      //    // Continue with database storage only
+      //  }
+      //}
+
       return res.status(201).json({
         message: "Successfully subscribed to the newsletter",
         id: newSubscriber.id
@@ -131,14 +226,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           details: validationError.message
         });
       }
-      
+
       console.error("Error subscribing to newsletter:", error);
       return res.status(500).json({
         message: "An error occurred while processing your request"
       });
     }
   });
-  
+
   // Get all newsletter subscribers (for admin)
   app.get("/api/newsletter", async (req: Request, res: Response) => {
     try {
@@ -157,18 +252,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Validate the request body
       const validatedData = insertContactSchema.parse(req.body);
-      
-      // Create contact submission in local storage
+
+      // Create contact submission in database
       const newSubmission = await storage.createContactSubmission(validatedData);
-      
-      // Send email notification
-      const emailResult = await sendContactEmail(validatedData);
-      
-      if (!emailResult.success) {
-        console.warn("Email sending failed:", emailResult.message);
-        // Continue with success response even if email fails
+
+      // Send email notification immediately
+      await sendContactEmail({
+        name: validatedData.name,
+        email: validatedData.email,
+        reason: validatedData.reason,
+        message: validatedData.message
+      });
+
+      // Submit to Google Sheet if deployment URL is available
+      const deploymentUrl = config.googleScriptDeploymentUrl;
+      if (deploymentUrl) {
+        const googleSubmitResult = await submitContactToGoogleScript(deploymentUrl, {
+          name: validatedData.name,
+          email: validatedData.email,
+          reason: validatedData.reason,
+          message: validatedData.message
+        });
+
+        if (!googleSubmitResult.success) {
+          console.warn("Google Sheet contact submission failed:", googleSubmitResult.message);
+          // Continue with database storage only
+        }
       }
-      
+
       return res.status(201).json({
         message: "Contact form submitted successfully",
         id: newSubmission.id
@@ -181,14 +292,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           details: validationError.message
         });
       }
-      
+
       console.error("Error processing contact form:", error);
       return res.status(500).json({
         message: "An error occurred while processing your request"
       });
     }
   });
-  
+
   // Get all contact submissions (for admin)
   app.get("/api/contact", async (req: Request, res: Response) => {
     try {

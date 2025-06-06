@@ -50,3 +50,80 @@ Timestamp: ${new Date().toISOString()}
     return { success: false, message: 'Failed to send email' };
   }
 }
+
+export async function sendWaitlistNotification(waitlistData: {
+  name: string;
+  email: string;
+  userType: string;
+  healthGoal: string;
+  dietaryConcern: string;
+}) {
+  try {
+    console.log(`
+===== NEW WAITLIST SIGNUP =====
+Name: ${waitlistData.name}
+Email: ${waitlistData.email}
+User Type: ${waitlistData.userType}
+Health Goal: ${waitlistData.healthGoal}
+Dietary Concern: ${waitlistData.dietaryConcern}
+Timestamp: ${new Date().toISOString()}
+===============================
+    `);
+    
+    // TODO: Integrate with actual email service for instant notifications
+    /*
+    await transporter.sendMail({
+      from: process.env.FROM_EMAIL,
+      to: 'savviwell@gmail.com',
+      subject: 'New Waitlist Signup - SavviWell',
+      html: `
+        <h3>New Waitlist Signup</h3>
+        <p><strong>Name:</strong> ${waitlistData.name}</p>
+        <p><strong>Email:</strong> ${waitlistData.email}</p>
+        <p><strong>User Type:</strong> ${waitlistData.userType}</p>
+        <p><strong>Health Goal:</strong> ${waitlistData.healthGoal}</p>
+        <p><strong>Dietary Concern:</strong> ${waitlistData.dietaryConcern}</p>
+      `
+    });
+    */
+    
+    return { success: true, message: 'Waitlist notification logged successfully' };
+  } catch (error) {
+    console.error('Error sending waitlist notification:', error);
+    return { success: false, message: 'Failed to send waitlist notification' };
+  }
+}
+
+export async function sendNewsletterNotification(newsletterData: {
+  email: string;
+  name?: string;
+}) {
+  try {
+    console.log(`
+===== NEW NEWSLETTER SIGNUP =====
+Email: ${newsletterData.email}
+Name: ${newsletterData.name || 'Not provided'}
+Timestamp: ${new Date().toISOString()}
+=================================
+    `);
+    
+    // TODO: Integrate with actual email service for instant notifications
+    /*
+    await transporter.sendMail({
+      from: process.env.FROM_EMAIL,
+      to: 'savviwell@gmail.com',
+      subject: 'New Newsletter Signup - SavviWell',
+      html: `
+        <h3>New Newsletter Signup</h3>
+        <p><strong>Email:</strong> ${newsletterData.email}</p>
+        <p><strong>Name:</strong> ${newsletterData.name || 'Not provided'}</p>
+      `
+    });
+    */
+    
+    return { success: true, message: 'Newsletter notification logged successfully' };
+  } catch (error) {
+    console.error('Error sending newsletter notification:', error);
+    return { success: false, message: 'Failed to send newsletter notification' };
+  }
+}
