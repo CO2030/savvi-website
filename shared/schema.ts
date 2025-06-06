@@ -20,6 +20,7 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   userType: text("user_type").notNull(),
   healthGoal: text("health_goal").notNull(),
   dietaryConcern: text("dietary_concern").notNull(),
+  source: text("source"),
   createdAt: text("created_at").notNull()
 });
 
@@ -35,6 +36,8 @@ export const insertWaitlistSchema = z.object({
 export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   id: serial("id").primaryKey(),
   email: text("email").notNull().unique(),
+  name: text("name"),
+  source: text("source"),
   createdAt: text("created_at").notNull()
 });
 
@@ -44,6 +47,7 @@ export const contactSubmissions = pgTable("contact_submissions", {
   email: text("email").notNull(),
   reason: text("reason").notNull(),
   message: text("message"),
+  source: text("source"),
   createdAt: text("created_at").notNull()
 });
 

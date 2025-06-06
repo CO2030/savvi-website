@@ -26,6 +26,7 @@ async function migrate() {
         user_type TEXT NOT NULL,
         health_goal TEXT NOT NULL,
         dietary_concern TEXT NOT NULL,
+        source TEXT,
         created_at TEXT NOT NULL
       )
     `);
@@ -35,6 +36,8 @@ async function migrate() {
       CREATE TABLE IF NOT EXISTS newsletter_subscribers (
         id SERIAL PRIMARY KEY,
         email TEXT NOT NULL UNIQUE,
+        name TEXT,
+        source TEXT,
         created_at TEXT NOT NULL
       )
     `);
@@ -47,6 +50,7 @@ async function migrate() {
         email TEXT NOT NULL,
         reason TEXT NOT NULL,
         message TEXT,
+        source TEXT,
         created_at TEXT NOT NULL
       )
     `);
