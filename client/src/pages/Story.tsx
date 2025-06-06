@@ -68,41 +68,71 @@ export default function Story() {
           </div>
         </section>
 
-        {/* Founders Section */}
+        {/* Our Story Section */}
         <section className="py-16 md:py-24 px-4 bg-white">
           <div className="container mx-auto">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Meet Our Founders</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Our Story</h2>
               
-              <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-                {/* Founder 1 */}
-                <div className="text-center">
-                  <div className="w-48 h-48 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
-                    {/* Placeholder for founder image */}
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
-                      <span className="text-6xl font-bold text-primary opacity-50">F1</span>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 font-heading">Founder Name</h3>
-                  <p className="text-primary font-semibold mb-4">Co-Founder & CEO</p>
-                  <p className="text-gray-700 leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Passionate about making nutrition accessible to all families.
+              <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                {/* Story Text */}
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    We started SavviWell because we knew there had to be a better way.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    A way to feed our families without the constant stress, the endless decisions, and the mental juggling act that starts before breakfast and doesn't stop.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    We're both moms, from very different backgrounds—one of us from wellness, the other from early-stage startups—but we shared the same struggle:
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    The daily question of what to cook, what to buy, who's eating what, and how to make it all work with limited time and energy.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    It wasn't just about meals. It was about everything around the meals—
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Dietary needs, grocery lists, last-minute store runs, figuring out delivery, remembering to defrost something, and hoping it's what everyone wants to eat.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    We didn't need another app to give us more options.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    We needed a system that could take the weight off—one that helped us plan better, shop smarter, and nourish our families (and ourselves) without burning out.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    That's what SavviWell is.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    A supportive, thoughtful tool that simplifies food planning, grocery lists, and delivery—while making space for wellness in the midst of real life.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Because this isn't just about food.<br/>
+                    It's about creating space.<br/>
+                    For connection.<br/>
+                    For care.<br/>
+                    For calm.<br/>
+                    For daily wellness that feels doable.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    We built the tool we desperately wished we had—<br/>
+                    and now we're building it for all of us.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed font-semibold italic">
+                    — Meara and Christina,<br/>
+                    Co-Founders, SavviWell
                   </p>
                 </div>
 
-                {/* Founder 2 */}
-                <div className="text-center">
-                  <div className="w-48 h-48 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
-                    {/* Placeholder for founder image */}
+                {/* Founders Image */}
+                <div className="flex justify-center">
+                  <div className="w-80 h-96 bg-gray-200 rounded-xl flex items-center justify-center overflow-hidden shadow-lg">
+                    {/* Placeholder for founders image */}
                     <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
-                      <span className="text-6xl font-bold text-primary opacity-50">F2</span>
+                      <span className="text-4xl font-bold text-primary opacity-50">Meara & Christina</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 font-heading">Founder Name</h3>
-                  <p className="text-primary font-semibold mb-4">Co-Founder & CTO</p>
-                  <p className="text-gray-700 leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Expert in AI and machine learning technologies.
-                  </p>
                 </div>
               </div>
             </div>
