@@ -24,7 +24,7 @@ export function About() {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">About SavviWell</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">Your Voice AI Assistant for Everyday Life</h2>
             <p className="text-lg mb-6 text-neutral-dark">
               The first voice-powered AI meal planning assistant designed to lighten the mental load of healthy eating.
             </p>
