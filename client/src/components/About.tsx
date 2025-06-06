@@ -3,77 +3,54 @@ import { Brain, Users, Utensils, ShoppingCart, RefreshCw, ChefHat, Mic, Heart } 
 
 export function About() {
   const features = [
+    // Features Grid - 8 items with images
     {
-      icon: <Brain className="h-6 w-6 text-primary" />,
+      icon: <Brain className="h-5 w-5 text-primary" />,
       title: "AI-Powered Nutrition",
-      description: (
-        <>
-          <strong>Personalized meal recommendations</strong> based on your dietary preferences, health goals, and real-life needs.
-        </>
-      )
+      description: "Personalized meal recommendations based on your dietary preferences and health goals.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <Users className="h-6 w-6 text-primary" />,
+      icon: <Users className="h-5 w-5 text-primary" />,
       title: "Family-Focused Flexibility",
-      description: (
-        <>
-          Built for households with <strong>multiple needs</strong>—accommodate allergies, picky eaters, and unique goals with ease.
-        </>
-      )
+      description: "Built for households with multiple needs—accommodate allergies and picky eaters.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <Utensils className="h-6 w-6 text-primary" />,
+      icon: <Utensils className="h-5 w-5 text-primary" />,
       title: "Personalized Meal Planning",
-      description: (
-        <>
-          <strong>Custom plans</strong> shaped by your lifestyle, schedule, and preferences—from quick comfort meals to clean eating.
-        </>
-      )
+      description: "Custom plans shaped by your lifestyle, schedule, and preferences.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <ShoppingCart className="h-6 w-6 text-primary" />,
+      icon: <ShoppingCart className="h-5 w-5 text-primary" />,
       title: "Smart Grocery Lists & Delivery",
-      description: (
-        <>
-          Generate grocery lists in <strong>one tap</strong>—automatically aligned with your plan and pantry, ready to send to delivery partners.
-        </>
-      )
+      description: "Generate grocery lists in one tap—automatically aligned with your plan.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <RefreshCw className="h-6 w-6 text-primary" />,
+      icon: <RefreshCw className="h-5 w-5 text-primary" />,
       title: "Flexible Ingredient Swaps",
-      description: (
-        <>
-          <strong>Easily adjust recipes</strong> for dietary needs, last-minute changes, or mood-based cravings—without the stress.
-        </>
-      )
+      description: "Easily adjust recipes for dietary needs or last-minute changes.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <ChefHat className="h-6 w-6 text-primary" />,
+      icon: <ChefHat className="h-5 w-5 text-primary" />,
       title: "Pantry-Based Recipe Suggestions",
-      description: (
-        <>
-          Make the most of what you already have. No more endless scrolling—just <strong>smart, satisfying ideas</strong>.
-        </>
-      )
+      description: "Make the most of what you already have with smart, satisfying ideas.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <Mic className="h-6 w-6 text-primary" />,
-      title: "Voice-First, Hands-Free Experience",
-      description: (
-        <>
-          <strong>Talk to SavviWell</strong> to get answers, plan your next meal, or change course—without lifting a finger.
-        </>
-      )
+      icon: <Mic className="h-5 w-5 text-primary" />,
+      title: "Voice-First Experience",
+      description: "Talk to SavviWell to get answers and plan meals—hands-free.",
+      image: "/images/salmon-asparagus.png"
     },
     {
-      icon: <Heart className="h-6 w-6 text-primary" />,
-      title: "Wellness Support That Grows With You",
-      description: (
-        <>
-          From <strong>food as fuel to food as medicine</strong>, get adaptive support and gentle nudges to help build long-term healthy habits.
-        </>
-      )
+      icon: <Heart className="h-5 w-5 text-primary" />,
+      title: "Wellness Support",
+      description: "Get adaptive support and gentle nudges to build healthy habits.",
+      image: "/images/salmon-asparagus.png"
     }
   ];
 
@@ -86,7 +63,7 @@ export function About() {
     <section id="about" className="py-16 md:py-24 px-4 bg-gray-50">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Your Voice AI Assistant for Everyday Life</h2>
-        
+
         {/* Hero Content Section - Desktop Side by Side, Mobile Stacked */}
         <div className="bg-white rounded-xl shadow-lg max-w-6xl mx-auto mb-12 overflow-hidden">
           {/* Mobile Layout */}
@@ -190,6 +167,37 @@ export function About() {
             ))}
           </div>
         </div>
+
+        {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+              >
+                <div className="flex items-start space-x-3 mb-3">
+                  <div className="flex-shrink-0">
+                    <img 
+                      src={feature.image} 
+                      alt={feature.title}
+                      className="w-12 h-12 rounded-lg object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center space-x-2 mb-2">
+                      {feature.icon}
+                      <h3 className="text-base font-semibold text-gray-900 font-heading">{feature.title}</h3>
+                    </div>
+                    <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
       </div>
     </section>
   );
