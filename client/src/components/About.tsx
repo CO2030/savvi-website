@@ -67,11 +67,15 @@ export function About() {
           {/* Mobile Layout */}
           <div className="md:hidden">
             <div className="flex justify-center py-6 bg-gray-50">
-              <div className="w-48 h-80 bg-gradient-to-br from-primary/20 to-primary/40 rounded-3xl flex items-center justify-center">
-                <span className="text-2xl font-bold text-primary opacity-50">📱</span>
+              <div className="w-48 h-80 rounded-3xl overflow-hidden shadow-lg">
+                <img 
+                  src="/images/iphone-mockup.jpeg" 
+                  alt="SavviWell iPhone App Mockup" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-            <div className="p-6 pt-12 space-y-6">
+            <div className="p-6 pt-8 space-y-6">
               <h2 className="text-3xl font-bold text-center font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
               <p className="text-lg text-gray-700 leading-relaxed text-center">
                 Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
@@ -98,8 +102,12 @@ export function About() {
               </p>
             </div>
             <div className="flex justify-center items-center p-8 bg-gray-50">
-              <div className="w-64 h-96 bg-gradient-to-br from-primary/20 to-primary/40 rounded-3xl flex items-center justify-center shadow-lg">
-                <span className="text-4xl font-bold text-primary opacity-50">📱</span>
+              <div className="w-64 h-96 rounded-3xl overflow-hidden shadow-lg">
+                <img 
+                  src="/images/iphone-mockup.jpeg" 
+                  alt="SavviWell iPhone App Mockup" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
