@@ -2,7 +2,7 @@
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const spreadsheetId = 'YOUR_SPREADSHEET_ID_HERE'; // Replace with your actual spreadsheet ID
+    const spreadsheetId = 'PASTE_YOUR_GOOGLE_SHEETS_ID_HERE'; // Get this from your Google Sheets URL
     const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     
     // Handle different types of submissions
