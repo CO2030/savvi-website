@@ -65,6 +65,11 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      fontFamily: {
+        sans: "var(--font-sans)",
+        heading: "var(--font-heading)",
+        logo: "var(--font-logo)",
+      },
       keyframes: {
         "accordion-down": {
           from: {
