@@ -4,7 +4,7 @@ import { storage } from "./storage";
 import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { submitToGoogleScript } from "./services/googleScripts";
+import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
 import { sendContactEmail } from "./services/emailService";
 import { config } from "./config";
 
@@ -99,98 +99,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Create newsletter subscriber in database
-      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
-
-      // Send email notification immediately
-      // await sendNewsletterNotification({
-      //   email: validatedData.email,
-      //   name: validatedData.name
-      // });
-
-      // Submit to Google Sheet if deployment URL is available
-      //const deploymentUrl = config.googleScriptDeploymentUrl;
-      //if (deploymentUrl) {
-      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
-      //    email: validatedData.email,
-      //    name: validatedData.name
-      //  });
-
-      //  if (!googleSubmitResult.success) {
-      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
-      //    // Continue with database storage only
-      //  }
-      //}
-
-      // Create newsletter subscriber in database
-      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
-
-      // Send email notification immediately
-      // await sendNewsletterNotification({
-      //   email: validatedData.email,
-      //   name: validatedData.name
-      // });
-
-      // Submit to Google Sheet if deployment URL is available
-      //const deploymentUrl = config.googleScriptDeploymentUrl;
-      //if (deploymentUrl) {
-      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
-      //    email: validatedData.email,
-      //    name: validatedData.name
-      //  });
-
-      //  if (!googleSubmitResult.success) {
-      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
-      //    // Continue with database storage only
-      //  }
-      //}
-
-      // Create newsletter subscriber in database
-      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
-
-      // Send email notification immediately
-      // await sendNewsletterNotification({
-      //   email: validatedData.email,
-      //   name: validatedData.name
-      // });
-
-      // Submit to Google Sheet if deployment URL is available
-      //const deploymentUrl = config.googleScriptDeploymentUrl;
-      //if (deploymentUrl) {
-      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
-      //    email: validatedData.email,
-      //    name: validatedData.name
-      //  });
-
-      //  if (!googleSubmitResult.success) {
-      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
-      //    // Continue with database storage only
-      //  }
-      //}
-
-      // Create newsletter subscriber in database
-      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
-
-      // Send email notification immediately
-      // await sendNewsletterNotification({
-      //   email: validatedData.email,
-      //   name: validatedData.name
-      // });
-
-      // Submit to Google Sheet if deployment URL is available
-      //const deploymentUrl = config.googleScriptDeploymentUrl;
-      //if (deploymentUrl) {
-      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
-      //    email: validatedData.email,
-      //    name: validatedData.name
-      //  });
-
-      //  if (!googleSubmitResult.success) {
-      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
-      //    // Continue with database storage only
-      //  }
-      //}
-      
       // Create newsletter subscriber in database
       const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
 
