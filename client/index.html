@@ -11,6 +11,7 @@
     <meta name="keywords" content="SavviWell, AI wellness assistant, AI lifestyle coach, mental load, what's for dinner, personalized meal planning, healthy eating, smart grocery lists, food-first wellness, family health, voice AI assistant, nutrition AI, adaptive meal plans, picky eaters, allergy-friendly meals, holistic wellness, AI for families, health-focused AI, AI nutritionist, savviwell.com" />
     <meta name="author" content="SavviWell" />
     <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="origin-when-cross-origin" />
     <link rel="canonical" href="https://savviwell.com" />
     
     <!-- Open Graph / Facebook -->
@@ -47,7 +48,46 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-0XC7YKTVF7');
+      gtag('config', 'G-0XC7YKTVF7', {
+        // Enhanced referrer attribution
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true,
+        send_page_view: true,
+        // Custom site URL for proper attribution
+        custom_map: {
+          'custom_parameter_site_name': 'SavviWell'
+        }
+      });
+
+      // Track custom events for better attribution
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        custom_parameter_site_name: 'SavviWell'
+      });
+    </script>
+
+    <!-- UTM Parameter Tracking -->
+    <script>
+      // Capture and track UTM parameters for better attribution
+      function trackUTMParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmSource = urlParams.get('utm_source');
+        const utmMedium = urlParams.get('utm_medium');
+        const utmCampaign = urlParams.get('utm_campaign');
+        
+        if (utmSource || utmMedium || utmCampaign) {
+          gtag('event', 'campaign_attribution', {
+            utm_source: utmSource || 'direct',
+            utm_medium: utmMedium || 'none',
+            utm_campaign: utmCampaign || 'none',
+            page_location: window.location.href
+          });
+        }
+      }
+      
+      // Run UTM tracking when page loads
+      window.addEventListener('load', trackUTMParameters);
     </script>
     
     <!-- Preconnect for performance -->
