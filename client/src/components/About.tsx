@@ -4,18 +4,38 @@ export function About() {
   const features = [
     {
       icon: <Brain className="text-primary" aria-hidden="true" />,
-      title: "AI-Powered Nutrition",
-      description: "Personalized meal recommendations based on your dietary preferences and health goals."
+      title: "🧠 AI-Powered Nutrition",
+      description: "Personalized meal recommendations based on your dietary preferences, health goals, and real-life needs."
     },
     {
       icon: <Users className="text-primary" aria-hidden="true" />,
-      title: "Family-Focused",
-      description: "Tools designed for households with diverse nutritional needs and preferences."
+      title: "👨‍👩‍👧 Family-Focused Flexibility",
+      description: "Built for households with multiple needs—accommodate allergies, picky eaters, and unique goals with ease."
     },
     {
       icon: <ShoppingBasket className="text-primary" aria-hidden="true" />,
-      title: "Smart Grocery Lists",
-      description: "Automatically generated shopping lists based on your meal plans to save time and reduce waste."
+      title: "🥗 Personalized Meal Planning",
+      description: "Custom plans shaped by your lifestyle, schedule, and preferences—from quick comfort meals to clean eating."
+    },
+    {
+      icon: <ShoppingBasket className="text-primary" aria-hidden="true" />,
+      title: "🛒 Smart Grocery Lists & Delivery",
+      description: "Generate grocery lists in one tap—automatically aligned with your plan and pantry, ready to send to delivery partners."
+    },
+    {
+      icon: <Brain className="text-primary" aria-hidden="true" />,
+      title: "🔄 Flexible Ingredient Swaps",
+      description: "Easily adjust recipes for dietary needs, last-minute changes, or mood-based cravings—without the stress."
+    },
+    {
+      icon: <Users className="text-primary" aria-hidden="true" />,
+      title: "🍳 Pantry-Based Recipe Suggestions",
+      description: "Make the most of what you already have. No more endless scrolling—just smart, satisfying ideas."
+    },
+    {
+      icon: <Brain className="text-primary" aria-hidden="true" />,
+      title: "💬 Voice-First, Hands-Free Experience",
+      description: "Talk to SavviWell to get answers, plan your next meal, or change course—without lifting a finger."
     }
   ];
 
