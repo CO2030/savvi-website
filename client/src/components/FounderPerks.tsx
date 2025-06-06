@@ -59,14 +59,14 @@ export function FounderPerks() {
         </div>
 
         {/* Mobile Stacked Cards */}
-        <div className="md:hidden space-y-6">
+        <div className="md:hidden">
           {perks.map((perk, index) => (
             <motion.div
               key={index}
-              className="sticky"
+              className="sticky mb-4"
               style={{
-                top: `${20 + index * 20}px`,
-                zIndex: perks.length - index,
+                top: "20px",
+                zIndex: 1,
               }}
               initial="hidden"
               whileInView="show"
