@@ -83,7 +83,8 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         <div className="hidden md:flex space-x-3">
           <Button 
             onClick={onWaitlistClick}
-            className="bg-primary hover:bg-primary/90 transition-colors"
+            size="lg"
+            className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg md:text-xl"
           >
             Join the Waitlist
           </Button>
@@ -129,7 +130,8 @@ export function Header({ onWaitlistClick }: HeaderProps) {
                 onWaitlistClick();
                 closeMobileMenu();
               }}
-              className="w-full bg-primary hover:bg-primary/90 transition-colors"
+              size="lg"
+              className="w-full bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg md:text-xl"
             >
               Join the Waitlist
             </Button>

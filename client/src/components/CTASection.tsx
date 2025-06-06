@@ -19,7 +19,7 @@ export function CTASection({ onWaitlistClick }: CTASectionProps) {
         <Button 
           onClick={onWaitlistClick}
           size="lg"
-          className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105"
+          className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg md:text-xl"
         >
           Join the Waitlist
         </Button>
