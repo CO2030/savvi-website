@@ -44,7 +44,16 @@ export function SocialShare({
   const [isOpen, setIsOpen] = useState(false);
 
   // Default to current URL if none provided
-  const shareUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
+  const baseUrl = url || (typeof window !== 'undefined' ? window.location.href : '');
+  
+  // Add UTM parameters for each platform
+  const createShareUrl = (platform: string) => {
+    const urlObj = new URL(baseUrl);
+    urlObj.searchParams.set('utm_source', platform);
+    urlObj.searchParams.set('utm_medium', 'social');
+    urlObj.searchParams.set('utm_campaign', 'share');
+    return urlObj.toString();
+  };
 
   // Apply rounded corners if specified
   const iconRadius = rounded ? 8 : 0;
@@ -63,23 +72,23 @@ export function SocialShare({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-2" align="end">
         <div className="flex gap-2 items-center">
-          <FacebookShareButton url={shareUrl} hashtag="#SavviWell" className="transition-opacity hover:opacity-80">
+          <FacebookShareButton url={createShareUrl('facebook')} hashtag="#SavviWell" className="transition-opacity hover:opacity-80">
             <FacebookIcon size={iconSize} round={rounded} borderRadius={iconRadius} />
           </FacebookShareButton>
 
-          <TwitterShareButton url={shareUrl} title={title} className="transition-opacity hover:opacity-80">
+          <TwitterShareButton url={createShareUrl('twitter')} title={title} className="transition-opacity hover:opacity-80">
             <TwitterIcon size={iconSize} round={rounded} borderRadius={iconRadius} />
           </TwitterShareButton>
 
-          <LinkedinShareButton url={shareUrl} title={title} summary={description} className="transition-opacity hover:opacity-80">
+          <LinkedinShareButton url={createShareUrl('linkedin')} title={title} summary={description} className="transition-opacity hover:opacity-80">
             <LinkedinIcon size={iconSize} round={rounded} borderRadius={iconRadius} />
           </LinkedinShareButton>
 
-          <WhatsappShareButton url={shareUrl} title={title} className="transition-opacity hover:opacity-80">
+          <WhatsappShareButton url={createShareUrl('whatsapp')} title={title} className="transition-opacity hover:opacity-80">
             <WhatsappIcon size={iconSize} round={rounded} borderRadius={iconRadius} />
           </WhatsappShareButton>
 
-          <EmailShareButton url={shareUrl} subject={title} body={description} className="transition-opacity hover:opacity-80">
+          <EmailShareButton url={createShareUrl('email')} subject={title} body={description} className="transition-opacity hover:opacity-80">
             <EmailIcon size={iconSize} round={rounded} borderRadius={iconRadius} />
           </EmailShareButton>
         </div>
