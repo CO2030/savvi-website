@@ -1,5 +1,4 @@
 import { Brain, Users, ShoppingBasket, ChefHat, RefreshCw, UtensilsCrossed, Mic } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 export function About() {
   const features = [
@@ -92,57 +91,28 @@ export function About() {
           </p>
         </div>
         
-        {/* Features Grid - Desktop */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        {/* Features - Vertical Card Stack */}
+        <div className="space-y-6 max-w-3xl mx-auto">
           {features.map((feature, index) => (
             <div 
               key={index} 
               className="group bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
                   {feature.icon}
                 </div>
-                <h3 className="font-bold mb-2 font-heading text-gray-900 group-hover:text-primary transition-colors duration-300">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-neutral-dark leading-relaxed">
-                  {feature.description}
-                </p>
+                <div className="flex-1">
+                  <h3 className="font-bold mb-2 font-heading text-gray-900 group-hover:text-primary transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-neutral-dark leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Features Carousel - Mobile */}
-        <div className="md:hidden">
-          <Carousel 
-            opts={{
-              align: "start",
-              loop: false,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {features.map((feature, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-4/5 min-w-0">
-                  <div className="group bg-white rounded-lg p-6 shadow-sm border border-gray-100 h-full">
-                    <div className="flex flex-col items-center text-center h-full">
-                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        {feature.icon}
-                      </div>
-                      <h3 className="font-bold mb-2 font-heading text-gray-900">
-                        {feature.title}
-                      </h3>
-                      <p className="text-sm text-neutral-dark leading-relaxed flex-grow">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
         </div>
       </div>
     </section>
