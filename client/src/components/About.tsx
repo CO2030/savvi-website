@@ -71,7 +71,7 @@ export function About() {
                 <span className="text-2xl font-bold text-primary opacity-50">📱</span>
               </div>
             </div>
-            <div className="p-6 space-y-6">
+            <div className="p-6 pt-12 space-y-6">
               <h2 className="text-3xl font-bold text-center font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
               <p className="text-lg text-gray-700 leading-relaxed text-center">
                 Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
@@ -86,7 +86,7 @@ export function About() {
 
           {/* Desktop Layout */}
           <div className="hidden md:block">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 mt-8 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
           </div>
           <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:items-center">
             <div className="p-8 space-y-6">
