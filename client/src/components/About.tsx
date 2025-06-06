@@ -114,17 +114,15 @@ export function About() {
           ))}
         </div>
 
-        {/* Features Stacked Cards - Mobile */}
-        <div className="md:hidden relative h-[600px] overflow-hidden">
+        {/* Features Vertical Stack - Mobile */}
+        <div className="md:hidden space-y-4 relative">
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="absolute inset-x-0 bg-white rounded-xl p-6 shadow-lg border border-gray-100 transform transition-all duration-300 ease-out"
+              className="bg-white rounded-xl p-6 shadow-md border border-gray-100 relative z-10 transform transition-all duration-300"
               style={{
-                top: `${index * 60}px`,
-                zIndex: features.length - index,
-                transform: `translateY(${index * 20}px) scale(${1 - index * 0.02})`,
-                opacity: index < 3 ? 1 : 0.7
+                marginTop: index === 0 ? '0' : '-8px',
+                zIndex: features.length - index
               }}
             >
               <div className="flex items-start space-x-4">
@@ -142,12 +140,6 @@ export function About() {
               </div>
             </div>
           ))}
-          
-          {/* Scroll indicator */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 flex items-center space-x-1">
-            <span>Swipe up to explore</span>
-            <div className="w-1 h-4 bg-gray-300 rounded animate-pulse"></div>
-          </div>
         </div>
       </div>
     </section>

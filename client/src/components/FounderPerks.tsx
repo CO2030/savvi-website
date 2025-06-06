@@ -41,17 +41,15 @@ export function FounderPerks() {
           ))}
         </div>
 
-        {/* Mobile Stacked Cards */}
-        <div className="md:hidden relative h-[400px] overflow-hidden">
+        {/* Mobile Vertical Stack */}
+        <div className="md:hidden space-y-4 relative">
           {perks.map((perk, index) => (
             <Card 
               key={index} 
-              className="absolute inset-x-0 bg-gray-50 border-none shadow-lg transform transition-all duration-300 ease-out"
+              className="bg-gray-50 border-none shadow-md relative z-10 transform transition-all duration-300"
               style={{
-                top: `${index * 80}px`,
-                zIndex: perks.length - index,
-                transform: `translateY(${index * 30}px) scale(${1 - index * 0.03})`,
-                opacity: index < 2 ? 1 : 0.8
+                marginTop: index === 0 ? '0' : '-8px',
+                zIndex: perks.length - index
               }}
             >
               <CardContent className="p-6">
@@ -67,12 +65,6 @@ export function FounderPerks() {
               </CardContent>
             </Card>
           ))}
-          
-          {/* Scroll indicator */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 flex items-center space-x-1">
-            <span>Swipe up to explore</span>
-            <div className="w-1 h-4 bg-gray-300 rounded animate-pulse"></div>
-          </div>
         </div>
       </div>
     </section>
