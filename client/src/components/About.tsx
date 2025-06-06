@@ -115,8 +115,8 @@ export function About() {
           </div>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        {/* Desktop Features Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -125,6 +125,32 @@ export function About() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+            >
+              <div className="mb-3">
+                <div className="flex items-center space-x-2 mb-2">
+                  {feature.icon}
+                  <h3 className="text-base font-semibold text-gray-900 font-heading">{feature.title}</h3>
+                </div>
+                <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Mobile Stacked Cards with Overlay Effect */}
+        <div className="md:hidden mb-16 space-y-4">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              className="sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200"
+              style={{
+                top: `${20 + index * 20}px`,
+                zIndex: features.length - index,
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
             >
               <div className="mb-3">
                 <div className="flex items-center space-x-2 mb-2">
