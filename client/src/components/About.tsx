@@ -138,18 +138,14 @@ export function About() {
         </div>
 
         {/* Mobile Stacked Cards with Overlay Effect */}
-        <div className="md:hidden mb-16 space-y-4">
+        <div className="md:hidden mb-16 space-y-6">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className={`${
-                index === 0 
-                  ? "sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200" 
-                  : "sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200"
-              }`}
+              className="sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200"
               style={{
-                top: index === 0 ? "20px" : `${20 + (index - 1) * 20}px`,
-                zIndex: index === 0 ? 1 : features.length - index + 1,
+                top: `${20 + index * 20}px`,
+                zIndex: features.length - index,
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
