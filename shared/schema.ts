@@ -23,9 +23,13 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   createdAt: text("created_at").notNull()
 });
 
-export const insertWaitlistSchema = createInsertSchema(waitlistEntries).omit({
-  id: true,
-  createdAt: true
+export const insertWaitlistSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  userType: z.enum(["Individual", "Healthcare Professional", "Nutritionist"]),
+  healthGoal: z.enum(["Weight Loss", "Muscle Gain", "Patient Education", "Client Support"]),
+  dietaryConcern: z.string().min(1, "Dietary concern is required"),
+  source: z.string().optional(),
 });
 
 export const newsletterSubscribers = pgTable("newsletter_subscribers", {

@@ -51,14 +51,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get Google Script deployment URL from config
       const deploymentUrl = config.googleScriptDeploymentUrl;
 
-      // Submit to Google Sheet if deployment URL is available
+      // Send to Google Sheet if deployment URL is available
       if (deploymentUrl) {
         const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
           name: validatedData.name,
           email: validatedData.email,
           userType: validatedData.userType,
           healthGoal: validatedData.healthGoal,
-          dietaryConcern: validatedData.dietaryConcern
+          dietaryConcern: validatedData.dietaryConcern,
+          source: validatedData.source || 'Direct'
         });
 
         if (!googleSubmitResult.success) {
