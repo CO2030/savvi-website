@@ -26,16 +26,16 @@ export function About() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">Your Voice AI Assistant for Everyday Life</h2>
             <p className="text-lg mb-6 text-neutral-dark">
-              Imagine having someone who just gets it.
+              <strong>Imagine having someone who just <em>gets it</em>.</strong>
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
-              The never-ending meal planning. The picky eaters. The special diets. The 5:45pm panic: "What are we eating tonight?"
+              The never-ending meal planning. The picky eaters. The special diets. The 5:45pm panic: <em>"What are we eating tonight?"</em>
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
-              Now imagine your AI assistant already has the answer—one that fits your goals, your groceries, and your time.
+              Now imagine your <strong>AI assistant</strong> already has the answer—one that fits your goals, your groceries, and your time.
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
-              SavviWell is your voice-guided partner in healthy living, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
+              <strong>SavviWell is your voice-guided partner in healthy living,</strong> built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
             </p>
             <div className="space-y-4">
               {features.map((feature, index) => (
