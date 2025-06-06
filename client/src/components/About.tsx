@@ -67,7 +67,7 @@ export function About() {
           {/* Mobile Layout */}
           <div className="md:hidden">
             <div className="flex justify-center py-6 bg-gray-50">
-              <div className="w-48 h-80 rounded-3xl overflow-hidden shadow-lg">
+              <div className="w-80 h-48 rounded-3xl overflow-hidden shadow-lg">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
@@ -102,7 +102,7 @@ export function About() {
               </p>
             </div>
             <div className="flex justify-center items-center p-8 bg-gray-50">
-              <div className="w-64 h-96 rounded-3xl overflow-hidden shadow-lg">
+              <div className="w-96 h-64 rounded-3xl overflow-hidden shadow-lg">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
