@@ -72,9 +72,9 @@ export function About() {
               </div>
             </div>
             <div className="p-6 space-y-6">
-              <h2 className="text-3xl font-bold text-center font-heading" style={{ color: '#399e5a' }}>Healthy Eating Made Simple</h2>
+              <h2 className="text-3xl font-bold text-center font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
               <p className="text-lg text-gray-700 leading-relaxed text-center">
-                <strong>Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.</strong>
+                Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
               </p>
             </div>
             <div className="p-6 space-y-6">
@@ -86,12 +86,12 @@ export function About() {
 
           {/* Desktop Layout */}
           <div className="hidden md:block">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading" style={{ color: '#399e5a' }}>Healthy Eating Made Simple</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
           </div>
           <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:items-center">
             <div className="p-8 space-y-6">
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                <strong>Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.</strong>
+                Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
               </p>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
