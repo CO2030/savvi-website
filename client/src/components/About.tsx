@@ -62,21 +62,20 @@ export function About() {
   return (
     <section id="about" className="py-16 md:py-24 px-4 bg-gray-50">
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Your Voice AI Assistant for Everyday Life</h2>
-
         {/* Hero Content Section - Desktop Side by Side, Mobile Stacked */}
         <div className="bg-white rounded-xl shadow-lg max-w-6xl mx-auto mb-12 overflow-hidden">
           {/* Mobile Layout */}
           <div className="md:hidden">
-            <div className="p-6 space-y-6">
-              <p className="text-lg text-gray-700 leading-relaxed text-center">
-                <strong>Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.</strong>
-              </p>
-            </div>
             <div className="flex justify-center py-6 bg-gray-50">
               <div className="w-48 h-80 bg-gradient-to-br from-primary/20 to-primary/40 rounded-3xl flex items-center justify-center">
                 <span className="text-2xl font-bold text-primary opacity-50">📱</span>
               </div>
+            </div>
+            <div className="p-6 space-y-6">
+              <h2 className="text-3xl font-bold text-center font-heading">Your Voice AI Assistant for Everyday Life</h2>
+              <p className="text-lg text-gray-700 leading-relaxed text-center">
+                <strong>Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.</strong>
+              </p>
             </div>
             <div className="p-6 space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed text-center">
@@ -86,6 +85,9 @@ export function About() {
           </div>
 
           {/* Desktop Layout */}
+          <div className="hidden md:block">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Your Voice AI Assistant for Everyday Life</h2>
+          </div>
           <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:items-center">
             <div className="p-8 space-y-6">
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
