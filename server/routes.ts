@@ -28,6 +28,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create waitlist entry in local storage
       const newEntry = await storage.createWaitlistEntry(validatedData);
 
+      // Send email notification to admin
+      try {
+        await sendContactEmail({
+          to: "savviwell@gmail.com",
+          subject: "New Waitlist Signup - SavviWell",
+          html: `
+            <h2>New Waitlist Signup</h2>
+            <p><strong>Name:</strong> ${validatedData.name}</p>
+            <p><strong>Email:</strong> ${validatedData.email}</p>
+            <p><strong>User Type:</strong> ${validatedData.userType}</p>
+            <p><strong>Health Goal:</strong> ${validatedData.healthGoal}</p>
+            <p><strong>Dietary Concern:</strong> ${validatedData.dietaryConcern}</p>
+            <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+          `
+        });
+      } catch (emailError) {
+        console.warn("Failed to send email notification:", emailError);
+        // Continue with normal flow even if email fails
+      }
+
       // Get Google Script deployment URL from config
       const deploymentUrl = config.googleScriptDeploymentUrl;
 
