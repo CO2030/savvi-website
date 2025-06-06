@@ -38,30 +38,40 @@ export function FAQ() {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-white">
-      <div className="container mx-auto max-w-4xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">
-          Frequently Asked Questions
-        </h2>
+    <section className="py-20 md:py-32 px-4 bg-gray-50">
+      <div className="container mx-auto max-w-3xl">
+        <div className="text-center mb-16">
+          <p className="text-lg text-gray-600 mb-4">You ask, we answer</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 font-heading">
+            Help & FAQ
+          </h2>
+        </div>
         
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqItems.map((item, index) => (
-            <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+            <div key={index} className="bg-white rounded-none border-none shadow-sm">
               <button
                 onClick={() => toggleQuestion(index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                className="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors group"
               >
-                <h3 className="font-semibold text-lg text-gray-900">{item.question}</h3>
-                {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
-                )}
+                <h3 className="font-medium text-lg md:text-xl text-gray-900 pr-4">{item.question}</h3>
+                <div className="flex-shrink-0">
+                  {openIndex === index ? (
+                    <div className="w-6 h-6 flex items-center justify-center">
+                      <div className="w-4 h-0.5 bg-gray-900"></div>
+                    </div>
+                  ) : (
+                    <div className="w-6 h-6 flex items-center justify-center relative">
+                      <div className="w-4 h-0.5 bg-gray-900"></div>
+                      <div className="w-0.5 h-4 bg-gray-900 absolute"></div>
+                    </div>
+                  )}
+                </div>
               </button>
               
               {openIndex === index && (
-                <div className="px-6 pb-4">
-                  <p className="text-gray-700 leading-relaxed">{item.answer}</p>
+                <div className="px-8 pb-6">
+                  <p className="text-gray-700 text-base leading-relaxed">{item.answer}</p>
                 </div>
               )}
             </div>
