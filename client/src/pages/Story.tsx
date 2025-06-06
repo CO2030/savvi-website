@@ -195,7 +195,7 @@ export default function Story() {
             <Button 
               onClick={openModal}
               size="lg"
-              className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+              className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg md:text-xl w-full sm:w-auto"
             >
               Join the Waitlist
             </Button>
