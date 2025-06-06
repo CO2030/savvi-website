@@ -1,27 +1,47 @@
 import { motion } from 'framer-motion';
-import { Brain, Users, Utensils, ShoppingCart } from "lucide-react";
+import { Brain, Users, Utensils, ShoppingCart, RefreshCw, ChefHat, Mic, Heart } from "lucide-react";
 
 export function About() {
   const features = [
     {
       icon: <Brain className="h-6 w-6 text-primary" />,
       title: "AI-Powered Nutrition",
-      description: "Smart meals tailored to your health goals and dietary preferences."
+      description: "Personalized meal recommendations based on your dietary preferences, health goals, and real-life needs."
     },
     {
       icon: <Users className="h-6 w-6 text-primary" />,
-      title: "Family-Focused",
-      description: "Built for real households with diverse needs and busy schedules."
+      title: "Family-Focused Flexibility",
+      description: "Built for households with multiple needs—accommodate allergies, picky eaters, and unique goals with ease."
     },
     {
       icon: <Utensils className="h-6 w-6 text-primary" />,
-      title: "Personalized Planning",
-      description: "Meal plans that match your time, budget, and lifestyle."
+      title: "Personalized Meal Planning",
+      description: "Custom plans shaped by your lifestyle, schedule, and preferences—from quick comfort meals to clean eating."
     },
     {
       icon: <ShoppingCart className="h-6 w-6 text-primary" />,
-      title: "Smart Grocery Lists",
-      description: "Auto-generated shopping lists optimized for delivery or pickup."
+      title: "Smart Grocery Lists & Delivery",
+      description: "Generate grocery lists in one tap—automatically aligned with your plan and pantry, ready to send to delivery partners."
+    },
+    {
+      icon: <RefreshCw className="h-6 w-6 text-primary" />,
+      title: "Flexible Ingredient Swaps",
+      description: "Easily adjust recipes for dietary needs, last-minute changes, or mood-based cravings—without the stress."
+    },
+    {
+      icon: <ChefHat className="h-6 w-6 text-primary" />,
+      title: "Pantry-Based Recipe Suggestions",
+      description: "Make the most of what you already have. No more endless scrolling—just smart, satisfying ideas."
+    },
+    {
+      icon: <Mic className="h-6 w-6 text-primary" />,
+      title: "Voice-First, Hands-Free Experience",
+      description: "Talk to SavviWell to get answers, plan your next meal, or change course—without lifting a finger."
+    },
+    {
+      icon: <Heart className="h-6 w-6 text-primary" />,
+      title: "Wellness Support That Grows With You",
+      description: "From food as fuel to food as medicine, get adaptive support and gentle nudges to help build long-term healthy habits."
     }
   ];
 
