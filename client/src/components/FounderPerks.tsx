@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Tag, MessageSquare } from "lucide-react";
 import { motion } from 'framer-motion';
@@ -21,6 +22,11 @@ export function FounderPerks() {
     }
   ];
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section id="features" className="py-16 md:py-24 px-4 bg-white">
       <div className="container mx-auto">
@@ -32,10 +38,11 @@ export function FounderPerks() {
           {perks.map((perk, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              variants={fadeInUp}
+              transition={{ delay: index * 0.2 }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
               <Card className="bg-gray-50 border-none hover:shadow-md transition-all duration-300 h-full">
@@ -52,45 +59,44 @@ export function FounderPerks() {
         </div>
 
         {/* Mobile Stacked Cards */}
-        <div className="md:hidden relative min-h-[500px]">
+        <div className="md:hidden relative h-[400px] overflow-hidden">
           {perks.map((perk, index) => (
             <motion.div
               key={index}
-              className="absolute inset-x-0"
-              initial={{ opacity: 0, y: 100, scale: 0.9 }}
-              whileInView={{ 
-                opacity: 1, 
-                y: index * 80, 
-                scale: 1 - index * 0.03,
-                zIndex: perks.length - index
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: index * 0.3,
-                type: "spring",
-                stiffness: 100
-              }}
               style={{
-                top: `${index * 30}px`,
-                zIndex: perks.length - index
+                top: `${index * 80}px`,
+                zIndex: perks.length - index,
               }}
+              initial={{ 
+                opacity: index < 2 ? 1 : 0.8,
+                scale: 1 - index * 0.03,
+                y: index * 30 
+              }}
+              whileInView={{ 
+                opacity: 1,
+                scale: 1 - index * 0.03,
+                y: index * 30 
+              }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="bg-gray-50 border-none shadow-lg">
+              <Card className="absolute inset-x-0 bg-gray-50 border-none shadow-lg">
                 <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      {perk.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-3 font-heading">{perk.title}</h3>
-                      <p className="text-neutral-dark">{perk.description}</p>
-                    </div>
+                  <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                    {perk.icon}
                   </div>
+                  <h3 className="text-xl font-bold mb-3 font-heading">{perk.title}</h3>
+                  <p className="text-neutral-dark">{perk.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
+          
+          {/* Scroll indicator */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 flex items-center space-x-1">
+            <span>Swipe up to explore</span>
+            <div className="w-1 h-4 bg-gray-300 rounded animate-pulse"></div>
+          </div>
         </div>
       </div>
     </section>
