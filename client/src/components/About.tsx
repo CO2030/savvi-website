@@ -142,10 +142,14 @@ export function About() {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200"
+              className={`${
+                index === 0 
+                  ? "sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200" 
+                  : "sticky bg-white rounded-lg p-4 shadow-lg border border-gray-200"
+              }`}
               style={{
-                top: `${20 + index * 20}px`,
-                zIndex: features.length - index,
+                top: index === 0 ? "20px" : `${20 + (index - 1) * 20}px`,
+                zIndex: index === 0 ? 1 : features.length - index + 1,
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
