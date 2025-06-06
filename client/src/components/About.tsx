@@ -85,23 +85,56 @@ export function About() {
   return (
     <section id="about" className="py-16 md:py-24 px-4 bg-gray-50">
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Your Voice AI Assistant for Everyday Wellness</h2>
-        <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-8">Transforming how families plan, shop, and eat together</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Your Voice AI Assistant for Everyday Life</h2>
         
-        <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg max-w-4xl mx-auto mb-12">
-          <div className="space-y-6">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-              <strong>Imagine having someone who just <em><strong>gets it</strong></em>.</strong>
-            </p>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-              The never-ending meal planning. The picky eaters. The special diets. The 5:45pm panic: <em>"What are we eating tonight?"</em>
-            </p>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-              Now imagine your <strong>AI assistant</strong> already has the answer—one that fits your goals, your groceries, and your time.
-            </p>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-              <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
-            </p>
+        {/* Hero Content Section - Desktop Side by Side, Mobile Stacked */}
+        <div className="bg-white rounded-xl shadow-lg max-w-6xl mx-auto mb-12 overflow-hidden">
+          {/* Mobile Layout */}
+          <div className="md:hidden">
+            <div className="p-6 space-y-6">
+              <p className="text-lg text-gray-700 leading-relaxed text-center">
+                <strong>Imagine having someone who just <em><strong>gets it</strong></em>.</strong>
+              </p>
+            </div>
+            <div className="flex justify-center py-6 bg-gray-50">
+              <div className="w-48 h-80 bg-gradient-to-br from-primary/20 to-primary/40 rounded-3xl flex items-center justify-center">
+                <span className="text-2xl font-bold text-primary opacity-50">📱</span>
+              </div>
+            </div>
+            <div className="p-6 space-y-6">
+              <p className="text-lg text-gray-700 leading-relaxed text-center">
+                The never-ending meal planning. The picky eaters. The special diets. The 5:45pm panic: <em>"What are we eating tonight?"</em>
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed text-center">
+                Now imagine your <strong>AI assistant</strong> already has the answer—one that fits your goals, your groceries, and your time.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed text-center">
+                <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
+              </p>
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:items-center">
+            <div className="p-8 space-y-6">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                <strong>Imagine having someone who just <em><strong>gets it</strong></em>.</strong>
+              </p>
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                The never-ending meal planning. The picky eaters. The special diets. The 5:45pm panic: <em>"What are we eating tonight?"</em>
+              </p>
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Now imagine your <strong>AI assistant</strong> already has the answer—one that fits your goals, your groceries, and your time.
+              </p>
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
+              </p>
+            </div>
+            <div className="flex justify-center items-center p-8 bg-gray-50">
+              <div className="w-64 h-96 bg-gradient-to-br from-primary/20 to-primary/40 rounded-3xl flex items-center justify-center shadow-lg">
+                <span className="text-4xl font-bold text-primary opacity-50">📱</span>
+              </div>
+            </div>
           </div>
         </div>
 
