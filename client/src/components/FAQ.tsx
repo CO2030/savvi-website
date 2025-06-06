@@ -49,10 +49,10 @@ export function FAQ() {
         
         <div className="space-y-2">
           {faqItems.map((item, index) => (
-            <div key={index} className="bg-gray-200 rounded-lg border border-gray-300">
+            <div key={index} className="bg-white rounded-lg border border-gray-300">
               <button
                 onClick={() => toggleQuestion(index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-300 transition-colors group"
+                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-200 transition-colors group"
               >
                 <h3 className="font-medium text-base text-gray-900 pr-4">{item.question}</h3>
                 <div className="flex-shrink-0">
