@@ -241,6 +241,17 @@
     </script>
   </head>
   <body>
+    <!-- Hidden referrer tracking for forms -->
+    <input type="hidden" name="source" id="ref-source" />
+
+    <script>
+      const ref = document.referrer;
+      document.getElementById("ref-source").value = ref.includes("instagram") ? "Instagram"
+        : ref.includes("tiktok") ? "TikTok"
+        : ref.includes("pinterest") ? "Pinterest"
+        : "Direct";
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
