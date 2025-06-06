@@ -6,22 +6,22 @@ export function About() {
     {
       icon: <Brain className="h-6 w-6 text-primary" />,
       title: "AI-Powered Nutrition",
-      description: "Get personalized meal recommendations based on your health goals, dietary restrictions, and preferences using advanced AI technology."
+      description: "Smart meals tailored to your health goals and dietary preferences."
     },
     {
       icon: <Users className="h-6 w-6 text-primary" />,
       title: "Family-Focused",
-      description: "Designed for real families with diverse needs, busy schedules, and varying dietary preferences - all managed in one place."
+      description: "Built for real households with diverse needs and busy schedules."
     },
     {
       icon: <Utensils className="h-6 w-6 text-primary" />,
       title: "Personalized Planning",
-      description: "Custom meal plans that adapt to your time constraints, budget, cooking skills, and lifestyle preferences."
+      description: "Meal plans that match your time, budget, and lifestyle."
     },
     {
       icon: <ShoppingCart className="h-6 w-6 text-primary" />,
       title: "Smart Grocery Lists",
-      description: "Automatically generated shopping lists that optimize for your preferred stores, delivery services, and budget constraints."
+      description: "Auto-generated shopping lists optimized for delivery or pickup."
     }
   ];
 
@@ -60,18 +60,21 @@ export function About() {
           ))}
         </div>
 
-        {/* Mobile Grid */}
-        <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Mobile Stacked Cards */}
+        <div className="md:hidden space-y-6">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-2xl shadow-xl"
+              className="bg-white p-6 rounded-2xl shadow-xl sticky"
+              style={{
+                top: `${20 + index * 20}px`,
+                zIndex: features.length - index,
+              }}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeInUp}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4, scale: 1.01 }}
             >
               <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                 {feature.icon}
