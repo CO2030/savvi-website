@@ -20,10 +20,10 @@ export function Hero({ onWaitlistClick }: HeroProps) {
             Smarter Meals.<br />Healthier Lives.<br />Less Stress.
           </h1>
           <p className="text-xl md:text-2xl text-white opacity-90 mb-4 animate-slide-in">
-            Meet <span style={{color: '#399e5a'}}>SavviWell</span> — your voice AI assistant for healthy meals, grocery delivery, quick recipe ideas, and wellness support when life gets busy.
+            Meet <span className="font-bold">SavviWell</span> — your voice AI assistant for healthy meals, grocery delivery, quick recipe ideas, and wellness support when life gets busy.
           </p>
           <p className="text-lg md:text-xl text-white opacity-95 mb-8 animate-slide-in" style={{animationDelay: "0.2s"}}>
-            Join the beta. Let <span style={{color: '#399e5a'}}>SavviWell</span> help carry the load.
+            Join the beta. Let <span className="font-bold">SavviWell</span> help carry the load.
           </p>
           <Button 
             onClick={onWaitlistClick}
