@@ -7,7 +7,7 @@ interface HeroProps {
 export function Hero({ onWaitlistClick }: HeroProps) {
   return (
     <section 
-      className="relative pt-20 pb-12 px-4 flex items-center min-h-screen bg-center bg-cover bg-no-repeat md:pt-32 md:pb-24"
+      className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] md:min-h-screen bg-top md:bg-center bg-cover bg-no-repeat"
       style={{
         backgroundImage: "url('/images/hero-background.jpeg')"
       }}
@@ -15,20 +15,20 @@ export function Hero({ onWaitlistClick }: HeroProps) {
     >
       <div className="absolute inset-0 bg-black/30" aria-hidden="true"></div>
       <div className="container mx-auto relative z-10">
-        <header className="max-w-2xl text-center mx-auto md:text-left md:mx-0">
-          <h1 className="text-3xl font-bold text-white font-heading leading-tight mb-4 animate-fade-in sm:text-4xl md:text-5xl lg:text-6xl">
+        <header className="max-w-2xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-heading leading-tight mb-4 animate-fade-in">
             Smarter Meals.<br />Healthier Lives.<br />Less Stress.
           </h1>
-          <p className="text-lg text-white opacity-90 mb-4 animate-slide-in sm:text-xl md:text-2xl">
+          <p className="text-xl md:text-2xl text-white opacity-90 mb-4 animate-slide-in">
             Meet <span className="font-bold">SavviWell</span> — your voice AI assistant for healthy meals, grocery delivery, quick recipe ideas, and wellness support when life gets busy.
           </p>
-          <p className="text-base text-white opacity-95 mb-8 animate-slide-in sm:text-lg md:text-xl" style={{animationDelay: "0.2s"}}>
+          <p className="text-lg md:text-xl text-white opacity-95 mb-8 animate-slide-in" style={{animationDelay: "0.2s"}}>
             Join the beta. Let <span className="font-bold">SavviWell</span> help carry the load.
           </p>
           <Button 
             onClick={onWaitlistClick}
             size="lg"
-            className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in px-8 py-4 text-lg md:text-xl w-full sm:w-auto"
+            className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 animate-slide-in px-8 py-4 text-lg md:text-xl"
             aria-label="Join the SavviWell waitlist"
           >
             Join the Waitlist
