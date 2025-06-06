@@ -86,7 +86,13 @@ export function About() {
     <section id="about" className="py-16 md:py-24 px-4 bg-gray-50">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Your Voice AI Assistant for Everyday Wellness</h2>
-        <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Transforming how families plan, shop, and eat together</p>
+        <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-8">Transforming how families plan, shop, and eat together</p>
+        
+        <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg max-w-4xl mx-auto mb-12">
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+            <strong>Imagine</strong> asking your AI assistant to "plan a week of dinners that work for my picky teenager and my diabetic spouse" — and getting personalized meal plans, grocery lists, and recipe modifications instantly. That's the power of <strong>SavviWell</strong>.
+          </p>
+        </div>
 
         {/* Desktop Grid */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
