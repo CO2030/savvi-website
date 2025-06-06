@@ -60,31 +60,33 @@ export function About() {
           ))}
         </div>
 
-        {/* Mobile Stacked Cards */}
-        <div className="md:hidden space-y-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              className="bg-white p-6 rounded-2xl shadow-xl sticky"
-              style={{
-                top: `${20 + index * 20}px`,
-                zIndex: features.length - index,
-              }}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeInUp}
-              transition={{ delay: index * 0.1 }}
-            >
-              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3 font-heading">{feature.title}</h3>
-              <p className="text-sm text-neutral-dark leading-relaxed">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
+        {/* Mobile Vertical Layout with Stacking */}
+        <div className="md:hidden">
+          <div className="grid grid-cols-2 gap-4">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-4 rounded-2xl shadow-xl sticky"
+                style={{
+                  top: `${20 + (index % 2) * 10}px`,
+                  zIndex: features.length - index,
+                }}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-bold mb-2 font-heading">{feature.title}</h3>
+                <p className="text-xs text-neutral-dark leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
