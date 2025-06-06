@@ -65,6 +65,31 @@
         page_location: window.location.href,
         custom_parameter_site_name: 'SavviWell'
       });
+
+      // Automatic social media tracking based on referrer
+      function trackSocialReferrer() {
+        const referrer = document.referrer.toLowerCase();
+        let socialSource = null;
+        
+        if (referrer.includes('instagram.com')) socialSource = 'instagram';
+        else if (referrer.includes('tiktok.com')) socialSource = 'tiktok';
+        else if (referrer.includes('pinterest.com')) socialSource = 'pinterest';
+        else if (referrer.includes('whatsapp.com')) socialSource = 'whatsapp';
+        else if (referrer.includes('twitter.com') || referrer.includes('t.co')) socialSource = 'twitter';
+        else if (referrer.includes('linkedin.com')) socialSource = 'linkedin';
+        else if (referrer.includes('facebook.com')) socialSource = 'facebook';
+        
+        if (socialSource) {
+          gtag('event', 'social_referral', {
+            social_platform: socialSource,
+            referrer_url: document.referrer,
+            landing_page: window.location.href
+          });
+        }
+      }
+      
+      // Run social referrer tracking
+      trackSocialReferrer();
     </script>
 
     <!-- UTM Parameter Tracking -->
