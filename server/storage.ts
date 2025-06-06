@@ -4,6 +4,8 @@ import {
   newsletterSubscribers, type NewsletterSubscriber, type InsertNewsletterSubscriber,
   contactSubmissions, type ContactSubmission, type InsertContactSubmission
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -27,99 +29,58 @@ export interface IStorage {
   getAllContactSubmissions(): Promise<ContactSubmission[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private waitlistEntries: Map<number, WaitlistEntry>;
-  private newsletterSubscribers: Map<number, NewsletterSubscriber>;
-  private contactSubmissions: Map<number, ContactSubmission>;
-  currentUserId: number;
-  currentWaitlistId: number;
-  currentNewsletterId: number;
-  currentContactId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.waitlistEntries = new Map();
-    this.newsletterSubscribers = new Map();
-    this.contactSubmissions = new Map();
-    this.currentUserId = 1;
-    this.currentWaitlistId = 1;
-    this.currentNewsletterId = 1;
-    this.currentContactId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const result = await db.select().from(users).where(eq(users.username, username));
+    return result[0];
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const result = await db.insert(users).values(insertUser).returning();
+    return result[0];
   }
 
   async createWaitlistEntry(insertEntry: InsertWaitlistEntry): Promise<WaitlistEntry> {
-    const id = this.currentWaitlistId++;
-    const createdAt = new Date().toISOString();
-    const entry: WaitlistEntry = { ...insertEntry, id, createdAt };
-    this.waitlistEntries.set(id, entry);
-    return entry;
+    const result = await db.insert(waitlistEntries).values(insertEntry).returning();
+    return result[0];
   }
 
   async getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined> {
-    return Array.from(this.waitlistEntries.values()).find(
-      (entry) => entry.email.toLowerCase() === email.toLowerCase(),
-    );
+    const result = await db.select().from(waitlistEntries).where(eq(waitlistEntries.email, email));
+    return result[0];
   }
 
   async getAllWaitlistEntries(): Promise<WaitlistEntry[]> {
-    return Array.from(this.waitlistEntries.values());
+    return await db.select().from(waitlistEntries);
   }
 
   async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
-    const id = this.currentNewsletterId++;
-    const createdAt = new Date().toISOString();
-
-    const newSubscriber: NewsletterSubscriber = { 
-      ...subscriber, 
-      id, 
-      createdAt 
-    };
-
-    this.newsletterSubscribers.set(id, newSubscriber);
-    return newSubscriber;
+    const result = await db.insert(newsletterSubscribers).values(subscriber).returning();
+    return result[0];
   }
 
   async getNewsletterSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
-    return Array.from(this.newsletterSubscribers.values()).find(
-      (subscriber) => subscriber.email === email
-    );
+    const result = await db.select().from(newsletterSubscribers).where(eq(newsletterSubscribers.email, email));
+    return result[0];
   }
 
   async getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
-    return Array.from(this.newsletterSubscribers.values());
+    return await db.select().from(newsletterSubscribers);
   }
 
   async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
-    const id = this.currentContactId++;
-    const createdAt = new Date().toISOString();
-    const submission: ContactSubmission = { ...insertSubmission, id, createdAt };
-    this.contactSubmissions.set(id, submission);
-    return submission;
+    const result = await db.insert(contactSubmissions).values(insertSubmission).returning();
+    return result[0];
   }
 
   async getAllContactSubmissions(): Promise<ContactSubmission[]> {
-    return Array.from(this.contactSubmissions.values()).sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    return await db.select().from(contactSubmissions);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
