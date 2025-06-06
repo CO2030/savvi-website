@@ -115,89 +115,36 @@ export function About() {
           </div>
         </div>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Features Grid - Compact with Images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-2xl shadow-xl"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
             >
-              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3 font-heading">{feature.title}</h3>
-              <div className="text-sm text-neutral-dark leading-relaxed">
-                {feature.description}
+              <div className="flex items-start space-x-3 mb-3">
+                <div className="flex-shrink-0">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center space-x-2 mb-2">
+                    {feature.icon}
+                    <h3 className="text-base font-semibold text-gray-900 font-heading">{feature.title}</h3>
+                  </div>
+                  <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Mobile Vertical Layout with Stacking */}
-        <div className="md:hidden">
-          <div className="grid grid-cols-2 gap-4">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-4 rounded-2xl shadow-xl sticky"
-                style={{
-                  top: `${20 + (index % 2) * 10}px`,
-                  zIndex: features.length - index,
-                }}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={fadeInUp}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-bold mb-2 font-heading">{feature.title}</h3>
-                <div className="text-xs text-neutral-dark leading-relaxed">
-                  {feature.description}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
-              >
-                <div className="flex items-start space-x-3 mb-3">
-                  <div className="flex-shrink-0">
-                    <img 
-                      src={feature.image} 
-                      alt={feature.title}
-                      className="w-12 h-12 rounded-lg object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-2 mb-2">
-                      {feature.icon}
-                      <h3 className="text-base font-semibold text-gray-900 font-heading">{feature.title}</h3>
-                    </div>
-                    <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
       </div>
     </section>
   );
