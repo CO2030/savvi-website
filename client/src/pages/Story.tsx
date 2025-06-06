@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useState } from "react";
 import { WaitlistModal } from "@/components/WaitlistModal";
+import { Button } from "@/components/ui/button";
 
 export default function Story() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,113 +30,109 @@ export default function Story() {
 
       <Header onWaitlistClick={openModal} />
       
-      <main className="font-sans pt-20">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 font-heading">
-              Our Story
-            </h1>
-            
-            <div className="prose prose-lg max-w-none">
-              <div className="bg-gray-50 rounded-lg p-8 mb-12">
-                <h2 className="text-2xl font-bold mb-4 text-primary">Why We Started SavviWell</h2>
-                <p className="text-gray-700 leading-relaxed">
-                  In a world where nutrition advice is abundant but often contradictory, we recognized the need for 
-                  personalized, science-backed guidance that adapts to each individual's unique needs, preferences, 
-                  and lifestyle. SavviWell was born from the belief that everyone deserves access to nutrition 
-                  recommendations that are as unique as they are.
+      <main className="font-sans">
+        {/* Hero Section */}
+        <section 
+          className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] bg-center bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/hero-background.jpeg')"
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="container mx-auto relative z-10">
+            <div className="max-w-4xl mx-auto text-center text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
+                Our Story
+              </h1>
+              <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
+                Born from the everyday struggles of meal planning and wellness, SavviWell is building the future of personalized nutrition through AI.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Mission Section */}
+        <section className="py-16 md:py-24 px-4 bg-gray-50">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Our Mission</h2>
+              <div className="bg-primary/10 rounded-2xl p-8 md:p-12">
+                <p className="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed mb-6">
+                  "To democratize personalized nutrition by making AI-powered wellness accessible to everyone, empowering individuals and families to make informed decisions about their health."
                 </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-white rounded-lg shadow-sm border p-6">
-                  <h3 className="text-xl font-bold mb-3 text-primary">The Problem</h3>
-                  <p className="text-gray-700">
-                    Traditional nutrition advice follows a one-size-fits-all approach. What works for one person 
-                    may not work for another due to differences in genetics, lifestyle, health conditions, and 
-                    personal preferences.
-                  </p>
-                </div>
-                
-                <div className="bg-white rounded-lg shadow-sm border p-6">
-                  <h3 className="text-xl font-bold mb-3 text-primary">Our Solution</h3>
-                  <p className="text-gray-700">
-                    SavviWell leverages artificial intelligence to analyze individual profiles and provide 
-                    personalized meal plans, grocery lists, and wellness recommendations that evolve with your journey.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 text-center">Our Mission</h2>
-                <div className="bg-primary/10 rounded-lg p-8 text-center">
-                  <p className="text-xl text-gray-800 font-medium leading-relaxed">
-                    "To democratize personalized nutrition by making AI-powered wellness accessible to everyone, 
-                    empowering individuals and families to make informed decisions about their health."
-                  </p>
-                </div>
-              </div>
-
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">What Makes Us Different</h2>
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0">
-                      1
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-2">AI-Powered Personalization</h4>
-                      <p className="text-gray-700">
-                        Our advanced algorithms learn from your preferences, dietary restrictions, and health goals 
-                        to provide recommendations that improve over time.
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0">
-                      2
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-2">Science-Based Approach</h4>
-                      <p className="text-gray-700">
-                        Every recommendation is grounded in nutritional science and evidence-based research, 
-                        ensuring you receive accurate and reliable guidance.
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0">
-                      3
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-2">Adaptive Technology</h4>
-                      <p className="text-gray-700">
-                        Our platform continuously adapts to your changing needs, preferences, and lifestyle, 
-                        providing relevant recommendations at every stage of your wellness journey.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 rounded-lg p-8 text-center">
-                <h2 className="text-2xl font-bold mb-4">Join Our Journey</h2>
-                <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-                  We're just getting started. Join our waitlist to be among the first to experience 
-                  personalized nutrition that truly understands you.
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  We believe that nutrition advice shouldn't be one-size-fits-all. Every family has unique needs, preferences, and challenges. Our mission is to create technology that understands these differences and provides personalized support that grows with you.
                 </p>
-                <button 
-                  onClick={openModal}
-                  className="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-                >
-                  Join the Waitlist
-                </button>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Founders Section */}
+        <section className="py-16 md:py-24 px-4 bg-white">
+          <div className="container mx-auto">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-heading">Meet Our Founders</h2>
+              
+              <div className="grid md:grid-cols-2 gap-12 md:gap-16">
+                {/* Founder 1 */}
+                <div className="text-center">
+                  <div className="w-48 h-48 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                    {/* Placeholder for founder image */}
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
+                      <span className="text-6xl font-bold text-primary opacity-50">F1</span>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2 font-heading">Founder Name</h3>
+                  <p className="text-primary font-semibold mb-4">Co-Founder & CEO</p>
+                  <p className="text-gray-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Passionate about making nutrition accessible to all families.
+                  </p>
+                </div>
+
+                {/* Founder 2 */}
+                <div className="text-center">
+                  <div className="w-48 h-48 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                    {/* Placeholder for founder image */}
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
+                      <span className="text-6xl font-bold text-primary opacity-50">F2</span>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2 font-heading">Founder Name</h3>
+                  <p className="text-primary font-semibold mb-4">Co-Founder & CTO</p>
+                  <p className="text-gray-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Expert in AI and machine learning technologies.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section 
+          className="relative py-16 px-4 text-white" 
+          style={{
+            backgroundImage: "url('/images/hero-background.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="container mx-auto text-center relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">Join Our Journey</h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+              We're just getting started. Be among the first to experience personalized nutrition that truly understands you and your family's unique needs.
+            </p>
+            <Button 
+              onClick={openModal}
+              size="lg"
+              className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+            >
+              Join the Waitlist
+            </Button>
+          </div>
+        </section>
       </main>
 
       <Footer />
