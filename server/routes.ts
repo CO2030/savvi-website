@@ -241,6 +241,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Export all collected emails
+  app.get("/api/export/emails", async (req: Request, res: Response) => {
+    try {
+      const waitlistEntries = await storage.getAllWaitlistEntries();
+      const contactSubmissions = await storage.getAllContactSubmissions();
+      const newsletterSubscribers = await storage.getAllNewsletterSubscribers();
+
+      const allEmails = [
+        ...waitlistEntries.map(entry => ({ email: entry.email, source: 'waitlist', name: entry.name, date: entry.createdAt })),
+        ...contactSubmissions.map(submission => ({ email: submission.email, source: 'contact', name: submission.name, date: submission.createdAt })),
+        ...newsletterSubscribers.map(subscriber => ({ email: subscriber.email, source: 'newsletter', name: subscriber.name || '', date: subscriber.createdAt }))
+      ];
+
+      // Remove duplicates by email
+      const uniqueEmails = allEmails.filter((email, index, self) => 
+        index === self.findIndex((e) => e.email === email.email)
+      );
+
+      return res.status(200).json({
+        total: uniqueEmails.length,
+        emails: uniqueEmails.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      });
+    } catch (error) {
+      console.error("Error exporting emails:", error);
+      return res.status(500).json({
+        message: "Error exporting emails"
+      });
+    }
+  });
+
   // Test endpoint to add sample data (for testing the admin dashboard grouping)
   app.post("/api/test/add-sample-data", async (req: Request, res: Response) => {
     try {
