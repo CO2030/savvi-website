@@ -29,6 +29,9 @@ export function About() {
               The first voice-powered AI meal planning assistant designed to lighten the mental load of healthy eating.
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
+              Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
+            </p>
+            <p className="text-lg mb-6 text-neutral-dark">
               We make it easy to plan meals, nourish your family, and support whole-body wellness—with personalized guidance that starts in your kitchen and grows with your goals.
             </p>
             <p className="text-lg mb-6 text-neutral-dark">

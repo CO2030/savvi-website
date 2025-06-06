@@ -35,8 +35,8 @@ export default function Home() {
       <Header onWaitlistClick={openModal} />
       <main className="font-sans">
         <Hero onWaitlistClick={openModal} />
-        <FounderPerks />
         <About />
+        <FounderPerks />
         <FAQ />
         <CTASection onWaitlistClick={openModal} />
       </main>
