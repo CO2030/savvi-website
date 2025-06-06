@@ -46,7 +46,11 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createWaitlistEntry(insertEntry: InsertWaitlistEntry): Promise<WaitlistEntry> {
-    const result = await db.insert(waitlistEntries).values(insertEntry).returning();
+    const entryWithTimestamp = {
+      ...insertEntry,
+      createdAt: new Date().toISOString()
+    };
+    const result = await db.insert(waitlistEntries).values(entryWithTimestamp).returning();
     return result[0];
   }
 
@@ -60,7 +64,11 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
-    const result = await db.insert(newsletterSubscribers).values(subscriber).returning();
+    const subscriberWithTimestamp = {
+      ...subscriber,
+      createdAt: new Date().toISOString()
+    };
+    const result = await db.insert(newsletterSubscribers).values(subscriberWithTimestamp).returning();
     return result[0];
   }
 
@@ -74,7 +82,11 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
-    const result = await db.insert(contactSubmissions).values(insertSubmission).returning();
+    const submissionWithTimestamp = {
+      ...insertSubmission,
+      createdAt: new Date().toISOString()
+    };
+    const result = await db.insert(contactSubmissions).values(submissionWithTimestamp).returning();
     return result[0];
   }
 
