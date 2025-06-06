@@ -130,18 +130,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // });
 
       // Submit to Google Sheet if deployment URL is available
-      //const deploymentUrl = config.googleScriptDeploymentUrl;
-      //if (deploymentUrl) {
-      //  const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
-      //    email: validatedData.email,
-      //    name: validatedData.name
-      //  });
+      const deploymentUrl = config.googleScriptDeploymentUrl;
+      if (deploymentUrl) {
+        const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+          email: validatedData.email,
+          name: validatedData.name,
+          source: validatedData.source || 'Direct'
+        });
 
-      //  if (!googleSubmitResult.success) {
-      //    console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
-      //    // Continue with database storage only
-      //  }
-      //}
+        if (!googleSubmitResult.success) {
+          console.warn("Google Sheet newsletter submission failed:", googleSubmitResult.message);
+          // Continue with database storage only
+        }
+      }
 
       return res.status(201).json({
         message: "Successfully subscribed to the newsletter",
@@ -200,7 +201,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           name: validatedData.name,
           email: validatedData.email,
           reason: validatedData.reason,
-          message: validatedData.message
+          message: validatedData.message,
+          source: validatedData.source || 'Direct'
         });
 
         if (!googleSubmitResult.success) {

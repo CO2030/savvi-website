@@ -103,7 +103,7 @@ function handleContactSubmission(spreadsheet, data) {
     if (!sheet) {
       sheet = spreadsheet.insertSheet('Contact');
       // Add headers
-      sheet.getRange(1, 1, 1, 5).setValues([['Timestamp', 'Name', 'Email', 'Reason', 'Message']]);
+      sheet.getRange(1, 1, 1, 6).setValues([['Timestamp', 'Name', 'Email', 'Reason', 'Message', 'Source']]);
     }
 
     // Add the new row
@@ -112,7 +112,8 @@ function handleContactSubmission(spreadsheet, data) {
       data.name,
       data.email,
       data.reason,
-      data.message
+      data.message,
+      data.source || 'Direct'
     ]);
 
     return ContentService
@@ -131,14 +132,15 @@ function handleNewsletterSubmission(spreadsheet, data) {
     if (!sheet) {
       sheet = spreadsheet.insertSheet('Newsletter');
       // Add headers
-      sheet.getRange(1, 1, 1, 3).setValues([['Timestamp', 'Email', 'Name']]);
+      sheet.getRange(1, 1, 1, 4).setValues([['Timestamp', 'Email', 'Name', 'Source']]);
     }
 
     // Add the new row
     sheet.appendRow([
       data.timestamp || new Date().toISOString(),
       data.email,
-      data.name || ''
+      data.name || '',
+      data.source || 'Direct'
     ]);
 
     return ContentService

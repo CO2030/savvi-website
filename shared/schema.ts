@@ -49,6 +49,8 @@ export const contactSubmissions = pgTable("contact_submissions", {
 
 export const insertNewsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
+  name: z.string().optional(),
+  source: z.string().optional(),
 });
 
 export const insertContactSchema = z.object({
@@ -56,6 +58,7 @@ export const insertContactSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   reason: z.string().min(1, "Please select a reason for contacting us"),
   message: z.string().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
+  source: z.string().optional(),
 });
 
 export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;

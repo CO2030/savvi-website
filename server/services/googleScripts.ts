@@ -49,6 +49,7 @@ export async function submitContactToGoogleScript(
     email: string;
     reason: string;
     message: string;
+    source?: string;
   }
 ): Promise<{ success: boolean; message?: string }> {
   try {
@@ -84,6 +85,7 @@ export async function submitNewsletterToGoogleScript(
   data: {
     email: string;
     name?: string;
+    source?: string;
   }
 ): Promise<{ success: boolean; message?: string }> {
   try {
