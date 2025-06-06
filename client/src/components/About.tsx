@@ -1,4 +1,5 @@
 import { Brain, Users, ShoppingBasket, ChefHat, RefreshCw, UtensilsCrossed, Mic } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 export function About() {
   const features = [
@@ -91,8 +92,8 @@ export function About() {
           </p>
         </div>
         
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        {/* Features Grid - Desktop */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {features.map((feature, index) => (
             <div 
               key={index} 
@@ -111,6 +112,37 @@ export function About() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Features Carousel - Mobile */}
+        <div className="md:hidden">
+          <Carousel 
+            opts={{
+              align: "start",
+              loop: false,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {features.map((feature, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-4/5 min-w-0">
+                  <div className="group bg-white rounded-lg p-6 shadow-sm border border-gray-100 h-full">
+                    <div className="flex flex-col items-center text-center h-full">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        {feature.icon}
+                      </div>
+                      <h3 className="font-bold mb-2 font-heading text-gray-900">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-neutral-dark leading-relaxed flex-grow">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
     </section>
