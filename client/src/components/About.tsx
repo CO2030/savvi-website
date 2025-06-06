@@ -26,16 +26,16 @@ export function About() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">Your Voice AI Assistant for Everyday Life</h2>
             <p className="text-lg mb-6 text-neutral-dark">
-              The first voice-powered AI meal planning assistant designed to lighten the mental load of healthy eating.
+              Imagine having someone who just gets it.
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
-              Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
+              The never-ending meal planning. The picky eaters. The special diets. The 5:45pm panic: "What are we eating tonight?"
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
-              We make it easy to plan meals, nourish your family, and support whole-body wellness—with personalized guidance that starts in your kitchen and grows with your goals.
+              Now imagine your AI assistant already has the answer—one that fits your goals, your groceries, and your time.
             </p>
             <p className="text-lg mb-6 text-neutral-dark">
-              Simple. Smart. Wellness that starts with food—and lasts a lifetime.
+              SavviWell is your voice-guided partner in healthy living, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
             </p>
             <div className="space-y-4">
               {features.map((feature, index) => (
