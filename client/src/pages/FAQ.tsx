@@ -95,12 +95,20 @@ export default function FAQPage() {
         <FAQ />
         
         {/* CTA Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading" style={{ color: '#399e5a' }}>
+        <section 
+          className="relative py-16 px-4 text-white" 
+          style={{
+            backgroundImage: "url('/images/salmon-asparagus.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="container mx-auto text-center relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
               Join thousands already on the waitlist for early access to SavviWell's AI-powered nutrition assistant.
             </p>
             <Button 
