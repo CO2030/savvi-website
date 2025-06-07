@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FAQ } from "@/components/FAQ";
 import { WaitlistModal } from "@/components/WaitlistModal";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 
@@ -92,6 +93,25 @@ export default function FAQPage() {
           </div>
         </div>
         <FAQ />
+        
+        {/* CTA Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading" style={{ color: '#399e5a' }}>
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Join thousands already on the waitlist for early access to SavviWell's AI-powered nutrition assistant.
+            </p>
+            <Button 
+              onClick={openModal}
+              size="lg"
+              className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg md:text-xl"
+            >
+              Join the Waitlist
+            </Button>
+          </div>
+        </section>
       </main>
       <Footer />
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
