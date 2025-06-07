@@ -63,11 +63,11 @@ export function About() {
     <section id="about" className="py-16 md:py-24 px-4 bg-gray-50">
       <div className="container mx-auto">
         {/* Hero Content Section - Desktop Side by Side, Mobile Stacked */}
-        <div className="bg-white rounded-xl shadow-lg max-w-6xl mx-auto mb-12 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-lg max-w-7xl mx-auto mb-16 overflow-hidden">
           {/* Mobile Layout */}
           <div className="md:hidden">
-            <div className="flex justify-center py-6 bg-gray-50">
-              <div className="w-80 h-48 rounded-3xl overflow-hidden shadow-lg">
+            <div className="flex justify-center py-8 bg-gray-50">
+              <div className="w-80 h-96 rounded-3xl overflow-hidden shadow-xl">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
@@ -90,19 +90,19 @@ export function About() {
 
           {/* Desktop Layout */}
           <div className="hidden md:block">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 mt-8 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 mt-12 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
           </div>
-          <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:items-center">
-            <div className="p-8 space-y-6">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+          <div className="hidden md:grid md:grid-cols-2 md:gap-16 md:items-center">
+            <div className="p-12 space-y-8">
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
                 Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
               </p>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
                 <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
               </p>
             </div>
-            <div className="flex justify-center items-center p-8 bg-gray-50">
-              <div className="w-96 h-64 rounded-3xl overflow-hidden shadow-lg">
+            <div className="flex justify-center items-center p-12 bg-gray-50">
+              <div className="w-80 h-[600px] lg:w-96 lg:h-[700px] rounded-3xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
@@ -113,51 +113,52 @@ export function About() {
           </div>
         </div>
 
-        {/* Desktop Features Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
-            >
-              <div className="mb-3">
-                <div className="flex items-center space-x-2 mb-2">
+        {/* Features Cards Section */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-12 font-heading text-gray-900">Why Choose SavviWell?</h3>
+          
+          {/* Desktop Feature Cards Grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:border-primary/20"
+              >
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   {feature.icon}
-                  <h3 className="text-base font-semibold text-gray-900 font-heading">{feature.title}</h3>
                 </div>
-                <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
-              </div>
-            </motion.div>
-          ))}
+                <h4 className="text-lg font-semibold text-gray-900 mb-3 font-heading">{feature.title}</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Mobile Feature Cards */}
+          <div className="md:hidden space-y-4">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl p-6 shadow-md border border-gray-100"
+              >
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-3 font-heading">{feature.title}</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        {/* Mobile Stacked Cards with Overlay Effect */}
-        <div className="md:hidden">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              className="sticky bg-white shadow-lg rounded-lg p-6 mb-4 border border-gray-200"
-              style={{
-                top: "20px",
-                zIndex: 1,
-              }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3 font-heading">{feature.title}</h3>
-              <p className="text-neutral-dark">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
+        
       </div>
     </section>
   );
