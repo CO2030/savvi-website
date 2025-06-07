@@ -92,22 +92,21 @@ export function About() {
           <div className="hidden md:block">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 mt-12 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
           </div>
-          <div className="hidden md:grid md:grid-cols-2 md:gap-16 md:items-center">
-            <div className="p-12 space-y-8">
-              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+          <div className="hidden md:flex md:h-[600px]">
+            <div className="flex-[2] overflow-hidden">
+              <img 
+                src="/images/iphone-mockup.jpeg" 
+                alt="SavviWell iPhone App Mockup" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex-1 p-8 bg-gray-50 flex flex-col justify-center space-y-6">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
               </p>
-              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
               </p>
-            </div>
-            <div className="flex justify-end items-center p-8 bg-gray-50">
-              <div className="w-96 h-[700px] lg:w-[450px] lg:h-[800px] xl:w-[500px] xl:h-[850px] rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                <img 
-                  src="/images/iphone-mockup.jpeg" 
-                  alt="SavviWell iPhone App Mockup" 
-                  className="w-full h-full object-contain bg-white"
-                /></div>
             </div>
           </div>
         </div>
