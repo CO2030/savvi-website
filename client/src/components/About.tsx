@@ -67,11 +67,11 @@ export function About() {
           {/* Mobile Layout */}
           <div className="md:hidden">
             <div className="flex justify-center py-8 bg-gray-50">
-              <div className="w-64 h-80 rounded-3xl overflow-hidden shadow-xl">
+              <div className="shadow-xl">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
-                  className="w-full h-full object-cover"
+                  className="max-w-full h-auto"
                 />
               </div>
             </div>
@@ -92,12 +92,12 @@ export function About() {
           <div className="hidden md:block">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 mt-12 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
           </div>
-          <div className="hidden md:flex md:h-[600px]">
-            <div className="flex-[2] overflow-hidden bg-gray-100 flex items-center justify-center">
+          <div className="hidden md:flex">
+            <div className="flex-[2] bg-gray-100 flex items-center justify-center p-8">
               <img 
                 src="/images/iphone-mockup.jpeg" 
                 alt="SavviWell iPhone App Mockup" 
-                className="w-full h-full object-contain"
+                className="max-w-full h-auto"
               />
             </div>
             <div className="flex-1 p-8 bg-gray-50 flex flex-col justify-center space-y-6">
