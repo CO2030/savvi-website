@@ -93,11 +93,11 @@ export function About() {
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 mt-12 font-heading" style={{ color: '#399e5a' }}>Healthy Made Easy</h2>
           </div>
           <div className="hidden md:flex md:h-[600px]">
-            <div className="flex-[2] overflow-hidden">
+            <div className="flex-[2] overflow-hidden bg-gray-100 flex items-center justify-center">
               <img 
                 src="/images/iphone-mockup.jpeg" 
                 alt="SavviWell iPhone App Mockup" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="flex-1 p-8 bg-gray-50 flex flex-col justify-center space-y-6">
