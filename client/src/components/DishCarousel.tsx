@@ -48,7 +48,7 @@ export function DishCarousel() {
         <motion.div
           className="flex gap-6"
           animate={{
-            x: [0, -2400], // Adjusted for larger image width (384px + 24px gap)
+            x: [0, -2040], // Adjusted for 320px width + 24px gap
           }}
           transition={{
             x: {
@@ -62,7 +62,7 @@ export function DishCarousel() {
           {allDishes.map((dish, index) => (
             <div
               key={`${dish.id}-${index}`}
-              className="flex-shrink-0 w-96 h-80 rounded-2xl overflow-hidden shadow-lg"
+              className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg"
             >
               <img
                 src={dish.image}
