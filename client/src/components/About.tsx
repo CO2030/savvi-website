@@ -101,14 +101,13 @@ export function About() {
                 <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
               </p>
             </div>
-            <div className="flex justify-center items-center p-12 bg-gray-50">
-              <div className="w-80 h-[600px] lg:w-96 lg:h-[700px] rounded-3xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
+            <div className="flex justify-end items-center p-8 bg-gray-50">
+              <div className="w-96 h-[700px] lg:w-[450px] lg:h-[800px] xl:w-[500px] xl:h-[850px] rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                  className="w-full h-full object-contain bg-white"
+                /></div>
             </div>
           </div>
         </div>
@@ -116,7 +115,7 @@ export function About() {
         {/* Features Cards Section */}
         <div className="max-w-6xl mx-auto mb-16">
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-12 font-heading text-gray-900">Why Choose SavviWell?</h3>
-          
+
           {/* Desktop Feature Cards Grid */}
           <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
@@ -158,7 +157,7 @@ export function About() {
           </div>
         </div>
 
-        
+
       </div>
     </section>
   );
