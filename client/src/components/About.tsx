@@ -67,10 +67,10 @@ export function About() {
           {/* Mobile Layout */}
           <div className="md:hidden">
             <div className="flex justify-center py-8 bg-gray-50">
-              <div className="w-80 h-96 rounded-3xl overflow-hidden shadow-xl">
+              <div className="w-80 h-60 rounded-2xl overflow-hidden shadow-xl">
                 <img 
-                  src="/images/iphone-mockup.jpeg" 
-                  alt="SavviWell iPhone App Mockup" 
+                  src="/images/salmon-asparagus.png" 
+                  alt="Delicious salmon with asparagus - healthy meal example" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -102,12 +102,13 @@ export function About() {
               </p>
             </div>
             <div className="flex justify-end items-center p-8 bg-gray-50">
-              <div className="w-96 h-[700px] lg:w-[450px] lg:h-[800px] xl:w-[500px] xl:h-[850px] rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
+              <div className="w-80 h-64 lg:w-96 lg:h-72 xl:w-[420px] xl:h-80 rounded-2xl overflow-hidden shadow-xl">
                 <img 
-                  src="/images/iphone-mockup.jpeg" 
-                  alt="SavviWell iPhone App Mockup" 
-                  className="w-full h-full object-contain bg-white"
-                /></div>
+                  src="/images/salmon-asparagus.png" 
+                  alt="Delicious salmon with asparagus - healthy meal example" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
