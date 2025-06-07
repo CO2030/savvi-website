@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { DishCarousel } from "@/components/DishCarousel";
 import { FounderPerks } from "@/components/FounderPerks";
 import { About } from "@/components/About";
 import { FAQ } from "@/components/FAQ";
@@ -36,6 +37,7 @@ export default function Home() {
       <main className="font-sans">
         <Hero onWaitlistClick={openModal} />
         <About />
+        <DishCarousel />
         <FounderPerks />
         <FAQ />
         <CTASection onWaitlistClick={openModal} />
