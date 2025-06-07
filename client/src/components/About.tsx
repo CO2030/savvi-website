@@ -67,7 +67,7 @@ export function About() {
           {/* Mobile Layout */}
           <div className="md:hidden">
             <div className="flex justify-center py-8 bg-gray-50">
-              <div className="w-80 h-96 rounded-3xl overflow-hidden shadow-xl">
+              <div className="w-64 h-80 rounded-3xl overflow-hidden shadow-xl">
                 <img 
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
