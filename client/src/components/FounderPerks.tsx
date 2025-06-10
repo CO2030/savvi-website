@@ -64,7 +64,7 @@ export function FounderPerks() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <img 
-                  src="/images/vegetables.png" 
+                  src="/images/salmon-asparagus.png" 
                   alt="Fresh salmon with potatoes and asparagus" 
                   className="w-full rounded-lg shadow-md"
                 />
@@ -78,7 +78,7 @@ export function FounderPerks() {
               </div>
               <div>
                 <img 
-                  src="/images/fresh-ingredients.png" 
+                  src="/images/vegetables.png" 
                   alt="Fresh meal prep ingredients organized" 
                   className="w-full rounded-lg shadow-md"
                 />
