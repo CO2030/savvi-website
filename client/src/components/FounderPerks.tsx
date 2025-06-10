@@ -60,20 +60,36 @@ export function FounderPerks() {
           </div>
 
           {/* Images Section - Takes up 2 columns */}
-          <div className="md:col-span-2 space-y-6">
-            <div>
-              <img 
-                src="/images/salmon-asparagus.png" 
-                alt="Healthy salmon and asparagus dish" 
-                className="w-full rounded-lg shadow-md"
-              />
-            </div>
-            <div>
-              <img 
-                src="/images/vegetables.png" 
-                alt="Fresh vegetables and healthy ingredients" 
-                className="w-full rounded-lg shadow-md"
-              />
+          <div className="md:col-span-2">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <img 
+                  src="/images/salmon-asparagus.png" 
+                  alt="Healthy salmon and asparagus dish" 
+                  className="w-full rounded-lg shadow-md"
+                />
+              </div>
+              <div>
+                <img 
+                  src="/images/healthy-bowl.jpeg" 
+                  alt="Nutritious bowl with fresh ingredients" 
+                  className="w-full rounded-lg shadow-md"
+                />
+              </div>
+              <div>
+                <img 
+                  src="/images/vegetables.png" 
+                  alt="Fresh vegetables and healthy ingredients" 
+                  className="w-full rounded-lg shadow-md"
+                />
+              </div>
+              <div>
+                <img 
+                  src="/images/meal-prep.png" 
+                  alt="Organized meal preparation setup" 
+                  className="w-full rounded-lg shadow-md"
+                />
+              </div>
             </div>
           </div>
         </div>
