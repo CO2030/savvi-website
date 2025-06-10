@@ -34,21 +34,21 @@ export function DishCarousel() {
   const allDishes = [...dishes, ...dishes];
 
   return (
-    <section className="py-12 overflow-hidden bg-white">
-      <div className="container mx-auto px-4 mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-center font-heading text-gray-800 mb-2">
+    <section className="py-8 sm:py-12 overflow-hidden bg-white">
+      <div className="container mx-auto px-4 mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center font-heading text-gray-800 mb-2">
           Delicious, Healthy Meals
         </h2>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-gray-600 text-center max-w-2xl mx-auto">
           From quick weeknight dinners to weekend meal prep, SavviWell helps you create nutritious meals you'll love.
         </p>
       </div>
       
       <div className="relative">
         <motion.div
-          className="flex gap-6"
+          className="flex gap-3 sm:gap-4 md:gap-6"
           animate={{
-            x: [0, -2040], // Adjusted for 320px width + 24px gap
+            x: [0, -1700], // Adjusted for mobile responsiveness
           }}
           transition={{
             x: {
@@ -62,7 +62,7 @@ export function DishCarousel() {
           {allDishes.map((dish, index) => (
             <div
               key={`${dish.id}-${index}`}
-              className="flex-shrink-0 w-80 h-56 rounded-2xl overflow-hidden shadow-lg"
+              className="flex-shrink-0 w-56 h-40 sm:w-64 sm:h-44 md:w-80 md:h-56 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg"
             >
               <img
                 src={dish.image}

@@ -90,7 +90,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
           <Button 
             onClick={onWaitlistClick}
             size="lg"
-            className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg md:text-xl"
+            className="bg-primary hover:bg-primary/70 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-4 lg:px-6 xl:px-8 py-2 lg:py-3 xl:py-4 text-sm lg:text-base xl:text-lg"
           >
             Join the Waitlist
           </Button>
