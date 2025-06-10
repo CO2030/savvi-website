@@ -51,23 +51,6 @@ export default function Story() {
           </div>
         </section>
 
-        {/* Our Mission Section */}
-        <section className="py-16 md:py-24 px-4 bg-gray-50">
-          <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Our Mission</h2>
-              <div className="bg-primary/10 rounded-2xl p-8 md:p-12">
-                <p className="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed mb-6">
-                  "To democratize personalized nutrition by making AI-powered wellness accessible to everyone, empowering individuals and families to make informed decisions about their health."
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  We believe that nutrition advice shouldn't be one-size-fits-all. Every family has unique needs, preferences, and challenges. Our mission is to create technology that understands these differences and provides personalized support that grows with you.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Our Story Section */}
         <section className="py-16 md:py-24 px-4 bg-white">
           <div className="container mx-auto">
