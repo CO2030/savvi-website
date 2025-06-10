@@ -62,11 +62,12 @@ export default function Story() {
                 
                 {/* Founders Image - Mobile First */}
                 <div className="flex justify-center mb-8 lg:mb-0 lg:order-2 lg:flex-shrink-0">
-                  <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-96 bg-gray-200 rounded-2xl flex items-center justify-center overflow-hidden shadow-xl">
-                    {/* Placeholder for founders image */}
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
-                      <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary opacity-50 text-center">Meara &<br/>Christina</span>
-                    </div>
+                  <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-96 rounded-2xl overflow-hidden shadow-xl">
+                    <img 
+                      src="/images/meara-christina-founders.png" 
+                      alt="Meara and Christina, co-founders of SavviWell" 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
 
