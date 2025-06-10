@@ -22,37 +22,8 @@ export function About() {
       icon: <ShoppingCart className="h-5 w-5 text-primary" />,
       title: "Voice-First Convenience",
       description: "Hands full? No problem. Just talk to SavviWell to explore recipes, adjust your meal plan, or get quick answers—all in a seamless, hands-free experience."
-    },
-    {
-      icon: <RefreshCw className="h-5 w-5 text-primary" />,
-      title: "Flexible Ingredient Swaps",
-      description: "Easily adjust recipes for dietary needs or last-minute changes.",
-      image: "/images/salmon-asparagus.png"
-    },
-    {
-      icon: <ChefHat className="h-5 w-5 text-primary" />,
-      title: "Pantry-Based Recipe Suggestions",
-      description: "Make the most of what you already have with smart, satisfying ideas.",
-      image: "/images/salmon-asparagus.png"
-    },
-    {
-      icon: <Mic className="h-5 w-5 text-primary" />,
-      title: "Voice-First Experience",
-      description: "Talk to SavviWell to get answers and plan meals—hands-free.",
-      image: "/images/salmon-asparagus.png"
-    },
-    {
-      icon: <Heart className="h-5 w-5 text-primary" />,
-      title: "Wellness Support",
-      description: "Get adaptive support and gentle nudges to build healthy habits.",
-      image: "/images/salmon-asparagus.png"
     }
   ];
-
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
 
   return (
     <section id="about" className="py-16 md:py-24 px-4 bg-gray-50">
