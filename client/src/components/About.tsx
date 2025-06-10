@@ -122,55 +122,7 @@ export function About() {
           </div>
         </div>
 
-        {/* Founder Section */}
-        <div className="bg-gray-50 py-16 px-4">
-          <div className="container mx-auto max-w-6xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Meet Our Founder</h2>
 
-              <div className="bg-white rounded-lg shadow-lg p-8 text-left">
-                <div className="flex flex-col lg:flex-row items-center gap-8">
-                  {/* Images Section */}
-                  <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <img 
-                        src="/images/salmon-asparagus.png" 
-                        alt="Salmon and asparagus dish" 
-                        className="w-full rounded-lg shadow-md"
-                      />
-                    </div>
-                    <div>
-                      <img 
-                        src="/images/vegetables.png" 
-                        alt="Fresh vegetables and healthy ingredients" 
-                        className="w-full rounded-lg shadow-md"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="lg:w-1/2">
-                    <h3 className="text-2xl font-bold mb-4 text-primary font-heading">Dr. Dorra Derraz</h3>
-                    <p className="text-gray-700 mb-4 leading-relaxed">
-                      As a family physician and mother of two, I understand the daily struggle of planning nutritious meals that everyone will enjoy. After years of helping patients with diet-related health concerns and experiencing my own challenges with meal planning, I realized there had to be a better way.
-                    </p>
-                    <p className="text-gray-700 mb-4 leading-relaxed">
-                      SavviWell was born from this personal mission to make healthy eating accessible, enjoyable, and sustainable for busy families. Our AI-powered platform combines medical expertise with practical solutions to transform how families approach nutrition and wellness.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      Together, we're building a healthier future, one meal at a time.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
       </div>
     </section>
   );
