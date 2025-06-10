@@ -134,6 +134,7 @@
 @media (max-width: 768px) {
   .story-hero {
     height: 70vh;
+    background-position: center 60%; /* Focus on phone interface for mobile */
   }
 }
 
