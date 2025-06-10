@@ -40,7 +40,7 @@ export default function Story() {
             backgroundPosition: "center bottom"
           }}
         >
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
           <div className="container mx-auto relative z-10 pb-16 md:pb-20">
             <div className="max-w-4xl mx-auto text-center text-white">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
