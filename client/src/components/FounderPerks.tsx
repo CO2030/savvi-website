@@ -32,9 +32,35 @@ export function FounderPerks() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Founder & Beta Member Perks</h2>
         <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Join as an early member and enjoy exclusive benefits</p>
 
-        {/* Images Section */}
-        <div className="flex justify-center mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+        {/* Desktop Layout with Images on Right */}
+        <div className="hidden md:grid md:grid-cols-5 gap-8 items-start">
+          {/* Text Content - Takes up 3 columns */}
+          <div className="md:col-span-3 space-y-8">
+            {perks.map((perk, index) => (
+              <motion.div
+                key={index}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={fadeInUp}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                <Card className="bg-gray-50 border-none hover:shadow-md transition-all duration-300 h-full">
+                  <CardContent className="p-6">
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                      {perk.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 font-heading">{perk.title}</h3>
+                    <p className="text-neutral-dark">{perk.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Images Section - Takes up 2 columns */}
+          <div className="md:col-span-2 space-y-6">
             <div>
               <img 
                 src="/images/salmon-asparagus.png" 
@@ -50,31 +76,6 @@ export function FounderPerks() {
               />
             </div>
           </div>
-        </div>
-
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8">
-          {perks.map((perk, index) => (
-            <motion.div
-              key={index}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              transition={{ delay: index * 0.2 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-            >
-              <Card className="bg-gray-50 border-none hover:shadow-md transition-all duration-300 h-full">
-                <CardContent className="p-6">
-                  <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    {perk.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 font-heading">{perk.title}</h3>
-                  <p className="text-neutral-dark">{perk.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
         </div>
 
         {/* Mobile Stacked Cards */}
