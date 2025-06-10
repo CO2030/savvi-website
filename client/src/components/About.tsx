@@ -3,30 +3,25 @@ import { Brain, Users, Utensils, ShoppingCart, RefreshCw, ChefHat, Mic, Heart } 
 
 export function About() {
   const features = [
-    // Features Grid - 8 items with images
     {
       icon: <Brain className="h-5 w-5 text-primary" />,
-      title: "AI-Powered Nutrition",
-      description: "Personalized meal recommendations based on your dietary preferences and health goals.",
-      image: "/images/salmon-asparagus.png"
+      title: "Personalized Nutrition Planning",
+      description: "Smart, AI-powered recommendations that craft meal plans around your health goals, dietary needs, and lifestyle. Get gentle nudges and wellness support to stay on track—without the stress."
     },
     {
       icon: <Users className="h-5 w-5 text-primary" />,
-      title: "Family-Focused Flexibility",
-      description: "Built for households with multiple needs—accommodate allergies and picky eaters.",
-      image: "/images/salmon-asparagus.png"
+      title: "Flexible for Real Life",
+      description: "Whether you’re cooking for one, managing allergies, or feeding picky eaters, SavviWell adapts to your reality. Effortlessly swap ingredients, adjust for dietary needs, or scan your pantry for smart recipe suggestions based on what you already have."
     },
     {
       icon: <Utensils className="h-5 w-5 text-primary" />,
-      title: "Personalized Meal Planning",
-      description: "Custom plans shaped by your lifestyle, schedule, and preferences.",
-      image: "/images/salmon-asparagus.png"
+      title: "Smart Grocery & Delivery Integration",
+      description: "Tap once to generate organized, editable grocery lists that match your weekly plan—or line up takeaway when time is tight. Seamlessly connect with delivery services so you spend less time shopping and more time living."
     },
     {
       icon: <ShoppingCart className="h-5 w-5 text-primary" />,
-      title: "Smart Grocery Lists & Delivery",
-      description: "Generate grocery lists in one tap—automatically aligned with your plan.",
-      image: "/images/salmon-asparagus.png"
+      title: "Voice-First Convenience",
+      description: "Hands full? No problem. Just talk to SavviWell to explore recipes, adjust your meal plan, or get quick answers—all in a seamless, hands-free experience."
     },
     {
       icon: <RefreshCw className="h-5 w-5 text-primary" />,
