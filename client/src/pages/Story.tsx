@@ -63,9 +63,9 @@ export default function Story() {
                 
                 {/* Founders Image - Mobile First */}
                 <div className="flex justify-center mb-8 lg:mb-0 lg:order-2 lg:flex-shrink-0">
-                  <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-96 rounded-2xl overflow-hidden shadow-xl">
+                  <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-xl border-4 border-primary">
                     <img 
-                      src="/images/meara-christina-founders.png" 
+                      src="@assets/meara-christina-founders_1749580938646.png" 
                       alt="Meara and Christina, co-founders of SavviWell" 
                       className="w-full h-full object-cover"
                     />
