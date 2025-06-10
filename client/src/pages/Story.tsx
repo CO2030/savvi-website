@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { useState } from "react";
 import { WaitlistModal } from "@/components/WaitlistModal";
 import { Button } from "@/components/ui/button";
+import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
 
 export default function Story() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,7 +66,7 @@ export default function Story() {
                 <div className="flex justify-center mb-8 lg:mb-0 lg:order-2 lg:flex-shrink-0">
                   <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-xl border-4 border-primary">
                     <img 
-                      src="@assets/meara-christina-founders_1749580938646.png" 
+                      src={foundersImage} 
                       alt="Meara and Christina, co-founders of SavviWell" 
                       className="w-full h-full object-cover"
                     />
