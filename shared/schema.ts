@@ -27,9 +27,9 @@ export const waitlistEntries = pgTable("waitlist_entries", {
 export const insertWaitlistSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
-  userType: z.enum(["Individual", "Healthcare Professional", "Nutritionist"]),
-  healthGoal: z.enum(["Weight Loss", "Muscle Gain", "Patient Education", "Client Support"]),
-  dietaryConcern: z.string().min(1, "Dietary concern is required"),
+  userType: z.enum(["individual", "parent", "caregiver", "older-adult"]),
+  healthGoal: z.enum(["energy", "gut-health", "blood-sugar", "weight-loss", "other"]),
+  dietaryConcern: z.enum(["gluten-free", "vegan", "low-sugar", "none"]),
   source: z.string().optional(),
 });
 

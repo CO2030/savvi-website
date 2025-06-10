@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+export interface WaitlistSubmissionData {
+  name: string;
+  email: string;
+  userType: "individual" | "parent" | "caregiver" | "older-adult";
+  healthGoal: "energy" | "gut-health" | "blood-sugar" | "weight-loss" | "other";
+  dietaryConcern: "gluten-free" | "vegan" | "low-sugar" | "none";
+  source?: string;
+}
+
 // This function sends waitlist data to a Google Apps Script Web App
 export async function submitToGoogleScript(
   deploymentUrl: string, 
@@ -19,7 +28,7 @@ export async function submitToGoogleScript(
       type: 'waitlist',
       timestamp: new Date().toISOString()
     });
-    
+
     // Google Apps Script returns a success message
     if (response.status === 200) {
       return { 
@@ -27,7 +36,7 @@ export async function submitToGoogleScript(
         message: 'Successfully submitted to Google Sheet' 
       };
     }
-    
+
     return { 
       success: false, 
       message: 'Submission failed' 
@@ -58,14 +67,14 @@ export async function submitContactToGoogleScript(
       type: 'contact',
       timestamp: new Date().toISOString()
     });
-    
+
     if (response.status === 200) {
       return { 
         success: true, 
         message: 'Contact submission saved to Google Sheet' 
       };
     }
-    
+
     return { 
       success: false, 
       message: 'Contact submission failed' 
@@ -94,14 +103,14 @@ export async function submitNewsletterToGoogleScript(
       type: 'newsletter',
       timestamp: new Date().toISOString()
     });
-    
+
     if (response.status === 200) {
       return { 
         success: true, 
         message: 'Newsletter subscription saved to Google Sheet' 
       };
     }
-    
+
     return { 
       success: false, 
       message: 'Newsletter submission failed' 

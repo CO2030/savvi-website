@@ -32,7 +32,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     name: "",
     email: "",
     userType: "individual",
-    healthGoal: "energy",
+    healthGoal: "energy", 
     dietaryConcern: "none"
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
