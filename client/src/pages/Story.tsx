@@ -37,7 +37,7 @@ export default function Story() {
           className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-end min-h-[70vh] md:min-h-screen bg-cover bg-no-repeat"
           style={{
             backgroundImage: "url('/images/story-hero.jpeg')",
-            backgroundPosition: "center bottom"
+            backgroundPosition: "center 70%"
           }}
         >
           <div className="absolute inset-0 bg-black/30"></div>
