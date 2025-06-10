@@ -101,3 +101,52 @@
 .animate-slide-in-right {
   animation: slideInRight 0.3s ease-out;
 }
+
+/* Responsive Hero Sections */
+.hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+  }
+}
+
+.hero h1 {
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.hero p {
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+}
+
+/* Story page hero specific styles */
+.story-hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center 70%;
+}
+
+@media (max-width: 768px) {
+  .story-hero {
+    height: 70vh;
+  }
+}
+
+/* Responsive image container */
+.hero-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 768px) {
+  .hero-img {
+    aspect-ratio: 4 / 3;
+  }
+}

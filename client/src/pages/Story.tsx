@@ -34,10 +34,9 @@ export default function Story() {
       <main className="font-sans">
         {/* Hero Section */}
         <section 
-          className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-screen bg-cover bg-no-repeat"
+          className="story-hero"
           style={{
-            backgroundImage: "url('/images/story-hero.jpeg')",
-            backgroundPosition: "center 70%"
+            backgroundImage: "url('/images/story-hero.jpeg')"
           }}
         >
         </section>
