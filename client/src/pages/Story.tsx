@@ -33,7 +33,7 @@ export default function Story() {
       <main className="font-sans">
         {/* Hero Section */}
         <section 
-          className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] bg-center bg-cover bg-no-repeat"
+          className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] md:min-h-screen bg-center bg-cover bg-no-repeat"
           style={{
             backgroundImage: "url('/images/story-hero.jpeg')"
           }}
