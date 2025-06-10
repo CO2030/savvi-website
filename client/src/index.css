@@ -134,7 +134,7 @@
 @media (max-width: 768px) {
   .story-hero {
     height: 70vh;
-    background-position: 0% 60%; /* Show far left side to capture all left text */
+    background-position: 5% 60%; /* Show left side with slight margin */
   }
 }
 
