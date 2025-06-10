@@ -118,7 +118,7 @@ export function Footer() {
               <a href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://www.facebook.com/share/16RHv8a2nt/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-300 hover:text-white transition-colors">
@@ -194,7 +194,7 @@ export function Footer() {
           
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 px-4">
             <FacebookShareButton 
-              url={typeof window !== 'undefined' ? window.location.href : ''} 
+              url="https://www.facebook.com/share/16RHv8a2nt/?mibextid=wwXIfr" 
               hashtag="#SavviWell"
               className="transition-transform hover:scale-110 active:scale-95"
             >
