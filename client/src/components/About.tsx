@@ -49,7 +49,7 @@ export function About() {
             </div>
             <div className="p-6 space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed text-center">
-                <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
+                <strong>SavviWell is your voice-guided partner in healthy living.</strong>
               </p>
             </div>
           </div>
@@ -71,7 +71,7 @@ export function About() {
                 Imagine a smart assistant that plans healthy meals, orders your groceries, suggests recipes from what you already have, orders or lines up food delivery when you're too busy to cook.
               </p>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                <strong>SavviWell is your voice-guided partner in healthy living</strong>, built for real families and individuals navigating real life. It's more than meal planning. It's personalized support that grows with you, lightens the mental load, and helps you stay well without overthinking it.
+                <strong>SavviWell is your voice-guided partner in healthy living.</strong>
               </p>
             </div>
           </div>
