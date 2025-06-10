@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Tag, MessageSquare } from "lucide-react";
 import { motion } from 'framer-motion';
@@ -32,7 +31,27 @@ export function FounderPerks() {
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Founder & Beta Member Perks</h2>
         <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Join as an early member and enjoy exclusive benefits</p>
-        
+
+        {/* Images Section */}
+        <div className="flex justify-center mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+            <div>
+              <img 
+                src="/images/salmon-asparagus.png" 
+                alt="Healthy salmon and asparagus dish" 
+                className="w-full rounded-lg shadow-md"
+              />
+            </div>
+            <div>
+              <img 
+                src="/images/vegetables.png" 
+                alt="Fresh vegetables and healthy ingredients" 
+                className="w-full rounded-lg shadow-md"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Desktop Grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-8">
           {perks.map((perk, index) => (
