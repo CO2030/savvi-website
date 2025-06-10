@@ -34,25 +34,12 @@ export default function Story() {
       <main className="font-sans">
         {/* Hero Section */}
         <section 
-          className="relative pt-16 pb-12 sm:pt-20 sm:pb-16 md:pt-32 md:pb-24 px-4 flex items-end min-h-[60vh] sm:min-h-[70vh] md:min-h-screen bg-cover bg-no-repeat"
+          className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-screen bg-cover bg-no-repeat"
           style={{
             backgroundImage: "url('/images/story-hero.jpeg')",
             backgroundPosition: "center 70%"
           }}
         >
-          <div className="container mx-auto relative z-10 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
-            <div className="max-w-4xl mx-auto text-center text-white relative px-2">
-              <div className="absolute inset-0 bg-black/40 rounded-xl sm:rounded-2xl -m-4 sm:-m-6 md:-m-8"></div>
-              <div className="relative z-10 py-4 sm:py-6 md:py-8">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 font-heading leading-tight">
-                  Our Story
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-                  Born from the everyday struggles of meal planning and wellness, SavviWell is building the future of personalized nutrition through AI.
-                </p>
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* Our Story Section */}
