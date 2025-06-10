@@ -134,7 +134,7 @@
 @media (max-width: 768px) {
   .story-hero {
     height: 70vh;
-    background-position: 75% 60%; /* Show more of the right side with "Let's grow together" text */
+    background-position: 25% 60%; /* Show left side with "Let SavviWell help carry the load" text and phone */
   }
 }
 
