@@ -34,11 +34,12 @@ export default function Story() {
       <main className="font-sans">
         {/* Hero Section */}
         <section 
-          className="story-hero"
+          className="story-hero relative"
           style={{
             backgroundImage: "url('/images/story-hero.jpeg')"
           }}
         >
+          <div className="absolute inset-0 bg-black/30"></div>
         </section>
 
         {/* Our Story Section */}
