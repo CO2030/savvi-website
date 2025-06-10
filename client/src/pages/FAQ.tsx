@@ -106,10 +106,10 @@ export default function FAQPage() {
           <div className="absolute inset-0 bg-black/50"></div>
           <div className="container mx-auto text-center relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading">
-              Ready to Get Started?
+              Join the Waitlist. Be a Founding Member.
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-              Join thousands already on the waitlist for early access to SavviWell's AI-powered nutrition assistant.
+              Get early access, exclusive perks, and help shape the future of everyday wellness.
             </p>
             <Button 
               onClick={openModal}
