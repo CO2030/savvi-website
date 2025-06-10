@@ -34,14 +34,14 @@ export default function Story() {
       <main className="font-sans">
         {/* Hero Section */}
         <section 
-          className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-center min-h-[70vh] md:min-h-screen bg-cover bg-no-repeat"
+          className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 flex items-end min-h-[70vh] md:min-h-screen bg-cover bg-no-repeat"
           style={{
             backgroundImage: "url('/images/story-hero.jpeg')",
             backgroundPosition: "center bottom"
           }}
         >
           <div className="absolute inset-0 bg-black/40"></div>
-          <div className="container mx-auto relative z-10">
+          <div className="container mx-auto relative z-10 pb-16 md:pb-20">
             <div className="max-w-4xl mx-auto text-center text-white">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
                 Our Story
