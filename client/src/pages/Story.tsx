@@ -40,15 +40,17 @@ export default function Story() {
             backgroundPosition: "center 70%"
           }}
         >
-          <div className="absolute inset-0 bg-black/30"></div>
           <div className="container mx-auto relative z-10 pb-16 md:pb-20">
-            <div className="max-w-4xl mx-auto text-center text-white">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
-                Our Story
-              </h1>
-              <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
-                Born from the everyday struggles of meal planning and wellness, SavviWell is building the future of personalized nutrition through AI.
-              </p>
+            <div className="max-w-4xl mx-auto text-center text-white relative">
+              <div className="absolute inset-0 bg-black/40 rounded-2xl -m-8"></div>
+              <div className="relative z-10 py-8">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">
+                  Our Story
+                </h1>
+                <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
+                  Born from the everyday struggles of meal planning and wellness, SavviWell is building the future of personalized nutrition through AI.
+                </p>
+              </div>
             </div>
           </div>
         </section>
