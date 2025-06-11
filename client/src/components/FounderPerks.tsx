@@ -30,7 +30,7 @@ export function FounderPerks() {
     <section id="features" className="py-16 md:py-24 px-4 bg-white">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 font-heading">Founder & Beta Member Perks</h2>
-        <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Join as an early member and enjoy exclusive benefits</p>
+        <p className="text-neutral-dark text-center max-w-2xl mx-auto mb-12">Join as an early member and enjoy exclusive benefits — it's free to sign up.</p>
 
         {/* Desktop Layout */}
         <div className="hidden md:grid md:grid-cols-1 lg:grid-cols-3 gap-8">
