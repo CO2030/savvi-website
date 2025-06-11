@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { FounderPerks } from "@/components/FounderPerks";
 import { About } from "@/components/About";
-
+import { Button } from "@/components/ui/button";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { WaitlistModal } from "@/components/WaitlistModal";
