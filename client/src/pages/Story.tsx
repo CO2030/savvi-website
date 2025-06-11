@@ -61,6 +61,17 @@ export default function Story() {
                   </div>
                 </div>
 
+                {/* Join the Waitlist Button - Mobile positioned after image */}
+                <div className="flex justify-center mb-8 lg:hidden">
+                  <Button 
+                    onClick={openModal}
+                    size="lg"
+                    className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+                  >
+                    Join the Waitlist
+                  </Button>
+                </div>
+
                 {/* Story Text - Organized in flowing sections */}
                 <div className="lg:order-1 lg:flex-1">
 
@@ -69,6 +80,17 @@ export default function Story() {
                     <p className="text-lg text-gray-700 leading-relaxed font-medium">
                       We started SavviWell because we knew there had to be a <strong>better way</strong>.
                     </p>
+                  </div>
+
+                  {/* Join the Waitlist Button - Desktop positioned after opening */}
+                  <div className="hidden lg:flex justify-center mb-8">
+                    <Button 
+                      onClick={openModal}
+                      size="lg"
+                      className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+                    >
+                      Join the Waitlist
+                    </Button>
                   </div>
 
                   {/* The Problem */}
@@ -144,21 +166,6 @@ export default function Story() {
                         <span className="text-primary text-sm font-normal">Co-Founders, SavviWell</span>
                       </p>
                     </div>
-                  </div>
-                  <div className="bg-primary/5 rounded-xl p-6 mb-6">
-                  <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                    We started SavviWell because we knew there had to be a better way.
-                  </p>
-
-                  <div className="flex justify-center mb-6">
-                    <Button 
-                      onClick={openModal}
-                      size="lg"
-                      className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
-                    >
-                      Join the Waitlist
-                    </Button>
-                  </div>
                   </div>
                 </div>
               </div>
