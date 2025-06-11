@@ -41,7 +41,7 @@ export default function Home() {
         <section className="py-16 md:py-24 px-4 bg-white">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Meet SavviWell's Founders</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Meet the Founders Behind SavviWell</h2>
               
               {/* Founders Photo */}
               <div className="flex justify-center mb-6">
