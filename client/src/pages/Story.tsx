@@ -1,4 +1,3 @@
-
 import { Helmet } from "react-helmet";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -30,7 +29,7 @@ export default function Story() {
       </Helmet>
 
       <Header onWaitlistClick={openModal} />
-      
+
       <main className="font-sans">
         {/* Hero Section */}
         <section 
@@ -47,10 +46,10 @@ export default function Story() {
           <div className="container mx-auto">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 font-heading">Our Story</h2>
-              
+
               {/* Mobile-First Layout */}
               <div className="flex flex-col lg:flex-row lg:gap-16 lg:items-start">
-                
+
                 {/* Founders Image - Mobile First */}
                 <div className="flex justify-center mb-6 sm:mb-8 lg:mb-0 lg:order-2 lg:flex-shrink-0">
                   <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 rounded-full overflow-hidden shadow-xl border-2 sm:border-3 md:border-4 border-primary">
@@ -64,10 +63,10 @@ export default function Story() {
 
                 {/* Story Text - Organized in flowing sections */}
                 <div className="lg:order-1 lg:flex-1">
-                  
+
                   {/* Opening */}
                   <div className="bg-primary/5 rounded-xl p-6 mb-6">
-                    <p className="text-lg md:text-xl text-gray-800 leading-relaxed font-medium">
+                    <p className="text-lg text-gray-700 leading-relaxed font-medium">
                       We started SavviWell because we knew there had to be a <strong>better way</strong>.
                     </p>
                   </div>
@@ -145,6 +144,21 @@ export default function Story() {
                         <span className="text-primary text-sm font-normal">Co-Founders, SavviWell</span>
                       </p>
                     </div>
+                  </div>
+                  <div className="bg-primary/5 rounded-xl p-6 mb-6">
+                  <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                    We started SavviWell because we knew there had to be a better way.
+                  </p>
+
+                  <div className="flex justify-center mb-6">
+                    <Button 
+                      onClick={openModal}
+                      size="lg"
+                      className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+                    >
+                      Join the Waitlist
+                    </Button>
+                  </div>
                   </div>
                 </div>
               </div>
