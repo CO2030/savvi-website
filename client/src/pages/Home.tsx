@@ -36,6 +36,50 @@ export default function Home() {
       <main className="font-sans">
         <Hero onWaitlistClick={openModal} />
         <About />
+        
+        {/* Meet SavviWell's Founders Section */}
+        <section className="py-16 md:py-24 px-4 bg-white">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Meet SavviWell's Founders</h2>
+              
+              {/* Founders Photo */}
+              <div className="flex justify-center mb-6">
+                <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl border-4 border-primary">
+                  <img 
+                    src="/attached_assets/meara-christina-founders_1749580938646.png" 
+                    alt="Meara and Christina, co-founders of SavviWell" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              
+              {/* Founders Label */}
+              <p className="text-lg font-semibold text-primary mb-8">Founders</p>
+              
+              {/* Content */}
+              <div className="space-y-6 mb-8">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-800">
+                  Ready to stop juggling and feel supported?
+                </h3>
+                <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                  We're two moms who built the tool we wished we had. Read our story and see how SavviWell can simplify your every day—and give you more time for what really matters.
+                </p>
+              </div>
+              
+              {/* Read More Button */}
+              <a href="/story">
+                <Button 
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+                >
+                  Read More
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <FounderPerks />
         <CTASection onWaitlistClick={openModal} />
       </main>
