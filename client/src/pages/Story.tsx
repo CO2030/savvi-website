@@ -77,20 +77,20 @@ export default function Story() {
 
                   {/* Opening */}
                   <div className="bg-primary/5 rounded-xl p-6 mb-6">
-                    <p className="text-lg text-gray-700 leading-relaxed font-medium">
+                    <p className="text-lg text-gray-700 leading-relaxed font-medium mb-4">
                       We started SavviWell because we knew there had to be a <strong>better way</strong>.
                     </p>
-                  </div>
-
-                  {/* Join the Waitlist Button - Desktop positioned after opening */}
-                  <div className="hidden lg:flex justify-center mb-8">
-                    <Button 
-                      onClick={openModal}
-                      size="lg"
-                      className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
-                    >
-                      Join the Waitlist
-                    </Button>
+                    
+                    {/* Join the Waitlist Button - Right after the opening sentence */}
+                    <div className="flex justify-center">
+                      <Button 
+                        onClick={openModal}
+                        size="lg"
+                        className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+                      >
+                        Join the Waitlist
+                      </Button>
+                    </div>
                   </div>
 
                   {/* The Problem */}
