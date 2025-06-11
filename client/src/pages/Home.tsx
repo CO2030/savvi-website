@@ -1,6 +1,3 @@
-The code adds the missing Button import in Home.tsx and updates the component imports.
-```
-```replit_final_file
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -39,13 +36,13 @@ export default function Home() {
       <main className="font-sans">
         <Hero onWaitlistClick={openModal} />
         <About />
-
+        
         {/* Meet SavviWell's Founders Section */}
         <section className="py-16 md:py-24 px-4 bg-white">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 font-heading">Meet the Founders Behind SavviWell</h2>
-
+              
               {/* Founders Photo */}
               <div className="flex justify-center mb-6">
                 <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl border-4 border-primary">
@@ -56,10 +53,10 @@ export default function Home() {
                   />
                 </div>
               </div>
-
+              
               {/* Founders Label */}
               <p className="text-lg font-semibold text-primary mb-8">Founders</p>
-
+              
               {/* Content */}
               <div className="space-y-6 mb-8">
                 <h3 className="text-xl md:text-2xl font-bold text-gray-800">
@@ -69,7 +66,7 @@ export default function Home() {
                   We're two moms who built the tool we wished we had. Read our story and see how SavviWell can simplify your every day—and give you more time for what really matters.
                 </p>
               </div>
-
+              
               {/* Read More Button */}
               <a href="/story">
                 <Button 
