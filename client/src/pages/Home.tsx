@@ -47,7 +47,7 @@ export default function Home() {
               <div className="flex justify-center mb-6">
                 <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl border-4 border-primary">
                   <img 
-                    src="/attached_assets/meara-christina-founders_1749580938646.png" 
+                    src="/images/meara-christina-founders.png" 
                     alt="Meara and Christina, co-founders of SavviWell" 
                     className="w-full h-full object-cover"
                   />
