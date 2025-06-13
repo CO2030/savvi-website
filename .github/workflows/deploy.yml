@@ -48,13 +48,33 @@ jobs:
     - name: Build application
       run: npm run build
     
-    - name: Deploy to production
-      run: echo "Add your deployment commands here"
-      # Example for Vercel:
-      # - name: Deploy to Vercel
-      #   uses: amondnet/vercel-action@v25
-      #   with:
-      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      #     vercel-org-id: ${{ secrets.ORG_ID }}
-      #     vercel-project-id: ${{ secrets.PROJECT_ID }}
-      #     vercel-args: '--prod'
+    # Uncomment one of the deployment options below:
+    
+    # Option 1: Deploy to Vercel
+    # - name: Deploy to Vercel
+    #   uses: amondnet/vercel-action@v25
+    #   with:
+    #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+    #     vercel-org-id: ${{ secrets.ORG_ID }}
+    #     vercel-project-id: ${{ secrets.PROJECT_ID }}
+    #     vercel-args: '--prod'
+    
+    # Option 2: Deploy to Railway
+    # - name: Deploy to Railway
+    #   uses: bervProject/railway-deploy@v1.2.0
+    #   with:
+    #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
+    #     service: 'savviwell'
+    
+    # Option 3: Deploy to Render
+    # - name: Deploy to Render
+    #   uses: johnbeynon/render-deploy-action@v0.0.8
+    #   with:
+    #     service-id: ${{ secrets.RENDER_SERVICE_ID }}
+    #     api-key: ${{ secrets.RENDER_API_KEY }}
+    
+    - name: Deployment ready
+      run: |
+        echo "✅ SavviWell build completed successfully"
+        echo "🚀 Configure deployment by uncommenting one of the options above"
+        echo "📁 Built files are ready in the dist/ directory"
