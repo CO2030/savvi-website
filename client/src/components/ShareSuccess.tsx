@@ -36,11 +36,7 @@ export function ShareSuccess({
             <FacebookIcon size={iconSize} round />
           </FacebookShareButton>
           
-          <TwitterShareButton url={shareUrl} title={shareTitle} className="transition-transform hover:scale-110">
-            <TwitterIcon size={iconSize} round />
-          </TwitterShareButton>
-          
-          <LinkedinShareButton url={shareUrl} title={shareTitle} summary={shareMessage} className="transition-transform hover:scale-110">
+          <LinkedinShareButton url="https://www.linkedin.com/company/savviwell/" title={shareTitle} summary={shareMessage} className="transition-transform hover:scale-110">
             <LinkedinIcon size={iconSize} round />
           </LinkedinShareButton>
           

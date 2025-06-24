@@ -115,13 +115,10 @@ export function Footer() {
               <a href="https://whatsapp.com/channel/0029Vb6QFzD35fLvJkkAOq3N" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <SiWhatsapp className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
               <a href="https://www.facebook.com/share/16RHv8a2nt/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/company/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
@@ -201,16 +198,8 @@ export function Footer() {
               <FacebookIcon size={44} round />
             </FacebookShareButton>
             
-            <TwitterShareButton 
-              url={typeof window !== 'undefined' ? window.location.href : ''} 
-              title="Join me in exploring AI-powered nutrition recommendations with SavviWell!" 
-              className="transition-transform hover:scale-110 active:scale-95"
-            >
-              <TwitterIcon size={44} round />
-            </TwitterShareButton>
-            
             <LinkedinShareButton 
-              url={typeof window !== 'undefined' ? window.location.href : ''} 
+              url="https://www.linkedin.com/company/savviwell/"
               title="SavviWell - AI-Powered Nutrition"
               summary="Personalized nutrition recommendations powered by AI. Join the waitlist for early access!" 
               className="transition-transform hover:scale-110 active:scale-95"
