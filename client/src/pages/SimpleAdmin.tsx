@@ -118,13 +118,14 @@ export default function SimpleAdmin() {
       return;
     }
 
-    const headers = ["Name", "Email", "UserType", "HealthGoal", "DietaryConcern", "CreatedAt"];
+    const headers = ["Name", "Email", "UserType", "HealthGoal", "DietaryConcern", "Source", "CreatedAt"];
     const formattedData = waitlistEntries.map(entry => ({
       name: entry.name,
       email: entry.email,
       usertype: entry.userType,
       healthgoal: entry.healthGoal,
       dietaryconcern: entry.dietaryConcern,
+      source: entry.source || 'Direct',
       createdat: new Date(entry.createdAt).toLocaleDateString()
     }));
 
@@ -283,7 +284,8 @@ export default function SimpleAdmin() {
                             <div><strong>Name:</strong> {entry.name}</div>
                             <div><strong>Email:</strong> {entry.email}</div>
                             <div className="md:col-span-2"><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
-                            <div className="md:col-span-2 text-gray-500">
+                            <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
+                            <div className="text-gray-500">
                               <strong>Date:</strong> {new Date(entry.createdAt).toLocaleDateString()}
                             </div>
                           </div>
