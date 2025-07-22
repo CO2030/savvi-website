@@ -136,7 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Submit to Google Sheet if deployment URL is available
       const deploymentUrl = config.googleScriptDeploymentUrl;
       if (deploymentUrl) {
-        const googleSubmitResult = await submitNewsletterToGoogleScript(deploymentUrl, {
+        const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
           email: validatedData.email,
           name: validatedData.name,
           source: validatedData.source || 'Direct'
@@ -286,37 +286,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
         {
           name: "Alice Johnson",
           email: "alice@example.com",
-          userType: "Individual",
-          healthGoal: "Weight Loss",
-          dietaryConcern: "Gluten-free diet"
+          userType: "individual",
+          healthGoal: "weight-loss",
+          dietaryConcern: "gluten-free",
+          source: "test-data"
         },
         {
           name: "Bob Smith",
           email: "bob@example.com",
-          userType: "Individual",
-          healthGoal: "Weight Loss",
-          dietaryConcern: "Low-carb preferences"
+          userType: "individual", 
+          healthGoal: "weight-loss",
+          dietaryConcern: "none",
+          source: "test-data"
         },
         {
           name: "Carol Williams",
           email: "carol@example.com",
-          userType: "Healthcare Professional",
-          healthGoal: "Patient Education",
-          dietaryConcern: "Diabetes management"
+          userType: "parent",
+          healthGoal: "energy",
+          dietaryConcern: "none",
+          source: "test-data"
         },
         {
           name: "David Brown",
           email: "david@example.com",
-          userType: "Individual",
-          healthGoal: "Muscle Gain",
-          dietaryConcern: "High-protein diet"
+          userType: "caregiver",
+          healthGoal: "gut-health",
+          dietaryConcern: "vegan",
+          source: "test-data"
         },
         {
           name: "Emma Davis",
           email: "emma@example.com",
-          userType: "Nutritionist",
-          healthGoal: "Client Support",
-          dietaryConcern: "Food allergies"
+          userType: "older-adult",
+          healthGoal: "blood-sugar",
+          dietaryConcern: "low-sugar",
+          source: "test-data"
         }
       ];
 
