@@ -138,7 +138,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (deploymentUrl) {
         const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
           email: validatedData.email,
-          name: validatedData.name,
+          name: validatedData.name || '',
           source: validatedData.source || 'Direct'
         });
 
@@ -359,9 +359,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       ];
 
-      // Add waitlist entries
+      // Add waitlist entries with proper types
       for (const entry of sampleWaitlistEntries) {
-        await storage.createWaitlistEntry(entry);
+        await storage.createWaitlistEntry({
+          ...entry,
+          createdAt: new Date().toISOString()
+        });
       }
 
       // Add contact submissions

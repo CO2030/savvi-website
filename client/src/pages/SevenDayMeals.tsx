@@ -41,7 +41,7 @@ export default function SevenDayMeals() {
 
   const submitMutation = useMutation({
     mutationFn: async (data: LeadMagnetFormData) => {
-      await apiRequest("/api/waitlist", "POST", data);
+      await apiRequest("POST", "/api/waitlist", data);
     },
     onSuccess: () => {
       setIsSubmitted(true);
