@@ -246,7 +246,7 @@ export default function MealGuide() {
               </Button>
               
               <p className="text-sm text-gray-500">
-                No spam, just delicious family meals created by certified nutritionists Meara & Christina
+                No spam, just delicious family meals created by certified nutritionists
               </p>
             </div>
           </CardContent>
@@ -374,7 +374,7 @@ Visit us at savviwell.com for more healthy living resources.
         <Card className="shadow-lg border-0 mb-8">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-gray-800">What's Inside Your Guide</CardTitle>
-            <p className="text-gray-600 mt-2">5 delicious, family-friendly meals created by Meara & Christina</p>
+            <p className="text-gray-600 mt-2">5 delicious, family-friendly meals created by certified nutritionists</p>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
