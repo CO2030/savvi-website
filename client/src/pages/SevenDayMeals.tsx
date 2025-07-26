@@ -10,7 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { CheckCircle, Download, Clock, Users, Utensils, Heart } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
-import heroImagePath from "@/assets/images/5-day-meals-hero.png";
+import heroImagePath from "@/assets/images/5-day-meals-hero-clean.png";
 
 // Lead magnet specific schema - simplified with just name and email
 const leadMagnetSchema = z.object({
@@ -149,7 +149,7 @@ export default function SevenDayMeals() {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'left center',
+          backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat'
         }}
       >
