@@ -145,9 +145,12 @@ export default function SevenDayMeals() {
     <div className="min-h-screen bg-white">
       {/* Hero Section with Background Image */}
       <div 
-        className="relative min-h-screen bg-cover bg-center bg-no-repeat"
+        className="relative min-h-screen"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
