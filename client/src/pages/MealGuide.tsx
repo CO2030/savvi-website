@@ -231,26 +231,9 @@ export default function MealGuide() {
                 Want Your <span style={{ color: '#399E5A' }}>FREE</span> 5-Day Meal Guide?
               </h1>
               
-              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Join thousands of families getting healthy, delicious meals delivered straight to their inbox!
               </p>
-              
-              <div className="bg-white rounded-lg p-6 shadow-md mb-8 border-l-4" style={{ borderLeftColor: '#399E5A' }}>
-                <div className="grid md:grid-cols-3 gap-4 text-center">
-                  <div>
-                    <div className="text-2xl font-bold" style={{ color: '#399E5A' }}>5</div>
-                    <div className="text-sm text-gray-600">Complete Recipes</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold" style={{ color: '#399E5A' }}>15min</div>
-                    <div className="text-sm text-gray-600">Prep Time</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold" style={{ color: '#399E5A' }}>100%</div>
-                    <div className="text-sm text-gray-600">Family Approved</div>
-                  </div>
-                </div>
-              </div>
             </div>
             
             <div className="space-y-4">
