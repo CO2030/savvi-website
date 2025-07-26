@@ -112,8 +112,23 @@ GOOGLE_SCRIPT_DEPLOYMENT_URL=https://script.google.com/...
 ADMIN_PASSWORD=secure_admin_password
 ```
 
+## User Flow Architecture
+
+### Social Media Traffic Flow
+1. **Entry Point**: `/5-day-meals` - Lead magnet signup form for social media traffic
+2. **Form Completion**: User fills out waitlist form and gets instant PDF download
+3. **Email Delivery**: User receives email with secure token link to access online guide
+4. **Secure Access**: `/meal-guide?token=xxx` - Token-verified access to online meal guide
+
+### Security Implementation
+- **Access Tokens**: Generated for each waitlist entry (unique 32-character tokens)
+- **Token Verification**: Backend validates tokens before showing meal guide content
+- **Branded Access Denial**: Unauthorized users see attractive signup page instead of error
+- **Personalized Experience**: Authorized users see personalized greeting with their name
+
 ## Changelog
-- June 24, 2025. Initial setup
+- July 26, 2025: Implemented secure token-based access for meal guide page
+- June 24, 2025: Initial setup
 
 ## User Preferences
 

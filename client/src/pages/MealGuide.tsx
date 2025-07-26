@@ -217,30 +217,55 @@ export default function MealGuide() {
   // Show access denied
   if (!isValidToken) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl mx-auto text-center shadow-2xl border-0">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+        <Card className="w-full max-w-3xl mx-auto text-center shadow-2xl border-0 overflow-hidden">
+          <div className="h-2" style={{ backgroundColor: '#399E5A' }}></div>
           <CardContent className="p-8 md:p-12">
-            <div className="mb-6">
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-                <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                </svg>
+            <div className="mb-8">
+              {/* SavviWell Logo/Brand */}
+              <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#399E5A' }}>
+                <Utensils className="w-12 h-12 text-white" />
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                Access Required
+              
+              <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#2d3748' }}>
+                Want Your <span style={{ color: '#399E5A' }}>FREE</span> 5-Day Meal Guide?
               </h1>
-              <p className="text-lg text-gray-600 mb-8">
-                This meal guide is exclusive to our community members. Sign up for our 5-day meals program to get access!
+              
+              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                Join thousands of families getting healthy, delicious meals delivered straight to their inbox!
               </p>
+              
+              <div className="bg-white rounded-lg p-6 shadow-md mb-8 border-l-4" style={{ borderLeftColor: '#399E5A' }}>
+                <div className="grid md:grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold" style={{ color: '#399E5A' }}>5</div>
+                    <div className="text-sm text-gray-600">Complete Recipes</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold" style={{ color: '#399E5A' }}>15min</div>
+                    <div className="text-sm text-gray-600">Prep Time</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold" style={{ color: '#399E5A' }}>100%</div>
+                    <div className="text-sm text-gray-600">Family Approved</div>
+                  </div>
+                </div>
+              </div>
             </div>
             
-            <Button 
-              onClick={() => window.location.href = '/5-day-meals'}
-              className="text-white px-8 py-3 text-lg hover:opacity-90 transition-opacity duration-200"
-              style={{ backgroundColor: '#399E5A' }}
-            >
-              Get Your Free Meal Guide
-            </Button>
+            <div className="space-y-4">
+              <Button 
+                onClick={() => window.location.href = '/5-day-meals'}
+                className="text-white px-12 py-4 text-xl font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                style={{ backgroundColor: '#399E5A' }}
+              >
+                Get My Free Meal Guide Now
+              </Button>
+              
+              <p className="text-sm text-gray-500">
+                No spam, just delicious family meals created by certified nutritionists Meara & Christina
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
