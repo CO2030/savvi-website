@@ -143,9 +143,9 @@ export default function SevenDayMeals() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section with Background Image */}
+      {/* Hero Section with Background Image and Centered Text */}
       <div 
-        className="relative min-h-screen"
+        className="relative min-h-screen flex items-center justify-center"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`,
           backgroundSize: 'cover',
@@ -153,8 +153,8 @@ export default function SevenDayMeals() {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-12">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Get Your FREE<br />
               <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span><br />
@@ -163,13 +163,98 @@ export default function SevenDayMeals() {
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
               Transform your family's eating habits with our expertly crafted meal plans, shopping lists, and prep guides - all designed to make healthy eating effortless.
             </p>
-          </div>
+            
+            {/* Form Section in Hero */}
+            <div className="max-w-md mx-auto">
+              <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur">
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-2xl font-bold text-gray-800">
+                    Get Your Free Guide Now
+                  </CardTitle>
+                  <p className="text-gray-600">Join 10,000+ families eating healthier</p>
+                </CardHeader>
+                <CardContent className="p-6 pt-0">
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-700">Your Name</FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="Enter your first name" 
+                                className="h-12 text-lg"
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Benefits Section */}
-          <div className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-700">Email Address</FormLabel>
+                            <FormControl>
+                              <Input 
+                                type="email"
+                                placeholder="your.email@example.com" 
+                                className="h-12 text-lg"
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button 
+                        type="submit" 
+                        disabled={submitMutation.isPending}
+                        className="w-full h-14 text-lg font-semibold text-white shadow-lg hover:opacity-90 transition-opacity duration-200"
+                        style={{ backgroundColor: '#399E5A' }}
+                      >
+                        {submitMutation.isPending ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" />
+                            Preparing Your Guide...
+                          </>
+                        ) : (
+                          <>
+                            <Download className="w-5 h-5 mr-2" />
+                            Get My Free 5-Day Guide
+                          </>
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-gray-500 text-center">
+                        We respect your privacy. Unsubscribe at any time. 
+                        You'll also get early access to our AI nutrition assistant.
+                      </p>
+                    </form>
+                  </Form>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Benefits Section */}
+      <div className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+              Why Families Love Our Meal Planning Guide
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
                 <Clock className="w-8 h-8 flex-shrink-0 mt-1" style={{ color: '#399E5A' }} />
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-2">Save 3+ Hours Weekly</h3>
@@ -177,7 +262,7 @@ export default function SevenDayMeals() {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+              <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
                 <Utensils className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-2">Simple, Delicious Recipes</h3>
@@ -185,7 +270,7 @@ export default function SevenDayMeals() {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+              <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
                 <Users className="w-8 h-8 text-purple-600 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-2">Whole Family Approved</h3>
@@ -193,7 +278,7 @@ export default function SevenDayMeals() {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+              <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
                 <Heart className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-2">Boost Energy & Health</h3>
@@ -202,126 +287,32 @@ export default function SevenDayMeals() {
               </div>
             </div>
 
-            <div className="rounded-xl p-6" style={{ backgroundColor: '#EFD8D0' }}>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">What You'll Get:</h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
-                  <span><strong>5 Delicious Dinner Plans</strong> - We've got your family dinners covered all week</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
-                  <span><strong>Shopping Lists</strong> - Organized by grocery store sections</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
-                  <span><strong>Prep Guide</strong> - Make-ahead tips to save even more time</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
-                  <span><strong>Nutrition Tips</strong> - Simple ways to boost your family's health</span>
-                </li>
-              </ul>
+            <div className="max-w-4xl mx-auto rounded-xl p-8" style={{ backgroundColor: '#EFD8D0' }}>
+              <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center">What You'll Get:</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
+                    <span><strong>5 Delicious Dinner Plans</strong> - We've got your family dinners covered all week</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
+                    <span><strong>Shopping Lists</strong> - Organized by grocery store sections</span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
+                    <span><strong>Prep Guide</strong> - Make-ahead tips to save even more time</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
+                    <span><strong>Nutrition Tips</strong> - Simple ways to boost your family's health</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Form Section */}
-          <div className="lg:order-first">
-            <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-2xl font-bold text-gray-800">
-                  Get Your Free Guide Now
-                </CardTitle>
-                <p className="text-gray-600">Join 10,000+ families eating healthier</p>
-              </CardHeader>
-              <CardContent className="p-6 pt-0">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-gray-700">Your Name</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Enter your first name" 
-                              className="h-12 text-lg"
-                              {...field} 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-gray-700">Email Address</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="email"
-                              placeholder="your.email@example.com" 
-                              className="h-12 text-lg"
-                              {...field} 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button 
-                      type="submit" 
-                      disabled={submitMutation.isPending}
-                      className="w-full h-14 text-lg font-semibold text-white shadow-lg hover:opacity-90 transition-opacity duration-200"
-                      style={{ backgroundColor: '#399E5A' }}
-                    >
-                      {submitMutation.isPending ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" />
-                          Preparing Your Guide...
-                        </>
-                      ) : (
-                        <>
-                          <Download className="w-5 h-5 mr-2" />
-                          Get My Free 5-Day Guide
-                        </>
-                      )}
-                    </Button>
-
-                    <p className="text-xs text-gray-500 text-center">
-                      We respect your privacy. Unsubscribe at any time. 
-                      You'll also get early access to our AI nutrition assistant.
-                    </p>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="max-w-4xl mx-auto mt-16 text-center">
-          <p className="text-white/80 mb-6">Trusted by families worldwide</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-white/70">
-            <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
-              No Spam, Ever
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
-              100% Free
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
-              Instant Download
-            </span>
-          </div>
-        </div>
         </div>
       </div>
     </div>
