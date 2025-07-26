@@ -1,111 +1,358 @@
 import nodemailer from 'nodemailer';
 
-// Create email transporter
+interface EmailData {
+  to: string;
+  name: string;
+}
+
+// Create reusable transporter
 const createTransporter = () => {
-  // Using Gmail SMTP - you'll need to set up app passwords
-  return nodemailer.createTransporter({
-    service: 'gmail',
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.warn('Email configuration missing. Emails will not be sent.');
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.GMAIL_USER || 'your-email@gmail.com',
-      pass: process.env.GMAIL_APP_PASSWORD || 'your-app-password'
-    }
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
   });
 };
 
-export async function sendContactEmail(data: {
-  to?: string;
-  subject?: string;
-  html?: string;
-  name?: string;
-  email?: string;
-  reason?: string;
-  message?: string;
-}) {
+const generateMealGuideContent = () => {
+  return `
+SAVVIWELL 5-DAY HEALTHY MEALS GUIDE
+========================================
+
+Welcome to your personalized 5-day dinner planning guide! Each recipe is designed to be nutritious, delicious, and family-friendly.
+
+DAY 1: MEDITERRANEAN SALMON BOWL
+Prep Time: 25 mins | Servings: 4
+
+INGREDIENTS:
+• 4 salmon fillets (6oz each)
+• 2 cups quinoa
+• 1 cucumber, diced
+• 2 cups cherry tomatoes
+• 1 red onion, sliced
+• 1/2 cup kalamata olives
+• 1/4 cup feta cheese
+• 3 tbsp olive oil
+• 2 lemons
+• Fresh dill
+
+INSTRUCTIONS:
+1. Cook quinoa according to package directions
+2. Season salmon with salt, pepper, and lemon juice
+3. Heat olive oil in pan, cook salmon 4-5 minutes per side
+4. Mix cucumber, tomatoes, onion, and olives
+5. Serve salmon over quinoa with vegetables and feta
+
+---
+
+DAY 2: ASIAN CHICKEN LETTUCE WRAPS
+Prep Time: 20 mins | Servings: 4
+
+INGREDIENTS:
+• 1 lb ground chicken
+• 1 head butter lettuce
+• 2 carrots, julienned
+• 1 red bell pepper, diced
+• 3 green onions, sliced
+• 2 tbsp sesame oil
+• 3 tbsp soy sauce
+• 1 tbsp rice vinegar
+• 2 cloves garlic, minced
+• 1 tsp fresh ginger
+
+INSTRUCTIONS:
+1. Heat sesame oil in large pan
+2. Cook ground chicken until no longer pink
+3. Add garlic and ginger, cook 1 minute
+4. Stir in soy sauce and rice vinegar
+5. Add vegetables, cook 3-4 minutes until crisp-tender
+6. Serve in lettuce cups with green onions
+
+---
+
+DAY 3: ONE-PAN VEGETABLE PASTA
+Prep Time: 30 mins | Servings: 4
+
+INGREDIENTS:
+• 12 oz whole grain penne
+• 2 zucchini, sliced
+• 1 yellow bell pepper
+• 1 cup cherry tomatoes
+• 1/2 red onion, sliced
+• 3 cloves garlic, minced
+• 1/4 cup olive oil
+• 1/2 cup fresh basil
+• 1/4 cup parmesan cheese
+• Salt and pepper to taste
+
+INSTRUCTIONS:
+1. Cook pasta according to package directions
+2. Heat olive oil in large pan
+3. Sauté onion and garlic until fragrant
+4. Add zucchini and bell pepper, cook 5 minutes
+5. Add tomatoes, cook until softened
+6. Toss with cooked pasta, basil, and parmesan
+
+---
+
+DAY 4: TURKEY AND SWEET POTATO SKILLET
+Prep Time: 35 mins | Servings: 4
+
+INGREDIENTS:
+• 1 lb ground turkey
+• 2 large sweet potatoes, cubed
+• 1 bell pepper, diced
+• 1 onion, diced
+• 2 cups spinach
+• 2 tbsp olive oil
+• 1 tsp cumin
+• 1 tsp paprika
+• 1/2 tsp garlic powder
+• Salt and pepper to taste
+
+INSTRUCTIONS:
+1. Heat olive oil in large skillet
+2. Cook sweet potato cubes until tender, about 15 minutes
+3. Add onion and bell pepper, cook 5 minutes
+4. Add ground turkey and spices, cook until browned
+5. Stir in spinach until wilted
+6. Season with salt and pepper to taste
+
+---
+
+DAY 5: BAKED COD WITH ROASTED VEGETABLES
+Prep Time: 40 mins | Servings: 4
+
+INGREDIENTS:
+• 4 cod fillets (6oz each)
+• 2 cups broccoli florets
+• 2 cups Brussels sprouts, halved
+• 1 lb baby potatoes, halved
+• 3 tbsp olive oil
+• 2 lemons
+• 2 cloves garlic, minced
+• 1 tsp dried herbs
+• Salt and pepper to taste
+
+INSTRUCTIONS:
+1. Preheat oven to 425°F
+2. Toss vegetables with olive oil, salt, and pepper
+3. Roast vegetables for 20 minutes
+4. Season cod with lemon juice, garlic, and herbs
+5. Add cod to pan with vegetables
+6. Bake additional 12-15 minutes until fish flakes easily
+
+COMPLETE SHOPPING LIST
+=====================
+
+PROTEINS:
+• 4 salmon fillets (6oz each)
+• 1 lb ground chicken
+• 1 lb ground turkey
+• 4 cod fillets (6oz each)
+
+VEGETABLES:
+• 2 cups quinoa
+• 1 head butter lettuce
+• 2 cucumbers
+• 4 cups cherry tomatoes
+• 2 red onions
+• 2 zucchini
+• 2 yellow bell peppers
+• 1 red bell pepper
+• 2 carrots
+• 3 green onions
+• 2 cups broccoli florets
+• 2 cups Brussels sprouts
+• 1 lb baby potatoes
+• 2 large sweet potatoes
+• 2 cups spinach
+
+PANTRY ITEMS:
+• 12 oz whole grain penne
+• Olive oil
+• Sesame oil
+• Soy sauce
+• Rice vinegar
+• Kalamata olives
+• Feta cheese
+• Parmesan cheese
+• Fresh herbs (basil, dill)
+• Garlic
+• Lemons
+• Spices (cumin, paprika, dried herbs)
+
+MEAL PREP TIPS
+==============
+
+• Wash and chop vegetables on Sunday for the week
+• Cook quinoa in batches and store in refrigerator
+• Marinate proteins the night before for enhanced flavor
+• Pre-cut vegetables and store in airtight containers
+• Keep herbs fresh by storing in water like flowers
+
+NUTRITION TIPS
+==============
+
+• Each meal provides balanced protein, healthy fats, and complex carbs
+• Aim for colorful plates - variety ensures diverse nutrients
+• Stay hydrated with water throughout the day
+• Listen to your body's hunger and fullness cues
+• Enjoy your meals mindfully without distractions
+
+Thank you for choosing SavviWell!
+Visit us at your website for more healthy living resources and to access our AI nutrition assistant.
+`;
+};
+
+interface ContactEmailData {
+  to: string;
+  subject: string;
+  html: string;
+}
+
+export async function sendContactEmail(emailData: ContactEmailData): Promise<boolean> {
+  const transporter = createTransporter();
+  
+  if (!transporter) {
+    console.log('Email service not configured, skipping email send');
+    return false;
+  }
+
+  const mailOptions = {
+    from: `"SavviWell" <${process.env.SMTP_USER}>`,
+    to: emailData.to,
+    subject: emailData.subject,
+    html: emailData.html
+  };
+
   try {
-    const transporter = createTransporter();
-
-    // If it's a structured contact form (legacy format)
-    if (data.name && data.email && data.reason && data.message) {
-      const emailHtml = `
-        <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Reason:</strong> ${data.reason}</p>
-        <p><strong>Message:</strong></p>
-        <p>${data.message}</p>
-        <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-      `;
-
-      await transporter.sendMail({
-        from: process.env.GMAIL_USER || 'savviwell@gmail.com',
-        to: 'savviwell@gmail.com',
-        subject: `New Contact Form Submission: ${data.reason}`,
-        html: emailHtml
-      });
-    }
-    // If it's a direct email (new format for waitlist notifications)
-    else if (data.to && data.subject && data.html) {
-      await transporter.sendMail({
-        from: process.env.GMAIL_USER || 'savviwell@gmail.com',
-        to: data.to,
-        subject: data.subject,
-        html: data.html
-      });
-    }
-
-    console.log('Email sent successfully');
-    return { success: true, message: 'Email sent successfully' };
+    await transporter.sendMail(mailOptions);
+    console.log(`Contact email sent successfully to ${emailData.to}`);
+    return true;
   } catch (error) {
-    console.error('Error sending email:', error);
-
-    // Log the email content as fallback
-    console.log(`
-===== EMAIL NOTIFICATION =====
-To: ${data.to || 'savviwell@gmail.com'}
-Subject: ${data.subject || 'Contact Form Submission'}
-Content: ${data.html || `Name: ${data.name}, Email: ${data.email}, Reason: ${data.reason}, Message: ${data.message}`}
-Timestamp: ${new Date().toISOString()}
-==============================
-    `);
-
-    return { success: false, message: 'Failed to send email, but logged to console' };
+    console.error('Error sending contact email:', error);
+    return false;
   }
 }
 
-export async function sendWaitlistNotification(waitlistData: {
-  name: string;
-  email: string;
-  userType: string;
-  healthGoal: string;
-  dietaryConcern: string;
-}) {
-  return await sendContactEmail({
-    to: 'savviwell@gmail.com',
-    subject: 'New Waitlist Signup - SavviWell',
-    html: `
-      <h3>New Waitlist Signup</h3>
-      <p><strong>Name:</strong> ${waitlistData.name}</p>
-      <p><strong>Email:</strong> ${waitlistData.email}</p>
-      <p><strong>User Type:</strong> ${waitlistData.userType}</p>
-      <p><strong>Health Goal:</strong> ${waitlistData.healthGoal}</p>
-      <p><strong>Dietary Concern:</strong> ${waitlistData.dietaryConcern}</p>
-      <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-    `
-  });
-}
+export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean> {
+  const transporter = createTransporter();
+  
+  if (!transporter) {
+    console.log('Email service not configured, skipping email send');
+    return false;
+  }
 
-export async function sendNewsletterNotification(newsletterData: {
-  email: string;
-  name?: string;
-}) {
-  return await sendContactEmail({
-    to: 'savviwell@gmail.com',
-    subject: 'New Newsletter Signup - SavviWell',
+  const mealGuideContent = generateMealGuideContent();
+
+  const mailOptions = {
+    from: `"SavviWell" <${process.env.SMTP_USER}>`,
+    to: emailData.to,
+    subject: '🍽️ Your FREE 5-Day Healthy Meals Guide is Here!',
+    text: `Hi ${emailData.name},
+
+Thank you for joining the SavviWell community! We're excited to help you transform your family's eating habits with our expertly crafted meal planning guide.
+
+Your 5-Day Healthy Meals Guide includes:
+✅ 5 delicious dinner recipes your family will love
+✅ Complete shopping list organized by grocery sections
+✅ Meal prep tips to save you time during the week
+✅ Nutrition tips for optimal family health
+
+You can also access your guide online anytime at: [Your Website]/meal-guide
+
+${mealGuideContent}
+
+Ready for more personalized nutrition guidance? 
+Our AI nutrition assistant is coming soon and will provide:
+• Personalized meal recommendations
+• Real-time nutrition advice
+• Custom meal planning based on your family's preferences
+• Interactive cooking guidance
+
+Stay tuned for early access!
+
+Best regards,
+The SavviWell Team
+
+P.S. Follow us for more healthy living tips and updates about our AI assistant launch!
+`,
     html: `
-      <h3>New Newsletter Signup</h3>
-      <p><strong>Email:</strong> ${newsletterData.email}</p>
-      <p><strong>Name:</strong> ${newsletterData.name || 'Not provided'}</p>
-      <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-    `
-  });
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
+      <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h1 style="color: #399E5A; text-align: center; margin-bottom: 20px;">
+          🍽️ Your FREE 5-Day Healthy Meals Guide is Here!
+        </h1>
+        
+        <p style="font-size: 16px; color: #333;">Hi ${emailData.name},</p>
+        
+        <p style="font-size: 16px; color: #333; line-height: 1.6;">
+          Thank you for joining the SavviWell community! We're excited to help you transform your family's eating habits with our expertly crafted meal planning guide.
+        </p>
+        
+        <div style="background-color: #f0f8f4; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #399E5A; margin-top: 0;">Your 5-Day Healthy Meals Guide includes:</h3>
+          <ul style="color: #333; line-height: 1.8;">
+            <li>✅ 5 delicious dinner recipes your family will love</li>
+            <li>✅ Complete shopping list organized by grocery sections</li>
+            <li>✅ Meal prep tips to save you time during the week</li>
+            <li>✅ Nutrition tips for optimal family health</li>
+          </ul>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="[Your Website]/meal-guide" 
+             style="background-color: #399E5A; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+            Access Your Guide Online
+          </a>
+        </div>
+        
+        <div style="background-color: #fff3e0; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #ff9800; margin-top: 0;">🚀 Coming Soon: AI Nutrition Assistant</h3>
+          <p style="color: #333; margin-bottom: 10px;">Ready for more personalized nutrition guidance?</p>
+          <ul style="color: #333; line-height: 1.6;">
+            <li>Personalized meal recommendations</li>
+            <li>Real-time nutrition advice</li>
+            <li>Custom meal planning based on your family's preferences</li>
+            <li>Interactive cooking guidance</li>
+          </ul>
+          <p style="color: #333;"><strong>Stay tuned for early access!</strong></p>
+        </div>
+        
+        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+        
+        <div style="font-size: 14px; color: #666; text-align: center;">
+          <p>Best regards,<br><strong>The SavviWell Team</strong></p>
+          <p>P.S. Follow us for more healthy living tips and updates about our AI assistant launch!</p>
+        </div>
+      </div>
+    </div>
+    `,
+    attachments: [
+      {
+        filename: 'SavviWell-5-Day-Meal-Guide.txt',
+        content: mealGuideContent,
+        contentType: 'text/plain'
+      }
+    ]
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Meal guide email sent successfully to ${emailData.to}`);
+    return true;
+  } catch (error) {
+    console.error('Error sending meal guide email:', error);
+    return false;
+  }
 }

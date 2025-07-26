@@ -14,6 +14,7 @@ import FAQPage from "@/pages/FAQ";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import FiveDayMeals from "@/pages/FiveDayMeals";
+import MealGuide from "@/pages/MealGuide";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/story" component={Story} />
       <Route path="/faq" component={FAQPage} />
       <Route path="/5-day-meals" component={FiveDayMeals} />
+      <Route path="/meal-guide" component={MealGuide} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="*" component={NotFound} />

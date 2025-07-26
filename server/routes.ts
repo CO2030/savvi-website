@@ -5,7 +5,7 @@ import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema } fro
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
-import { sendContactEmail } from "./services/emailService";
+import { sendContactEmail, sendMealGuideEmail } from "./services/emailService";
 import { config } from "./config";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -27,6 +27,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Create waitlist entry in local storage
       const newEntry = await storage.createWaitlistEntry(validatedData);
+
+      // Send meal guide email to user
+      try {
+        await sendMealGuideEmail({
+          to: validatedData.email,
+          name: validatedData.name
+        });
+        console.log(`Meal guide email sent to ${validatedData.email}`);
+      } catch (error) {
+        console.error('Error sending meal guide email:', error);
+        // Don't fail the request if email fails
+      }
 
       // Send email notification to admin
       try {
