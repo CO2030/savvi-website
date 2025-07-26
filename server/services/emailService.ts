@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 interface EmailData {
   to: string;
   name: string;
+  accessToken: string;
 }
 
 // Create reusable transporter
@@ -20,6 +21,9 @@ const createTransporter = () => {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    tls: {
+      rejectUnauthorized: false
+    }
   });
 };
 
@@ -269,7 +273,7 @@ Your 5-Day Healthy Meals Guide includes:
 ✅ Meal prep tips to save you time during the week
 ✅ Nutrition tips for optimal family health
 
-You can also access your guide online anytime at: [Your Website]/meal-guide
+You can also access your guide online anytime by clicking the link in this email.
 
 ${mealGuideContent}
 
@@ -311,7 +315,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
         </div>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="https://your-domain.replit.app/meal-guide?token=${userData.accessToken}" 
+          <a href="https://191c6b95-2847-41e3-ad11-555df255908f-00-2vo1gi3vmrgs3.riker.replit.dev/meal-guide?token=${emailData.accessToken}" 
              style="background-color: #399E5A; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
             Access Your Guide Online
           </a>

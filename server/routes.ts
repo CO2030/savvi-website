@@ -69,7 +69,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         await sendMealGuideEmail({
           to: validatedData.email,
-          name: validatedData.name
+          name: validatedData.name,
+          accessToken: newEntry.accessToken || ''
         });
         console.log(`Meal guide email sent to ${validatedData.email}`);
       } catch (error) {
