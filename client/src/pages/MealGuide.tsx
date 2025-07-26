@@ -175,17 +175,13 @@ const shoppingList = {
 
 export default function MealGuide() {
   const handleDownloadPDF = () => {
-    // Generate and download PDF
-    const content = generatePDFContent();
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
+    // Download the actual SavviWell PDF
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'SavviWell-5-Day-Meal-Guide.txt';
+    a.href = '/api/download-meal-guide';
+    a.download = 'SavviWell-5-Day-Meals.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   const generatePDFContent = () => {

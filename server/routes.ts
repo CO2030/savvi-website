@@ -7,8 +7,20 @@ import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
 import { sendContactEmail, sendMealGuideEmail } from "./services/emailService";
 import { config } from "./config";
+import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Download meal guide PDF
+  app.get('/api/download-meal-guide', (req: Request, res: Response) => {
+    const filePath = path.join(process.cwd(), 'server/public/SavviWell-5-Day-Meals.pdf');
+    res.download(filePath, 'SavviWell-5-Day-Meals.pdf', (err) => {
+      if (err) {
+        console.error('Error downloading file:', err);
+        res.status(500).send('Error downloading file');
+      }
+    });
+  });
+
   // Waitlist endpoint
   app.post("/api/waitlist", async (req: Request, res: Response) => {
     try {
@@ -151,6 +163,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
           email: validatedData.email,
           name: validatedData.name || '',
+          userType: validatedData.userType,
+          healthGoal: validatedData.healthGoal,
+          dietaryConcern: validatedData.dietaryConcern,
           source: validatedData.source || 'Direct'
         });
 
@@ -204,10 +219,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Send email notification immediately
       await sendContactEmail({
-        name: validatedData.name,
-        email: validatedData.email,
-        reason: validatedData.reason,
-        message: validatedData.message
+        to: "admin@savviwell.com",
+        subject: `New Contact Form Submission - ${validatedData.reason}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${validatedData.name}</p>
+          <p><strong>Email:</strong> ${validatedData.email}</p>
+          <p><strong>Reason:</strong> ${validatedData.reason}</p>
+          <p><strong>Message:</strong> ${validatedData.message}</p>
+          <p><strong>Source:</strong> ${validatedData.source || 'Direct'}</p>
+          <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+        `
       });
 
       // Submit to Google Sheet if deployment URL is available
@@ -373,10 +395,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Add waitlist entries with proper types
       for (const entry of sampleWaitlistEntries) {
-        await storage.createWaitlistEntry({
-          ...entry,
-          createdAt: new Date().toISOString()
-        });
+        await storage.createWaitlistEntry(entry);
       }
 
       // Add contact submissions
