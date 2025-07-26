@@ -10,7 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { CheckCircle, Download, Clock, Users, Utensils, Heart } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
-import heroImagePath from "@assets/Test savviwell lead magnet form (1)_1753496284509.png";
+import heroImagePath from "@/assets/images/5-day-meals-hero.png";
 
 // Lead magnet specific schema - simplified with just name and email
 const leadMagnetSchema = z.object({
