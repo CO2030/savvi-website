@@ -263,102 +263,48 @@ Visit us at savviwell.com for more healthy living resources.
           </Button>
         </div>
 
-        {/* Meal Plans */}
-        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-          {mealPlans.map((meal) => (
-            <Card key={meal.day} className="shadow-lg border-0">
-              <CardHeader className="pb-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle className="text-2xl text-gray-800">Day {meal.day}</CardTitle>
-                    <h3 className="text-xl font-semibold mt-2" style={{ color: '#399E5A' }}>
-                      {meal.title}
-                    </h3>
-                  </div>
-                  <div className="text-right text-sm text-gray-500">
-                    <div className="flex items-center gap-1 mb-1">
-                      <Clock className="w-4 h-4" />
-                      {meal.prepTime}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Users className="w-4 h-4" />
-                      {meal.servings}
-                    </div>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                      <ShoppingCart className="w-4 h-4" />
-                      Ingredients
-                    </h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      {meal.ingredients.slice(0, 6).map((ingredient, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-xs mt-1">•</span>
-                          {ingredient}
-                        </li>
-                      ))}
-                      {meal.ingredients.length > 6 && (
-                        <li className="text-xs text-gray-500 italic">
-                          + {meal.ingredients.length - 6} more ingredients...
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                      <Utensils className="w-4 h-4" />
-                      Quick Steps
-                    </h4>
-                    <ol className="text-sm text-gray-600 space-y-1">
-                      {meal.instructions.slice(0, 3).map((step, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="font-medium text-xs mt-1">{i + 1}.</span>
-                          {step}
-                        </li>
-                      ))}
-                      {meal.instructions.length > 3 && (
-                        <li className="text-xs text-gray-500 italic">
-                          + {meal.instructions.length - 3} more steps in full guide...
-                        </li>
-                      )}
-                    </ol>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        {/* What's Included Preview */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <Card className="shadow-lg border-0 text-center">
+            <CardContent className="p-6">
+              <Utensils className="w-12 h-12 mx-auto mb-4" style={{ color: '#399E5A' }} />
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">5 Complete Recipes</h3>
+              <p className="text-gray-600">Nutritious dinner plans designed by certified nutritionists</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="shadow-lg border-0 text-center">
+            <CardContent className="p-6">
+              <ShoppingCart className="w-12 h-12 mx-auto mb-4" style={{ color: '#399E5A' }} />
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">Smart Shopping Lists</h3>
+              <p className="text-gray-600">Organized grocery lists to make shopping effortless</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="shadow-lg border-0 text-center">
+            <CardContent className="p-6">
+              <Clock className="w-12 h-12 mx-auto mb-4" style={{ color: '#399E5A' }} />
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">Prep & Wellness Tips</h3>
+              <p className="text-gray-600">Time-saving meal prep strategies and wellness guidance</p>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Shopping List Preview */}
+        {/* Featured Meals Preview */}
         <Card className="shadow-lg border-0 mb-8">
-          <CardHeader>
-            <CardTitle className="text-2xl text-gray-800 flex items-center gap-2">
-              <ShoppingCart className="w-6 h-6" style={{ color: '#399E5A' }} />
-              Complete Shopping List
-            </CardTitle>
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl text-gray-800">What's Inside Your Guide</CardTitle>
+            <p className="text-gray-600 mt-2">5 delicious, family-friendly meals created by Meara & Christina</p>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-6">
-              {Object.entries(shoppingList).map(([category, items]) => (
-                <div key={category}>
-                  <h4 className="font-semibold text-gray-800 mb-3">{category}</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {items.slice(0, 5).map((item, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <CheckCircle className="w-3 h-3" style={{ color: '#399E5A' }} />
-                        {item}
-                      </li>
-                    ))}
-                    {items.length > 5 && (
-                      <li className="text-xs text-gray-500 italic">
-                        + {items.length - 5} more items...
-                      </li>
-                    )}
-                  </ul>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {mealPlans.slice(0, 5).map((meal) => (
+                <div key={meal.day} className="text-center p-4 rounded-lg" style={{ backgroundColor: '#f8fffe' }}>
+                  <div className="w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold" style={{ backgroundColor: '#399E5A' }}>
+                    {meal.day}
+                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-1">{meal.title}</h4>
+                  <p className="text-sm text-gray-500">{meal.prepTime} • {meal.servings}</p>
                 </div>
               ))}
             </div>
