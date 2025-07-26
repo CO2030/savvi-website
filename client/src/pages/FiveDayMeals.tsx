@@ -103,6 +103,21 @@ export default function FiveDayMeals() {
               <p className="text-lg text-gray-600 mb-8">
                 Your <strong>5-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
               </p>
+              
+              {/* Immediate Download Button */}
+              <div className="mb-8">
+                <Button 
+                  onClick={() => window.location.href = '/meal-guide'}
+                  className="text-white px-8 py-4 text-xl font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg"
+                  style={{ backgroundColor: '#399E5A' }}
+                >
+                  <Download className="w-6 h-6 mr-3" />
+                  Download Your Guide Now
+                </Button>
+                <p className="text-sm text-gray-500 mt-2">
+                  Get instant access to your meal planning guide
+                </p>
+              </div>
             </div>
 
             <div className="rounded-lg p-6 mb-8" style={{ backgroundColor: '#399E5A20' }}>
@@ -124,14 +139,6 @@ export default function FiveDayMeals() {
             </div>
 
             <div className="space-y-4">
-              <Button 
-                onClick={() => window.location.href = '/meal-guide'}
-                className="text-white px-8 py-3 text-lg hover:opacity-90 transition-opacity duration-200"
-                style={{ backgroundColor: '#399E5A' }}
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Access Your Meal Guide Now
-              </Button>
               <Button 
                 onClick={() => window.location.href = '/'}
                 variant="outline"
