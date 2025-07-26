@@ -149,23 +149,23 @@ export default function FiveDayMeals() {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center center md:left center',
+          backgroundPosition: 'right center sm:left center',
           backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center md:text-left md:ml-auto md:mr-0 md:pr-8">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Get Your FREE<br />
               <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span><br />
               Planning Guide
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto md:mx-0 drop-shadow-md">
+            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
               Transform your family's eating habits with our expertly crafted meal plans, shopping lists, and prep guides - all designed to make healthy eating effortless.
             </p>
             
             {/* Form Section in Hero */}
-            <div className="max-w-md mx-auto md:mx-0 md:ml-auto">
+            <div className="max-w-md mx-auto">
               <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur">
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-2xl font-bold text-gray-800">
