@@ -241,6 +241,25 @@ export default function FiveDayMeals() {
                 </CardContent>
               </Card>
             </div>
+            
+            {/* Trust Indicators */}
+            <div className="mt-12 text-center">
+              <p className="text-white/80 mb-6">Trusted by families worldwide</p>
+              <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-white/70">
+                <span className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
+                  No Spam, Ever
+                </span>
+                <span className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
+                  100% Free
+                </span>
+                <span className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
+                  Instant Download
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
