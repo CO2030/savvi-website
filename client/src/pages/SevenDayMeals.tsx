@@ -207,7 +207,7 @@ export default function SevenDayMeals() {
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
-                  <span><strong>5 Complete Meal Plans</strong> - Breakfast, lunch, and dinner for 5 days</span>
+                  <span><strong>5 Delicious Dinner Plans</strong> - We've got your family dinners covered all week</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
