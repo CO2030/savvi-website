@@ -273,7 +273,8 @@ export default function SevenDayMeals() {
                     <Button 
                       type="submit" 
                       disabled={submitMutation.isPending}
-                      className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-lg"
+                      className="w-full h-14 text-lg font-semibold text-white shadow-lg hover:opacity-90 transition-opacity duration-200"
+                      style={{ backgroundColor: '#399E5A' }}
                     >
                       {submitMutation.isPending ? (
                         <>
@@ -283,7 +284,7 @@ export default function SevenDayMeals() {
                       ) : (
                         <>
                           <Download className="w-5 h-5 mr-2" />
-                          Get My Free 7-Day Guide
+                          Get My Free 5-Day Guide
                         </>
                       )}
                     </Button>
