@@ -13,17 +13,27 @@ const createTransporter = () => {
     return null;
   }
 
-  return nodemailer.createTransport({
+  // Try different port configurations for Hostinger
+  const configs = [
+    { port: 587, secure: false },
+    { port: 465, secure: true },
+    { port: 25, secure: false }
+  ];
+
+  return nodemailer.createTransporter({
     host: process.env.SMTP_HOST,
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
     tls: {
       rejectUnauthorized: false
-    }
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 5000,
+    socketTimeout: 10000
   });
 };
 
