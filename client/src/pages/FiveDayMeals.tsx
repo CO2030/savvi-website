@@ -24,7 +24,7 @@ const leadMagnetSchema = z.object({
 
 type LeadMagnetFormData = z.infer<typeof leadMagnetSchema>;
 
-export default function SevenDayMeals() {
+export default function FiveDayMeals() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
