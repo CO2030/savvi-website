@@ -149,7 +149,7 @@ export default function SevenDayMeals() {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center top',
+          backgroundPosition: 'left center',
           backgroundRepeat: 'no-repeat'
         }}
       >
