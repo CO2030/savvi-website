@@ -20,7 +20,7 @@ const createTransporter = () => {
     { port: 25, secure: false }
   ];
 
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: 587,
     secure: false,
