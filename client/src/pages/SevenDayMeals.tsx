@@ -16,9 +16,9 @@ const leadMagnetSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Please enter a valid email address"),
   userType: z.literal("individual"), // Default for lead magnet
-  healthGoal: z.literal("energy"), // Default for 7-day meals
+  healthGoal: z.literal("energy"), // Default for 5-day meals
   dietaryConcern: z.literal("none"), // Default
-  source: z.literal("7-day-lead-magnet")
+  source: z.literal("5-day-lead-magnet")
 });
 
 type LeadMagnetFormData = z.infer<typeof leadMagnetSchema>;
@@ -35,7 +35,7 @@ export default function SevenDayMeals() {
       userType: "individual",
       healthGoal: "energy",
       dietaryConcern: "none",
-      source: "7-day-lead-magnet"
+      source: "5-day-lead-magnet"
     }
   });
 
@@ -52,7 +52,7 @@ export default function SevenDayMeals() {
       });
       toast({
         title: "Success!",
-        description: "Your 7-Day Healthy Meals guide is on its way!",
+        description: "Your 5-Day Healthy Meals guide is on its way!",
         duration: 5000
       });
       queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
@@ -100,7 +100,7 @@ export default function SevenDayMeals() {
                 You're All Set!
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                Your <strong>7-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
+                Your <strong>5-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
               </p>
             </div>
 
@@ -146,7 +146,7 @@ export default function SevenDayMeals() {
         <div className="max-w-4xl mx-auto text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
             Get Your FREE<br />
-            <span className="text-green-600">7-Day Healthy Meals</span><br />
+            <span className="text-green-600">5-Day Healthy Meals</span><br />
             Planning Guide
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
@@ -196,7 +196,7 @@ export default function SevenDayMeals() {
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-green-600" />
-                  <span><strong>7 Complete Meal Plans</strong> - Breakfast, lunch, and dinner for a full week</span>
+                  <span><strong>5 Complete Meal Plans</strong> - Breakfast, lunch, and dinner for 5 days</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-green-600" />
