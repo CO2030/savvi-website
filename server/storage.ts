@@ -17,6 +17,7 @@ export interface IStorage {
   // Waitlist methods
   createWaitlistEntry(entry: InsertWaitlistEntry): Promise<WaitlistEntry>;
   getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined>;
+  getWaitlistEntryByToken(token: string): Promise<WaitlistEntry | undefined>;
   getAllWaitlistEntries(): Promise<WaitlistEntry[]>;
 
   // Newsletter methods
@@ -46,12 +47,25 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createWaitlistEntry(insertEntry: InsertWaitlistEntry): Promise<WaitlistEntry> {
+    const accessToken = this.generateAccessToken();
     const entryWithTimestamp = {
       ...insertEntry,
+      accessToken,
       createdAt: new Date().toISOString()
     };
     const result = await db.insert(waitlistEntries).values(entryWithTimestamp).returning();
     return result[0];
+  }
+
+  async getWaitlistEntryByToken(token: string): Promise<WaitlistEntry | undefined> {
+    const result = await db.select().from(waitlistEntries).where(eq(waitlistEntries.accessToken, token));
+    return result[0];
+  }
+
+  private generateAccessToken(): string {
+    return Math.random().toString(36).substring(2, 15) + 
+           Math.random().toString(36).substring(2, 15) + 
+           Date.now().toString(36);
   }
 
   async getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined> {

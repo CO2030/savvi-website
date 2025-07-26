@@ -311,7 +311,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
         </div>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="[Your Website]/meal-guide" 
+          <a href="https://your-domain.replit.app/meal-guide?token=${userData.accessToken}" 
              style="background-color: #399E5A; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
             Access Your Guide Online
           </a>

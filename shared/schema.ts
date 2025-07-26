@@ -21,6 +21,7 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   healthGoal: text("health_goal").notNull(),
   dietaryConcern: text("dietary_concern").notNull(),
   source: text("source"),
+  accessToken: text("access_token").unique(),
   createdAt: text("created_at").notNull()
 });
 

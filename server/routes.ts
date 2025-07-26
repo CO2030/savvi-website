@@ -10,6 +10,31 @@ import { config } from "./config";
 import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Verify access token for meal guide
+  app.get('/api/verify-access', async (req: Request, res: Response) => {
+    try {
+      const token = req.query.token as string;
+      
+      if (!token) {
+        return res.json({ valid: false });
+      }
+      
+      const entry = await storage.getWaitlistEntryByToken(token);
+      
+      if (entry) {
+        return res.json({ 
+          valid: true, 
+          name: entry.name 
+        });
+      } else {
+        return res.json({ valid: false });
+      }
+    } catch (error) {
+      console.error('Error verifying access token:', error);
+      return res.json({ valid: false });
+    }
+  });
+
   // Download meal guide PDF
   app.get('/api/download-meal-guide', (req: Request, res: Response) => {
     const filePath = path.join(process.cwd(), 'server/public/SavviWell-5-Day-Meals.pdf');

@@ -150,6 +150,9 @@ export default function FiveDayMeals() {
               <p className="text-sm text-gray-500">
                 You've also been added to our early access waitlist for the SavviWell AI assistant!
               </p>
+              <p className="text-xs text-gray-400 mt-4">
+                Check your email for a secure link to access your meal guide anytime.
+              </p>
             </div>
           </CardContent>
         </Card>

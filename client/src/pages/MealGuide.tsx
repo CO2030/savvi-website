@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Download, Clock, Users, ShoppingCart, Utensils } from "lucide-react";
@@ -174,6 +175,77 @@ const shoppingList = {
 };
 
 export default function MealGuide() {
+  const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
+  const [userName, setUserName] = useState<string>("");
+  
+  useEffect(() => {
+    // Get token from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    
+    if (!token) {
+      setIsValidToken(false);
+      return;
+    }
+    
+    // Verify token with backend
+    fetch(`/api/verify-access?token=${token}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.valid) {
+          setIsValidToken(true);
+          setUserName(data.name || 'Friend');
+        } else {
+          setIsValidToken(false);
+        }
+      })
+      .catch(() => setIsValidToken(false));
+  }, []);
+  
+  // Show loading state
+  if (isValidToken === null) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#399E5A' }}></div>
+          <p className="text-gray-600">Verifying access...</p>
+        </div>
+      </div>
+    );
+  }
+  
+  // Show access denied
+  if (!isValidToken) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card className="w-full max-w-2xl mx-auto text-center shadow-2xl border-0">
+          <CardContent className="p-8 md:p-12">
+            <div className="mb-6">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+                <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                Access Required
+              </h1>
+              <p className="text-lg text-gray-600 mb-8">
+                This meal guide is exclusive to our community members. Sign up for our 5-day meals program to get access!
+              </p>
+            </div>
+            
+            <Button 
+              onClick={() => window.location.href = '/5-day-meals'}
+              className="text-white px-8 py-3 text-lg hover:opacity-90 transition-opacity duration-200"
+              style={{ backgroundColor: '#399E5A' }}
+            >
+              Get Your Free Meal Guide
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
   const handleDownloadPDF = () => {
     // Download the actual SavviWell PDF
     const a = document.createElement('a');
@@ -248,7 +320,7 @@ Visit us at savviwell.com for more healthy living resources.
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Your FREE <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span> Guide
+            Hi {userName}! Your FREE <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span> Guide
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             Complete dinner plans designed to make healthy eating effortless for your family
