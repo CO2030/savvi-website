@@ -120,10 +120,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.warn("No Google Script deployment URL set in environment variables");
       }
 
-      // Return success response
+      // Return success response with access token
       return res.status(201).json({
         message: "Successfully joined the waitlist",
-        id: newEntry.id
+        id: newEntry.id,
+        accessToken: newEntry.accessToken
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

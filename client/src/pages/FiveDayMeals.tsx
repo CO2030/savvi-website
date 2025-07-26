@@ -26,6 +26,7 @@ type LeadMagnetFormData = z.infer<typeof leadMagnetSchema>;
 
 export default function FiveDayMeals() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [accessToken, setAccessToken] = useState<string>("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -42,10 +43,12 @@ export default function FiveDayMeals() {
 
   const submitMutation = useMutation({
     mutationFn: async (data: LeadMagnetFormData) => {
-      await apiRequest("POST", "/api/waitlist", data);
+      const response = await apiRequest("POST", "/api/waitlist", data);
+      return response;
     },
-    onSuccess: () => {
+    onSuccess: (response: any) => {
       setIsSubmitted(true);
+      setAccessToken(response.accessToken || "");
       confetti({
         particleCount: 100,
         spread: 70,
@@ -107,15 +110,35 @@ export default function FiveDayMeals() {
               {/* Immediate Download Button */}
               <div className="mb-8">
                 <Button 
-                  onClick={() => window.location.href = '/meal-guide'}
-                  className="text-white px-8 py-4 text-xl font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg"
+                  onClick={() => {
+                    // Direct PDF download
+                    const link = document.createElement('a');
+                    link.href = '/SavviWell-5-Day-Meals.pdf';
+                    link.download = 'SavviWell-5-Day-Meals.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="text-white px-8 py-4 text-xl font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg mr-4"
                   style={{ backgroundColor: '#399E5A' }}
                 >
                   <Download className="w-6 h-6 mr-3" />
-                  Download Your Guide Now
+                  Download PDF Guide
                 </Button>
+                
+                {accessToken && (
+                  <Button 
+                    onClick={() => window.location.href = `/meal-guide?token=${accessToken}`}
+                    variant="outline"
+                    className="px-8 py-4 text-xl font-semibold border-2 hover:bg-gray-50 transition-colors duration-200"
+                    style={{ borderColor: '#399E5A', color: '#399E5A' }}
+                  >
+                    View Online Guide
+                  </Button>
+                )}
+                
                 <p className="text-sm text-gray-500 mt-2">
-                  Get instant access to your meal planning guide
+                  Download instantly + check your email for the secure online version
                 </p>
               </div>
             </div>
