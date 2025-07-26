@@ -199,7 +199,7 @@ export default function SevenDayMeals() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-xl p-6">
+            <div className="rounded-xl p-6" style={{ backgroundColor: '#EFD8D0' }}>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">What You'll Get:</h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-center gap-3">
