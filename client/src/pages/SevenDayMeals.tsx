@@ -10,6 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { CheckCircle, Download, Clock, Users, Utensils, Heart } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
+import heroImagePath from "@assets/Test savviwell lead magnet form (1)_1753496284509.png";
 
 // Lead magnet specific schema - simplified with just name and email
 const leadMagnetSchema = z.object({
@@ -140,19 +141,25 @@ export default function SevenDayMeals() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-12 md:py-20">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-            Get Your FREE<br />
-            <span className="text-green-600">5-Day Healthy Meals</span><br />
-            Planning Guide
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Transform your family's eating habits with our expertly crafted meal plans, shopping lists, and prep guides - all designed to make healthy eating effortless.
-          </p>
-        </div>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section with Background Image */}
+      <div 
+        className="relative min-h-screen bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImagePath})`
+        }}
+      >
+        <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+              Get Your FREE<br />
+              <span className="text-green-400">5-Day Healthy Meals</span><br />
+              Planning Guide
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
+              Transform your family's eating habits with our expertly crafted meal plans, shopping lists, and prep guides - all designed to make healthy eating effortless.
+            </p>
+          </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Benefits Section */}
@@ -294,21 +301,22 @@ export default function SevenDayMeals() {
 
         {/* Trust Indicators */}
         <div className="max-w-4xl mx-auto mt-16 text-center">
-          <p className="text-gray-600 mb-6">Trusted by families worldwide</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
+          <p className="text-white/80 mb-6">Trusted by families worldwide</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-white/70">
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600" />
+              <CheckCircle className="w-4 h-4 text-green-400" />
               No Spam, Ever
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600" />
+              <CheckCircle className="w-4 h-4 text-green-400" />
               100% Free
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-600" />
+              <CheckCircle className="w-4 h-4 text-green-400" />
               Instant Download
             </span>
           </div>
+        </div>
         </div>
       </div>
     </div>
