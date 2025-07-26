@@ -96,7 +96,7 @@ export default function SevenDayMeals() {
         <Card className="w-full max-w-2xl mx-auto text-center shadow-2xl border-0">
           <CardContent className="p-8 md:p-12">
             <div className="mb-6">
-              <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-4" />
+              <CheckCircle className="w-20 h-20 mx-auto mb-4" style={{ color: '#399E5A' }} />
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                 You're All Set!
               </h1>
@@ -105,19 +105,19 @@ export default function SevenDayMeals() {
               </p>
             </div>
 
-            <div className="bg-green-50 rounded-lg p-6 mb-8">
-              <h3 className="text-xl font-semibold text-green-800 mb-3">What's Next?</h3>
-              <ul className="text-green-700 space-y-2 text-left max-w-md mx-auto">
+            <div className="rounded-lg p-6 mb-8" style={{ backgroundColor: '#399E5A20' }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: '#399E5A' }}>What's Next?</h3>
+              <ul className="space-y-2 text-left max-w-md mx-auto" style={{ color: '#399E5A' }}>
                 <li className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
                   Check your email (including spam folder)
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
                   Download your meal planning guide
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
                   Start your healthy eating journey
                 </li>
               </ul>
@@ -126,7 +126,8 @@ export default function SevenDayMeals() {
             <div className="space-y-4">
               <Button 
                 onClick={() => window.location.href = '/'}
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg"
+                className="text-white px-8 py-3 text-lg hover:opacity-90 transition-opacity duration-200"
+                style={{ backgroundColor: '#399E5A' }}
               >
                 Explore SavviWell
               </Button>
@@ -153,7 +154,7 @@ export default function SevenDayMeals() {
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Get Your FREE<br />
-              <span className="text-green-400">5-Day Healthy Meals</span><br />
+              <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span><br />
               Planning Guide
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
@@ -166,7 +167,7 @@ export default function SevenDayMeals() {
           <div className="space-y-8">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
-                <Clock className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
+                <Clock className="w-8 h-8 flex-shrink-0 mt-1" style={{ color: '#399E5A' }} />
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-2">Save 3+ Hours Weekly</h3>
                   <p className="text-gray-600 text-sm">No more wondering "what's for dinner?" - everything is planned for you.</p>
@@ -202,19 +203,19 @@ export default function SevenDayMeals() {
               <h3 className="text-2xl font-bold text-gray-800 mb-4">What You'll Get:</h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
                   <span><strong>5 Complete Meal Plans</strong> - Breakfast, lunch, and dinner for 5 days</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
                   <span><strong>Shopping Lists</strong> - Organized by grocery store sections</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
                   <span><strong>Prep Guide</strong> - Make-ahead tips to save even more time</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                  <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
                   <span><strong>Nutrition Tips</strong> - Simple ways to boost your family's health</span>
                 </li>
               </ul>
@@ -305,15 +306,15 @@ export default function SevenDayMeals() {
           <p className="text-white/80 mb-6">Trusted by families worldwide</p>
           <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-white/70">
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-400" />
+              <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
               No Spam, Ever
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-400" />
+              <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
               100% Free
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-400" />
+              <CheckCircle className="w-4 h-4" style={{ color: '#399E5A' }} />
               Instant Download
             </span>
           </div>
