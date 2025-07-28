@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Download, Clock, Users, ShoppingCart, Utensils } from "lucide-react";
+import { CheckCircle, Download, Clock, Users, ShoppingCart, Utensils, Share2, Copy } from "lucide-react";
 import freshVegetablesImage from "@/assets/images/fresh-vegetables.png";
+import vegetablesAssortmentImage from "@/assets/images/vegetables-assortment.png";
 
 const mealPlans = [
   {
@@ -178,6 +179,7 @@ const shoppingList = {
 export default function MealGuide() {
   const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
   const [userName, setUserName] = useState<string>("");
+  const [copySuccess, setCopySuccess] = useState(false);
   
   useEffect(() => {
     // Get token from URL params
@@ -215,43 +217,137 @@ export default function MealGuide() {
     );
   }
   
+  // Sharing functions
+  const handleShare = async (platform: string) => {
+    const shareUrl = `${window.location.origin}/5-day-meals`;
+    const shareText = "Check out this FREE 5-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
+    
+    if (platform === 'copy') {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+      } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+      }
+    } else if (platform === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'twitter') {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'whatsapp') {
+      window.open(`https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`, '_blank');
+    }
+  };
+
   // Show access denied
   if (!isValidToken) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl mx-auto text-center shadow-2xl border-0 overflow-hidden">
-          <div className="h-2" style={{ backgroundColor: '#399E5A' }}></div>
-          <CardContent className="p-8 md:p-12">
-            <div className="mb-8">
-              {/* SavviWell Logo/Brand */}
-              <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#399E5A' }}>
-                <Utensils className="w-12 h-12 text-white" />
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Hero Image Section */}
+          <div className="mb-8">
+            <Card className="shadow-2xl border-0 overflow-hidden">
+              <CardContent className="p-0">
+                <div className="relative">
+                  <img 
+                    src={vegetablesAssortmentImage} 
+                    alt="Colorful assortment of fresh vegetables on wooden background" 
+                    className="w-full h-64 md:h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                    <div className="text-center text-white px-4">
+                      <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                        Want Your <span style={{ color: '#399E5A' }}>FREE</span> 5-Day Meal Guide?
+                      </h1>
+                      <p className="text-xl md:text-2xl opacity-90">
+                        Join thousands of families getting healthy, delicious meals delivered straight to their inbox!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Main Content Card */}
+          <Card className="w-full max-w-3xl mx-auto text-center shadow-2xl border-0 overflow-hidden">
+            <div className="h-2" style={{ backgroundColor: '#399E5A' }}></div>
+            <CardContent className="p-8 md:p-12">
+              <div className="mb-8">
+                {/* SavviWell Logo/Brand */}
+                <div className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#399E5A' }}>
+                  <Utensils className="w-12 h-12 text-white" />
+                </div>
+                
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                  Transform your family's health with nutritious meals they'll actually love!
+                </p>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#2d3748' }}>
-                Want Your <span style={{ color: '#399E5A' }}>FREE</span> 5-Day Meal Guide?
-              </h1>
-              
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Join thousands of families getting healthy, delicious meals delivered straight to their inbox!
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <Button 
-                onClick={() => window.location.href = '/5-day-meals'}
-                className="text-white px-12 py-4 text-xl font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg"
-                style={{ backgroundColor: '#399E5A' }}
-              >
-                Get My Free Meal Guide Now
-              </Button>
-              
-              <p className="text-sm text-gray-500">
-                No spam, just delicious family meals created by certified nutritionists
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="space-y-6">
+                <Button 
+                  onClick={() => window.location.href = '/5-day-meals'}
+                  className="text-white px-12 py-4 text-xl font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg w-full md:w-auto"
+                  style={{ backgroundColor: '#399E5A' }}
+                >
+                  Get My Free Meal Guide Now
+                </Button>
+                
+                <p className="text-sm text-gray-500">
+                  No spam, just delicious family meals created by certified nutritionists
+                </p>
+
+                {/* Share Section */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Share with Friends & Family</h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <Button 
+                      onClick={() => handleShare('copy')}
+                      variant="outline"
+                      className="flex items-center gap-2"
+                      style={{ borderColor: '#399E5A', color: '#399E5A' }}
+                    >
+                      <Copy className="w-4 h-4" />
+                      {copySuccess ? 'Copied!' : 'Copy Link'}
+                    </Button>
+                    <Button 
+                      onClick={() => handleShare('facebook')}
+                      variant="outline"
+                      className="flex items-center gap-2 text-blue-600 border-blue-600 hover:bg-blue-50"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Facebook
+                    </Button>
+                    <Button 
+                      onClick={() => handleShare('twitter')}
+                      variant="outline"
+                      className="flex items-center gap-2 text-blue-400 border-blue-400 hover:bg-blue-50"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Twitter
+                    </Button>
+                    <Button 
+                      onClick={() => handleShare('whatsapp')}
+                      variant="outline"
+                      className="flex items-center gap-2 text-green-600 border-green-600 hover:bg-green-50"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      WhatsApp
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -413,8 +509,8 @@ Visit us at savviwell.com for more healthy living resources.
           </CardContent>
         </Card>
 
-        {/* Call to Action */}
-        <div className="text-center">
+        {/* Call to Action & Share */}
+        <div className="text-center space-y-8">
           <Card className="shadow-lg border-0 max-w-2xl mx-auto">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">
@@ -430,6 +526,53 @@ Visit us at savviwell.com for more healthy living resources.
               >
                 Explore SavviWell Platform
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Share This Guide */}
+          <Card className="shadow-lg border-0 max-w-2xl mx-auto">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                Love This Guide? Share It!
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Help other families discover healthy eating with our FREE 5-Day Meal Guide
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Button 
+                  onClick={() => handleShare('copy')}
+                  variant="outline"
+                  className="flex items-center gap-2"
+                  style={{ borderColor: '#399E5A', color: '#399E5A' }}
+                >
+                  <Copy className="w-4 h-4" />
+                  {copySuccess ? 'Copied!' : 'Copy Link'}
+                </Button>
+                <Button 
+                  onClick={() => handleShare('facebook')}
+                  variant="outline"
+                  className="flex items-center gap-2 text-blue-600 border-blue-600 hover:bg-blue-50"
+                >
+                  <Share2 className="w-4 h-4" />
+                  Facebook
+                </Button>
+                <Button 
+                  onClick={() => handleShare('twitter')}
+                  variant="outline"
+                  className="flex items-center gap-2 text-blue-400 border-blue-400 hover:bg-blue-50"
+                >
+                  <Share2 className="w-4 h-4" />
+                  Twitter
+                </Button>
+                <Button 
+                  onClick={() => handleShare('whatsapp')}
+                  variant="outline"
+                  className="flex items-center gap-2 text-green-600 border-green-600 hover:bg-green-50"
+                >
+                  <Share2 className="w-4 h-4" />
+                  WhatsApp
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
