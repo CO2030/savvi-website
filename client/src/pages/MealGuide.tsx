@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Download, Clock, Users, ShoppingCart, Utensils } from "lucide-react";
+import freshVegetablesImage from "@/assets/images/fresh-vegetables.png";
 
 const mealPlans = [
   {
@@ -341,6 +342,27 @@ Visit us at savviwell.com for more healthy living resources.
             <Download className="w-5 h-5 mr-2" />
             Download Complete Guide (PDF)
           </Button>
+        </div>
+
+        {/* Hero Image Section */}
+        <div className="mb-12">
+          <Card className="shadow-lg border-0 overflow-hidden">
+            <CardContent className="p-0">
+              <div className="relative">
+                <img 
+                  src={freshVegetablesImage} 
+                  alt="Fresh organic vegetables including broccoli, tomatoes, carrots, and peppers" 
+                  className="w-full h-64 md:h-80 object-cover"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-2">Fresh, Wholesome Ingredients</h2>
+                    <p className="text-lg md:text-xl opacity-90">Every recipe uses simple, nutritious ingredients your family will love</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* What's Included Preview */}
