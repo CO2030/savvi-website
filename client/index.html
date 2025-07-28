@@ -56,10 +56,18 @@
         allow_google_signals: true,
         allow_ad_personalization_signals: true,
         send_page_view: true,
+        // Enhanced ecommerce and conversion tracking
+        enhanced_conversions: true,
         // Custom site URL for proper attribution
         custom_map: {
-          'custom_parameter_site_name': 'SavviWell'
-        }
+          'custom_parameter_site_name': 'SavviWell',
+          'custom_parameter_source': 'source_attribution',
+          'custom_parameter_campaign': 'campaign_attribution',
+          'custom_parameter_medium': 'medium_attribution'
+        },
+        // Track waitlist page specifically
+        page_title: document.title,
+        page_location: window.location.href
       });
 
       // Track custom events for better attribution
@@ -120,21 +128,36 @@
 
     <!-- Enhanced Conversion Tracking -->
     <script>
-      // Track form submissions as conversions
+      // Track form submissions as conversions with enhanced attribution
       function trackFormSubmission(formType, source) {
         gtag('event', 'form_submission', {
           form_type: formType,
           source: source,
           event_category: 'engagement',
-          event_label: `${formType}_conversion`
+          event_label: `${formType}_conversion`,
+          page_location: window.location.href,
+          page_title: document.title
         });
         
-        // Track as conversion goal
+        // Track as conversion goal with enhanced data
         gtag('event', 'conversion', {
           send_to: 'G-0XC7YKTVF7',
           conversion_type: formType,
-          source: source
+          source: source,
+          page_path: window.location.pathname,
+          page_location: window.location.href
         });
+        
+        // Track waitlist-specific conversions
+        if (formType === 'lead_magnet') {
+          gtag('event', 'generate_lead', {
+            event_category: 'conversion',
+            event_label: 'waitlist_lead',
+            source: source,
+            currency: 'USD',
+            value: 1
+          });
+        }
       }
 
       // Track scroll depth for engagement

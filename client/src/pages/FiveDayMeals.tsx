@@ -37,13 +37,20 @@ const getSourceFromURL = (): string => {
 
 const getCampaignFromURL = (): string | undefined => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('utm_campaign') || urlParams.get('campaign');
+  return urlParams.get('utm_campaign') || urlParams.get('campaign') || undefined;
 };
 
 const getMediumFromURL = (): string | undefined => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('utm_medium') || urlParams.get('medium');
+  return urlParams.get('utm_medium') || urlParams.get('medium') || undefined;
 };
+
+// Declare gtag type for TypeScript
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
 
 // Lead magnet specific schema - with dynamic source tracking
 const leadMagnetSchema = z.object({
@@ -80,6 +87,28 @@ export default function FiveDayMeals() {
     localStorage.setItem('user_source', source);
     if (campaign) localStorage.setItem('user_campaign', campaign);
     if (medium) localStorage.setItem('user_medium', medium);
+    
+    // Track page view with source attribution in Google Analytics
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('event', 'waitlist_page_view', {
+        page_title: '5-Day Healthy Meals - Lead Magnet',
+        page_location: window.location.href,
+        source_attribution: source,
+        campaign_attribution: campaign || 'none',
+        medium_attribution: medium || 'none',
+        event_category: 'lead_magnet',
+        event_label: 'page_entry'
+      });
+      
+      // Track unique page view with source
+      window.gtag('event', 'page_view', {
+        page_title: '5-Day Healthy Meals - Lead Magnet',
+        page_location: window.location.href,
+        custom_parameter_source: source,
+        custom_parameter_campaign: campaign || 'none',
+        custom_parameter_medium: medium || 'none'
+      });
+    }
   }, []);
 
   const form = useForm<LeadMagnetFormData>({
@@ -102,9 +131,38 @@ export default function FiveDayMeals() {
       setIsSubmitted(true);
       setAccessToken(response.accessToken || "");
       
-      // Track conversion in Google Analytics
+      // Track conversion in Google Analytics with enhanced attribution
       if (typeof window !== 'undefined' && (window as any).trackFormSubmission) {
         (window as any).trackFormSubmission('lead_magnet', sourceData.source);
+      }
+      
+      // Additional detailed conversion tracking
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'lead_magnet_conversion', {
+          event_category: 'conversion',
+          event_label: 'waitlist_signup',
+          source_attribution: sourceData.source,
+          campaign_attribution: sourceData.campaign || 'none',
+          medium_attribution: sourceData.medium || 'none',
+          conversion_value: 1,
+          currency: 'USD'
+        });
+        
+        // Track as purchase/conversion for ecommerce
+        window.gtag('event', 'purchase', {
+          transaction_id: Date.now().toString(),
+          value: 1,
+          currency: 'USD',
+          items: [{
+            item_id: 'lead_magnet_5_day_meals',
+            item_name: '5-Day Healthy Meals Guide',
+            item_category: 'lead_magnet',
+            quantity: 1,
+            price: 1
+          }],
+          source_attribution: sourceData.source,
+          campaign_attribution: sourceData.campaign || 'none'
+        });
       }
       
       confetti({
