@@ -117,6 +117,78 @@
       // Run UTM tracking when page loads
       window.addEventListener('load', trackUTMParameters);
     </script>
+
+    <!-- Enhanced Conversion Tracking -->
+    <script>
+      // Track form submissions as conversions
+      function trackFormSubmission(formType, source) {
+        gtag('event', 'form_submission', {
+          form_type: formType,
+          source: source,
+          event_category: 'engagement',
+          event_label: `${formType}_conversion`
+        });
+        
+        // Track as conversion goal
+        gtag('event', 'conversion', {
+          send_to: 'G-0XC7YKTVF7',
+          conversion_type: formType,
+          source: source
+        });
+      }
+
+      // Track scroll depth for engagement
+      let scrollDepthTracked = false;
+      function trackScrollDepth() {
+        if (scrollDepthTracked) return;
+        const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        if (scrollPercent >= 75) {
+          gtag('event', 'scroll_depth', {
+            event_category: 'engagement',
+            event_label: '75_percent_scroll',
+            value: scrollPercent
+          });
+          scrollDepthTracked = true;
+        }
+      }
+
+      // Track time on page
+      let startTime = Date.now();
+      function trackTimeOnPage() {
+        const timeSpent = Math.round((Date.now() - startTime) / 1000);
+        if (timeSpent >= 30) {
+          gtag('event', 'engaged_session', {
+            event_category: 'engagement',
+            event_label: 'time_on_page',
+            value: timeSpent
+          });
+        }
+      }
+
+      // Track external link clicks
+      function trackExternalLinks() {
+        document.addEventListener('click', function(e) {
+          const link = e.target.closest('a');
+          if (link && link.hostname !== window.location.hostname) {
+            gtag('event', 'external_link_click', {
+              event_category: 'engagement',
+              event_label: link.hostname,
+              link_url: link.href
+            });
+          }
+        });
+      }
+
+      // Initialize enhanced tracking
+      window.addEventListener('load', () => {
+        trackExternalLinks();
+        window.addEventListener('scroll', trackScrollDepth);
+        setTimeout(trackTimeOnPage, 30000); // Track after 30 seconds
+      });
+
+      // Make form tracking available globally
+      window.trackFormSubmission = trackFormSubmission;
+    </script>
     
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

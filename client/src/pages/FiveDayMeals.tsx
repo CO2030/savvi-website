@@ -101,6 +101,12 @@ export default function FiveDayMeals() {
     onSuccess: (response: any) => {
       setIsSubmitted(true);
       setAccessToken(response.accessToken || "");
+      
+      // Track conversion in Google Analytics
+      if (typeof window !== 'undefined' && (window as any).trackFormSubmission) {
+        (window as any).trackFormSubmission('lead_magnet', sourceData.source);
+      }
+      
       confetti({
         particleCount: 100,
         spread: 70,

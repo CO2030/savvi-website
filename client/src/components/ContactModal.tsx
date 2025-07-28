@@ -90,6 +90,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       return response.json();
     },
     onSuccess: () => {
+      // Track conversion in Google Analytics
+      if (typeof window !== 'undefined' && (window as any).trackFormSubmission) {
+        (window as any).trackFormSubmission('contact_modal', source);
+      }
+      
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you as soon as possible.",
