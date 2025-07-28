@@ -240,11 +240,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const deploymentUrl = config.googleScriptDeploymentUrl;
       if (deploymentUrl) {
         const googleSubmitResult = await submitToGoogleScript(deploymentUrl, {
-          email: validatedData.email,
           name: validatedData.name || '',
-          userType: validatedData.userType,
-          healthGoal: validatedData.healthGoal,
-          dietaryConcern: validatedData.dietaryConcern,
+          email: validatedData.email,
+          userType: 'individual', // Default for newsletter
+          healthGoal: 'energy', // Default for newsletter
+          dietaryConcern: 'none', // Default for newsletter
           source: validatedData.source || 'Direct'
         });
 
@@ -502,7 +502,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Add waitlist entries with proper types
       for (const entry of sampleWaitlistEntries) {
-        await storage.createWaitlistEntry(entry);
+        await storage.createWaitlistEntry({
+          ...entry,
+          userType: entry.userType as "individual" | "parent" | "caregiver" | "older-adult",
+          healthGoal: entry.healthGoal as "energy" | "gut-health" | "blood-sugar" | "weight-loss" | "other",
+          dietaryConcern: entry.dietaryConcern as "gluten-free" | "vegan" | "low-sugar" | "none"
+        });
       }
 
       // Add contact submissions
