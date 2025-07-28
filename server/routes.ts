@@ -361,6 +361,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Delete waitlist entry (protected admin route)
+  app.delete("/api/waitlist/:id", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const entryId = parseInt(req.params.id);
+      await storage.deleteWaitlistEntry(entryId);
+      return res.status(200).json({ message: "Waitlist entry deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting waitlist entry:", error);
+      return res.status(500).json({
+        message: "An error occurred while deleting the entry"
+      });
+    }
+  });
+
+  // Delete contact submission (protected admin route)
+  app.delete("/api/contact/:id", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const submissionId = parseInt(req.params.id);
+      await storage.deleteContactSubmission(submissionId);
+      return res.status(200).json({ message: "Contact submission deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting contact submission:", error);
+      return res.status(500).json({
+        message: "An error occurred while deleting the submission"
+      });
+    }
+  });
+
   // Export all collected emails
   app.get("/api/export/emails", async (req: Request, res: Response) => {
     try {

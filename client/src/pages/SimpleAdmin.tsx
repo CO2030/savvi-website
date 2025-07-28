@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { WaitlistEntry, ContactSubmission } from "@shared/schema";
 import { Logo } from "@/components/Logo";
 import { apiRequest } from "@/lib/queryClient";
-import { Download } from "lucide-react";
+import { Download, Trash2 } from "lucide-react";
 
 export default function SimpleAdmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -108,6 +108,44 @@ export default function SimpleAdmin() {
       toast({
         title: "Error",
         description: "Failed to add test data",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Mutation to delete waitlist entry
+  const deleteWaitlistMutation = useMutation({
+    mutationFn: (id: number) => apiRequest("DELETE", `/api/waitlist/${id}`, {}),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
+      toast({
+        title: "Entry deleted",
+        description: "Waitlist entry has been removed",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to delete entry",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Mutation to delete contact submission
+  const deleteContactMutation = useMutation({
+    mutationFn: (id: number) => apiRequest("DELETE", `/api/contact/${id}`, {}),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
+      toast({
+        title: "Submission deleted",
+        description: "Contact submission has been removed",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to delete submission",
         variant: "destructive",
       });
     },
@@ -312,14 +350,25 @@ export default function SimpleAdmin() {
                     <div className="space-y-3">
                       {entries.map((entry: WaitlistEntry) => (
                         <div key={entry.id} className="bg-gray-50 rounded p-3">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                            <div><strong>Name:</strong> {entry.name}</div>
-                            <div><strong>Email:</strong> {entry.email}</div>
-                            <div className="md:col-span-2"><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
-                            <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
-                            <div className="text-gray-500">
-                              <strong>Date:</strong> {new Date(entry.createdAt).toLocaleDateString()}
+                          <div className="flex justify-between items-start">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm flex-1">
+                              <div><strong>Name:</strong> {entry.name}</div>
+                              <div><strong>Email:</strong> {entry.email}</div>
+                              <div className="md:col-span-2"><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
+                              <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
+                              <div className="text-gray-500">
+                                <strong>Date:</strong> {new Date(entry.createdAt).toLocaleDateString()}
+                              </div>
                             </div>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteWaitlistMutation.mutate(entry.id)}
+                              disabled={deleteWaitlistMutation.isPending}
+                              className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
                           </div>
                         </div>
                       ))}
@@ -350,15 +399,26 @@ export default function SimpleAdmin() {
                     <div className="space-y-3">
                       {submissions.map((submission: ContactSubmission) => (
                         <div key={submission.id} className="bg-gray-50 rounded p-3">
-                          <div className="space-y-2 text-sm">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                              <div><strong>Name:</strong> {submission.name}</div>
-                              <div><strong>Email:</strong> {submission.email}</div>
+                          <div className="flex justify-between items-start">
+                            <div className="space-y-2 text-sm flex-1">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <div><strong>Name:</strong> {submission.name}</div>
+                                <div><strong>Email:</strong> {submission.email}</div>
+                              </div>
+                              <div><strong>Message:</strong> {submission.message}</div>
+                              <div className="text-gray-500">
+                                <strong>Date:</strong> {new Date(submission.createdAt).toLocaleDateString()}
+                              </div>
                             </div>
-                            <div><strong>Message:</strong> {submission.message}</div>
-                            <div className="text-gray-500">
-                              <strong>Date:</strong> {new Date(submission.createdAt).toLocaleDateString()}
-                            </div>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteContactMutation.mutate(submission.id)}
+                              disabled={deleteContactMutation.isPending}
+                              className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
                           </div>
                         </div>
                       ))}

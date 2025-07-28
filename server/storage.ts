@@ -107,6 +107,14 @@ export class DatabaseStorage implements IStorage {
   async getAllContactSubmissions(): Promise<ContactSubmission[]> {
     return await db.select().from(contactSubmissions);
   }
+
+  async deleteWaitlistEntry(id: number): Promise<void> {
+    await db.delete(waitlistEntries).where(eq(waitlistEntries.id, id));
+  }
+
+  async deleteContactSubmission(id: number): Promise<void> {
+    await db.delete(contactSubmissions).where(eq(contactSubmissions.id, id));
+  }
 }
 
 export const storage = new DatabaseStorage();

@@ -127,6 +127,7 @@ ADMIN_PASSWORD=secure_admin_password
 - **Personalized Experience**: Authorized users see personalized greeting with their name
 
 ## Changelog
+- July 28, 2025: Added comprehensive admin security with server-side authentication and delete functionality for waitlist/contact entries
 - July 26, 2025: Implemented secure token-based access for meal guide page
 - June 24, 2025: Initial setup
 
