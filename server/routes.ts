@@ -88,19 +88,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Don't fail the request if email fails
       }
 
-      // Send email notification to admin
+      // Send email notification to admin with source identification
       try {
+        const isLeadMagnet = validatedData.source?.includes('5-day-lead-magnet') || validatedData.source?.includes('lead-magnet');
+        const notificationType = isLeadMagnet ? "📱 New Lead Magnet Signup" : "📋 New Waitlist Signup";
+        const subjectType = isLeadMagnet ? "Lead Magnet" : "Waitlist";
+        
         await sendContactEmail({
           to: "savviwell@gmail.com",
-          subject: "New Waitlist Signup - SavviWell",
+          subject: `New ${subjectType} Signup - SavviWell`,
           html: `
-            <h2>New Waitlist Signup</h2>
-            <p><strong>Name:</strong> ${validatedData.name}</p>
-            <p><strong>Email:</strong> ${validatedData.email}</p>
-            <p><strong>User Type:</strong> ${validatedData.userType}</p>
-            <p><strong>Health Goal:</strong> ${validatedData.healthGoal}</p>
-            <p><strong>Dietary Concern:</strong> ${validatedData.dietaryConcern}</p>
-            <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+            <h2 style="color: ${isLeadMagnet ? '#ff9800' : '#399E5A'};">${notificationType}</h2>
+            <div style="background-color: ${isLeadMagnet ? '#fff3e0' : '#f0f8f4'}; padding: 15px; border-radius: 8px; margin: 10px 0;">
+              <p><strong>Name:</strong> ${validatedData.name}</p>
+              <p><strong>Email:</strong> ${validatedData.email}</p>
+              <p><strong>User Type:</strong> ${validatedData.userType}</p>
+              <p><strong>Health Goal:</strong> ${validatedData.healthGoal}</p>
+              <p><strong>Dietary Concern:</strong> ${validatedData.dietaryConcern}</p>
+              <p><strong>Source:</strong> ${validatedData.source || 'Direct'}</p>
+              <p><strong>Signup Type:</strong> ${isLeadMagnet ? '🎯 5-Day Meals Lead Magnet' : '📝 Regular Waitlist'}</p>
+              <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+            </div>
+            ${isLeadMagnet ? `
+            <p style="color: #ff9800; font-weight: bold;">✅ User automatically received 5-Day Meals Guide email with PDF attachment</p>
+            ` : ''}
           `
         });
       } catch (emailError) {
