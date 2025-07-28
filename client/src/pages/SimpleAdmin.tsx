@@ -185,7 +185,7 @@ export default function SimpleAdmin() {
     }
 
     const headers = ["Name", "Email", "UserType", "HealthGoal", "DietaryConcern", "Source", "CreatedAt"];
-    const formattedData = waitlistEntries.map(entry => ({
+    const formattedData = waitlistEntries.map((entry: WaitlistEntry) => ({
       name: entry.name,
       email: entry.email,
       usertype: entry.userType,
@@ -213,7 +213,7 @@ export default function SimpleAdmin() {
     }
 
     const headers = ["Name", "Email", "Reason", "Message", "CreatedAt"];
-    const formattedData = contactSubmissions.map(submission => ({
+    const formattedData = contactSubmissions.map((submission: ContactSubmission) => ({
       name: submission.name,
       email: submission.email,
       reason: submission.reason,
@@ -272,7 +272,7 @@ export default function SimpleAdmin() {
   }
 
   // Group waitlist entries by signup type (Lead Magnet vs Regular Waitlist)
-  const groupedWaitlist = waitlistEntries ? waitlistEntries.reduce((groups, entry) => {
+  const groupedWaitlist = waitlistEntries ? waitlistEntries.reduce((groups: Record<string, WaitlistEntry[]>, entry: WaitlistEntry) => {
     const isLeadMagnet = entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet');
     const signupType = isLeadMagnet ? '🎯 Lead Magnet Signups' : '📝 Regular Waitlist';
     if (!groups[signupType]) {
@@ -283,13 +283,13 @@ export default function SimpleAdmin() {
   }, {} as Record<string, WaitlistEntry[]>) : {};
 
   // Calculate lead magnet vs regular waitlist stats
-  const leadMagnetCount = waitlistEntries ? waitlistEntries.filter(entry => 
+  const leadMagnetCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
     entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet')
   ).length : 0;
   const regularWaitlistCount = (waitlistEntries?.length || 0) - leadMagnetCount;
 
   // Group contact submissions by reason
-  const groupedContacts = contactSubmissions ? contactSubmissions.reduce((groups, submission) => {
+  const groupedContacts = contactSubmissions ? contactSubmissions.reduce((groups: Record<string, ContactSubmission[]>, submission: ContactSubmission) => {
     const key = submission.reason || 'General Inquiry';
     if (!groups[key]) {
       groups[key] = [];
@@ -349,7 +349,7 @@ export default function SimpleAdmin() {
               <p>Loading waitlist entries...</p>
             ) : Object.keys(groupedWaitlist).length > 0 ? (
               <div className="space-y-6">
-                {Object.entries(groupedWaitlist).map(([group, entries]) => (
+                {(Object.entries(groupedWaitlist) as [string, WaitlistEntry[]][]).map(([group, entries]) => (
                   <div key={group} className="border rounded-lg p-4">
                     <h3 className="font-semibold text-lg mb-3 text-blue-600">
                       {group} ({entries.length})
@@ -411,7 +411,7 @@ export default function SimpleAdmin() {
               <p>Loading contact submissions...</p>
             ) : Object.keys(groupedContacts).length > 0 ? (
               <div className="space-y-6">
-                {Object.entries(groupedContacts).map(([reason, submissions]) => (
+                {(Object.entries(groupedContacts) as [string, ContactSubmission[]][]).map(([reason, submissions]) => (
                   <div key={reason} className="border rounded-lg p-4">
                     <h3 className="font-semibold text-lg mb-3 text-green-600 capitalize">
                       {reason} ({submissions.length})
@@ -492,15 +492,15 @@ export default function SimpleAdmin() {
                 <h3 className="font-semibold text-lg mb-3 text-blue-600">Waitlist Entry Sources</h3>
                 <div className="space-y-2">
                   {waitlistEntries && Object.entries(
-                    waitlistEntries.reduce((sources, entry) => {
+                    waitlistEntries.reduce((sources: Record<string, number>, entry: WaitlistEntry) => {
                       const source = entry.source || 'direct';
                       sources[source] = (sources[source] || 0) + 1;
                       return sources;
                     }, {} as Record<string, number>)
-                  ).sort(([,a], [,b]) => b - a).map(([source, count]) => (
+                  ).sort(([,a], [,b]) => (b as number) - (a as number)).map(([source, count]) => (
                     <div key={source} className="flex justify-between items-center bg-blue-50 p-2 rounded">
                       <span className="capitalize text-sm font-medium">{source.replace(/-/g, ' ')}</span>
-                      <span className="text-blue-600 font-bold">{count}</span>
+                      <span className="text-blue-600 font-bold">{count as number}</span>
                     </div>
                   ))}
                 </div>
@@ -511,15 +511,15 @@ export default function SimpleAdmin() {
                 <h3 className="font-semibold text-lg mb-3 text-green-600">Contact Entry Sources</h3>
                 <div className="space-y-2">
                   {contactSubmissions && Object.entries(
-                    contactSubmissions.reduce((sources, submission) => {
+                    contactSubmissions.reduce((sources: Record<string, number>, submission: ContactSubmission) => {
                       const source = submission.source || 'direct';
                       sources[source] = (sources[source] || 0) + 1;
                       return sources;
                     }, {} as Record<string, number>)
-                  ).sort(([,a], [,b]) => b - a).map(([source, count]) => (
+                  ).sort(([,a], [,b]) => (b as number) - (a as number)).map(([source, count]) => (
                     <div key={source} className="flex justify-between items-center bg-green-50 p-2 rounded">
                       <span className="capitalize text-sm font-medium">{source.replace(/-/g, ' ')}</span>
-                      <span className="text-green-600 font-bold">{count}</span>
+                      <span className="text-green-600 font-bold">{count as number}</span>
                     </div>
                   ))}
                 </div>
@@ -532,23 +532,23 @@ export default function SimpleAdmin() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
                   <strong>Top Waitlist Source:</strong> {waitlistEntries && waitlistEntries.length > 0 ? 
-                    Object.entries(waitlistEntries.reduce((sources, entry) => {
+                    Object.entries(waitlistEntries.reduce((sources: Record<string, number>, entry: WaitlistEntry) => {
                       const source = entry.source || 'direct';
                       sources[source] = (sources[source] || 0) + 1;
                       return sources;
-                    }, {} as Record<string, number>)).sort(([,a], [,b]) => b - a)[0]?.[0]?.replace(/-/g, ' ') || 'None'
+                    }, {} as Record<string, number>)).sort(([,a], [,b]) => (b as number) - (a as number))[0]?.[0]?.replace(/-/g, ' ') || 'None'
                     : 'None'
                   }
                 </div>
                 <div>
                   <strong>Social Media Entries:</strong> {waitlistEntries ? 
-                    waitlistEntries.filter(e => e.source?.includes('facebook') || e.source?.includes('instagram') || e.source?.includes('twitter') || e.source?.includes('linkedin')).length
+                    waitlistEntries.filter((e: WaitlistEntry) => e.source?.includes('facebook') || e.source?.includes('instagram') || e.source?.includes('twitter') || e.source?.includes('linkedin')).length
                     : 0
                   }
                 </div>
                 <div>
                   <strong>Lead Magnet Performance:</strong> {waitlistEntries ? 
-                    waitlistEntries.filter(e => e.source?.includes('5-day-lead-magnet')).length
+                    waitlistEntries.filter((e: WaitlistEntry) => e.source?.includes('5-day-lead-magnet')).length
                     : 0
                   } entries
                 </div>
