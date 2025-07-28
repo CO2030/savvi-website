@@ -271,15 +271,22 @@ export default function SimpleAdmin() {
     );
   }
 
-  // Group waitlist entries by user type and health goal
+  // Group waitlist entries by signup type (Lead Magnet vs Regular Waitlist)
   const groupedWaitlist = waitlistEntries ? waitlistEntries.reduce((groups, entry) => {
-    const key = `${entry.userType} - ${entry.healthGoal}`;
-    if (!groups[key]) {
-      groups[key] = [];
+    const isLeadMagnet = entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet');
+    const signupType = isLeadMagnet ? '🎯 Lead Magnet Signups' : '📝 Regular Waitlist';
+    if (!groups[signupType]) {
+      groups[signupType] = [];
     }
-    groups[key].push(entry);
+    groups[signupType].push(entry);
     return groups;
   }, {} as Record<string, WaitlistEntry[]>) : {};
+
+  // Calculate lead magnet vs regular waitlist stats
+  const leadMagnetCount = waitlistEntries ? waitlistEntries.filter(entry => 
+    entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet')
+  ).length : 0;
+  const regularWaitlistCount = (waitlistEntries?.length || 0) - leadMagnetCount;
 
   // Group contact submissions by reason
   const groupedContacts = contactSubmissions ? contactSubmissions.reduce((groups, submission) => {
@@ -348,30 +355,43 @@ export default function SimpleAdmin() {
                       {group} ({entries.length})
                     </h3>
                     <div className="space-y-3">
-                      {entries.map((entry: WaitlistEntry) => (
-                        <div key={entry.id} className="bg-gray-50 rounded p-3">
-                          <div className="flex justify-between items-start">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm flex-1">
-                              <div><strong>Name:</strong> {entry.name}</div>
-                              <div><strong>Email:</strong> {entry.email}</div>
-                              <div className="md:col-span-2"><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
-                              <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
-                              <div className="text-gray-500">
-                                <strong>Date:</strong> {new Date(entry.createdAt).toLocaleDateString()}
+                      {entries.map((entry: WaitlistEntry) => {
+                        const isLeadMagnet = entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet');
+                        return (
+                          <div key={entry.id} className={`rounded p-3 border-l-4 ${isLeadMagnet ? 'bg-orange-50 border-orange-400' : 'bg-green-50 border-green-400'}`}>
+                            <div className="flex justify-between items-start">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm flex-1">
+                                <div><strong>Name:</strong> {entry.name}</div>
+                                <div><strong>Email:</strong> {entry.email}</div>
+                                <div><strong>User Type:</strong> {entry.userType}</div>
+                                <div><strong>Health Goal:</strong> {entry.healthGoal}</div>
+                                <div><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
+                                <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
+                                <div className={`font-medium ${isLeadMagnet ? 'text-orange-600' : 'text-green-600'}`}>
+                                  <strong>Type:</strong> {isLeadMagnet ? '🎯 Lead Magnet' : '📝 Regular Waitlist'}
+                                </div>
+                                <div className="text-gray-500">
+                                  <strong>Date:</strong> {new Date(entry.createdAt).toLocaleDateString()}
+                                </div>
+                                {isLeadMagnet && (
+                                  <div className="md:col-span-2 text-orange-600 text-xs font-medium">
+                                    ✅ User received 5-Day Meals Guide email automatically
+                                  </div>
+                                )}
                               </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => deleteWaitlistMutation.mutate(entry.id)}
+                                disabled={deleteWaitlistMutation.isPending}
+                                className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
                             </div>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => deleteWaitlistMutation.mutate(entry.id)}
-                              disabled={deleteWaitlistMutation.isPending}
-                              className="text-red-600 hover:text-red-800 hover:bg-red-50"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
@@ -436,13 +456,21 @@ export default function SimpleAdmin() {
         {/* Analytics & Summary Stats */}
         <div className="mt-8 space-y-8">
           {/* Summary Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="bg-white rounded-lg shadow p-4 text-center">
               <div className="text-2xl font-bold text-blue-600">{waitlistEntries?.length || 0}</div>
               <div className="text-sm text-gray-600">Total Waitlist</div>
             </div>
             <div className="bg-white rounded-lg shadow p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">{contactSubmissions?.length || 0}</div>
+              <div className="text-2xl font-bold text-orange-600">{leadMagnetCount}</div>
+              <div className="text-sm text-gray-600">🎯 Lead Magnet</div>
+            </div>
+            <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="text-2xl font-bold text-green-600">{regularWaitlistCount}</div>
+              <div className="text-sm text-gray-600">📝 Regular Waitlist</div>
+            </div>
+            <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="text-2xl font-bold text-purple-600">{contactSubmissions?.length || 0}</div>
               <div className="text-sm text-gray-600">Contact Submissions</div>
             </div>
             <div className="bg-white rounded-lg shadow p-4 text-center">
