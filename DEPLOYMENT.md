@@ -1,4 +1,13 @@
-# SavviWell Deployment Guide
+# SavviWell Deployment Guide - savviwell.com
+
+## Quick Deployment to savviwell.com
+
+This guide will help you deploy the SavviWell meal guide system to your custom domain savviwell.com.
+
+### URLs After Deployment
+- **Main signup page:** `https://savviwell.com/5-day-meals`
+- **Meal guide access:** `https://savviwell.com/meal-guide?token=xxx`
+- **Admin dashboard:** `https://savviwell.com/admin`
 
 ## Environment Variables Required
 
@@ -30,12 +39,42 @@ GOOGLE_SCRIPT_DEPLOYMENT_URL=https://script.google.com/macros/s/your_script_id/e
 SESSION_SECRET=your_secure_random_string_here
 ```
 
-## Deployment Platforms
+### Production Environment
+```bash
+NODE_ENV=production
+PORT=5000
+```
 
-### Replit Deployments
-1. Connect your GitHub repository to Replit
-2. Configure environment variables in Replit Secrets
-3. Deploy using the Replit deployment interface
+## Deployment Steps for savviwell.com
+
+### 1. Replit Deployments (Recommended)
+1. **Prepare for deployment:**
+   - All code is already configured for production deployment
+   - Email templates automatically use savviwell.com URLs in production
+   - Static assets and routes are optimized
+
+2. **Configure environment variables in Replit Secrets:**
+   ```bash
+   NODE_ENV=production
+   DATABASE_URL=your_production_database_url
+   SESSION_SECRET=your_secure_random_string
+   SMTP_HOST=smtp.hostinger.com
+   SMTP_USER=your_email@savviwell.com
+   SMTP_PASS=your_email_password
+   ```
+
+3. **Deploy using the Replit deployment interface**
+4. **Configure custom domain:**
+   - In Replit Deployments, add custom domain: `savviwell.com`
+   - Update DNS records to point to Replit's deployment URL
+   - Configure SSL certificate (automatic with Replit)
+
+5. **Test deployment:**
+   - Visit `https://savviwell.com/5-day-meals`
+   - Submit test form to verify email delivery works
+   - Check admin access at `https://savviwell.com/admin`
+
+### 2. Alternative Deployment Platforms
 
 ### Vercel
 1. Connect your GitHub repository
@@ -65,15 +104,56 @@ npm run db:migrate
 ## Health Check
 
 The application serves on port 5000 with health checks at:
-- `/` - Main application
+- `/` - Main application redirect to lead magnet
+- `/5-day-meals` - Lead magnet signup page
+- `/meal-guide` - Secure meal guide access
+- `/admin` - Admin dashboard
 - `/api/waitlist` - API health check
+
+## URL Structure After Deployment
+
+### Public Pages
+- `https://savviwell.com/` - Redirects to lead magnet
+- `https://savviwell.com/5-day-meals` - Main signup form
+- `https://savviwell.com/meal-guide` - Access denied page (no token)
+- `https://savviwell.com/meal-guide?token=xxx` - Authenticated access
+
+### Protected Pages
+- `https://savviwell.com/admin` - Admin login (password: KalmarLisbon00025)
+- `https://savviwell.com/admin/dashboard` - Admin dashboard
+
+### API Endpoints
+- `https://savviwell.com/api/waitlist` - Form submission
+- `https://savviwell.com/api/verify-access` - Token verification
 
 ## Security Notes
 
-- Admin dashboard is password protected
+- Admin dashboard is password protected (current: KalmarLisbon00025)
+- Secure token-based access for meal guide content
 - Database credentials should never be committed to repository
 - Use strong, unique passwords for production
-- Enable SSL/TLS in production environment
+- SSL/TLS automatically enabled with custom domain deployment
+- Email delivery uses secure SMTP with authentication
+
+## Features Included in Deployment
+
+### Lead Magnet System
+- ✅ Instant PDF download on form submission
+- ✅ Professional email delivery with meal guide content
+- ✅ Secure token-based access to online version
+- ✅ Social sharing functionality for viral growth
+
+### Admin Dashboard
+- ✅ Waitlist entries management
+- ✅ Contact form submissions
+- ✅ Data export capabilities
+- ✅ Real-time statistics
+
+### Security Features
+- ✅ Token-based authentication for meal guide access
+- ✅ Password-protected admin area
+- ✅ Session management
+- ✅ SQL injection protection
 
 ## Monitoring
 

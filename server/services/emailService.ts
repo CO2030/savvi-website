@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { config } from '../config';
 
 interface EmailData {
   to: string;
@@ -224,7 +225,7 @@ NUTRITION TIPS
 • Enjoy your meals mindfully without distractions
 
 Thank you for choosing SavviWell!
-Visit us at your website for more healthy living resources and to access our AI nutrition assistant.
+Visit us at savviwell.com for more healthy living resources and to access our AI nutrition assistant.
 `;
 };
 
@@ -325,7 +326,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
         </div>
         
         <div style="text-align: center; margin: 30px 0;">
-          <a href="https://191c6b95-2847-41e3-ad11-555df255908f-00-2vo1gi3vmrgs3.riker.replit.dev/meal-guide?token=${emailData.accessToken}" 
+          <a href="${config.baseUrl}/meal-guide?token=${emailData.accessToken}" 
              style="background-color: #399E5A; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
             Access Your Guide Online
           </a>
