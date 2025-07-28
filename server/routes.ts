@@ -9,6 +9,16 @@ import { sendContactEmail, sendMealGuideEmail } from "./services/emailService";
 import { config } from "./config";
 import path from "path";
 
+// Admin authentication middleware
+const authenticateAdmin = (req: Request, res: Response, next: any) => {
+  const session = req.session as any;
+  if (session && session.adminAuthenticated) {
+    next();
+  } else {
+    return res.status(401).json({ message: "Unauthorized - Admin access required" });
+  }
+};
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Verify access token for meal guide
   app.get('/api/verify-access', async (req: Request, res: Response) => {
@@ -146,8 +156,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all waitlist entries (would normally be protected)
-  app.get("/api/waitlist", async (req: Request, res: Response) => {
+  // Admin login endpoint
+  app.post("/api/admin/login", async (req: Request, res: Response) => {
+    try {
+      const { password } = req.body;
+      
+      if (password === "KalmarLisbon00025") {
+        const session = req.session as any;
+        session.adminAuthenticated = true;
+        return res.status(200).json({ message: "Authentication successful" });
+      } else {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+    } catch (error) {
+      console.error("Error in admin login:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Admin logout endpoint
+  app.post("/api/admin/logout", async (req: Request, res: Response) => {
+    try {
+      const session = req.session as any;
+      session.adminAuthenticated = false;
+      return res.status(200).json({ message: "Logout successful" });
+    } catch (error) {
+      console.error("Error in admin logout:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Check admin authentication status
+  app.get("/api/admin/status", async (req: Request, res: Response) => {
+    try {
+      const session = req.session as any;
+      const isAuthenticated = !!(session && session.adminAuthenticated);
+      return res.status(200).json({ authenticated: isAuthenticated });
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+      return res.status(500).json({ authenticated: false });
+    }
+  });
+
+  // Get all waitlist entries (protected admin route)
+  app.get("/api/waitlist", authenticateAdmin, async (req: Request, res: Response) => {
     try {
       const entries = await storage.getAllWaitlistEntries();
       return res.status(200).json(entries);
@@ -222,8 +274,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all newsletter subscribers (for admin)
-  app.get("/api/newsletter", async (req: Request, res: Response) => {
+  // Get all newsletter subscribers (protected admin route)
+  app.get("/api/newsletter", authenticateAdmin, async (req: Request, res: Response) => {
     try {
       const subscribers = await storage.getAllNewsletterSubscribers();
       return res.status(200).json(subscribers);
@@ -296,8 +348,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all contact submissions (for admin)
-  app.get("/api/contact", async (req: Request, res: Response) => {
+  // Get all contact submissions (protected admin route)
+  app.get("/api/contact", authenticateAdmin, async (req: Request, res: Response) => {
     try {
       const submissions = await storage.getAllContactSubmissions();
       return res.status(200).json(submissions);

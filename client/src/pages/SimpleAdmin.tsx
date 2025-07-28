@@ -15,43 +15,71 @@ export default function SimpleAdmin() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  // Check if already authenticated
-  useEffect(() => {
-    const authStatus = localStorage.getItem('admin_auth');
-    if (authStatus === 'true') {
-      setIsAuthenticated(true);
-    }
-  }, []);
+  // Check authentication status with server
+  const { data: authStatus } = useQuery({
+    queryKey: ["/api/admin/status"],
+    retry: false,
+  });
 
-  // Handle authentication
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Login attempt with password:', password);
-    
-    if (password === "KalmarLisbon00025") {
+  useEffect(() => {
+    if (authStatus?.authenticated) {
       setIsAuthenticated(true);
       localStorage.setItem('admin_auth', 'true');
+    } else {
+      setIsAuthenticated(false);
+      localStorage.removeItem('admin_auth');
+    }
+  }, [authStatus]);
+
+  // Handle authentication with server-side validation
+  const loginMutation = useMutation({
+    mutationFn: (password: string) => apiRequest("POST", "/api/admin/login", { password }),
+    onSuccess: () => {
+      setIsAuthenticated(true);
+      localStorage.setItem('admin_auth', 'true');
+      // Invalidate auth status to refresh data access
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/status"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
       toast({
         title: "Access granted",
         description: "Welcome to admin dashboard",
       });
-    } else {
+    },
+    onError: (error: any) => {
       toast({
         title: "Access denied",
         description: "Incorrect password",
         variant: "destructive",
       });
-    }
+    },
+  });
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    loginMutation.mutate(password);
   };
 
-  // Handle logout
+  // Handle logout with server-side session clearing
+  const logoutMutation = useMutation({
+    mutationFn: () => apiRequest("POST", "/api/admin/logout", {}),
+    onSuccess: () => {
+      setIsAuthenticated(false);
+      localStorage.removeItem('admin_auth');
+      toast({
+        title: "Logged out",
+        description: "Logged out successfully",
+      });
+    },
+    onError: () => {
+      // Still clear local state even if server logout fails
+      setIsAuthenticated(false);
+      localStorage.removeItem('admin_auth');
+    },
+  });
+
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('admin_auth');
-    toast({
-      title: "Logged out",
-      description: "Logged out successfully",
-    });
+    logoutMutation.mutate();
   };
 
   // Fetch data only when authenticated
@@ -186,8 +214,12 @@ export default function SimpleAdmin() {
                 autoFocus
               />
             </div>
-            <Button type="submit" className="w-full">
-              Login
+            <Button 
+              type="submit" 
+              className="w-full"
+              disabled={loginMutation.isPending}
+            >
+              {loginMutation.isPending ? "Logging in..." : "Login"}
             </Button>
           </form>
           

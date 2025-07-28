@@ -129,8 +129,16 @@ The application serves on port 5000 with health checks at:
 
 ## Security Notes
 
-- Admin dashboard is password protected (current: KalmarLisbon00025)
-- Secure token-based access for meal guide content
+- **Multi-layer admin protection:**
+  - Server-side session authentication with middleware
+  - Client-side password verification (KalmarLisbon00025)
+  - All admin API endpoints protected with authentication middleware
+  - Session cookies with secure flags in production
+- **Secure token-based access** for meal guide content
+- **API endpoint protection:**
+  - `/api/waitlist` - Requires admin authentication
+  - `/api/contact` - Requires admin authentication
+  - `/api/newsletter` - Requires admin authentication
 - Database credentials should never be committed to repository
 - Use strong, unique passwords for production
 - SSL/TLS automatically enabled with custom domain deployment
