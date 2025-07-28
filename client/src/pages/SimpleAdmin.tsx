@@ -406,8 +406,9 @@ export default function SimpleAdmin() {
                                 <div><strong>Email:</strong> {submission.email}</div>
                               </div>
                               <div><strong>Message:</strong> {submission.message}</div>
-                              <div className="text-gray-500">
-                                <strong>Date:</strong> {new Date(submission.createdAt).toLocaleDateString()}
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-500">
+                                <div><strong>Source:</strong> {submission.source || 'Direct'}</div>
+                                <div><strong>Date:</strong> {new Date(submission.createdAt).toLocaleDateString()}</div>
                               </div>
                             </div>
                             <Button
@@ -432,23 +433,99 @@ export default function SimpleAdmin() {
           </div>
         </div>
 
-        {/* Summary Stats */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg shadow p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">{waitlistEntries?.length || 0}</div>
-            <div className="text-sm text-gray-600">Total Waitlist</div>
+        {/* Analytics & Summary Stats */}
+        <div className="mt-8 space-y-8">
+          {/* Summary Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="text-2xl font-bold text-blue-600">{waitlistEntries?.length || 0}</div>
+              <div className="text-sm text-gray-600">Total Waitlist</div>
+            </div>
+            <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="text-2xl font-bold text-green-600">{contactSubmissions?.length || 0}</div>
+              <div className="text-sm text-gray-600">Contact Submissions</div>
+            </div>
+            <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="text-2xl font-bold text-purple-600">{Object.keys(groupedWaitlist).length}</div>
+              <div className="text-sm text-gray-600">Waitlist Categories</div>
+            </div>
+            <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="text-2xl font-bold text-orange-600">{Object.keys(groupedContacts).length}</div>
+              <div className="text-sm text-gray-600">Contact Reasons</div>
+            </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-4 text-center">
-            <div className="text-2xl font-bold text-green-600">{contactSubmissions?.length || 0}</div>
-            <div className="text-sm text-gray-600">Contact Submissions</div>
-          </div>
-          <div className="bg-white rounded-lg shadow p-4 text-center">
-            <div className="text-2xl font-bold text-purple-600">{Object.keys(groupedWaitlist).length}</div>
-            <div className="text-sm text-gray-600">Waitlist Categories</div>
-          </div>
-          <div className="bg-white rounded-lg shadow p-4 text-center">
-            <div className="text-2xl font-bold text-orange-600">{Object.keys(groupedContacts).length}</div>
-            <div className="text-sm text-gray-600">Contact Reasons</div>
+
+          {/* Source Analytics */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold mb-4">Source Analytics</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Waitlist Sources */}
+              <div>
+                <h3 className="font-semibold text-lg mb-3 text-blue-600">Waitlist Entry Sources</h3>
+                <div className="space-y-2">
+                  {waitlistEntries && Object.entries(
+                    waitlistEntries.reduce((sources, entry) => {
+                      const source = entry.source || 'direct';
+                      sources[source] = (sources[source] || 0) + 1;
+                      return sources;
+                    }, {} as Record<string, number>)
+                  ).sort(([,a], [,b]) => b - a).map(([source, count]) => (
+                    <div key={source} className="flex justify-between items-center bg-blue-50 p-2 rounded">
+                      <span className="capitalize text-sm font-medium">{source.replace(/-/g, ' ')}</span>
+                      <span className="text-blue-600 font-bold">{count}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Contact Sources */}
+              <div>
+                <h3 className="font-semibold text-lg mb-3 text-green-600">Contact Entry Sources</h3>
+                <div className="space-y-2">
+                  {contactSubmissions && Object.entries(
+                    contactSubmissions.reduce((sources, submission) => {
+                      const source = submission.source || 'direct';
+                      sources[source] = (sources[source] || 0) + 1;
+                      return sources;
+                    }, {} as Record<string, number>)
+                  ).sort(([,a], [,b]) => b - a).map(([source, count]) => (
+                    <div key={source} className="flex justify-between items-center bg-green-50 p-2 rounded">
+                      <span className="capitalize text-sm font-medium">{source.replace(/-/g, ' ')}</span>
+                      <span className="text-green-600 font-bold">{count}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Marketing Insights */}
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-semibold mb-2">Marketing Insights</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <strong>Top Waitlist Source:</strong> {waitlistEntries && waitlistEntries.length > 0 ? 
+                    Object.entries(waitlistEntries.reduce((sources, entry) => {
+                      const source = entry.source || 'direct';
+                      sources[source] = (sources[source] || 0) + 1;
+                      return sources;
+                    }, {} as Record<string, number>)).sort(([,a], [,b]) => b - a)[0]?.[0]?.replace(/-/g, ' ') || 'None'
+                    : 'None'
+                  }
+                </div>
+                <div>
+                  <strong>Social Media Entries:</strong> {waitlistEntries ? 
+                    waitlistEntries.filter(e => e.source?.includes('facebook') || e.source?.includes('instagram') || e.source?.includes('twitter') || e.source?.includes('linkedin')).length
+                    : 0
+                  }
+                </div>
+                <div>
+                  <strong>Lead Magnet Performance:</strong> {waitlistEntries ? 
+                    waitlistEntries.filter(e => e.source?.includes('5-day-lead-magnet')).length
+                    : 0
+                  } entries
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,14 +12,47 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import confetti from 'canvas-confetti';
 import heroImagePath from "@/assets/images/5-day-meals-hero-final.png";
 
-// Lead magnet specific schema - simplified with just name and email
+// Analytics and source tracking utilities
+const getSourceFromURL = (): string => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const source = urlParams.get('source') || urlParams.get('utm_source') || urlParams.get('ref');
+  if (source) return source;
+  
+  // Check referrer
+  const referrer = document.referrer;
+  if (referrer) {
+    if (referrer.includes('facebook.com')) return 'facebook';
+    if (referrer.includes('instagram.com')) return 'instagram';
+    if (referrer.includes('twitter.com') || referrer.includes('x.com')) return 'twitter';
+    if (referrer.includes('linkedin.com')) return 'linkedin';
+    if (referrer.includes('youtube.com')) return 'youtube';
+    if (referrer.includes('tiktok.com')) return 'tiktok';
+    if (referrer.includes('google.com')) return 'google-search';
+    if (referrer.includes('bing.com')) return 'bing-search';
+    return 'external-website';
+  }
+  
+  return 'direct';
+};
+
+const getCampaignFromURL = (): string | undefined => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('utm_campaign') || urlParams.get('campaign');
+};
+
+const getMediumFromURL = (): string | undefined => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('utm_medium') || urlParams.get('medium');
+};
+
+// Lead magnet specific schema - with dynamic source tracking
 const leadMagnetSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Please enter a valid email address"),
   userType: z.literal("individual"), // Default for lead magnet
   healthGoal: z.literal("energy"), // Default for 5-day meals
   dietaryConcern: z.literal("none"), // Default
-  source: z.literal("5-day-lead-magnet")
+  source: z.string()
 });
 
 type LeadMagnetFormData = z.infer<typeof leadMagnetSchema>;
@@ -27,8 +60,27 @@ type LeadMagnetFormData = z.infer<typeof leadMagnetSchema>;
 export default function FiveDayMeals() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [accessToken, setAccessToken] = useState<string>("");
+  const [sourceData, setSourceData] = useState({
+    source: 'direct',
+    campaign: undefined as string | undefined,
+    medium: undefined as string | undefined
+  });
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Capture source tracking on component mount
+  useEffect(() => {
+    const source = getSourceFromURL();
+    const campaign = getCampaignFromURL();
+    const medium = getMediumFromURL();
+    
+    setSourceData({ source, campaign, medium });
+    
+    // Store in localStorage for analytics
+    localStorage.setItem('user_source', source);
+    if (campaign) localStorage.setItem('user_campaign', campaign);
+    if (medium) localStorage.setItem('user_medium', medium);
+  }, []);
 
   const form = useForm<LeadMagnetFormData>({
     defaultValues: {
@@ -80,8 +132,14 @@ export default function FiveDayMeals() {
   });
 
   const onSubmit = (data: LeadMagnetFormData) => {
+    // Add dynamic source tracking to form data
+    const dataWithSource = {
+      ...data,
+      source: `5-day-lead-magnet-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`
+    };
+    
     // Manual validation since zodResolver isn't available
-    const validation = leadMagnetSchema.safeParse(data);
+    const validation = leadMagnetSchema.safeParse(dataWithSource);
     if (!validation.success) {
       toast({
         title: "Validation Error",

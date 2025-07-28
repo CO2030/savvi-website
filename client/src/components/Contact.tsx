@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,7 +16,30 @@ interface ContactFormData {
   email: string;
   reason: string;
   message: string;
+  source?: string;
 }
+
+// Analytics utilities
+const getSourceFromURL = (): string => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const source = urlParams.get('source') || urlParams.get('utm_source') || urlParams.get('ref');
+  if (source) return source;
+  
+  const referrer = document.referrer;
+  if (referrer) {
+    if (referrer.includes('facebook.com')) return 'facebook';
+    if (referrer.includes('instagram.com')) return 'instagram';
+    if (referrer.includes('twitter.com') || referrer.includes('x.com')) return 'twitter';
+    if (referrer.includes('linkedin.com')) return 'linkedin';
+    if (referrer.includes('youtube.com')) return 'youtube';
+    if (referrer.includes('tiktok.com')) return 'tiktok';
+    if (referrer.includes('google.com')) return 'google-search';
+    if (referrer.includes('bing.com')) return 'bing-search';
+    return 'external-website';
+  }
+  
+  return 'direct';
+};
 
 const contactReasons = [
   { value: "general", label: "General Inquiry" },
@@ -34,17 +57,28 @@ export function Contact() {
     reason: "",
     message: ""
   });
+  const [source, setSource] = useState<string>('direct');
 
   const { toast } = useToast();
 
+  // Capture source on component mount
+  useEffect(() => {
+    const detectedSource = getSourceFromURL();
+    setSource(detectedSource);
+  }, []);
+
   const contactMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
+      const dataWithSource = {
+        ...data,
+        source: `contact-${source}`
+      };
       return apiRequest("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataWithSource),
       });
     },
     onSuccess: () => {

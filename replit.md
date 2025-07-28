@@ -126,6 +126,15 @@ ADMIN_PASSWORD=secure_admin_password
 - **Branded Access Denial**: Unauthorized users see attractive signup page instead of error
 - **Personalized Experience**: Authorized users see personalized greeting with their name
 
+### Analytics and Source Tracking
+- **Comprehensive Source Detection**: Automatically captures user acquisition sources from URL parameters (utm_source, source, ref) and referrer analysis
+- **Social Media Tracking**: Identifies traffic from Facebook, Instagram, Twitter, LinkedIn, YouTube, TikTok
+- **Search Engine Detection**: Recognizes Google and Bing search traffic
+- **Campaign Tracking**: Supports utm_campaign and utm_medium parameters for detailed campaign analysis
+- **Lead Magnet Analytics**: Tracks performance of 5-day meal guide lead magnet with source attribution
+- **Contact Form Sources**: All contact submissions include source tracking for lead attribution
+- **Admin Dashboard Analytics**: Visual breakdown of user acquisition sources with marketing insights
+
 ## Changelog
 - July 28, 2025: Added comprehensive admin security with server-side authentication and delete functionality for waitlist/contact entries
 - July 26, 2025: Implemented secure token-based access for meal guide page
