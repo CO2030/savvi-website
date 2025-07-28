@@ -7,7 +7,8 @@ This guide will help you deploy the SavviWell meal guide system to your custom d
 ### URLs After Deployment
 - **Main signup page:** `https://savviwell.com/5-day-meals`
 - **Meal guide access:** `https://savviwell.com/meal-guide?token=xxx`
-- **Admin dashboard:** `https://savviwell.com/admin`
+- **Admin login:** `https://savviwell.com/admin/login`
+- **Admin dashboard:** `https://savviwell.com/admin/dashboard`
 
 ## Environment Variables Required
 
@@ -72,7 +73,7 @@ PORT=5000
 5. **Test deployment:**
    - Visit `https://savviwell.com/5-day-meals`
    - Submit test form to verify email delivery works
-   - Check admin access at `https://savviwell.com/admin`
+   - Check admin access at `https://savviwell.com/admin/dashboard`
 
 ### 2. Alternative Deployment Platforms
 
@@ -107,7 +108,7 @@ The application serves on port 5000 with health checks at:
 - `/` - Main application redirect to lead magnet
 - `/5-day-meals` - Lead magnet signup page
 - `/meal-guide` - Secure meal guide access
-- `/admin` - Admin dashboard
+- `/admin/dashboard` - Admin dashboard (categorized waitlist and contact entries)
 - `/api/waitlist` - API health check
 
 ## URL Structure After Deployment
@@ -119,8 +120,8 @@ The application serves on port 5000 with health checks at:
 - `https://savviwell.com/meal-guide?token=xxx` - Authenticated access
 
 ### Protected Pages
-- `https://savviwell.com/admin` - Admin login (password: KalmarLisbon00025)
-- `https://savviwell.com/admin/dashboard` - Admin dashboard
+- `https://savviwell.com/admin/login` - Admin login form
+- `https://savviwell.com/admin/dashboard` - Admin dashboard (password: KalmarLisbon00025)
 
 ### API Endpoints
 - `https://savviwell.com/api/waitlist` - Form submission
