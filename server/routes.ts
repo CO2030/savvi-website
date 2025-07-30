@@ -1,7 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema } from "@shared/schema";
+import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema, insertReferralSchema, insertReferralCampaignSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
@@ -34,7 +34,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (entry) {
         return res.json({ 
           valid: true, 
-          name: entry.name 
+          name: entry.name,
+          email: entry.email
         });
       } else {
         return res.json({ valid: false });
@@ -74,6 +75,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Create waitlist entry in local storage
       const newEntry = await storage.createWaitlistEntry(validatedData);
+
+      // Check if this person was referred and mark referral as completed
+      try {
+        await storage.markReferralAsSignedUp(validatedData.email);
+        // Check for achievements
+        const allReferrals = await storage.getAllReferrals();
+        const referral = allReferrals.find(r => r.referredEmail === validatedData.email);
+        if (referral && referral.campaignId) {
+          await storage.checkAndCreateAchievement(referral.referrerEmail, referral.campaignId);
+        }
+      } catch (error) {
+        console.log('No referral found or error checking referral:', error);
+      }
 
       // Send meal guide email to user
       try {
@@ -536,6 +550,176 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({
         message: "Error adding sample data"
       });
+    }
+  });
+
+  // ============ REFERRAL SYSTEM ENDPOINTS ============
+
+  // Get active referral campaign
+  app.get("/api/referral/campaign", async (req: Request, res: Response) => {
+    try {
+      const campaign = await storage.getActiveCampaign();
+      return res.status(200).json(campaign || null);
+    } catch (error) {
+      console.error("Error fetching active campaign:", error);
+      return res.status(500).json({ message: "Error fetching campaign" });
+    }
+  });
+
+  // Submit a referral
+  app.post("/api/referral", async (req: Request, res: Response) => {
+    try {
+      const validatedData = insertReferralSchema.parse(req.body);
+
+      // Get active campaign
+      const activeCampaign = await storage.getActiveCampaign();
+      if (!activeCampaign) {
+        return res.status(400).json({ message: "No active referral campaign" });
+      }
+
+      // Check if this person has already referred this email
+      const existingReferrals = await storage.getReferralsByReferrer(validatedData.referrerEmail);
+      const alreadyReferred = existingReferrals.some(r => r.referredEmail === validatedData.referredEmail);
+      
+      if (alreadyReferred) {
+        return res.status(400).json({ message: "You have already referred this person" });
+      }
+
+      // Create the referral
+      const referral = await storage.createReferral({
+        ...validatedData,
+        campaignId: activeCampaign.id
+      });
+
+      return res.status(201).json({
+        message: "Referral submitted successfully",
+        referral,
+        campaignInfo: {
+          name: activeCampaign.name,
+          description: activeCampaign.description,
+          requiredReferrals: activeCampaign.requiredreferrals
+        }
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({
+          message: "Validation error",
+          details: validationError.message
+        });
+      }
+
+      console.error("Error submitting referral:", error);
+      return res.status(500).json({ message: "Error submitting referral" });
+    }
+  });
+
+  // Get referral progress for a specific user
+  app.get("/api/referral/progress/:email", async (req: Request, res: Response) => {
+    try {
+      const email = req.params.email;
+      const activeCampaign = await storage.getActiveCampaign();
+      
+      if (!activeCampaign) {
+        return res.status(200).json({
+          referrals: [],
+          completedReferrals: 0,
+          requiredReferrals: 0,
+          qualified: false
+        });
+      }
+
+      const referrals = await storage.getReferralsByReferrer(email);
+      const campaignReferrals = referrals.filter(r => r.campaignId === activeCampaign.id);
+      const completedReferrals = campaignReferrals.filter(r => r.signupCompleted).length;
+      
+      return res.status(200).json({
+        referrals: campaignReferrals,
+        completedReferrals,
+        requiredReferrals: activeCampaign.requiredreferrals,
+        qualified: completedReferrals >= activeCampaign.requiredreferrals,
+        campaign: activeCampaign
+      });
+    } catch (error) {
+      console.error("Error fetching referral progress:", error);
+      return res.status(500).json({ message: "Error fetching progress" });
+    }
+  });
+
+  // Mark a referral as signed up (called when referred person joins waitlist)
+  app.post("/api/referral/signup/:email", async (req: Request, res: Response) => {
+    try {
+      const referredEmail = req.params.email;
+      
+      // Mark the referral as completed
+      await storage.markReferralAsSignedUp(referredEmail);
+      
+      // Find who referred this person and check for achievements
+      const allReferrals = await storage.getAllReferrals();
+      const referral = allReferrals.find(r => r.referredEmail === referredEmail);
+      
+      if (referral && referral.campaignId) {
+        const achievement = await storage.checkAndCreateAchievement(
+          referral.referrerEmail, 
+          referral.campaignId
+        );
+        
+        if (achievement) {
+          return res.status(200).json({
+            message: "Referral marked as signed up and achievement unlocked!",
+            achievement
+          });
+        }
+      }
+
+      return res.status(200).json({
+        message: "Referral marked as signed up"
+      });
+    } catch (error) {
+      console.error("Error marking referral signup:", error);
+      return res.status(500).json({ message: "Error updating referral" });
+    }
+  });
+
+  // Admin: Get all referrals (protected)
+  app.get("/api/admin/referrals", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const referrals = await storage.getAllReferrals();
+      const campaigns = await storage.getAllReferralCampaigns();
+      const achievements = await storage.getAllAchievements();
+      
+      return res.status(200).json({
+        referrals,
+        campaigns,
+        achievements
+      });
+    } catch (error) {
+      console.error("Error fetching referral data:", error);
+      return res.status(500).json({ message: "Error fetching referral data" });
+    }
+  });
+
+  // Admin: Create new referral campaign (protected)
+  app.post("/api/admin/referral-campaign", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const validatedData = insertReferralCampaignSchema.parse(req.body);
+      const campaign = await storage.createReferralCampaign(validatedData);
+      
+      return res.status(201).json({
+        message: "Campaign created successfully",
+        campaign
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({
+          message: "Validation error",
+          details: validationError.message
+        });
+      }
+
+      console.error("Error creating campaign:", error);
+      return res.status(500).json({ message: "Error creating campaign" });
     }
   });
 

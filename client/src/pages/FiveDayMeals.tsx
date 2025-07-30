@@ -35,6 +35,15 @@ const getSourceFromURL = (): string => {
   return 'direct';
 };
 
+// Get referral data from URL
+const getReferralFromURL = (): { referrerEmail?: string; referrerName?: string } => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return {
+    referrerEmail: urlParams.get('ref') || undefined,
+    referrerName: urlParams.get('referrer') || undefined
+  };
+};
+
 const getCampaignFromURL = (): string | undefined => {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('utm_campaign') || urlParams.get('campaign') || undefined;
@@ -72,16 +81,22 @@ export default function FiveDayMeals() {
     campaign: undefined as string | undefined,
     medium: undefined as string | undefined
   });
+  const [referralData, setReferralData] = useState<{
+    referrerEmail?: string;
+    referrerName?: string;
+  }>({});
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  // Capture source tracking on component mount
+  // Capture source and referral tracking on component mount
   useEffect(() => {
     const source = getSourceFromURL();
     const campaign = getCampaignFromURL();
     const medium = getMediumFromURL();
+    const referral = getReferralFromURL();
     
     setSourceData({ source, campaign, medium });
+    setReferralData(referral);
     
     // Store in localStorage for analytics
     localStorage.setItem('user_source', source);
@@ -127,7 +142,7 @@ export default function FiveDayMeals() {
       const response = await apiRequest("POST", "/api/waitlist", data);
       return response;
     },
-    onSuccess: (response: any) => {
+    onSuccess: async (response: any) => {
       setIsSubmitted(true);
       setAccessToken(response.accessToken || "");
       
@@ -163,6 +178,22 @@ export default function FiveDayMeals() {
           source_attribution: sourceData.source,
           campaign_attribution: sourceData.campaign || 'none'
         });
+      }
+      
+      // Submit referral if this was a referred signup
+      if (referralData.referrerEmail && referralData.referrerName) {
+        try {
+          await apiRequest("POST", "/api/referral", {
+            referrerName: referralData.referrerName,
+            referrerEmail: referralData.referrerEmail,
+            referredName: response.name,
+            referredEmail: response.email,
+            source: "5-day-lead-magnet-referral"
+          });
+          console.log('Referral tracked successfully');
+        } catch (referralError) {
+          console.warn('Failed to track referral:', referralError);
+        }
       }
       
       confetti({

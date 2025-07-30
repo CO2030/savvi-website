@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { WaitlistEntry, ContactSubmission } from "@shared/schema";
+import { WaitlistEntry, ContactSubmission, Referral, ReferralCampaign, ReferralAchievement } from "@shared/schema";
 import { Logo } from "@/components/Logo";
 import { apiRequest } from "@/lib/queryClient";
 import { Download, Trash2 } from "lucide-react";
@@ -90,6 +90,16 @@ export default function SimpleAdmin() {
 
   const { data: contactSubmissions, isLoading: contactLoading } = useQuery<ContactSubmission[]>({
     queryKey: ["/api/contact"],
+    enabled: isAuthenticated,
+  });
+
+  // Fetch referral data
+  const { data: referralData, isLoading: referralLoading } = useQuery<{
+    referrals: Referral[];
+    campaigns: ReferralCampaign[];
+    achievements: ReferralAchievement[];
+  }>({
+    queryKey: ["/api/admin/referrals"],
     enabled: isAuthenticated,
   });
 
@@ -554,6 +564,188 @@ export default function SimpleAdmin() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Referrals Section */}
+          <div className="xl:col-span-2 bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold mb-4">
+              Referral Campaign Management
+            </h2>
+            
+            {referralLoading ? (
+              <p>Loading referral data...</p>
+            ) : referralData ? (
+              <div className="space-y-6">
+                {/* Campaign Overview */}
+                <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-orange-800 mb-3">Active Campaign</h3>
+                  {referralData.campaigns.find(c => c.isActive) ? (
+                    (() => {
+                      const activeCampaign = referralData.campaigns.find(c => c.isActive)!;
+                      const qualifiedCount = referralData.achievements.filter(a => a.campaignId === activeCampaign.id).length;
+                      const completedReferrals = referralData.referrals.filter(r => r.campaignId === activeCampaign.id && r.signupCompleted);
+                      const totalReferrals = referralData.referrals.filter(r => r.campaignId === activeCampaign.id);
+                      
+                      return (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                          <div className="bg-white p-3 rounded border">
+                            <div className="text-2xl font-bold text-orange-600">{activeCampaign.name}</div>
+                            <div className="text-sm text-gray-600">{activeCampaign.description}</div>
+                          </div>
+                          <div className="bg-white p-3 rounded border text-center">
+                            <div className="text-2xl font-bold text-green-600">{qualifiedCount}</div>
+                            <div className="text-sm text-gray-600">Qualified Users</div>
+                            <div className="text-xs text-gray-500">/ {activeCampaign.maxqualifiers} max</div>
+                          </div>
+                          <div className="bg-white p-3 rounded border text-center">
+                            <div className="text-2xl font-bold text-blue-600">{completedReferrals.length}</div>
+                            <div className="text-sm text-gray-600">Completed Referrals</div>
+                          </div>
+                          <div className="bg-white p-3 rounded border text-center">
+                            <div className="text-2xl font-bold text-purple-600">{totalReferrals.length}</div>
+                            <div className="text-sm text-gray-600">Total Referrals</div>
+                          </div>
+                        </div>
+                      );
+                    })()
+                  ) : (
+                    <p className="text-gray-500">No active campaign</p>
+                  )}
+                </div>
+
+                {/* Qualified Users */}
+                {referralData.achievements.length > 0 && (
+                  <div className="border rounded-lg p-4">
+                    <h3 className="font-semibold text-green-600 mb-3">
+                      🎉 Qualified Users ({referralData.achievements.length})
+                    </h3>
+                    <div className="space-y-2">
+                      {referralData.achievements.map((achievement) => {
+                        const campaign = referralData.campaigns.find(c => c.id === achievement.campaignId);
+                        const userReferrals = referralData.referrals.filter(r => 
+                          r.referrerEmail === achievement.referrerEmail && r.signupCompleted
+                        );
+                        
+                        return (
+                          <div key={achievement.id} className="bg-green-50 border border-green-200 rounded p-3">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
+                              <div>
+                                <strong>User:</strong> {achievement.referrerEmail}
+                              </div>
+                              <div>
+                                <strong>Referrals:</strong> {userReferrals.length} completed
+                              </div>
+                              <div>
+                                <strong>Qualified:</strong> {new Date(achievement.qualifiedAt).toLocaleDateString()}
+                              </div>
+                            </div>
+                            {achievement.specialListStatus && (
+                              <div className="mt-2 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                                Special Status: {achievement.specialListStatus}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Recent Referrals */}
+                <div className="border rounded-lg p-4">
+                  <h3 className="font-semibold text-blue-600 mb-3">
+                    Recent Referrals ({referralData.referrals.length})
+                  </h3>
+                  {referralData.referrals.length > 0 ? (
+                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                      {referralData.referrals
+                        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                        .slice(0, 20)
+                        .map((referral) => (
+                          <div key={referral.id} className={`rounded p-3 border-l-4 ${
+                            referral.signupCompleted ? 'bg-green-50 border-green-400' : 'bg-yellow-50 border-yellow-400'
+                          }`}>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
+                              <div>
+                                <strong>Referrer:</strong> {referral.referrerName}
+                                <br />
+                                <span className="text-gray-600">{referral.referrerEmail}</span>
+                              </div>
+                              <div>
+                                <strong>Referred:</strong> {referral.referredName}
+                                <br />
+                                <span className="text-gray-600">{referral.referredEmail}</span>
+                              </div>
+                              <div>
+                                <strong>Status:</strong> 
+                                <span className={`ml-1 px-2 py-1 rounded text-xs ${
+                                  referral.signupCompleted 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : 'bg-yellow-100 text-yellow-800'
+                                }`}>
+                                  {referral.signupCompleted ? 'Completed' : 'Pending'}
+                                </span>
+                                <br />
+                                <span className="text-gray-500 text-xs">
+                                  {new Date(referral.createdAt).toLocaleDateString()}
+                                </span>
+                              </div>
+                            </div>
+                            {referral.source && (
+                              <div className="mt-2 text-xs text-gray-600">
+                                Source: {referral.source}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                    </div>
+                  ) : (
+                    <p className="text-gray-500">No referrals yet</p>
+                  )}
+                </div>
+
+                {/* Referral Analytics */}
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h3 className="font-semibold mb-3">Referral Analytics</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <strong>Conversion Rate:</strong> {
+                        referralData.referrals.length > 0 
+                          ? `${Math.round((referralData.referrals.filter(r => r.signupCompleted).length / referralData.referrals.length) * 100)}%`
+                          : '0%'
+                      }
+                    </div>
+                    <div>
+                      <strong>Top Referrer:</strong> {
+                        (() => {
+                          const referrerCounts = referralData.referrals.reduce((acc, r) => {
+                            acc[r.referrerEmail] = (acc[r.referrerEmail] || 0) + 1;
+                            return acc;
+                          }, {} as Record<string, number>);
+                          
+                          const topReferrer = Object.entries(referrerCounts).sort(([,a], [,b]) => b - a)[0];
+                          return topReferrer ? `${topReferrer[0]} (${topReferrer[1]} referrals)` : 'None';
+                        })()
+                      }
+                    </div>
+                    <div>
+                      <strong>Campaign Progress:</strong> {
+                        (() => {
+                          const activeCampaign = referralData.campaigns.find(c => c.isActive);
+                          if (!activeCampaign) return 'No active campaign';
+                          
+                          const qualified = referralData.achievements.filter(a => a.campaignId === activeCampaign.id).length;
+                          const remaining = Math.max(0, activeCampaign.maxqualifiers - qualified);
+                          return `${remaining} spots remaining`;
+                        })()
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="text-gray-500">No referral data available</p>
+            )}
           </div>
         </div>
       </div>

@@ -80,3 +80,62 @@ export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
 
 export type InsertContactSubmission = z.infer<typeof insertContactSchema>;
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
+
+// Referral System Tables
+export const referralCampaigns = pgTable("referral_campaigns", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  requiredreferrals: integer("required_referrals").notNull(),
+  maxparticipants: integer("max_participants").notNull(),
+  active: boolean("active").notNull().default(true),
+  createdAt: text("created_at").notNull()
+});
+
+export const referrals = pgTable("referrals", {
+  id: serial("id").primaryKey(),
+  campaignId: integer("campaign_id").references(() => referralCampaigns.id),
+  referrerName: text("referrer_name").notNull(),
+  referrerEmail: text("referrer_email").notNull(),
+  referredName: text("referred_name").notNull(),
+  referredEmail: text("referred_email").notNull(),
+  signupCompleted: boolean("signup_completed").notNull().default(false),
+  source: text("source"),
+  createdAt: text("created_at").notNull()
+});
+
+export const referralAchievements = pgTable("referral_achievements", {
+  id: serial("id").primaryKey(),
+  campaignId: integer("campaign_id").references(() => referralCampaigns.id),
+  referrerName: text("referrer_name").notNull(),
+  referrerEmail: text("referrer_email").notNull(),
+  completedAt: text("completed_at").notNull(),
+  specialListStatus: text("special_list_status").notNull().default("qualified")
+});
+
+// Referral Schemas
+export const insertReferralCampaignSchema = z.object({
+  name: z.string().min(1, "Campaign name is required"),
+  description: z.string().min(1, "Description is required"),
+  requiredreferrals: z.number().min(1, "Must require at least 1 referral"),
+  maxparticipants: z.number().min(1, "Must allow at least 1 participant"),
+  active: z.boolean().default(true)
+});
+
+export const insertReferralSchema = z.object({
+  campaignId: z.number().optional(),
+  referrerName: z.string().min(1, "Your name is required"),
+  referrerEmail: z.string().email("Valid email is required"),
+  referredName: z.string().min(1, "Friend's name is required"),
+  referredEmail: z.string().email("Friend's valid email is required"),
+  source: z.string().optional()
+});
+
+// Types
+export type InsertReferralCampaign = z.infer<typeof insertReferralCampaignSchema>;
+export type ReferralCampaign = typeof referralCampaigns.$inferSelect;
+
+export type InsertReferral = z.infer<typeof insertReferralSchema>;
+export type Referral = typeof referrals.$inferSelect;
+
+export type ReferralAchievement = typeof referralAchievements.$inferSelect;

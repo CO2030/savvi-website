@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Download, Clock, Users, ShoppingCart, Utensils, Share2, Copy } from "lucide-react";
+import { ReferralSection } from "@/components/ReferralSection";
 import freshVegetablesImage from "@/assets/images/fresh-vegetables.png";
 import vegetablesAssortmentImage from "@/assets/images/vegetables-assortment.png";
 
@@ -179,6 +180,7 @@ const shoppingList = {
 export default function MealGuide() {
   const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
   const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
   const [copySuccess, setCopySuccess] = useState(false);
   
   useEffect(() => {
@@ -198,6 +200,7 @@ export default function MealGuide() {
         if (data.valid) {
           setIsValidToken(true);
           setUserName(data.name || 'Friend');
+          setUserEmail(data.email || '');
         } else {
           setIsValidToken(false);
         }
@@ -508,6 +511,13 @@ Visit us at savviwell.com for more healthy living resources.
             </div>
           </CardContent>
         </Card>
+
+        {/* Referral Section */}
+        {userEmail && (
+          <div className="mb-12">
+            <ReferralSection userEmail={userEmail} userName={userName} />
+          </div>
+        )}
 
         {/* Call to Action & Share */}
         <div className="text-center space-y-8">
