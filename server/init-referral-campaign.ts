@@ -11,7 +11,7 @@ async function initializeReferralCampaign() {
         name: "Early Access Founders",
         description: "First 100 people who refer 3 friends will get free early access to wellness tool",
         requiredreferrals: 3,
-        isActive: true,
+        active: true,
         maxqualifiers: 100
       });
       

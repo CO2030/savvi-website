@@ -579,12 +579,12 @@ export default function SimpleAdmin() {
                 {/* Campaign Overview */}
                 <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-4">
                   <h3 className="font-semibold text-orange-800 mb-3">Active Campaign</h3>
-                  {referralData.campaigns.find(c => c.isActive) ? (
+                  {referralData.campaigns.find((c: ReferralCampaign) => c.active) ? (
                     (() => {
-                      const activeCampaign = referralData.campaigns.find(c => c.isActive)!;
-                      const qualifiedCount = referralData.achievements.filter(a => a.campaignId === activeCampaign.id).length;
-                      const completedReferrals = referralData.referrals.filter(r => r.campaignId === activeCampaign.id && r.signupCompleted);
-                      const totalReferrals = referralData.referrals.filter(r => r.campaignId === activeCampaign.id);
+                      const activeCampaign = referralData.campaigns.find((c: ReferralCampaign) => c.active)!;
+                      const qualifiedCount = referralData.achievements.filter((a: ReferralAchievement) => a.campaignId === activeCampaign.id).length;
+                      const completedReferrals = referralData.referrals.filter((r: Referral) => r.campaignId === activeCampaign.id && r.signupCompleted);
+                      const totalReferrals = referralData.referrals.filter((r: Referral) => r.campaignId === activeCampaign.id);
                       
                       return (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -620,9 +620,9 @@ export default function SimpleAdmin() {
                       🎉 Qualified Users ({referralData.achievements.length})
                     </h3>
                     <div className="space-y-2">
-                      {referralData.achievements.map((achievement) => {
-                        const campaign = referralData.campaigns.find(c => c.id === achievement.campaignId);
-                        const userReferrals = referralData.referrals.filter(r => 
+                      {referralData.achievements.map((achievement: ReferralAchievement) => {
+                        const campaign = referralData.campaigns.find((c: ReferralCampaign) => c.id === achievement.campaignId);
+                        const userReferrals = referralData.referrals.filter((r: Referral) => 
                           r.referrerEmail === achievement.referrerEmail && r.signupCompleted
                         );
                         
@@ -659,9 +659,9 @@ export default function SimpleAdmin() {
                   {referralData.referrals.length > 0 ? (
                     <div className="space-y-3 max-h-96 overflow-y-auto">
                       {referralData.referrals
-                        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                        .sort((a: Referral, b: Referral) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                         .slice(0, 20)
-                        .map((referral) => (
+                        .map((referral: Referral) => (
                           <div key={referral.id} className={`rounded p-3 border-l-4 ${
                             referral.signupCompleted ? 'bg-green-50 border-green-400' : 'bg-yellow-50 border-yellow-400'
                           }`}>
@@ -711,19 +711,19 @@ export default function SimpleAdmin() {
                     <div>
                       <strong>Conversion Rate:</strong> {
                         referralData.referrals.length > 0 
-                          ? `${Math.round((referralData.referrals.filter(r => r.signupCompleted).length / referralData.referrals.length) * 100)}%`
+                          ? `${Math.round((referralData.referrals.filter((r: Referral) => r.signupCompleted).length / referralData.referrals.length) * 100)}%`
                           : '0%'
                       }
                     </div>
                     <div>
                       <strong>Top Referrer:</strong> {
                         (() => {
-                          const referrerCounts = referralData.referrals.reduce((acc, r) => {
+                          const referrerCounts = referralData.referrals.reduce((acc: Record<string, number>, r: Referral) => {
                             acc[r.referrerEmail] = (acc[r.referrerEmail] || 0) + 1;
                             return acc;
                           }, {} as Record<string, number>);
                           
-                          const topReferrer = Object.entries(referrerCounts).sort(([,a], [,b]) => b - a)[0];
+                          const topReferrer = Object.entries(referrerCounts).sort(([,a], [,b]) => (b as number) - (a as number))[0];
                           return topReferrer ? `${topReferrer[0]} (${topReferrer[1]} referrals)` : 'None';
                         })()
                       }
@@ -731,10 +731,10 @@ export default function SimpleAdmin() {
                     <div>
                       <strong>Campaign Progress:</strong> {
                         (() => {
-                          const activeCampaign = referralData.campaigns.find(c => c.isActive);
+                          const activeCampaign = referralData.campaigns.find((c: ReferralCampaign) => c.active);
                           if (!activeCampaign) return 'No active campaign';
                           
-                          const qualified = referralData.achievements.filter(a => a.campaignId === activeCampaign.id).length;
+                          const qualified = referralData.achievements.filter((a: ReferralAchievement) => a.campaignId === activeCampaign.id).length;
                           const remaining = Math.max(0, activeCampaign.maxqualifiers - qualified);
                           return `${remaining} spots remaining`;
                         })()
