@@ -385,6 +385,15 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
         <div style="font-size: 14px; color: #666; text-align: center;">
           <p>Best regards,<br><strong>The SavviWell Team</strong></p>
           <p>P.S. Follow us for more healthy living tips and updates about our AI assistant launch!</p>
+          
+          <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+            <p style="font-size: 12px; color: #999;">
+              SavviWell AI | Nutrition & Wellness Platform<br>
+              You received this email because you signed up for our 5-Day Healthy Meals Guide.<br>
+              <a href="mailto:hello@savviwell.com" style="color: #399E5A;">Contact us</a> | 
+              <a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #399E5A;">Unsubscribe</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
