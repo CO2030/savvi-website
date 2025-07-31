@@ -363,11 +363,18 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Meal guide email sent successfully to ${emailData.to}`);
+    console.log(`Attempting to send meal guide email to ${emailData.to}...`);
+    const result = await transporter.sendMail(mailOptions);
+    console.log(`✅ Meal guide email sent successfully to ${emailData.to}`, result.messageId);
     return true;
   } catch (error) {
-    console.error('Error sending meal guide email:', error);
+    console.error('❌ Error sending meal guide email:', error);
+    console.error('SMTP Configuration:', {
+      host: process.env.SMTP_HOST,
+      port: 587,
+      user: process.env.SMTP_USER ? 'configured' : 'missing',
+      pass: process.env.SMTP_PASS ? 'configured' : 'missing'
+    });
     return false;
   }
 }

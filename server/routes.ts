@@ -91,14 +91,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Send meal guide email to user
       try {
-        await sendMealGuideEmail({
+        console.log(`🔄 Starting email send process for ${validatedData.email}`);
+        const emailSent = await sendMealGuideEmail({
           to: validatedData.email,
           name: validatedData.name,
           accessToken: newEntry.accessToken || ''
         });
-        console.log(`Meal guide email sent to ${validatedData.email}`);
+        if (emailSent) {
+          console.log(`✅ Meal guide email successfully sent to ${validatedData.email}`);
+        } else {
+          console.log(`❌ Failed to send meal guide email to ${validatedData.email}`);
+        }
       } catch (error) {
-        console.error('Error sending meal guide email:', error);
+        console.error('❌ Exception while sending meal guide email:', error);
         // Don't fail the request if email fails
       }
 
