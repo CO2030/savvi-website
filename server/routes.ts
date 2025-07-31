@@ -216,6 +216,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Resend email endpoint
+  app.post("/api/resend-email", async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+      
+      if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+      }
+
+      // Find the user in the waitlist
+      const user = await storage.getWaitlistEntryByEmail(email);
+      
+      if (!user) {
+        return res.status(404).json({ message: "Email not found in waitlist" });
+      }
+
+      // Send meal guide email
+      console.log(`🔄 Resending email for ${user.email}`);
+      
+      if (!user.accessToken) {
+        return res.status(400).json({ message: "User does not have an access token" });
+      }
+      
+      const emailSent = await sendMealGuideEmail({
+        to: user.email,
+        name: user.name,
+        accessToken: user.accessToken
+      });
+
+      if (emailSent) {
+        return res.status(200).json({ 
+          message: "Email resent successfully",
+          email: user.email,
+          name: user.name 
+        });
+      } else {
+        return res.status(500).json({ message: "Failed to send email" });
+      }
+    } catch (error) {
+      console.error("Error resending email:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
   // Check admin authentication status
   app.get("/api/admin/status", async (req: Request, res: Response) => {
     try {
