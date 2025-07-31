@@ -126,6 +126,76 @@ export class DatabaseStorage implements IStorage {
     await db.delete(waitlistEntries).where(eq(waitlistEntries.id, id));
   }
 
+  async unsubscribeUser(token: string): Promise<WaitlistEntry | null> {
+    const [updated] = await db
+      .update(waitlistEntries)
+      .set({ 
+        isUnsubscribed: true, 
+        unsubscribedAt: new Date().toISOString() 
+      })
+      .where(eq(waitlistEntries.accessToken, token))
+      .returning();
+    return updated || null;
+  }
+
+  async getUnsubscribeAnalytics(): Promise<{
+    totalUnsubscribed: number;
+    totalActive: number;
+    monthlyData: Array<{
+      month: string;
+      unsubscribed: number;
+      active: number;
+      signups: number;
+      unsubscribeRate: string;
+    }>;
+  }> {
+    const allEntries = await db.select().from(waitlistEntries);
+    
+    const totalUnsubscribed = allEntries.filter(entry => entry.isUnsubscribed).length;
+    const totalActive = allEntries.filter(entry => !entry.isUnsubscribed).length;
+    
+    // Group by month for last 12 months
+    const monthlyData = [];
+    const now = new Date();
+    
+    for (let i = 11; i >= 0; i--) {
+      const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const monthStart = date.toISOString().substring(0, 7); // YYYY-MM format
+      
+      // Count entries created in this month
+      const monthlySignups = allEntries.filter(entry => 
+        entry.createdAt.startsWith(monthStart)
+      );
+      
+      // Count unsubscribes in this month
+      const monthlyUnsubscribes = allEntries.filter(entry => 
+        entry.isUnsubscribed && 
+        entry.unsubscribedAt && 
+        entry.unsubscribedAt.startsWith(monthStart)
+      );
+      
+      // Count currently active users from this month's signups
+      const activeFromMonth = monthlySignups.filter(entry => !entry.isUnsubscribed).length;
+      
+      const signups = monthlySignups.length;
+      const unsubscribed = monthlyUnsubscribes.length;
+      
+      monthlyData.push({
+        month: date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' }),
+        unsubscribed,
+        active: activeFromMonth,
+        signups,
+        unsubscribeRate: signups > 0 ? ((unsubscribed / signups) * 100).toFixed(1) + '%' : '0%'
+      });
+    }
+    
+    return {
+      totalUnsubscribed,
+      totalActive,
+      monthlyData
+    };
+  }
+
   async deleteContactSubmission(id: number): Promise<void> {
     await db.delete(contactSubmissions).where(eq(contactSubmissions.id, id));
   }

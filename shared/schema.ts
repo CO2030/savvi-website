@@ -22,6 +22,8 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   dietaryConcern: text("dietary_concern").notNull(),
   source: text("source"),
   accessToken: text("access_token").unique(),
+  isUnsubscribed: boolean("is_unsubscribed").default(false).notNull(),
+  unsubscribedAt: text("unsubscribed_at"),
   createdAt: text("created_at").notNull()
 });
 

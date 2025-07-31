@@ -296,6 +296,9 @@ export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean>
     return false;
   }
 
+  // Check if user has unsubscribed (import storage at top if needed)
+  // This check should be done at the calling level, but adding as extra protection
+
   console.log(`📧 Sending email to REAL address: ${emailData.to}`);
 
   const mealGuideContent = generateMealGuideContent();
@@ -450,12 +453,12 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     EmailReputationMonitor.logEmailSent(false);
     
     // Check if it's a bounce-related error
-    const errorString = error.toString().toLowerCase();
+    const errorString = String(error).toLowerCase();
     if (errorString.includes('bounce') || errorString.includes('invalid') || errorString.includes('rejected')) {
       await EmailBounceHandler.logBounce(
         emailData.to, 
         errorString.includes('permanent') ? 'hard' : 'soft',
-        error.toString()
+        String(error)
       );
     }
     

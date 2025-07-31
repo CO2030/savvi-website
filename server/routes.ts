@@ -215,7 +215,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         `);
       }
 
-      // For now, just show confirmation (could implement actual unsubscribe logic)
+      // Mark user as unsubscribed in database
+      const unsubscribedUser = await storage.unsubscribeUser(token as string);
+      
+      if (!unsubscribedUser) {
+        return res.status(500).send(`
+          <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px;">
+            <h2 style="color: #e74c3c;">Error Processing Unsubscribe</h2>
+            <p>We encountered an error processing your unsubscribe request.</p>
+            <p>Please <a href="mailto:hello@savviwell.com">contact support</a> and we'll manually remove you from our list.</p>
+          </body></html>
+        `);
+      }
+      
       return res.status(200).send(`
         <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; text-align: center;">
           <h2 style="color: #399E5A;">Unsubscribe Successful</h2>
@@ -225,6 +237,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
             <p style="margin: 0;"><strong>Email:</strong> ${user.email}</p>
             <p style="margin: 5px 0 0 0;"><strong>Unsubscribed:</strong> ${new Date().toLocaleString()}</p>
+            <p style="margin: 5px 0 0 0;"><strong>Status:</strong> <span style="color: #dc3545;">Unsubscribed</span></p>
           </div>
           <p style="margin-top: 20px;"><a href="mailto:hello@savviwell.com">Contact us</a> if you have any questions.</p>
         </body></html>
@@ -249,6 +262,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error getting email reputation report:", error);
       return res.status(500).json({ message: "Error fetching reputation data" });
+    }
+  });
+
+  // Admin endpoint for unsubscribe analytics
+  app.get("/api/admin/unsubscribe-analytics", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const analytics = await storage.getUnsubscribeAnalytics();
+      return res.json(analytics);
+    } catch (error) {
+      console.error("Error getting unsubscribe analytics:", error);
+      return res.status(500).json({ message: "Error fetching unsubscribe data" });
     }
   });
 
