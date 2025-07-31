@@ -13,9 +13,11 @@ export function loadConfig(): AppConfig {
   const googleScriptDeploymentUrl = process.env.GOOGLE_SCRIPT_DEPLOYMENT_URL;
   
   // Determine base URL based on environment
-  // For development, use the Replit URL so emails work from external email clients
+  // Production: Use actual domain
+  // Development: Use Replit domain for email testing (external email clients need public URLs)
+  // Local: Use localhost for local development
   const baseUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://savviwell.com' 
+    ? 'https://savviwell.com'
     : process.env.REPLIT_DEV_DOMAIN 
       ? `https://${process.env.REPLIT_DEV_DOMAIN}`
       : `http://localhost:${process.env.PORT || 5000}`;

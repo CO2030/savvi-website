@@ -105,11 +105,12 @@ SavviWell is a comprehensive landing page and admin dashboard for an AI-powered 
 ```bash
 DATABASE_URL=postgresql://...
 SESSION_SECRET=secure_random_string
-SMTP_HOST=smtp.gmail.com
-SMTP_USER=email@domain.com
-SMTP_PASS=app_password
+SMTP_HOST=smtp.hostinger.com
+SMTP_USER=hello@savviwell.com
+SMTP_PASS=hostinger_app_password
 GOOGLE_SCRIPT_DEPLOYMENT_URL=https://script.google.com/...
 ADMIN_PASSWORD=secure_admin_password
+NODE_ENV=production  # For production deployment
 ```
 
 ## User Flow Architecture
