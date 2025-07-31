@@ -401,7 +401,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     attachments: [
       {
         filename: 'SavviWell-5-Day-Meals.pdf',
-        path: 'server/public/SavviWell-5-Day-Meals-optimized.pdf',
+        path: 'server/public/SavviWell-5-Day-Meals.pdf',
         contentType: 'application/pdf'
       }
     ]
