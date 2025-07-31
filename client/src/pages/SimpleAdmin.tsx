@@ -636,7 +636,7 @@ export default function SimpleAdmin() {
                                 <strong>Referrals:</strong> {userReferrals.length} completed
                               </div>
                               <div>
-                                <strong>Qualified:</strong> {new Date(achievement.qualifiedAt).toLocaleDateString()}
+                                <strong>Qualified:</strong> {new Date(achievement.completedAt).toLocaleDateString()}
                               </div>
                             </div>
                             {achievement.specialListStatus && (
