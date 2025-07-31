@@ -260,11 +260,25 @@ export async function sendContactEmail(emailData: ContactEmailData): Promise<boo
   }
 }
 
+// Block fake email domains to protect sender reputation
+const BLOCKED_DOMAINS = ['example.com', 'test.com', 'fake.com', 'invalid.com'];
+
+function isValidEmail(email: string): boolean {
+  const domain = email.split('@')[1]?.toLowerCase();
+  return !BLOCKED_DOMAINS.includes(domain);
+}
+
 export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean> {
   const transporter = createTransporter();
   
   if (!transporter) {
     console.log('Email service not configured, skipping email send');
+    return false;
+  }
+
+  // Block sending to fake email domains
+  if (!isValidEmail(emailData.to)) {
+    console.log(`⚠️ Blocked email to fake domain: ${emailData.to}`);
     return false;
   }
 
