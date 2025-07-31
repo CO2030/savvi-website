@@ -344,6 +344,26 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
           <p style="color: #333;"><strong>Stay tuned for early access!</strong></p>
         </div>
         
+        <div style="background-color: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px dashed #399E5A;">
+          <h3 style="color: #399E5A; margin-top: 0;">🎁 Earn FREE Early Access!</h3>
+          <p style="color: #333; margin-bottom: 15px;"><strong>Want to skip the waitlist?</strong> Refer 3 friends and you'll get free early access to our AI nutrition assistant!</p>
+          
+          <div style="text-align: center; margin: 20px 0;">
+            <a href="${config.baseUrl}/meal-guide?token=${emailData.accessToken}#referral" 
+               style="background-color: #399E5A; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 0 10px 10px 0;">
+              🔗 Get Your Referral Link
+            </a>
+            <a href="${config.baseUrl}/meal-guide?token=${emailData.accessToken}" 
+               style="background-color: #ff9800; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 0 10px 10px 0;">
+              📊 Track Your Progress
+            </a>
+          </div>
+          
+          <p style="color: #333; text-align: center; font-size: 14px; margin-bottom: 0;">
+            <strong>Campaign:</strong> First 100 people who refer 3 friends get free early access!
+          </p>
+        </div>
+        
         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
         
         <div style="font-size: 14px; color: #666; text-align: center;">
