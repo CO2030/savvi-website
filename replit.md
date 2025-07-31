@@ -136,6 +136,7 @@ ADMIN_PASSWORD=secure_admin_password
 - **Admin Dashboard Analytics**: Visual breakdown of user acquisition sources with marketing insights
 
 ## Changelog
+- July 31, 2025: Fixed email delivery system with proper domain validation, cleaned test data, implemented referral tracking in emails, and resolved link issues for external email clients
 - July 28, 2025: Added comprehensive admin security with server-side authentication and delete functionality for waitlist/contact entries
 - July 26, 2025: Implemented secure token-based access for meal guide page
 - June 24, 2025: Initial setup
