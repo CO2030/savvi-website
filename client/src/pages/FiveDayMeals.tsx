@@ -314,6 +314,40 @@ export default function FiveDayMeals() {
               </ul>
             </div>
 
+            {/* Referral Campaign CTA */}
+            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200 rounded-xl p-6 mb-6">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-orange-800 mb-3">
+                  🎉 Want FREE Early Access to Our AI Wellness Tool?
+                </h3>
+                <p className="text-lg text-orange-700 mb-4">
+                  <strong>First 100 people who refer 3 friends get free early access!</strong>
+                </p>
+                <p className="text-sm text-orange-600 mb-6">
+                  Share your meal guide with friends and unlock exclusive early access to our AI nutrition assistant.
+                </p>
+                
+                <div className="space-y-4">
+                  {accessToken ? (
+                    <Button 
+                      onClick={() => window.location.href = `/meal-guide?token=${accessToken}`}
+                      className="text-white px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg"
+                      style={{ backgroundColor: '#399E5A' }}
+                    >
+                      Start Referring Friends →
+                    </Button>
+                  ) : (
+                    <p className="text-sm text-orange-600 bg-orange-100 p-3 rounded">
+                      Check your email for a secure link to access your meal guide and start referring friends!
+                    </p>
+                  )}
+                  <p className="text-xs text-orange-600">
+                    Share your meal guide link and track your referrals to qualify for free access
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div className="space-y-4">
               <Button 
                 onClick={() => window.location.href = '/'}
