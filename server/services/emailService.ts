@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 import { config } from '../config';
+import { EmailReputationMonitor } from './reputationMonitor';
+import { EmailBounceHandler, validateEmailFormat, isDisposableEmail } from './bounceHandler';
 
 interface EmailData {
   to: string;
@@ -273,6 +275,18 @@ export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean>
   
   if (!transporter) {
     console.log('Email service not configured, skipping email send');
+    EmailReputationMonitor.logEmailSent(false);
+    return false;
+  }
+
+  // Enhanced email validation
+  if (!validateEmailFormat(emailData.to)) {
+    console.log(`⚠️ Invalid email format: ${emailData.to}`);
+    return false;
+  }
+
+  if (isDisposableEmail(emailData.to)) {
+    console.log(`⚠️ Blocked disposable email: ${emailData.to}`);
     return false;
   }
 
@@ -397,6 +411,13 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
         </div>
       </div>
     </div>
+    
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e5e5; color: #666; font-size: 12px;">
+      <p>You received this email because you signed up for SavviWell's 5-day meal guide.</p>
+      <p><a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #666; text-decoration: underline;">Unsubscribe</a> | 
+      <a href="mailto:hello@savviwell.com" style="color: #666; text-decoration: underline;">Contact Us</a></p>
+      <p>SavviWell • Nutrition made simple</p>
+    </div>
     `,
     attachments: [
       {
@@ -411,6 +432,10 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     console.log(`Attempting to send meal guide email to ${emailData.to}...`);
     const result = await transporter.sendMail(mailOptions);
     console.log(`✅ Meal guide email sent successfully to ${emailData.to}`, result.messageId);
+    
+    // Log successful email send
+    EmailReputationMonitor.logEmailSent(true);
+    
     return true;
   } catch (error) {
     console.error('❌ Error sending meal guide email:', error);
@@ -420,6 +445,20 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
       user: process.env.SMTP_USER ? 'configured' : 'missing',
       pass: process.env.SMTP_PASS ? 'configured' : 'missing'
     });
+    
+    // Log failed email send and potential bounce
+    EmailReputationMonitor.logEmailSent(false);
+    
+    // Check if it's a bounce-related error
+    const errorString = error.toString().toLowerCase();
+    if (errorString.includes('bounce') || errorString.includes('invalid') || errorString.includes('rejected')) {
+      await EmailBounceHandler.logBounce(
+        emailData.to, 
+        errorString.includes('permanent') ? 'hard' : 'soft',
+        error.toString()
+      );
+    }
+    
     return false;
   }
 }

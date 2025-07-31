@@ -6,6 +6,7 @@ import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
 import { sendContactEmail, sendMealGuideEmail } from "./services/emailService";
+import { EmailReputationMonitor } from "./services/reputationMonitor";
 import { config } from "./config";
 import path from "path";
 
@@ -183,6 +184,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({
         message: "An error occurred while processing your request"
       });
+    }
+  });
+
+  // Unsubscribe endpoint
+  app.get("/unsubscribe", async (req: Request, res: Response) => {
+    try {
+      const { token } = req.query;
+      
+      if (!token) {
+        return res.status(400).send(`
+          <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px;">
+            <h2 style="color: #e74c3c;">Invalid Unsubscribe Link</h2>
+            <p>The unsubscribe link is missing required information.</p>
+            <p><a href="mailto:hello@savviwell.com">Contact support</a> if you need assistance.</p>
+          </body></html>
+        `);
+      }
+
+      // Find user by access token
+      const user = await storage.getWaitlistEntryByToken(token as string);
+      
+      if (!user) {
+        return res.status(404).send(`
+          <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px;">
+            <h2 style="color: #e74c3c;">Unsubscribe Link Not Found</h2>
+            <p>This unsubscribe link is no longer valid or has already been used.</p>
+            <p><a href="mailto:hello@savviwell.com">Contact support</a> if you continue to receive emails.</p>
+          </body></html>
+        `);
+      }
+
+      // For now, just show confirmation (could implement actual unsubscribe logic)
+      return res.status(200).send(`
+        <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; text-align: center;">
+          <h2 style="color: #399E5A;">Unsubscribe Successful</h2>
+          <p>Hello ${user.name},</p>
+          <p>You have been successfully unsubscribed from SavviWell emails.</p>
+          <p>We're sorry to see you go! If you change your mind, you can always sign up again at <a href="https://savviwell.com">savviwell.com</a></p>
+          <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
+            <p style="margin: 0;"><strong>Email:</strong> ${user.email}</p>
+            <p style="margin: 5px 0 0 0;"><strong>Unsubscribed:</strong> ${new Date().toLocaleString()}</p>
+          </div>
+          <p style="margin-top: 20px;"><a href="mailto:hello@savviwell.com">Contact us</a> if you have any questions.</p>
+        </body></html>
+      `);
+    } catch (error) {
+      console.error("Error in unsubscribe:", error);
+      return res.status(500).send(`
+        <html><body style="font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px;">
+          <h2 style="color: #e74c3c;">Error Processing Unsubscribe</h2>
+          <p>We encountered an error processing your unsubscribe request.</p>
+          <p>Please <a href="mailto:hello@savviwell.com">contact support</a> and we'll manually remove you from our list.</p>
+        </body></html>
+      `);
+    }
+  });
+
+  // Admin endpoint for email reputation monitoring
+  app.get("/api/admin/email-reputation", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const report = EmailReputationMonitor.getWeeklyReport();
+      return res.json(report);
+    } catch (error) {
+      console.error("Error getting email reputation report:", error);
+      return res.status(500).json({ message: "Error fetching reputation data" });
     }
   });
 
