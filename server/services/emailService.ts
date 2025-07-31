@@ -282,6 +282,8 @@ export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean>
     return false;
   }
 
+  console.log(`📧 Sending email to REAL address: ${emailData.to}`);
+
   const mealGuideContent = generateMealGuideContent();
 
   const mailOptions = {
