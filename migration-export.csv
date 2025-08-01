@@ -1,0 +1,7 @@
+id,name,email,user_type,health_goal,dietary_concern,source,access_token,created_at,is_unsubscribed
+11,Victoria Train,victoria.train@britishschool.pt,individual,energy,none,,b706c2875813b8b1e4371753535072.902692,2025-06-16T11:09:40.366Z,false
+12,Tom Richter,triqter@gmail.com,individual,gut-health,gluten-free,,419724bf47f9ded677841753535072.902692,2025-06-30T17:27:29.287Z,false
+14,Natasha Phillips,contactnphillips@gmail.com,individual,other,gluten-free,,acfc2feb9cb2ddd055841753535072.902692,2025-07-13T18:38:15.032Z,false
+31,mikael,mikael.c.olofsson@gmail.com,individual,energy,none,5-day-lead-magnet,icqe5dv9qmvlpcrgmfq7mdkb7ipp,2025-07-26T13:52:10.621Z,false
+46,Leyborne,leybornedesign@gmail.com,parent,energy,vegan,,bzznfhzvzep37cne61jl6xmdr72u6t,2025-07-31T09:30:56.981Z,false
+47,cc,olofsson624@gmail.com,individual,energy,none,5-day-lead-magnet-direct,lfebqrbnxlhsrrzpthfvjnqfqwfkdm,2025-08-01T02:56:53.138Z,false
