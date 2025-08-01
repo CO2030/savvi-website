@@ -5,7 +5,8 @@ import {
   contactSubmissions, type ContactSubmission, type InsertContactSubmission,
   referralCampaigns, type ReferralCampaign, type InsertReferralCampaign,
   referrals, type Referral, type InsertReferral,
-  referralAchievements, type ReferralAchievement
+  referralAchievements, type ReferralAchievement,
+  shareEvents, type ShareEvent, type InsertShareEvent
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and } from "drizzle-orm";
@@ -42,6 +43,12 @@ export interface IStorage {
   markReferralAsSignedUp(referredEmail: string): Promise<void>;
   checkAndCreateAchievement(referrerEmail: string, campaignId: number): Promise<ReferralAchievement | null>;
   getAllAchievements(): Promise<ReferralAchievement[]>;
+
+  // Share tracking methods
+  createShareEvent(shareEvent: InsertShareEvent): Promise<ShareEvent>;
+  getShareEventsByEmail(email: string): Promise<ShareEvent[]>;
+  getAllShareEvents(): Promise<ShareEvent[]>;
+  getShareAnalytics(): Promise<any>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -76,11 +83,7 @@ export class DatabaseStorage implements IStorage {
     return result[0];
   }
 
-  private generateAccessToken(): string {
-    return Math.random().toString(36).substring(2, 15) + 
-           Math.random().toString(36).substring(2, 15) + 
-           Date.now().toString(36);
-  }
+
 
   async getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined> {
     const result = await db.select().from(waitlistEntries).where(eq(waitlistEntries.email, email));
@@ -301,6 +304,56 @@ export class DatabaseStorage implements IStorage {
 
   async getAllAchievements(): Promise<ReferralAchievement[]> {
     return await db.select().from(referralAchievements);
+  }
+
+  // Share tracking methods implementation
+  async createShareEvent(insertShareEvent: InsertShareEvent): Promise<ShareEvent> {
+    const shareEventWithTimestamp = {
+      ...insertShareEvent,
+      createdAt: new Date().toISOString()
+    };
+    const result = await db.insert(shareEvents).values(shareEventWithTimestamp).returning();
+    return result[0];
+  }
+
+  async getShareEventsByEmail(email: string): Promise<ShareEvent[]> {
+    return await db.select().from(shareEvents).where(eq(shareEvents.sharerEmail, email));
+  }
+
+  async getAllShareEvents(): Promise<ShareEvent[]> {
+    return await db.select().from(shareEvents);
+  }
+
+  async getShareAnalytics(): Promise<any> {
+    const allShares = await this.getAllShareEvents();
+    const allWaitlist = await this.getAllWaitlistEntries();
+    
+    const shareStats = {
+      totalShares: allShares.length,
+      sharesByPlatform: allShares.reduce((acc, share) => {
+        acc[share.platform] = (acc[share.platform] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>),
+      topSharers: allShares.reduce((acc, share) => {
+        const key = `${share.sharerName} (${share.sharerEmail})`;
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>),
+      conversionTracking: {
+        totalSharedUsers: new Set(allShares.map(s => s.sharerEmail)).size,
+        signupsFromShares: allWaitlist.filter(w => 
+          w.source?.includes('shared') || w.source?.includes('referral')
+        ).length
+      }
+    };
+    
+    return shareStats;
+  }
+
+  private generateAccessToken(): string {
+    return Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => 
+      byte.toString(16).padStart(2, '0')
+    ).join('');
   }
 }
 

@@ -1,7 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema, insertReferralSchema, insertReferralCampaignSchema } from "@shared/schema";
+import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema, insertReferralSchema, insertReferralCampaignSchema, insertShareEventSchema } from "@shared/schema";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
@@ -859,6 +859,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.error("Error creating campaign:", error);
       return res.status(500).json({ message: "Error creating campaign" });
+    }
+  });
+
+  // ============ SHARE TRACKING ENDPOINTS ============
+
+  // Track share event
+  app.post("/api/share-event", async (req: Request, res: Response) => {
+    try {
+      const validatedData = insertShareEventSchema.parse(req.body);
+      const shareEvent = await storage.createShareEvent(validatedData);
+      
+      res.status(201).json({
+        message: "Share event tracked successfully",
+        id: shareEvent.id
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({
+          message: "Validation error",
+          details: validationError.message
+        });
+      }
+      
+      console.error("Error tracking share event:", error);
+      return res.status(500).json({
+        message: "An error occurred while tracking share"
+      });
+    }
+  });
+
+  // Share analytics endpoint (admin only)
+  app.get("/api/admin/share-analytics", authenticateAdmin, async (req: Request, res: Response) => {
+    try {
+      const analytics = await storage.getShareAnalytics();
+      res.status(200).json(analytics);
+    } catch (error) {
+      console.error("Error getting share analytics:", error);
+      return res.status(500).json({
+        message: "An error occurred while getting analytics"
+      });
     }
   });
 

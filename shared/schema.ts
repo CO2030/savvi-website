@@ -68,8 +68,27 @@ export const insertContactSchema = z.object({
   source: z.string().optional(),
 });
 
+// Share tracking table
+export const shareEvents = pgTable("share_events", {
+  id: serial("id").primaryKey(),
+  sharerEmail: text("sharer_email").notNull(),
+  sharerName: text("sharer_name").notNull(),
+  platform: text("platform").notNull(), // 'copy', 'facebook', 'twitter', 'whatsapp'
+  shareUrl: text("share_url").notNull(),
+  createdAt: text("created_at").notNull()
+});
+
+export const insertShareEventSchema = z.object({
+  sharerEmail: z.string().email("Invalid email address"),
+  sharerName: z.string().min(1, "Name is required"),
+  platform: z.enum(["copy", "facebook", "twitter", "whatsapp"]),
+  shareUrl: z.string().url("Invalid URL"),
+});
+
 export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;
 export type InsertContact = z.infer<typeof insertContactSchema>;
+export type InsertShareEvent = z.infer<typeof insertShareEventSchema>;
+export type ShareEvent = typeof shareEvents.$inferSelect;
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;

@@ -252,6 +252,27 @@ export default function FiveDayMeals() {
     const shareUrl = `${window.location.origin}/5-day-meals`;
     const shareText = "Check out this FREE 5-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
     
+    // Track the share event if user data is available
+    if (submissionData?.name && submissionData?.email) {
+      try {
+        await fetch('/api/share-event', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sharerEmail: submissionData.email,
+            sharerName: submissionData.name,
+            platform: platform,
+            shareUrl: shareUrl
+          })
+        });
+      } catch (error) {
+        console.warn('Failed to track share event:', error);
+        // Continue with sharing even if tracking fails
+      }
+    }
+    
     if (platform === 'copy') {
       try {
         await navigator.clipboard.writeText(shareUrl);
