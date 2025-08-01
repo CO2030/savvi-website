@@ -15,6 +15,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import FiveDayMeals from "@/pages/FiveDayMeals";
 import MealGuide from "@/pages/MealGuide";
+import SuccessPreview from "@/pages/SuccessPreview";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/faq" component={FAQPage} />
       <Route path="/5-day-meals" component={FiveDayMeals} />
       <Route path="/meal-guide" component={MealGuide} />
+      <Route path="/success-preview" component={SuccessPreview} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="*" component={NotFound} />
