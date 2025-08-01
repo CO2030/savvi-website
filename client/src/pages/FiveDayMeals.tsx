@@ -356,15 +356,15 @@ export default function FiveDayMeals() {
               </div>
 
               {/* Combined Sharing & Referral Campaign */}
-              <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200 rounded-xl p-6 mb-8">
+              <div className="border-2 rounded-xl p-6 mb-8" style={{ backgroundColor: '#EFD8D0', borderColor: '#D4B5A8' }}>
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-orange-800 mb-3">
+                  <h3 className="text-2xl font-bold mb-3" style={{ color: '#8B4513' }}>
                     🎉 Want FREE Early Access to Our AI Wellness Tool?
                   </h3>
-                  <p className="text-lg text-orange-700 mb-4">
+                  <p className="text-lg mb-4" style={{ color: '#A0522D' }}>
                     <strong>First 100 people who refer 3 friends get free early access!</strong>
                   </p>
-                  <p className="text-sm text-orange-600 mb-6">
+                  <p className="text-sm mb-6" style={{ color: '#A0522D' }}>
                     Share this free guide with friends and unlock exclusive early access to our AI nutrition assistant.
                   </p>
                   
@@ -416,12 +416,12 @@ export default function FiveDayMeals() {
                         >
                           Get Your Personalized Referral Links →
                         </Button>
-                        <p className="text-xs text-orange-600 mt-2">
+                        <p className="text-xs mt-2" style={{ color: '#A0522D' }}>
                           Access your meal guide for trackable referral links to earn free access
                         </p>
                       </div>
                     ) : (
-                      <p className="text-sm text-orange-600 bg-orange-100 p-3 rounded">
+                      <p className="text-sm p-3 rounded" style={{ color: '#A0522D', backgroundColor: '#F5E6E0' }}>
                         Check your email for a secure link to access your meal guide and get personalized referral tracking!
                       </p>
                     )}
