@@ -462,7 +462,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Send email notification immediately
       await sendContactEmail({
-        to: "admin@savviwell.com",
+        to: "hello@savviwell.com",
         subject: `New Contact Form Submission - ${validatedData.reason}`,
         html: `
           <h2>New Contact Form Submission</h2>
