@@ -358,13 +358,13 @@ export default function FiveDayMeals() {
               {/* Combined Sharing & Referral Campaign */}
               <div className="border-2 rounded-xl p-6 mb-8" style={{ backgroundColor: '#EFD8D0', borderColor: '#D4B5A8' }}>
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold mb-3" style={{ color: '#8B4513' }}>
+                  <h3 className="text-2xl font-bold mb-3 text-black">
                     🎉 Want FREE Early Access to Our AI Wellness Tool?
                   </h3>
-                  <p className="text-lg mb-4" style={{ color: '#A0522D' }}>
+                  <p className="text-lg mb-4 text-black">
                     <strong>First 100 people who refer 3 friends get free early access!</strong>
                   </p>
-                  <p className="text-sm mb-6" style={{ color: '#A0522D' }}>
+                  <p className="text-sm mb-6 text-black">
                     Share this free guide with friends and unlock exclusive early access to our AI nutrition assistant.
                   </p>
                   
@@ -416,12 +416,12 @@ export default function FiveDayMeals() {
                         >
                           Get Your Personalized Referral Links →
                         </Button>
-                        <p className="text-xs mt-2" style={{ color: '#A0522D' }}>
+                        <p className="text-xs mt-2 text-black">
                           Access your meal guide for trackable referral links to earn free access
                         </p>
                       </div>
                     ) : (
-                      <p className="text-sm p-3 rounded" style={{ color: '#A0522D', backgroundColor: '#F5E6E0' }}>
+                      <p className="text-sm p-3 rounded text-black" style={{ backgroundColor: '#F5E6E0' }}>
                         Check your email for a secure link to access your meal guide and get personalized referral tracking!
                       </p>
                     )}
