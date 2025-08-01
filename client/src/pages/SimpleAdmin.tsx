@@ -194,13 +194,11 @@ export default function SimpleAdmin() {
       return;
     }
 
-    const headers = ["Name", "Email", "UserType", "HealthGoal", "DietaryConcern", "Source", "CreatedAt"];
+    const headers = ["Name", "Email", "UserType", "Source", "CreatedAt"];
     const formattedData = waitlistEntries.map((entry: WaitlistEntry) => ({
       name: entry.name,
       email: entry.email,
       usertype: entry.userType,
-      healthgoal: entry.healthGoal,
-      dietaryconcern: entry.dietaryConcern,
       source: entry.source || 'Direct',
       createdat: new Date(entry.createdAt).toLocaleDateString()
     }));
@@ -349,7 +347,7 @@ export default function SimpleAdmin() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          {/* Waitlist Section - Grouped by User Type & Health Goal */}
+          {/* Waitlist Section - Grouped by Signup Type */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">
               Waitlist Entries ({waitlistEntries?.length || 0})
@@ -374,8 +372,6 @@ export default function SimpleAdmin() {
                                 <div><strong>Name:</strong> {entry.name}</div>
                                 <div><strong>Email:</strong> {entry.email}</div>
                                 <div><strong>User Type:</strong> {entry.userType}</div>
-                                <div><strong>Health Goal:</strong> {entry.healthGoal}</div>
-                                <div><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
                                 <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
                                 <div className={`font-medium ${isLeadMagnet ? 'text-orange-600' : 'text-green-600'}`}>
                                   <strong>Type:</strong> {isLeadMagnet ? '🎯 Lead Magnet' : '📝 Regular Waitlist'}
