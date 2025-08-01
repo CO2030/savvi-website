@@ -253,7 +253,7 @@ export default function FiveDayMeals() {
     const shareText = "Check out this FREE 5-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
     
     // Track the share event if user data is available
-    if (submissionData?.name && submissionData?.email) {
+    if (submitMutation.data?.name && submitMutation.data?.email) {
       try {
         await fetch('/api/share-event', {
           method: 'POST',
@@ -261,8 +261,8 @@ export default function FiveDayMeals() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            sharerEmail: submissionData.email,
-            sharerName: submissionData.name,
+            sharerEmail: submitMutation.data.email,
+            sharerName: submitMutation.data.name,
             platform: platform,
             shareUrl: shareUrl
           })
@@ -501,7 +501,7 @@ export default function FiveDayMeals() {
                   <CardTitle className="text-2xl font-bold text-gray-800">
                     Get Your Free Guide Now
                   </CardTitle>
-                  <p className="text-gray-600">Join 10,000+ families eating healthier</p>
+                  <p className="text-gray-600">Join families and individuals eating healthier</p>
                 </CardHeader>
                 <CardContent className="p-6 pt-0">
                   <Form {...form}>
