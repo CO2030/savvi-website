@@ -334,17 +334,21 @@ export default function FiveDayMeals() {
                 </p>
               </div>
 
-              {/* Direct Sharing Section */}
-              <div className="bg-gradient-to-r from-blue-50 to-green-50 border-2 border-green-200 rounded-xl p-6 mb-8">
+              {/* Combined Sharing & Referral Campaign */}
+              <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200 rounded-xl p-6 mb-8">
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">
-                    🎉 Share with Friends & Family!
+                  <h3 className="text-2xl font-bold text-orange-800 mb-3">
+                    🎉 Want FREE Early Access to Our AI Wellness Tool?
                   </h3>
-                  <p className="text-gray-600 mb-4">
-                    Help others discover healthy eating - share this free guide and earn rewards!
+                  <p className="text-lg text-orange-700 mb-4">
+                    <strong>First 100 people who refer 3 friends get free early access!</strong>
+                  </p>
+                  <p className="text-sm text-orange-600 mb-6">
+                    Share this free guide with friends and unlock exclusive early access to our AI nutrition assistant.
                   </p>
                   
-                  <div className="flex flex-wrap justify-center gap-3 mb-4">
+                  {/* Direct Sharing Buttons */}
+                  <div className="flex flex-wrap justify-center gap-3 mb-6">
                     <Button 
                       onClick={() => handleShare('copy')}
                       variant="outline"
@@ -380,62 +384,47 @@ export default function FiveDayMeals() {
                     </Button>
                   </div>
                   
-                  <p className="text-xs text-blue-600">
-                    Share this link: {window.location.origin}/5-day-meals
-                  </p>
+                  {/* CTA for detailed tracking */}
+                  <div className="space-y-4">
+                    {accessToken ? (
+                      <div>
+                        <Button 
+                          onClick={() => window.location.href = `/meal-guide?token=${accessToken}`}
+                          className="text-white px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg"
+                          style={{ backgroundColor: '#399E5A' }}
+                        >
+                          Get Your Personalized Referral Links →
+                        </Button>
+                        <p className="text-xs text-orange-600 mt-2">
+                          Access your meal guide for trackable referral links to earn free access
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-orange-600 bg-orange-100 p-3 rounded">
+                        Check your email for a secure link to access your meal guide and get personalized referral tracking!
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="rounded-lg p-6 mb-8" style={{ backgroundColor: '#399E5A20' }}>
-              <h3 className="text-xl font-semibold mb-3" style={{ color: '#399E5A' }}>What's Next?</h3>
-              <ul className="space-y-2 text-left max-w-md mx-auto" style={{ color: '#399E5A' }}>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
-                  Check your email (including spam folder)
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
-                  Download your meal planning guide
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
-                  Start your healthy eating journey
-                </li>
-              </ul>
-            </div>
-
-            {/* Referral Campaign CTA */}
-            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border-2 border-orange-200 rounded-xl p-6 mb-6">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-orange-800 mb-3">
-                  🎉 Want FREE Early Access to Our AI Wellness Tool?
-                </h3>
-                <p className="text-lg text-orange-700 mb-4">
-                  <strong>First 100 people who refer 3 friends get free early access!</strong>
-                </p>
-                <p className="text-sm text-orange-600 mb-6">
-                  Share your meal guide with friends and unlock exclusive early access to our AI nutrition assistant.
-                </p>
-                
-                <div className="space-y-4">
-                  {accessToken ? (
-                    <Button 
-                      onClick={() => window.location.href = `/meal-guide?token=${accessToken}`}
-                      className="text-white px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200 shadow-lg"
-                      style={{ backgroundColor: '#399E5A' }}
-                    >
-                      Start Referring Friends →
-                    </Button>
-                  ) : (
-                    <p className="text-sm text-orange-600 bg-orange-100 p-3 rounded">
-                      Check your email for a secure link to access your meal guide and start referring friends!
-                    </p>
-                  )}
-                  <p className="text-xs text-orange-600">
-                    Share your meal guide link and track your referrals to qualify for free access
-                  </p>
-                </div>
+              {/* What's Next */}
+              <div className="rounded-lg p-6 mb-8" style={{ backgroundColor: '#399E5A20' }}>
+                <h3 className="text-xl font-semibold mb-3" style={{ color: '#399E5A' }}>What's Next?</h3>
+                <ul className="space-y-2 text-left max-w-md mx-auto" style={{ color: '#399E5A' }}>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
+                    Check your email (including spam folder)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
+                    Download your meal planning guide
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5" style={{ color: '#399E5A' }} />
+                    Share with friends to earn free early access
+                  </li>
+                </ul>
               </div>
             </div>
 
