@@ -115,7 +115,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const subjectType = isLeadMagnet ? "Lead Magnet" : "Waitlist";
         
         await sendContactEmail({
-          to: "savviwell@gmail.com",
+          to: "hello@savviwell.com",
           subject: `New ${subjectType} Signup - SavviWell`,
           html: `
             <h2 style="color: ${isLeadMagnet ? '#ff9800' : '#399E5A'};">${notificationType}</h2>

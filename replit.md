@@ -137,6 +137,7 @@ NODE_ENV=production  # For production deployment
 - **Admin Dashboard Analytics**: Visual breakdown of user acquisition sources with marketing insights
 
 ## Changelog
+- August 1, 2025: Updated email configuration - contact notifications now go to hello@savviwell.com, set up savviwell@gmail.com for user testing, restored /admin/dashboard route alongside /admin, confirmed Google Sheets integration working with 8 total entries
 - July 31, 2025: Implemented comprehensive email reputation protection system including PDF optimization (5.3MB→1.1MB), DNS authentication setup (SPF/DKIM/DMARC), professional unsubscribe functionality, bounce handling with automatic monitoring, and real-time reputation scoring with admin dashboard
 - July 31, 2025: Fixed email delivery system with proper domain validation, cleaned test data, implemented referral tracking in emails, and resolved link issues for external email clients
 - July 28, 2025: Added comprehensive admin security with server-side authentication and delete functionality for waitlist/contact entries
