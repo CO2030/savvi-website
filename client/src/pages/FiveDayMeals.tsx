@@ -7,7 +7,7 @@ import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { CheckCircle, Download, Clock, Users, Utensils, Heart } from "lucide-react";
+import { CheckCircle, Download, Clock, Users, Utensils, Heart, Share2, Copy } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
 import heroImagePath from "@/assets/images/5-day-meals-hero-final.png";
@@ -76,6 +76,7 @@ type LeadMagnetFormData = z.infer<typeof leadMagnetSchema>;
 export default function FiveDayMeals() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [accessToken, setAccessToken] = useState<string>("");
+  const [copySuccess, setCopySuccess] = useState(false);
   const [sourceData, setSourceData] = useState({
     source: 'direct',
     campaign: undefined as string | undefined,
@@ -246,6 +247,44 @@ export default function FiveDayMeals() {
     submitMutation.mutate(validation.data);
   };
 
+  // Sharing functions
+  const handleShare = async (platform: string) => {
+    const shareUrl = `${window.location.origin}/5-day-meals`;
+    const shareText = "Check out this FREE 5-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
+    
+    if (platform === 'copy') {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+        toast({
+          title: "Link copied!",
+          description: "Share link has been copied to your clipboard.",
+        });
+      } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+        toast({
+          title: "Link copied!",
+          description: "Share link has been copied to your clipboard.",
+        });
+      }
+    } else if (platform === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'twitter') {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'whatsapp') {
+      window.open(`https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`, '_blank');
+    }
+  };
+
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
@@ -293,6 +332,58 @@ export default function FiveDayMeals() {
                 <p className="text-sm text-gray-500 mt-2">
                   Download instantly + check your email for the secure online version
                 </p>
+              </div>
+
+              {/* Direct Sharing Section */}
+              <div className="bg-gradient-to-r from-blue-50 to-green-50 border-2 border-green-200 rounded-xl p-6 mb-8">
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">
+                    🎉 Share with Friends & Family!
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Help others discover healthy eating - share this free guide and earn rewards!
+                  </p>
+                  
+                  <div className="flex flex-wrap justify-center gap-3 mb-4">
+                    <Button 
+                      onClick={() => handleShare('copy')}
+                      variant="outline"
+                      className="flex items-center gap-2"
+                      style={{ borderColor: '#399E5A', color: '#399E5A' }}
+                    >
+                      <Copy className="w-4 h-4" />
+                      {copySuccess ? 'Copied!' : 'Copy Link'}
+                    </Button>
+                    <Button 
+                      onClick={() => handleShare('facebook')}
+                      variant="outline"
+                      className="flex items-center gap-2 text-blue-600 border-blue-600 hover:bg-blue-50"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Facebook
+                    </Button>
+                    <Button 
+                      onClick={() => handleShare('twitter')}
+                      variant="outline"
+                      className="flex items-center gap-2 text-blue-400 border-blue-400 hover:bg-blue-50"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Twitter
+                    </Button>
+                    <Button 
+                      onClick={() => handleShare('whatsapp')}
+                      variant="outline"
+                      className="flex items-center gap-2 text-green-600 border-green-600 hover:bg-green-50"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      WhatsApp
+                    </Button>
+                  </div>
+                  
+                  <p className="text-xs text-blue-600">
+                    Share this link: {window.location.origin}/5-day-meals
+                  </p>
+                </div>
               </div>
             </div>
 
