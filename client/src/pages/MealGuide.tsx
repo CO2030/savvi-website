@@ -491,27 +491,6 @@ Visit us at savviwell.com for more healthy living resources.
           </Card>
         </div>
 
-        {/* Featured Meals Preview */}
-        <Card className="shadow-lg border-0 mb-8">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-gray-800">What's Inside Your Guide</CardTitle>
-            <p className="text-gray-600 mt-2">5 delicious, family-friendly meals created by certified nutritionists</p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {mealPlans.slice(0, 5).map((meal) => (
-                <div key={meal.day} className="text-center p-4 rounded-lg" style={{ backgroundColor: '#f8fffe' }}>
-                  <div className="w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold" style={{ backgroundColor: '#399E5A' }}>
-                    {meal.day}
-                  </div>
-                  <h4 className="font-semibold text-gray-800 mb-1">{meal.title}</h4>
-                  <p className="text-sm text-gray-500">{meal.prepTime} • {meal.servings}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Referral Section */}
         {userEmail && (
           <div className="mb-12">
