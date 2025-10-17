@@ -222,8 +222,8 @@ export default function MealGuide() {
   
   // Sharing functions
   const handleShare = async (platform: string) => {
-    const shareUrl = `${window.location.origin}/5-day-meals`;
-    const shareText = "Check out this FREE 5-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
+    const shareUrl = `${window.location.origin}/3-day-meals`;
+    const shareText = "Check out this FREE 3-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
     
     if (platform === 'copy') {
       try {
@@ -297,7 +297,7 @@ export default function MealGuide() {
               
               <div className="space-y-6">
                 <Button 
-                  onClick={() => window.location.href = '/5-day-meals'}
+                  onClick={() => window.location.href = '/3-day-meals'}
                   className="text-white px-12 py-4 text-xl font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105 shadow-lg w-full md:w-auto"
                   style={{ backgroundColor: '#399E5A' }}
                 >

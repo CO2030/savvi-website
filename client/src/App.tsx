@@ -36,7 +36,7 @@ function Router() {
       <Route path="/contact" component={ContactPage} />
       <Route path="/story" component={Story} />
       <Route path="/faq" component={FAQPage} />
-      <Route path="/5-day-meals" component={FiveDayMeals} />
+      <Route path="/3-day-meals" component={FiveDayMeals} />
       <Route path="/meal-guide" component={MealGuide} />
       <Route path="/success-preview" component={SuccessPreview} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />

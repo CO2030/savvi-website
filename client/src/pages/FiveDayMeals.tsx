@@ -249,7 +249,7 @@ export default function FiveDayMeals() {
 
   // Sharing functions
   const handleShare = async (platform: string) => {
-    const shareUrl = `${window.location.origin}/5-day-meals`;
+    const shareUrl = `${window.location.origin}/3-day-meals`;
     const shareText = "Check out this FREE 3-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
     
     // Track the share event if user data is available

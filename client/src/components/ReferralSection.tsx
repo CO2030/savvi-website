@@ -113,7 +113,7 @@ export function ReferralSection({ userEmail, userName }: ReferralSectionProps) {
 
   const generateShareUrl = () => {
     const baseUrl = window.location.origin;
-    return `${baseUrl}/5-day-meals?ref=${encodeURIComponent(userEmail)}&referrer=${encodeURIComponent(userName)}`;
+    return `${baseUrl}/3-day-meals?ref=${encodeURIComponent(userEmail)}&referrer=${encodeURIComponent(userName)}`;
   };
 
   const copyShareUrl = () => {
@@ -127,7 +127,7 @@ export function ReferralSection({ userEmail, userName }: ReferralSectionProps) {
 
   const shareOnSocial = (platform: string) => {
     const shareUrl = generateShareUrl();
-    const text = `Check out this amazing 5-Day Meals Guide from SavviWell! 🥗 It's helping me plan healthier meals. Get yours here:`;
+    const text = `Check out this amazing 3-Day Meals Guide from SavviWell! 🥗 It's helping me plan healthier meals. Get yours here:`;
     
     let url = "";
     switch (platform) {
