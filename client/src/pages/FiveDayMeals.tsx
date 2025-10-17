@@ -486,12 +486,10 @@ export default function FiveDayMeals() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-              Get Your FREE<br />
-              <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span><br />
-              Planning Guide
+              Get your Free <span style={{ color: '#399E5A' }}>Easy Healthy Meals</span> for Busy Lives
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
-              Transform your family's eating habits with our expertly crafted meal plans, shopping lists, and prep guides - all designed to make healthy eating effortless.
+              Nutritious Meals - wellness without stress
             </p>
             
             {/* Form Section in Hero */}
