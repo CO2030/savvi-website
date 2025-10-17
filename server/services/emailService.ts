@@ -42,10 +42,10 @@ const createTransporter = () => {
 
 const generateMealGuideContent = () => {
   return `
-SAVVIWELL 5-DAY HEALTHY MEALS GUIDE
+SAVVIWELL 3-DAY HEALTHY MEALS GUIDE
 ========================================
 
-Welcome to your personalized 5-day dinner planning guide! Each recipe is designed to be nutritious, delicious, and family-friendly.
+Welcome to your personalized 3-day dinner planning guide! Each recipe is designed to be nutritious, delicious, and family-friendly.
 
 DAY 1: MEDITERRANEAN SALMON BOWL
 Prep Time: 25 mins | Servings: 4
@@ -306,13 +306,13 @@ export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean>
   const mailOptions = {
     from: `"SavviWell" <${process.env.SMTP_USER}>`,
     to: emailData.to,
-    subject: '🍽️ Your FREE 5-Day Healthy Meals Guide is Here!',
+    subject: '🍽️ Your FREE 3-Day Healthy Meals Guide is Here!',
     text: `Hi ${emailData.name},
 
 Thank you for joining the SavviWell community! We're excited to help you transform your family's eating habits with our expertly crafted meal planning guide.
 
-Your 5-Day Healthy Meals Guide includes:
-✅ 5 delicious dinner recipes your family will love
+Your 3-Day Healthy Meals Guide includes:
+✅ 3 delicious dinner recipes your family will love
 ✅ Complete shopping list organized by grocery sections
 ✅ Meal prep tips to save you time during the week
 ✅ Nutrition tips for optimal family health
@@ -339,7 +339,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
       <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         <h1 style="color: #399E5A; text-align: center; margin-bottom: 20px;">
-          🍽️ Your FREE 5-Day Healthy Meals Guide is Here!
+          🍽️ Your FREE 3-Day Healthy Meals Guide is Here!
         </h1>
         
         <p style="font-size: 16px; color: #333;">Hi ${emailData.name},</p>
@@ -349,9 +349,9 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
         </p>
         
         <div style="background-color: #f0f8f4; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <h3 style="color: #399E5A; margin-top: 0;">Your 5-Day Healthy Meals Guide includes:</h3>
+          <h3 style="color: #399E5A; margin-top: 0;">Your 3-Day Healthy Meals Guide includes:</h3>
           <ul style="color: #333; line-height: 1.8;">
-            <li>✅ 5 delicious dinner recipes your family will love</li>
+            <li>✅ 3 delicious dinner recipes your family will love</li>
             <li>✅ Complete shopping list organized by grocery sections</li>
             <li>✅ Meal prep tips to save you time during the week</li>
             <li>✅ Nutrition tips for optimal family health</li>
@@ -406,7 +406,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
           <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
             <p style="font-size: 12px; color: #999;">
               SavviWell AI | Nutrition & Wellness Platform<br>
-              You received this email because you signed up for our 5-Day Healthy Meals Guide.<br>
+              You received this email because you signed up for our 3-Day Healthy Meals Guide.<br>
               <a href="mailto:hello@savviwell.com" style="color: #399E5A;">Contact us</a> | 
               <a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #399E5A;">Unsubscribe</a>
             </p>
@@ -416,7 +416,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     </div>
     
     <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e5e5; color: #666; font-size: 12px;">
-      <p>You received this email because you signed up for SavviWell's 5-day meal guide.</p>
+      <p>You received this email because you signed up for SavviWell's 3-day meal guide.</p>
       <p><a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #666; text-decoration: underline;">Unsubscribe</a> | 
       <a href="mailto:hello@savviwell.com" style="color: #666; text-decoration: underline;">Contact Us</a></p>
       <p>SavviWell • Nutrition made simple</p>
@@ -424,8 +424,8 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     `,
     attachments: [
       {
-        filename: 'SavviWell-5-Day-Meals.pdf',
-        path: 'server/public/SavviWell-5-Day-Meals.pdf',
+        filename: 'SavviWell-3-Day-Meals.pdf',
+        path: 'server/public/SavviWell-3-Day-Meals.pdf',
         contentType: 'application/pdf'
       }
     ]

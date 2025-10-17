@@ -49,8 +49,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Download meal guide PDF
   app.get('/api/download-meal-guide', (req: Request, res: Response) => {
-    const filePath = path.join(process.cwd(), 'server/public/SavviWell-5-Day-Meals.pdf');
-    res.download(filePath, 'SavviWell-5-Day-Meals.pdf', (err) => {
+    const filePath = path.join(process.cwd(), 'server/public/SavviWell-3-Day-Meals.pdf');
+    res.download(filePath, 'SavviWell-3-Day-Meals.pdf', (err) => {
       if (err) {
         console.error('Error downloading file:', err);
         res.status(500).send('Error downloading file');
@@ -110,7 +110,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Send email notification to admin with source identification
       try {
-        const isLeadMagnet = validatedData.source?.includes('5-day-lead-magnet') || validatedData.source?.includes('lead-magnet');
+        const isLeadMagnet = validatedData.source?.includes('3-day-lead-magnet') || validatedData.source?.includes('lead-magnet');
         const notificationType = isLeadMagnet ? "📱 New Lead Magnet Signup" : "📋 New Waitlist Signup";
         const subjectType = isLeadMagnet ? "Lead Magnet" : "Waitlist";
         
@@ -126,11 +126,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <p><strong>Health Goal:</strong> ${validatedData.healthGoal}</p>
               <p><strong>Dietary Concern:</strong> ${validatedData.dietaryConcern}</p>
               <p><strong>Source:</strong> ${validatedData.source || 'Direct'}</p>
-              <p><strong>Signup Type:</strong> ${isLeadMagnet ? '🎯 5-Day Meals Lead Magnet' : '📝 Regular Waitlist'}</p>
+              <p><strong>Signup Type:</strong> ${isLeadMagnet ? '🎯 3-Day Meals Lead Magnet' : '📝 Regular Waitlist'}</p>
               <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
             </div>
             ${isLeadMagnet ? `
-            <p style="color: #ff9800; font-weight: bold;">✅ User automatically received 5-Day Meals Guide email with PDF attachment</p>
+            <p style="color: #ff9800; font-weight: bold;">✅ User automatically received 3-Day Meals Guide email with PDF attachment</p>
             ` : ''}
           `
         });

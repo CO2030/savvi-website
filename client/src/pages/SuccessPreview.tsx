@@ -7,7 +7,7 @@ export default function SuccessPreview() {
   const handleDownload = () => {
     // Mock download for preview purposes
     console.log('Download clicked - this is preview mode');
-    window.open('/5-day-meals-guide.pdf', '_blank');
+    window.open('/3-day-meals-guide.pdf', '_blank');
   };
 
   return (
@@ -26,7 +26,7 @@ export default function SuccessPreview() {
         </h1>
         
         <p className="text-xl text-gray-600 mb-8 max-w-xl mx-auto leading-relaxed">
-          Your <strong>5-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
+          Your <strong>3-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
         </p>
 
         {/* Download Button */}
@@ -142,7 +142,7 @@ export default function SuccessPreview() {
         {/* Navigation for development */}
         <div className="border-t pt-6">
           <p className="text-sm text-gray-500">
-            <a href="/5-day-meals" className="text-blue-600 hover:underline">← Back to signup form</a>
+            <a href="/3-day-meals" className="text-blue-600 hover:underline">← Back to signup form</a>
             {" | "}
             <a href="/meal-guide" className="text-blue-600 hover:underline">Real token-protected meal guide →</a>
           </p>

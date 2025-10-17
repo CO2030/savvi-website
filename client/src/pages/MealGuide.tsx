@@ -358,17 +358,17 @@ export default function MealGuide() {
     // Download the actual SavviWell PDF
     const a = document.createElement('a');
     a.href = '/api/download-meal-guide';
-    a.download = 'SavviWell-5-Day-Meals.pdf';
+    a.download = 'SavviWell-3-Day-Meals.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
   };
 
   const generatePDFContent = () => {
-    let content = `SAVVIWELL 5-DAY HEALTHY MEALS GUIDE
+    let content = `SAVVIWELL 3-DAY HEALTHY MEALS GUIDE
 ========================================
 
-Welcome to your personalized 5-day dinner planning guide! Each recipe is designed to be nutritious, delicious, and family-friendly.
+Welcome to your personalized 3-day dinner planning guide! Each recipe is designed to be nutritious, delicious, and family-friendly.
 
 MEAL PLANS
 ==========
