@@ -66,7 +66,7 @@ const leadMagnetSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Please enter a valid email address"),
   userType: z.literal("individual"), // Default for lead magnet
-  healthGoal: z.literal("energy"), // Default for 5-day meals
+  healthGoal: z.literal("energy"), // Default for 3-day meals
   dietaryConcern: z.literal("none"), // Default
   source: z.string()
 });
@@ -107,7 +107,7 @@ export default function FiveDayMeals() {
     // Track page view with source attribution in Google Analytics
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('event', 'waitlist_page_view', {
-        page_title: '5-Day Healthy Meals - Lead Magnet',
+        page_title: '3-Day Healthy Meals - Lead Magnet',
         page_location: window.location.href,
         source_attribution: source,
         campaign_attribution: campaign || 'none',
@@ -118,7 +118,7 @@ export default function FiveDayMeals() {
       
       // Track unique page view with source
       window.gtag('event', 'page_view', {
-        page_title: '5-Day Healthy Meals - Lead Magnet',
+        page_title: '3-Day Healthy Meals - Lead Magnet',
         page_location: window.location.href,
         custom_parameter_source: source,
         custom_parameter_campaign: campaign || 'none',
@@ -134,7 +134,7 @@ export default function FiveDayMeals() {
       userType: "individual",
       healthGoal: "energy",
       dietaryConcern: "none",
-      source: "5-day-lead-magnet"
+      source: "3-day-lead-magnet"
     }
   });
 
@@ -171,7 +171,7 @@ export default function FiveDayMeals() {
           currency: 'USD',
           items: [{
             item_id: 'lead_magnet_5_day_meals',
-            item_name: '5-Day Healthy Meals Guide',
+            item_name: '3-Day Healthy Meals Guide',
             item_category: 'lead_magnet',
             quantity: 1,
             price: 1
@@ -189,7 +189,7 @@ export default function FiveDayMeals() {
             referrerEmail: referralData.referrerEmail,
             referredName: response.name,
             referredEmail: response.email,
-            source: "5-day-lead-magnet-referral"
+            source: "3-day-lead-magnet-referral"
           });
           console.log('Referral tracked successfully');
         } catch (referralError) {
@@ -204,7 +204,7 @@ export default function FiveDayMeals() {
       });
       toast({
         title: "Success!",
-        description: "Your 5-Day Healthy Meals guide is on its way!",
+        description: "Your 3-Day Healthy Meals guide is on its way!",
         duration: 5000
       });
       queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
@@ -231,7 +231,7 @@ export default function FiveDayMeals() {
     // Add dynamic source tracking to form data
     const dataWithSource = {
       ...data,
-      source: `5-day-lead-magnet-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`
+      source: `3-day-lead-magnet-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`
     };
     
     // Manual validation since zodResolver isn't available
@@ -250,7 +250,7 @@ export default function FiveDayMeals() {
   // Sharing functions
   const handleShare = async (platform: string) => {
     const shareUrl = `${window.location.origin}/5-day-meals`;
-    const shareText = "Check out this FREE 5-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
+    const shareText = "Check out this FREE 3-Day Healthy Meals Guide from SavviWell! Perfect for busy families who want nutritious, delicious dinners.";
     
     // Track the share event if user data is available
     if (submitMutation.data?.name && submitMutation.data?.email) {
@@ -317,7 +317,7 @@ export default function FiveDayMeals() {
                 You're All Set!
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                Your <strong>5-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
+                Your <strong>3-Day Healthy Meals Guide</strong> is being prepared and will be delivered to your inbox within the next few minutes.
               </p>
               
               {/* Immediate Download Button */}
@@ -326,8 +326,8 @@ export default function FiveDayMeals() {
                   onClick={() => {
                     // Direct PDF download
                     const link = document.createElement('a');
-                    link.href = '/SavviWell-5-Day-Meals.pdf';
-                    link.download = 'SavviWell-5-Day-Meals.pdf';
+                    link.href = '/SavviWell-3-Day-Meals.pdf';
+                    link.download = 'SavviWell-3-Day-Meals.pdf';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -555,7 +555,7 @@ export default function FiveDayMeals() {
                         ) : (
                           <>
                             <Download className="w-5 h-5 mr-2" />
-                            Get My Free 5-Day Guide
+                            Get My Free 3-Day Guide
                           </>
                         )}
                       </Button>
@@ -623,7 +623,7 @@ export default function FiveDayMeals() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
-                    <span><strong>5 Delicious Dinner Plans</strong> - We've got your family dinners covered all week</span>
+                    <span><strong>3 Delicious Dinner Plans</strong> - Perfect for busy weeknights</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6" style={{ color: '#399E5A' }} />
