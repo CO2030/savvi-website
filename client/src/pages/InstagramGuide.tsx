@@ -363,8 +363,8 @@ export default function InstagramGuide() {
         <div className="relative py-12 md:py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Video Side - Centered in its box */}
-              <div className="flex justify-center items-center">
+              {/* Video Side - Positioned to the right within its box */}
+              <div className="flex justify-center md:justify-end items-center">
                 <div className="relative">
                   <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ maxWidth: '280px' }}>
                     <video
