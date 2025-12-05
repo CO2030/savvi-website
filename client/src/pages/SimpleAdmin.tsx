@@ -281,10 +281,16 @@ export default function SimpleAdmin() {
     );
   }
 
-  // Group waitlist entries by signup type (Lead Magnet vs Regular Waitlist)
+  // Group waitlist entries by signup type (Lead Magnet vs Instagram Guide vs Regular Waitlist)
   const groupedWaitlist = waitlistEntries ? waitlistEntries.reduce((groups: Record<string, WaitlistEntry[]>, entry: WaitlistEntry) => {
+    const isInstagramGuide = entry.source?.includes('instagram-teen-guide');
     const isLeadMagnet = entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet');
-    const signupType = isLeadMagnet ? '🎯 Lead Magnet Signups' : '📝 Regular Waitlist';
+    let signupType = '📝 Regular Waitlist';
+    if (isInstagramGuide) {
+      signupType = '📱 Instagram Guide Signups';
+    } else if (isLeadMagnet) {
+      signupType = '🎯 Lead Magnet Signups';
+    }
     if (!groups[signupType]) {
       groups[signupType] = [];
     }
@@ -292,11 +298,14 @@ export default function SimpleAdmin() {
     return groups;
   }, {} as Record<string, WaitlistEntry[]>) : {};
 
-  // Calculate lead magnet vs regular waitlist stats
-  const leadMagnetCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
-    entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet')
+  // Calculate signup type stats
+  const instagramGuideCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
+    entry.source?.includes('instagram-teen-guide')
   ).length : 0;
-  const regularWaitlistCount = (waitlistEntries?.length || 0) - leadMagnetCount;
+  const leadMagnetCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
+    (entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet')) && !entry.source?.includes('instagram-teen-guide')
+  ).length : 0;
+  const regularWaitlistCount = (waitlistEntries?.length || 0) - leadMagnetCount - instagramGuideCount;
 
   // Group contact submissions by reason
   const groupedContacts = contactSubmissions ? contactSubmissions.reduce((groups: Record<string, ContactSubmission[]>, submission: ContactSubmission) => {
