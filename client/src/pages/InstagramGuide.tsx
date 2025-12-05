@@ -365,7 +365,7 @@ export default function InstagramGuide() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               {/* Video Side - Video already contains phone frame */}
               <div className="flex justify-center md:justify-end items-center">
-                <div className="relative" style={{ maxWidth: '320px' }}>
+                <div className="relative" style={{ maxWidth: '420px' }}>
                   <video
                     autoPlay
                     loop
