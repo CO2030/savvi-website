@@ -576,7 +576,7 @@ Part of Mom Connect — empowering moms with clarity, confidence, identity, and 
     attachments: [
       {
         filename: 'Instagram-Teen-Accounts-Guide.pdf',
-        path: 'server/public/Instagram-Teen-Accounts-Guide.pdf',
+        path: 'server/assets/Instagram-Teen-Accounts-Guide.pdf',
         contentType: 'application/pdf'
       }
     ]

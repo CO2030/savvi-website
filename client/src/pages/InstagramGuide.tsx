@@ -249,7 +249,7 @@ export default function InstagramGuide() {
                   <Button 
                     onClick={() => {
                       const link = document.createElement('a');
-                      link.href = '/api/download-instagram-guide';
+                      link.href = `/api/download-instagram-guide?token=${accessToken}`;
                       link.download = 'Instagram-Teen-Accounts-Guide.pdf';
                       document.body.appendChild(link);
                       link.click();

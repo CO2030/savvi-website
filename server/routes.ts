@@ -58,9 +58,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Download Instagram teen accounts guide PDF
-  app.get('/api/download-instagram-guide', (req: Request, res: Response) => {
-    const filePath = path.join(process.cwd(), 'server/public/Instagram-Teen-Accounts-Guide.pdf');
+  // Download Instagram teen accounts guide PDF (requires valid access token)
+  app.get('/api/download-instagram-guide', async (req: Request, res: Response) => {
+    const { token } = req.query;
+    
+    if (!token) {
+      return res.status(401).json({ message: 'Access token required' });
+    }
+    
+    // Verify the token exists in the database
+    const user = await storage.getWaitlistEntryByToken(token as string);
+    if (!user) {
+      return res.status(403).json({ message: 'Invalid or expired access token' });
+    }
+    
+    const filePath = path.join(process.cwd(), 'server/assets/Instagram-Teen-Accounts-Guide.pdf');
     res.download(filePath, 'Instagram-Teen-Accounts-Guide.pdf', (err) => {
       if (err) {
         console.error('Error downloading Instagram guide file:', err);
