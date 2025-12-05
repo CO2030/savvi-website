@@ -363,30 +363,18 @@ export default function InstagramGuide() {
         <div className="relative py-12 md:py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Video Side - Positioned to the right within its box with phone frame */}
+              {/* Video Side - Video already contains phone frame */}
               <div className="flex justify-center md:justify-end items-center">
-                <div className="relative" style={{ maxWidth: '300px' }}>
-                  {/* iPhone Frame */}
-                  <div className="relative bg-gray-900 rounded-[3rem] p-2 shadow-2xl">
-                    {/* Phone Notch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-gray-900 rounded-b-2xl z-10 flex items-center justify-center">
-                      <div className="w-16 h-4 bg-black rounded-full"></div>
-                    </div>
-                    {/* Screen */}
-                    <div className="rounded-[2.5rem] overflow-hidden bg-black">
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full aspect-[9/19] object-cover"
-                      >
-                        <source src={backgroundVideo} type="video/mp4" />
-                      </video>
-                    </div>
-                    {/* Home Indicator */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-gray-600 rounded-full"></div>
-                  </div>
+                <div className="relative" style={{ maxWidth: '320px' }}>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full"
+                  >
+                    <source src={backgroundVideo} type="video/mp4" />
+                  </video>
                 </div>
               </div>
               
