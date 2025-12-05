@@ -390,7 +390,7 @@ export default function InstagramGuide() {
                   "Instagram's Teen Accounts — What Every Parent Needs to Know"
                 </h2>
                 <p className="text-gray-600 text-lg mb-6">
-                  Your essential <strong>12-page guide</strong> to understanding how Instagram actually protects teens — and what <strong>YOU</strong> can do to keep your child safe online.
+                  The essential guide to understanding how Instagram protects teens — and how you can confidently support your child online.
                 </p>
               </div>
             </div>
