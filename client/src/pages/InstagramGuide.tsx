@@ -360,9 +360,9 @@ export default function InstagramGuide() {
       </Helmet>
       <div className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
         {/* Hero Header Section with Video */}
-        <div className="relative py-12 md:py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+        <div className="relative py-6 md:py-10 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="grid md:grid-cols-2 gap-6 items-center">
               {/* Video Side - Video already contains phone frame */}
               <div className="flex justify-center md:justify-end items-center">
                 <div className="relative" style={{ maxWidth: '420px' }}>
@@ -398,9 +398,9 @@ export default function InstagramGuide() {
         </div>
 
         {/* Form and Benefits Section */}
-        <div className="py-12 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+        <div className="py-6 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-5xl">
-            <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="grid md:grid-cols-2 gap-6 items-start">
               {/* Benefits Card */}
               <Card className="shadow-xl border-0 bg-white">
                 <CardHeader className="text-center pb-2">
