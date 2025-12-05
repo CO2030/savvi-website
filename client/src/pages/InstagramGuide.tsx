@@ -11,6 +11,7 @@ import { CheckCircle, Download, Shield, AlertTriangle, Globe, Users, MessageSqua
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
+import backgroundVideo from "@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_1764964107744.mp4";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -357,8 +358,21 @@ export default function InstagramGuide() {
         <meta property="og:description" content="Your essential 12-page guide to understanding how Instagram actually protects teens — and what YOU can do to keep your child safe." />
         <meta property="og:type" content="website" />
       </Helmet>
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
-        <div className="relative min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src={backgroundVideo} type="video/mp4" />
+        </video>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/70 z-10"></div>
+        
+        <div className="relative z-20 min-h-screen flex items-center justify-center px-4 py-12">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-8">
               <div className="inline-block mb-4 px-4 py-2 bg-purple-100 rounded-full">
