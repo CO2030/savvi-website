@@ -355,10 +355,12 @@ export default function MealGuide() {
     );
   }
   const handleDownloadPDF = () => {
-    // Download the actual SavviWell PDF
+    // Download the actual SavviWell PDF with token verification
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token') || '';
     const a = document.createElement('a');
-    a.href = '/api/download-meal-guide';
-    a.download = 'SavviWell-3-Day-Meals.pdf';
+    a.href = `/api/download-meal-guide?token=${token}`;
+    a.download = 'SavviWell-5-Day-Meals.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

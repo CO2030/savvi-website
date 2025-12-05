@@ -424,8 +424,8 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     `,
     attachments: [
       {
-        filename: 'SavviWell-3-Day-Meals.pdf',
-        path: 'server/public/SavviWell-3-Day-Meals.pdf',
+        filename: 'SavviWell-5-Day-Meals.pdf',
+        path: 'server/assets/SavviWell-5-Day-Meals.pdf',
         contentType: 'application/pdf'
       }
     ]

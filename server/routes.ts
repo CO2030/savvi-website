@@ -47,10 +47,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Download meal guide PDF
-  app.get('/api/download-meal-guide', (req: Request, res: Response) => {
-    const filePath = path.join(process.cwd(), 'server/public/SavviWell-3-Day-Meals.pdf');
-    res.download(filePath, 'SavviWell-3-Day-Meals.pdf', (err) => {
+  // Download meal guide PDF (requires valid access token)
+  app.get('/api/download-meal-guide', async (req: Request, res: Response) => {
+    const { token } = req.query;
+    
+    if (!token) {
+      return res.status(401).json({ message: 'Access token required' });
+    }
+    
+    // Verify the token exists in the database
+    const user = await storage.getWaitlistEntryByToken(token as string);
+    if (!user) {
+      return res.status(403).json({ message: 'Invalid or expired access token' });
+    }
+    
+    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-5-Day-Meals.pdf');
+    res.download(filePath, 'SavviWell-5-Day-Meals.pdf', (err) => {
       if (err) {
         console.error('Error downloading file:', err);
         res.status(500).send('Error downloading file');
