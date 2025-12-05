@@ -5,7 +5,7 @@ import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema, inse
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
-import { sendContactEmail, sendMealGuideEmail } from "./services/emailService";
+import { sendContactEmail, sendMealGuideEmail, sendInstagramGuideEmail } from "./services/emailService";
 import { EmailReputationMonitor } from "./services/reputationMonitor";
 import { config } from "./config";
 import path from "path";
@@ -58,6 +58,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // Download Instagram teen accounts guide PDF
+  app.get('/api/download-instagram-guide', (req: Request, res: Response) => {
+    const filePath = path.join(process.cwd(), 'server/public/Instagram-Teen-Accounts-Guide.pdf');
+    res.download(filePath, 'Instagram-Teen-Accounts-Guide.pdf', (err) => {
+      if (err) {
+        console.error('Error downloading Instagram guide file:', err);
+        res.status(500).send('Error downloading file');
+      }
+    });
+  });
+
   // Waitlist endpoint
   app.post("/api/waitlist", async (req: Request, res: Response) => {
     try {
@@ -90,48 +101,86 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log('No referral found or error checking referral:', error);
       }
 
-      // Send meal guide email to user
+      // Determine which guide to send based on source
+      const isInstagramGuide = validatedData.source?.includes('instagram-teen-guide');
+      
+      // Send appropriate guide email to user
       try {
         console.log(`🔄 Starting email send process for ${validatedData.email}`);
-        const emailSent = await sendMealGuideEmail({
-          to: validatedData.email,
-          name: validatedData.name,
-          accessToken: newEntry.accessToken || ''
-        });
-        if (emailSent) {
-          console.log(`✅ Meal guide email successfully sent to ${validatedData.email}`);
+        let emailSent = false;
+        
+        if (isInstagramGuide) {
+          emailSent = await sendInstagramGuideEmail({
+            to: validatedData.email,
+            name: validatedData.name,
+            accessToken: newEntry.accessToken || ''
+          });
+          if (emailSent) {
+            console.log(`✅ Instagram guide email successfully sent to ${validatedData.email}`);
+          } else {
+            console.log(`❌ Failed to send Instagram guide email to ${validatedData.email}`);
+          }
         } else {
-          console.log(`❌ Failed to send meal guide email to ${validatedData.email}`);
+          emailSent = await sendMealGuideEmail({
+            to: validatedData.email,
+            name: validatedData.name,
+            accessToken: newEntry.accessToken || ''
+          });
+          if (emailSent) {
+            console.log(`✅ Meal guide email successfully sent to ${validatedData.email}`);
+          } else {
+            console.log(`❌ Failed to send meal guide email to ${validatedData.email}`);
+          }
         }
       } catch (error) {
-        console.error('❌ Exception while sending meal guide email:', error);
+        console.error('❌ Exception while sending guide email:', error);
         // Don't fail the request if email fails
       }
 
       // Send email notification to admin with source identification
       try {
         const isLeadMagnet = validatedData.source?.includes('3-day-lead-magnet') || validatedData.source?.includes('lead-magnet');
-        const notificationType = isLeadMagnet ? "📱 New Lead Magnet Signup" : "📋 New Waitlist Signup";
-        const subjectType = isLeadMagnet ? "Lead Magnet" : "Waitlist";
+        const isInstagramGuideSignup = validatedData.source?.includes('instagram-teen-guide');
+        
+        let notificationType = "📋 New Waitlist Signup";
+        let subjectType = "Waitlist";
+        let bgColor = '#399E5A';
+        let bgBoxColor = '#f0f8f4';
+        let guideType = '📝 Regular Waitlist';
+        let emailNote = '';
+        
+        if (isInstagramGuideSignup) {
+          notificationType = "📱 New Instagram Teen Guide Signup";
+          subjectType = "Instagram Guide";
+          bgColor = '#9333ea';
+          bgBoxColor = '#f3e8ff';
+          guideType = '📱 Instagram Teen Accounts Guide';
+          emailNote = '<p style="color: #9333ea; font-weight: bold;">✅ User automatically received Instagram Teen Accounts Guide email with PDF attachment</p>';
+        } else if (isLeadMagnet) {
+          notificationType = "📱 New Lead Magnet Signup";
+          subjectType = "Lead Magnet";
+          bgColor = '#ff9800';
+          bgBoxColor = '#fff3e0';
+          guideType = '🎯 3-Day Meals Lead Magnet';
+          emailNote = '<p style="color: #ff9800; font-weight: bold;">✅ User automatically received 3-Day Meals Guide email with PDF attachment</p>';
+        }
         
         await sendContactEmail({
           to: "hello@savviwell.com",
           subject: `New ${subjectType} Signup - SavviWell`,
           html: `
-            <h2 style="color: ${isLeadMagnet ? '#ff9800' : '#399E5A'};">${notificationType}</h2>
-            <div style="background-color: ${isLeadMagnet ? '#fff3e0' : '#f0f8f4'}; padding: 15px; border-radius: 8px; margin: 10px 0;">
+            <h2 style="color: ${bgColor};">${notificationType}</h2>
+            <div style="background-color: ${bgBoxColor}; padding: 15px; border-radius: 8px; margin: 10px 0;">
               <p><strong>Name:</strong> ${validatedData.name}</p>
               <p><strong>Email:</strong> ${validatedData.email}</p>
               <p><strong>User Type:</strong> ${validatedData.userType}</p>
               <p><strong>Health Goal:</strong> ${validatedData.healthGoal}</p>
               <p><strong>Dietary Concern:</strong> ${validatedData.dietaryConcern}</p>
               <p><strong>Source:</strong> ${validatedData.source || 'Direct'}</p>
-              <p><strong>Signup Type:</strong> ${isLeadMagnet ? '🎯 3-Day Meals Lead Magnet' : '📝 Regular Waitlist'}</p>
+              <p><strong>Signup Type:</strong> ${guideType}</p>
               <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
             </div>
-            ${isLeadMagnet ? `
-            <p style="color: #ff9800; font-weight: bold;">✅ User automatically received 3-Day Meals Guide email with PDF attachment</p>
-            ` : ''}
+            ${emailNote}
           `
         });
       } catch (emailError) {

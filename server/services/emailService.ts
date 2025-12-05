@@ -465,3 +465,151 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     return false;
   }
 }
+
+export async function sendInstagramGuideEmail(emailData: EmailData): Promise<boolean> {
+  const transporter = createTransporter();
+  
+  if (!transporter) {
+    console.log('Email service not configured, skipping email send');
+    EmailReputationMonitor.logEmailSent(false);
+    return false;
+  }
+
+  if (!validateEmailFormat(emailData.to)) {
+    console.log(`⚠️ Invalid email format: ${emailData.to}`);
+    return false;
+  }
+
+  if (isDisposableEmail(emailData.to)) {
+    console.log(`⚠️ Blocked disposable email: ${emailData.to}`);
+    return false;
+  }
+
+  if (!isValidEmail(emailData.to)) {
+    console.log(`⚠️ Blocked email to fake domain: ${emailData.to}`);
+    return false;
+  }
+
+  console.log(`📧 Sending Instagram guide email to: ${emailData.to}`);
+
+  const mailOptions = {
+    from: `"Mom Connect" <${process.env.SMTP_USER}>`,
+    to: emailData.to,
+    subject: "📱 Your FREE Instagram Teen Accounts Guide is Here!",
+    text: `Hi ${emailData.name},
+
+Thank you for downloading our Instagram Teen Accounts Guide! As a parent navigating the digital world, you're taking an important step in understanding how to keep your teen safe online.
+
+Inside Your Guide, You'll Learn:
+✅ How Instagram's Teen Accounts really work
+✅ What happens if a teen lies about their age
+✅ Whether IG shuts down after 60 minutes (and what actually happens)
+✅ How global laws in Australia, Denmark & the U.K. affect your family
+✅ What parents must know about teen creator accounts
+✅ A simple parent checklist you can use this week
+✅ Conversation scripts that create trust, not conflict
+
+Feel informed. Feel empowered. Feel connected.
+
+Your PDF guide is attached to this email!
+
+Best regards,
+The Mom Connect Team
+
+Part of Mom Connect — empowering moms with clarity, confidence, identity, and community in motherhood and beyond.
+`,
+    html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f5ff;">
+      <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h1 style="color: #9333ea; text-align: center; margin-bottom: 20px;">
+          📱 Your FREE Instagram Teen Accounts Guide is Here!
+        </h1>
+        
+        <p style="font-size: 16px; color: #333;">Hi ${emailData.name},</p>
+        
+        <p style="font-size: 16px; color: #333; line-height: 1.6;">
+          Thank you for downloading our Instagram Teen Accounts Guide! As a parent navigating the digital world, you're taking an important step in understanding how to keep your teen safe online.
+        </p>
+        
+        <div style="background-color: #f3e8ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #9333ea; margin-top: 0;">Inside Your Guide, You'll Learn:</h3>
+          <ul style="color: #333; line-height: 1.8;">
+            <li>✅ How Instagram's Teen Accounts really work</li>
+            <li>✅ What happens if a teen lies about their age</li>
+            <li>✅ Whether IG shuts down after 60 minutes (and what actually happens)</li>
+            <li>✅ How global laws in Australia, Denmark & the U.K. affect your family</li>
+            <li>✅ What parents must know about teen creator accounts</li>
+            <li>✅ A simple parent checklist you can use this week</li>
+            <li>✅ Conversation scripts that create trust, not conflict</li>
+          </ul>
+        </div>
+        
+        <div style="text-align: center; padding: 20px; background-color: #fdf4ff; border-radius: 8px; margin: 20px 0;">
+          <p style="color: #7c3aed; font-size: 18px; font-style: italic; margin: 0;">
+            Feel informed. Feel empowered. Feel connected.
+          </p>
+          <p style="color: #666; font-size: 14px; margin-top: 10px;">
+            A must-have for moms raising teens in a digital world.
+          </p>
+        </div>
+        
+        <p style="font-size: 16px; color: #333; text-align: center; font-weight: bold;">
+          📎 Your PDF guide is attached to this email!
+        </p>
+        
+        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+        
+        <div style="font-size: 14px; color: #666; text-align: center;">
+          <p>Best regards,<br><strong>The Mom Connect Team</strong></p>
+          
+          <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+            <p style="font-size: 12px; color: #999;">
+              Part of <strong>Mom Connect</strong> — empowering moms with clarity, confidence, identity, and community in motherhood and beyond.<br>
+              <a href="mailto:hello@savviwell.com" style="color: #9333ea;">Contact us</a> | 
+              <a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #9333ea;">Unsubscribe</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
+    attachments: [
+      {
+        filename: 'Instagram-Teen-Accounts-Guide.pdf',
+        path: 'server/public/Instagram-Teen-Accounts-Guide.pdf',
+        contentType: 'application/pdf'
+      }
+    ]
+  };
+
+  try {
+    console.log(`Attempting to send Instagram guide email to ${emailData.to}...`);
+    const result = await transporter.sendMail(mailOptions);
+    console.log(`✅ Instagram guide email sent successfully to ${emailData.to}`, result.messageId);
+    
+    EmailReputationMonitor.logEmailSent(true);
+    
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending Instagram guide email:', error);
+    console.error('SMTP Configuration:', {
+      host: process.env.SMTP_HOST,
+      port: 587,
+      user: process.env.SMTP_USER ? 'configured' : 'missing',
+      pass: process.env.SMTP_PASS ? 'configured' : 'missing'
+    });
+    
+    EmailReputationMonitor.logEmailSent(false);
+    
+    const errorString = String(error).toLowerCase();
+    if (errorString.includes('bounce') || errorString.includes('invalid') || errorString.includes('rejected')) {
+      await EmailBounceHandler.logBounce(
+        emailData.to, 
+        errorString.includes('permanent') ? 'hard' : 'soft',
+        String(error)
+      );
+    }
+    
+    return false;
+  }
+}
