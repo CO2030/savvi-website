@@ -358,145 +358,174 @@ export default function InstagramGuide() {
         <meta property="og:description" content="Your essential 12-page guide to understanding how Instagram actually protects teens — and what YOU can do to keep your child safe." />
         <meta property="og:type" content="website" />
       </Helmet>
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
-        <div className="min-h-screen flex items-center justify-center px-4 py-8">
-          <div className="container mx-auto max-w-7xl">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
-              
-              {/* Left Side - Video Feature */}
-              <div className="order-2 lg:order-1 flex flex-col items-center">
-                <div className="relative w-full max-w-md mx-auto">
-                  {/* Video Container with decorative frame */}
-                  <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+      <div className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
+        {/* Hero Header Section with Video */}
+        <div className="relative py-12 md:py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Video Side */}
+              <div className="flex justify-center md:justify-start">
+                <div className="relative">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ maxWidth: '320px' }}>
                     <video
                       autoPlay
                       loop
                       muted
                       playsInline
-                      className="w-full aspect-square object-cover"
+                      className="w-full aspect-[9/16] object-cover"
                     >
                       <source src={backgroundVideo} type="video/mp4" />
                     </video>
                   </div>
-                  {/* Decorative elements */}
-                  <div className="absolute -top-4 -left-4 w-24 h-24 bg-purple-200 rounded-full opacity-50 -z-10"></div>
-                  <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-pink-200 rounded-full opacity-50 -z-10"></div>
                 </div>
-                
-                {/* Benefits below video */}
-                <div className="mt-8 w-full max-w-md">
-                  <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">Inside the Free Guide:</h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3 bg-white/80 p-3 rounded-lg shadow-sm">
-                      <Shield className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">How Instagram's Teen Accounts really work</span>
+              </div>
+              
+              {/* Text Side */}
+              <div className="text-center md:text-left">
+                <div className="inline-block mb-4 px-4 py-2 bg-purple-100 rounded-full">
+                  <span className="text-purple-700 font-medium text-sm">Free Guide for Modern Moms</span>
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
+                  Wait! Don't Miss This <span className="text-purple-600">Free Guide</span>
+                </h1>
+                <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
+                  "Instagram's Teen Accounts — What Every Parent Needs to Know"
+                </h2>
+                <p className="text-gray-600 text-lg mb-6">
+                  Your essential <strong>12-page guide</strong> to understanding how Instagram actually protects teens — and what <strong>YOU</strong> can do to keep your child safe online.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Form and Benefits Section */}
+        <div className="py-12 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+          <div className="container mx-auto max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              {/* Benefits Card */}
+              <Card className="shadow-xl border-0 bg-white">
+                <CardHeader className="text-center pb-2">
+                  <CardTitle className="text-xl md:text-2xl font-bold text-gray-800">
+                    Inside the Free Guide, You'll Learn:
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <Shield className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">How Instagram's Teen Accounts really work</span>
                     </li>
-                    <li className="flex items-start gap-3 bg-white/80 p-3 rounded-lg shadow-sm">
-                      <AlertTriangle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">What happens if a teen lies about their age</span>
+                    <li className="flex items-start gap-3">
+                      <AlertTriangle className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">What happens if a teen lies about their age</span>
                     </li>
-                    <li className="flex items-start gap-3 bg-white/80 p-3 rounded-lg shadow-sm">
-                      <Lock className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">Whether IG shuts down after 60 minutes</span>
+                    <li className="flex items-start gap-3">
+                      <Lock className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Whether IG shuts down after 60 minutes (and what actually happens)</span>
                     </li>
-                    <li className="flex items-start gap-3 bg-white/80 p-3 rounded-lg shadow-sm">
-                      <MessageSquare className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">Conversation scripts that create trust, not conflict</span>
+                    <li className="flex items-start gap-3">
+                      <Globe className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">How global laws in Australia, Denmark & the U.K. affect your family</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Users className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">What parents must know about teen creator accounts</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">A simple parent checklist you can use this week</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <MessageSquare className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Conversation scripts that create trust, not conflict</span>
                     </li>
                   </ul>
-                </div>
-              </div>
-
-              {/* Right Side - Form */}
-              <div className="order-1 lg:order-2">
-                <div className="text-center mb-6">
-                  <div className="inline-block mb-3 px-4 py-2 bg-purple-100 rounded-full">
-                    <span className="text-purple-700 font-medium text-sm">Free Guide for Modern Moms</span>
+                  
+                  <div className="text-center p-4 bg-purple-50 rounded-lg mt-6">
+                    <p className="text-purple-700 font-medium italic">
+                      Feel informed. Feel empowered. Feel connected.
+                    </p>
+                    <p className="text-gray-600 text-sm mt-1">
+                      A must-have for moms raising teens in a digital world.
+                    </p>
                   </div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 leading-tight" data-testid="text-page-title">
-                    Wait! Don't Miss This <span className="text-purple-600">Free Guide</span>
-                  </h1>
-                  <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
-                    "Instagram's Teen Accounts — What Every Parent Needs to Know"
-                  </h2>
-                  <p className="text-gray-600 max-w-lg mx-auto">
-                    Your essential <strong>12-page guide</strong> to keeping your child safe online.
-                  </p>
-                </div>
-                
-                <Card className="shadow-2xl border-0 bg-white">
-                  <CardHeader className="text-center pb-4 bg-purple-600 rounded-t-xl">
-                    <CardTitle className="text-2xl font-bold text-white">
-                      Get Your Free PDF Now
-                    </CardTitle>
-                    <p className="text-purple-100">Delivered instantly to your inbox</p>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        <FormField
-                          control={form.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-gray-700">Your Name</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  placeholder="Enter your first name" 
-                                  className="h-12 text-lg"
-                                  data-testid="input-name"
-                                  {...field} 
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                </CardContent>
+              </Card>
 
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-gray-700">Email Address</FormLabel>
-                              <FormControl>
-                                <Input 
-                                  type="email"
-                                  placeholder="your.email@example.com" 
-                                  className="h-12 text-lg"
-                                  data-testid="input-email"
-                                  {...field} 
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+              {/* Sign Up Form */}
+              <Card className="shadow-2xl border-0 bg-white">
+                <CardHeader className="text-center pb-4 bg-purple-600 rounded-t-xl">
+                  <CardTitle className="text-2xl font-bold text-white">
+                    Get Your Free PDF Now
+                  </CardTitle>
+                  <p className="text-purple-100">Delivered instantly to your inbox</p>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-700">Your Name</FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="Enter your first name" 
+                                className="h-12 text-lg"
+                                data-testid="input-name"
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                        <Button 
-                          type="submit" 
-                          disabled={submitMutation.isPending}
-                          className="w-full h-14 text-lg font-semibold text-white shadow-lg bg-purple-600 hover:bg-purple-700 transition-all duration-200"
-                          data-testid="button-submit"
-                        >
-                          {submitMutation.isPending ? (
-                            <>
-                              <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" />
-                              Preparing Your Guide...
-                            </>
-                          ) : (
-                            "Yes, Send Me the Guide"
-                          )}
-                        </Button>
-                        
-                        <p className="text-xs text-gray-500 text-center">
-                          We respect your privacy. Unsubscribe at any time.
-                        </p>
-                      </form>
-                    </Form>
-                  </CardContent>
-                </Card>
-              </div>
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-700">Email Address</FormLabel>
+                            <FormControl>
+                              <Input 
+                                type="email"
+                                placeholder="your.email@example.com" 
+                                className="h-12 text-lg"
+                                data-testid="input-email"
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button 
+                        type="submit" 
+                        disabled={submitMutation.isPending}
+                        className="w-full h-14 text-lg font-semibold text-white shadow-lg bg-purple-600 hover:bg-purple-700 transition-all duration-200"
+                        data-testid="button-submit"
+                      >
+                        {submitMutation.isPending ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" />
+                            Preparing Your Guide...
+                          </>
+                        ) : (
+                          "Yes, Send Me the Guide"
+                        )}
+                      </Button>
+                      
+                      <p className="text-xs text-gray-500 text-center">
+                        We respect your privacy. Unsubscribe at any time.
+                      </p>
+                    </form>
+                  </Form>
+                </CardContent>
+              </Card>
             </div>
 
             <div className="mt-12 text-center">
