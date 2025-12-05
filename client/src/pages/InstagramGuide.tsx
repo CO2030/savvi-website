@@ -359,40 +359,42 @@ export default function InstagramGuide() {
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
-        {/* Hero Header Section with Centered Video */}
+        {/* Hero Header Section with Video */}
         <div className="relative py-12 md:py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
-          <div className="container mx-auto max-w-4xl">
-            {/* Centered Video */}
-            <div className="flex justify-center mb-8">
-              <div className="relative">
-                <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ maxWidth: '280px' }}>
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full aspect-[9/16] object-cover"
-                  >
-                    <source src={backgroundVideo} type="video/mp4" />
-                  </video>
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Video Side - Centered in its box */}
+              <div className="flex justify-center items-center">
+                <div className="relative">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ maxWidth: '280px' }}>
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full aspect-[9/16] object-cover"
+                    >
+                      <source src={backgroundVideo} type="video/mp4" />
+                    </video>
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Centered Text Below Video */}
-            <div className="text-center">
-              <div className="inline-block mb-4 px-4 py-2 bg-purple-100 rounded-full">
-                <span className="text-purple-700 font-medium text-sm">Free Guide for Modern Moms</span>
+              
+              {/* Text Side */}
+              <div className="text-center md:text-left">
+                <div className="inline-block mb-4 px-4 py-2 bg-purple-100 rounded-full">
+                  <span className="text-purple-700 font-medium text-sm">Free Guide for Modern Moms</span>
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
+                  Wait! Don't Miss This <span className="text-purple-600">Free Guide</span>
+                </h1>
+                <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
+                  "Instagram's Teen Accounts — What Every Parent Needs to Know"
+                </h2>
+                <p className="text-gray-600 text-lg mb-6">
+                  Your essential <strong>12-page guide</strong> to understanding how Instagram actually protects teens — and what <strong>YOU</strong> can do to keep your child safe online.
+                </p>
               </div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
-                Wait! Don't Miss This <span className="text-purple-600">Free Guide</span>
-              </h1>
-              <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
-                "Instagram's Teen Accounts — What Every Parent Needs to Know"
-              </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Your essential <strong>12-page guide</strong> to understanding how Instagram actually protects teens — and what <strong>YOU</strong> can do to keep your child safe online.
-              </p>
             </div>
           </div>
         </div>
