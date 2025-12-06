@@ -17,6 +17,7 @@ import FiveDayMeals from "@/pages/FiveDayMeals";
 import MealGuide from "@/pages/MealGuide";
 import SuccessPreview from "@/pages/SuccessPreview";
 import InstagramGuide from "@/pages/InstagramGuide";
+import Podcast from "@/pages/Podcast";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -44,6 +45,7 @@ function Router() {
       <Route path="/meal-guide" component={MealGuide} />
       <Route path="/success-preview" component={SuccessPreview} />
       <Route path="/instagram-teen-guide" component={InstagramGuide} />
+      <Route path="/podcast" component={Podcast} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="*" component={NotFound} />

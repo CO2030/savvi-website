@@ -67,6 +67,12 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             Member Perks
           </button>
           <button 
+            onClick={() => setLocation('/podcast')}
+            className="text-neutral-dark hover:text-primary transition-colors"
+          >
+            Podcast
+          </button>
+          <button 
             onClick={() => scrollToSection('about')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
@@ -114,6 +120,15 @@ export function Header({ onWaitlistClick }: HeaderProps) {
               className="text-neutral-dark hover:text-primary transition-colors py-2"
             >
               Member Perks
+            </button>
+            <button 
+              onClick={() => {
+                setLocation('/podcast');
+                closeMobileMenu();
+              }}
+              className="text-neutral-dark hover:text-primary transition-colors py-2"
+            >
+              Podcast
             </button>
             <button 
               onClick={() => scrollToSection('about')}

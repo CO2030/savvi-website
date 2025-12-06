@@ -128,7 +128,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li><a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a></li>
               <li><a href="/story" className="text-gray-300 hover:text-white transition-colors">Our Story</a></li>
-              <li><a href="/blog" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/podcast" className="text-gray-300 hover:text-white transition-colors">Podcast</a></li>
             </ul>
           </div>
           <div>
