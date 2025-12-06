@@ -13,7 +13,7 @@ export default function Podcast() {
         <meta name="description" content="Listen to the SavviWell podcast for tips on nutrition, wellness, and raising healthy families." />
       </Helmet>
       <Header onWaitlistClick={() => {}} />
-      <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <main className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
         <section className="pt-32 pb-16 px-4">
           <div className="container mx-auto max-w-4xl text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
@@ -29,7 +29,7 @@ export default function Podcast() {
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-white">
+        <section className="py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-4xl">
             <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
               What to Expect
