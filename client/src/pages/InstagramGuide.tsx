@@ -364,8 +364,8 @@ export default function InstagramGuide() {
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-6 items-center">
               {/* Video Side - Video already contains phone frame */}
-              <div className="flex justify-center md:justify-end items-center w-full">
-                <div className="relative w-full max-w-[280px] md:max-w-[420px] mx-auto md:mx-0 md:mr-0 md:ml-auto">
+              <div className="w-full flex justify-center md:justify-end">
+                <div className="max-w-[260px] md:max-w-[420px]">
                   <video
                     autoPlay
                     loop
