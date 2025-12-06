@@ -387,7 +387,7 @@ export default function InstagramGuide() {
                   Wait! Don't Miss This <span className="text-purple-600">Free Guide</span>
                 </h1>
                 <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
-                  "Instagram's Teen Accounts — What Every Parent Needs to Know"
+                  Instagram's Teen Accounts — What Every Parent Needs to Know
                 </h2>
                 <p className="text-gray-600 text-lg mb-6">
                   The essential guide to understanding how Instagram protects teens — and how you can confidently support your child online.
