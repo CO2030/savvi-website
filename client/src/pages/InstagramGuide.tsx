@@ -11,7 +11,7 @@ import { CheckCircle, Download, Shield, AlertTriangle, Globe, Users, MessageSqua
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
-import backgroundVideo from "@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_1764964107744.mp4";
+import backgroundVideo from "@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(1)_1764981652797.mp4";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
