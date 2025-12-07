@@ -22,8 +22,11 @@ export default function Podcast() {
   return (
     <>
       <Helmet>
-        <title>Podcast | SavviWell</title>
-        <meta name="description" content="Listen to the SavviWell podcast for tips on nutrition, wellness, and raising healthy families." />
+        <title>SavviWell Podcast | Wellbeing for Modern Life</title>
+        <meta name="description" content="The Savviwell Podcast by Christina and Meara explores wellbeing for modern life through honest conversations, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported." />
+        <meta property="og:title" content="SavviWell Podcast | Wellbeing for Modern Life" />
+        <meta property="og:description" content="The Savviwell Podcast by Christina and Meara explores wellbeing for modern life through honest conversations, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported." />
+        <meta property="og:type" content="website" />
       </Helmet>
       <Header onWaitlistClick={openModal} />
       
