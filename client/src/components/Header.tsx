@@ -61,10 +61,10 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         <Logo />
         <nav className="hidden md:flex space-x-6">
           <button 
-            onClick={() => scrollToSection('features')}
+            onClick={() => scrollToSection('about')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
-            Member Perks
+            About
           </button>
           <button 
             onClick={() => setLocation('/podcast')}
@@ -73,16 +73,16 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             Podcast
           </button>
           <button 
-            onClick={() => scrollToSection('about')}
-            className="text-neutral-dark hover:text-primary transition-colors"
-          >
-            About
-          </button>
-          <button 
             onClick={() => setLocation('/story')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
             Our Story
+          </button>
+          <button 
+            onClick={() => scrollToSection('features')}
+            className="text-neutral-dark hover:text-primary transition-colors"
+          >
+            Member Perks
           </button>
           <button 
             onClick={() => setLocation('/faq')}
@@ -116,10 +116,10 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         <div className="md:hidden bg-white w-full py-4 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
             <button 
-              onClick={() => scrollToSection('features')}
+              onClick={() => scrollToSection('about')}
               className="text-neutral-dark hover:text-primary transition-colors py-2"
             >
-              Member Perks
+              About
             </button>
             <button 
               onClick={() => {
@@ -131,12 +131,6 @@ export function Header({ onWaitlistClick }: HeaderProps) {
               Podcast
             </button>
             <button 
-              onClick={() => scrollToSection('about')}
-              className="text-neutral-dark hover:text-primary transition-colors py-2"
-            >
-              About
-            </button>
-            <button 
               onClick={() => {
                 setLocation('/story');
                 closeMobileMenu();
@@ -144,6 +138,12 @@ export function Header({ onWaitlistClick }: HeaderProps) {
               className="text-neutral-dark hover:text-primary transition-colors py-2"
             >
               Our Story
+            </button>
+            <button 
+              onClick={() => scrollToSection('features')}
+              className="text-neutral-dark hover:text-primary transition-colors py-2"
+            >
+              Member Perks
             </button>
             <button 
               onClick={() => {
