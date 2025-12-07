@@ -352,10 +352,10 @@ export default function InstagramGuide() {
   return (
     <>
       <Helmet>
-        <title>Instagram's Teen Accounts Guide | What Every Parent Needs to Know | Mom Connect</title>
-        <meta name="description" content="Free 12-page guide for parents: Understand how Instagram actually protects teens and what YOU can do to keep your child safe, confident, and empowered online." />
-        <meta property="og:title" content="Instagram's Teen Accounts — What Every Parent Needs to Know" />
-        <meta property="og:description" content="Your essential 12-page guide to understanding how Instagram actually protects teens — and what YOU can do to keep your child safe." />
+        <title>SavviWell Podcast | Wellbeing for Modern Life</title>
+        <meta name="description" content="A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported." />
+        <meta property="og:title" content="SavviWell Podcast | Wellbeing for Modern Life" />
+        <meta property="og:description" content="A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported." />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
