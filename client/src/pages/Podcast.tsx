@@ -72,7 +72,7 @@ export default function Podcast() {
                     className="bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
                     data-testid="button-podcast-waitlist"
                   >
-                    Get the Free Guides Now!
+                    Listen Now
                   </Button>
                 </div>
               </div>
@@ -122,10 +122,10 @@ export default function Podcast() {
         <section className="py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Be the First to Listen
+              Ready to Feel Better?
             </h2>
             <p className="text-gray-600 mb-8">
-              Join our waitlist to get notified when we launch the podcast.
+              Start listening now and get your free companion guides.
             </p>
             <Button 
               size="lg"
@@ -133,7 +133,7 @@ export default function Podcast() {
               onClick={openModal}
               data-testid="button-podcast-cta"
             >
-              Join the Waitlist
+              Listen Now
             </Button>
           </div>
         </section>
