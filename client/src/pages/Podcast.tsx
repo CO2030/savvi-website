@@ -23,9 +23,9 @@ export default function Podcast() {
     <>
       <Helmet>
         <title>SavviWell Podcast | Wellbeing for Modern Life</title>
-        <meta name="description" content="The Savviwell Podcast by Christina and Meara explores wellbeing for modern life through honest conversations, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported." />
+        <meta name="description" content="A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported." />
         <meta property="og:title" content="SavviWell Podcast | Wellbeing for Modern Life" />
-        <meta property="og:description" content="The Savviwell Podcast by Christina and Meara explores wellbeing for modern life through honest conversations, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported." />
+        <meta property="og:description" content="A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported." />
         <meta property="og:type" content="website" />
       </Helmet>
       <Header onWaitlistClick={openModal} />
