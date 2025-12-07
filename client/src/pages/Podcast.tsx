@@ -53,21 +53,28 @@ export default function Podcast() {
                     <span className="font-medium">SavviWell Podcast</span>
                   </div>
                   
-                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" data-testid="text-podcast-title">
+                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2" data-testid="text-podcast-title">
                     Coming Soon
                   </h1>
+                  <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-6">
+                    Wellbeing for Modern Life
+                  </h2>
                   
-                  <p className="text-xl text-gray-600 mb-8">
-                    We're working on bringing you insightful conversations about nutrition, wellness, and raising healthy families. Stay tuned!
+                  <p className="text-lg text-gray-600 mb-4">
+                    Honest conversations, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported in the life you're already living.
+                  </p>
+                  
+                  <p className="text-lg text-gray-700 mb-8 font-medium">
+                    Each episode comes with a free companion guide — simple, practical, and designed to help you take action.
                   </p>
 
                   <Button 
                     onClick={openModal}
                     size="lg"
-                    className="bg-primary hover:bg-primary/90 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
                     data-testid="button-podcast-waitlist"
                   >
-                    Join the Waitlist
+                    Get the Free Guides Now!
                   </Button>
                 </div>
               </div>
