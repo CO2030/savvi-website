@@ -61,6 +61,12 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         <Logo />
         <nav className="hidden md:flex space-x-6">
           <button 
+            onClick={() => setLocation('/')}
+            className="text-neutral-dark hover:text-primary transition-colors"
+          >
+            Podcast
+          </button>
+          <button 
             onClick={() => setLocation('/app')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
@@ -109,6 +115,15 @@ export function Header({ onWaitlistClick }: HeaderProps) {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white w-full py-4 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
+            <button 
+              onClick={() => {
+                setLocation('/');
+                closeMobileMenu();
+              }}
+              className="text-neutral-dark hover:text-primary transition-colors py-2"
+            >
+              Podcast
+            </button>
             <button 
               onClick={() => {
                 setLocation('/app');
