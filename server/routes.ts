@@ -1,4 +1,4 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema, insertReferralSchema, insertReferralCampaignSchema, insertShareEventSchema } from "@shared/schema";
@@ -10,8 +10,83 @@ import { EmailReputationMonitor } from "./services/reputationMonitor";
 import { config } from "./config";
 import path from "path";
 
+// Common crawler/bot user agents
+const CRAWLER_USER_AGENTS = [
+  'facebookexternalhit',
+  'Facebot',
+  'LinkedInBot',
+  'Twitterbot',
+  'WhatsApp',
+  'Slackbot',
+  'TelegramBot',
+  'Discordbot',
+  'Googlebot',
+  'bingbot',
+  'Pinterest',
+  'vkShare',
+  'Embedly',
+  'Quora Link Preview',
+  'Showyoubot'
+];
+
+// Check if request is from a crawler
+const isCrawler = (userAgent: string | undefined): boolean => {
+  if (!userAgent) return false;
+  return CRAWLER_USER_AGENTS.some(bot => userAgent.toLowerCase().includes(bot.toLowerCase()));
+};
+
+// Generate podcast-specific HTML for crawlers
+const getPodcastCrawlerHTML = (): string => {
+  const title = "SavviWell Podcast | Wellbeing for Modern Life";
+  const description = "A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported.";
+  const url = "https://savviwell.com/podcast";
+  const image = "https://savviwell.com/images/hero-background.jpeg";
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <meta name="description" content="${description}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${url}">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:image" content="${image}">
+  <meta property="og:site_name" content="SavviWell">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${image}">
+</head>
+<body>
+  <h1>${title}</h1>
+  <p>${description}</p>
+</body>
+</html>`;
+};
+
+// Podcast routes that should use podcast meta
+const PODCAST_ROUTES = ['/podcast', '/instagram-teen-guide'];
+
+// Crawler meta middleware for podcast routes
+const crawlerMetaMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const pathname = req.path;
+  const userAgent = req.headers['user-agent'];
+  
+  // Check if this is a podcast route and request is from a crawler
+  const isPodcastRoute = PODCAST_ROUTES.some(route => pathname === route || pathname.startsWith(route + '/'));
+  
+  if (isPodcastRoute && isCrawler(userAgent)) {
+    return res.status(200).set({ 'Content-Type': 'text/html' }).send(getPodcastCrawlerHTML());
+  }
+  
+  next();
+};
+
 // Admin authentication middleware
-const authenticateAdmin = (req: Request, res: Response, next: any) => {
+const authenticateAdmin = (req: Request, res: Response, next: NextFunction) => {
   const session = req.session as any;
   if (session && session.adminAuthenticated) {
     next();
@@ -21,6 +96,9 @@ const authenticateAdmin = (req: Request, res: Response, next: any) => {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Register crawler meta middleware for podcast routes (must be before catch-all)
+  app.use(crawlerMetaMiddleware);
+
   // Verify access token for meal guide
   app.get('/api/verify-access', async (req: Request, res: Response) => {
     try {
