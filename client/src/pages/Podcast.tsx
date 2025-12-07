@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet";
-import { Headphones, Play, Clock, FileText } from "lucide-react";
+import { Play, Clock, FileText } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -51,11 +51,6 @@ export default function Podcast() {
 
                 {/* Text Content */}
                 <div className="lg:order-1 lg:flex-1 text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
-                    <Headphones className="w-5 h-5" />
-                    <span className="font-medium">SavviWell Podcast</span>
-                  </div>
-                  
                   <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2" data-testid="text-podcast-title">
                     The SavviWell Podcast
                   </h1>
@@ -64,11 +59,11 @@ export default function Podcast() {
                   </h2>
                   
                   <p className="text-lg text-gray-600 mb-4">
-                    Honest conversations, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported in the life you're already living.
+                    The podcast that makes feeling good actually fit into your real life. Hosted by Meara and Christina, two moms juggling full, real, modern lives, this show is all about the simple shifts and everyday choices that help you live with more ease, more clarity, and more joy. Honest conversations, expert insights, practical tools, and free downloadable guides to help you feel calmer, healthier, and more supported in the life you're already living.
                   </p>
                   
                   <p className="text-lg text-gray-700 mb-8 font-medium">
-                    Each episode comes with a free companion guide — simple, practical, and designed to help you take action.
+                    Each episode comes with a free companion guide - simple, practical, and designed to help you take action.
                   </p>
 
                   <Button 
