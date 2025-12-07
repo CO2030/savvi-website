@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet";
-import { Headphones, Play, Clock, Calendar } from "lucide-react";
+import { Headphones, Play, Clock, FileText } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -110,10 +110,10 @@ export default function Podcast() {
               <Card className="text-center p-6 shadow-lg">
                 <CardContent className="pt-6">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Calendar className="w-8 h-8 text-primary" />
+                    <FileText className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">Weekly Episodes</h3>
-                  <p className="text-gray-600">New episodes every week to keep you inspired and informed.</p>
+                  <h3 className="font-bold text-lg mb-2">Free PDF Guides</h3>
+                  <p className="text-gray-600">Each episode comes with a free companion guide — simple, practical, and designed to help you take action.</p>
                 </CardContent>
               </Card>
             </div>
