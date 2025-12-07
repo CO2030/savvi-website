@@ -57,7 +57,7 @@ export default function Podcast() {
                   </div>
                   
                   <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2" data-testid="text-podcast-title">
-                    Coming Soon
+                    The SavviWell Podcast
                   </h1>
                   <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-6">
                     Wellbeing for Modern Life

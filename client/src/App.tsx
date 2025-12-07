@@ -30,8 +30,8 @@ function Router() {
 
   return (
     <Switch>
-      <Route path="/" component={Podcast} />
-      <Route path="/app" component={Home} />
+      <Route path="/" component={Home} />
+      <Route path="/podcast" component={Podcast} />
       <Route path="/demo" component={Demo} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={SimpleAdmin} />
@@ -46,9 +46,6 @@ function Router() {
       <Route path="/meal-guide" component={MealGuide} />
       <Route path="/success-preview" component={SuccessPreview} />
       <Route path="/instagram-teen-guide" component={InstagramGuide} />
-      <Route path="/podcast">
-        <Redirect to="/" />
-      </Route>
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="*" component={NotFound} />

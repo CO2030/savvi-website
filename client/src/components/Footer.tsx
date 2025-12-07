@@ -126,7 +126,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 font-heading">Company</h3>
             <ul className="space-y-2">
-              <li><a href="/app" className="text-gray-300 hover:text-white transition-colors">SavviWell App</a></li>
+              <li><a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a></li>
               <li><a href="/story" className="text-gray-300 hover:text-white transition-colors">Our Story</a></li>
               <li><a href="/podcast" className="text-gray-300 hover:text-white transition-colors">Podcast</a></li>
             </ul>

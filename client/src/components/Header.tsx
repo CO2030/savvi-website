@@ -31,10 +31,10 @@ export function Header({ onWaitlistClick }: HeaderProps) {
     setIsMobileMenuOpen(false);
   };
 
-  const scrollToAppSection = (id: string) => {
-    // Navigate to /app page and scroll to section
-    if (window.location.pathname !== "/app") {
-      setLocation("/app");
+  const scrollToSection = (id: string) => {
+    // Navigate to home page and scroll to section
+    if (window.location.pathname !== "/") {
+      setLocation("/");
       // Wait for navigation to complete, then scroll
       setTimeout(() => {
         const element = document.getElementById(id);
@@ -43,7 +43,7 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         }
       }, 100);
     } else {
-      // We're on app page, just scroll
+      // We're on home page, just scroll
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
@@ -61,22 +61,22 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         <Logo />
         <nav className="hidden md:flex space-x-6">
           <button 
-            onClick={() => setLocation('/')}
+            onClick={() => scrollToSection('features')}
+            className="text-neutral-dark hover:text-primary transition-colors"
+          >
+            Member Perks
+          </button>
+          <button 
+            onClick={() => setLocation('/podcast')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
             Podcast
           </button>
           <button 
-            onClick={() => setLocation('/app')}
+            onClick={() => scrollToSection('about')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
-            SavviWell App
-          </button>
-          <button 
-            onClick={() => scrollToAppSection('features')}
-            className="text-neutral-dark hover:text-primary transition-colors"
-          >
-            Member Perks
+            About
           </button>
           <button 
             onClick={() => setLocation('/story')}
@@ -116,8 +116,14 @@ export function Header({ onWaitlistClick }: HeaderProps) {
         <div className="md:hidden bg-white w-full py-4 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
             <button 
+              onClick={() => scrollToSection('features')}
+              className="text-neutral-dark hover:text-primary transition-colors py-2"
+            >
+              Member Perks
+            </button>
+            <button 
               onClick={() => {
-                setLocation('/');
+                setLocation('/podcast');
                 closeMobileMenu();
               }}
               className="text-neutral-dark hover:text-primary transition-colors py-2"
@@ -125,19 +131,10 @@ export function Header({ onWaitlistClick }: HeaderProps) {
               Podcast
             </button>
             <button 
-              onClick={() => {
-                setLocation('/app');
-                closeMobileMenu();
-              }}
+              onClick={() => scrollToSection('about')}
               className="text-neutral-dark hover:text-primary transition-colors py-2"
             >
-              SavviWell App
-            </button>
-            <button 
-              onClick={() => scrollToAppSection('features')}
-              className="text-neutral-dark hover:text-primary transition-colors py-2"
-            >
-              Member Perks
+              About
             </button>
             <button 
               onClick={() => {
