@@ -113,7 +113,7 @@ export default function Podcast() {
                     <FileText className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">Free PDF Guides</h3>
-                  <p className="text-gray-600">Each episode comes with a free companion guide — simple, practical, and designed to help you take action.</p>
+                  <p className="text-gray-600">Get a free, practical companion guide with each episode — built to help you apply what you learn.</p>
                 </CardContent>
               </Card>
             </div>
