@@ -23,7 +23,7 @@ const podcastEpisodes: PodcastEpisode[] = [
     id: "instagram-teens",
     title: "Instagram & Teens: What Every Parent Needs to Know",
     description: "A modern, practical guide for raising confident teens in a digital world. Learn how teen accounts work and how to support your child online.",
-    thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=300&fit=crop",
+    thumbnail: "/images/podcast-instagram-teens.jpeg",
     listenUrl: "#",
     guideUrl: "/instagram-teen-guide"
   }
