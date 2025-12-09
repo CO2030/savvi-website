@@ -11,6 +11,7 @@ import { CheckCircle, Download, Shield, AlertTriangle, Globe, Users, MessageSqua
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
+import { Link } from 'wouter';
 import backgroundVideo from "@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(1)_1764981652797.mp4";
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
 
@@ -352,12 +353,6 @@ export default function InstagramGuide() {
                   </ul>
                 </div>
               </div>
-
-              <div className="space-y-4">
-                <p className="text-sm text-gray-500">
-                  Part of Mom Connect — empowering moms with clarity, confidence, identity, and community in motherhood and beyond.
-                </p>
-              </div>
             </CardContent>
           </Card>
         </div>
@@ -376,19 +371,29 @@ export default function InstagramGuide() {
       </Helmet>
       <div className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
         {/* Podcast Branding Header */}
-        <div className="bg-primary py-6 px-4">
-          <div className="container mx-auto max-w-6xl flex items-center gap-4">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-white flex-shrink-0">
-              <img 
-                src={foundersImage} 
-                alt="Meara and Christina" 
-                className="w-full h-full object-cover"
-              />
+        <div className="bg-primary py-4 px-4">
+          <div className="container mx-auto max-w-6xl flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-white flex-shrink-0">
+                <img 
+                  src={foundersImage} 
+                  alt="Meara and Christina" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="text-white text-base md:text-lg font-bold">The SavviWell Podcast</h2>
+                <p className="text-white/90 text-xs md:text-sm italic">Wellbeing for Modern Life</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-white text-lg md:text-xl font-bold">The SavviWell Podcast</h2>
-              <p className="text-white/90 text-sm md:text-base italic">Wellbeing for Modern Life</p>
-            </div>
+            <nav className="flex items-center gap-4 md:gap-6">
+              <Link href="/podcast" className="text-white hover:text-white/80 text-sm md:text-base font-medium transition-colors">
+                Podcast
+              </Link>
+              <Link href="/contact" className="text-white hover:text-white/80 text-sm md:text-base font-medium transition-colors">
+                Contact Us
+              </Link>
+            </nav>
           </div>
         </div>
 
@@ -557,12 +562,6 @@ export default function InstagramGuide() {
                   </Form>
                 </CardContent>
               </Card>
-            </div>
-
-            <div className="mt-12 text-center">
-              <p className="text-gray-500 text-sm">
-                Part of <strong>Mom Connect</strong> — empowering moms with clarity, confidence, identity, and community in motherhood and beyond.
-              </p>
             </div>
           </div>
         </div>
