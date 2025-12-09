@@ -1,12 +1,33 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet";
-import { Play, Clock, FileText } from "lucide-react";
+import { Play, Clock, FileText, ExternalLink, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { WaitlistModal } from "@/components/WaitlistModal";
+import { Link } from "wouter";
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
+
+interface PodcastEpisode {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  listenUrl: string;
+  guideUrl?: string;
+}
+
+const podcastEpisodes: PodcastEpisode[] = [
+  {
+    id: "instagram-teens",
+    title: "Instagram & Teens: What Every Parent Needs to Know",
+    description: "A modern, practical guide for raising confident teens in a digital world. Learn how teen accounts work and how to support your child online.",
+    thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=300&fit=crop",
+    listenUrl: "#",
+    guideUrl: "/instagram-teen-guide"
+  }
+];
 
 export default function Podcast() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +38,10 @@ export default function Podcast() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const scrollToEpisodes = () => {
+    document.getElementById('episodes')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -67,7 +92,7 @@ export default function Podcast() {
                   </p>
 
                   <Button 
-                    onClick={openModal}
+                    onClick={scrollToEpisodes}
                     size="lg"
                     className="bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg transition-all transform hover:scale-105 px-8 py-4 text-lg"
                     data-testid="button-podcast-waitlist"
@@ -118,8 +143,61 @@ export default function Podcast() {
           </div>
         </section>
 
+        {/* Episodes Section */}
+        <section id="episodes" className="py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
+              Latest Episodes
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {podcastEpisodes.map((episode) => (
+                <Card key={episode.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-white">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={episode.thumbnail} 
+                      alt={episode.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <CardContent className="p-5">
+                    <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2">
+                      {episode.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      {episode.description}
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      {episode.guideUrl && (
+                        <Link href={episode.guideUrl}>
+                          <Button 
+                            variant="default"
+                            size="sm"
+                            className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white"
+                          >
+                            <Download className="w-4 h-4 mr-1" />
+                            Free Guide
+                          </Button>
+                        </Link>
+                      )}
+                      <a 
+                        href={episode.listenUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center text-primary hover:text-primary/80 font-medium text-sm"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Listen Here
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
-        <section className="py-16 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+        <section className="py-16 px-4 bg-white">
           <div className="container mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Ready to Feel Better?
@@ -130,7 +208,7 @@ export default function Podcast() {
             <Button 
               size="lg"
               className="bg-primary hover:bg-primary/90"
-              onClick={openModal}
+              onClick={scrollToEpisodes}
               data-testid="button-podcast-cta"
             >
               Listen Now
