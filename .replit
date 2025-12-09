@@ -24,6 +24,10 @@ localPort = 34675
 externalPort = 3002
 
 [[ports]]
+localPort = 40927
+externalPort = 3003
+
+[[ports]]
 localPort = 43193
 externalPort = 3000
 
@@ -49,4 +53,4 @@ args = "npm run dev"
 waitForPort = 5000
 
 [agent]
-integrations = ["javascript_openai==1.0.0", "javascript_sendgrid==1.0.0", "javascript_google_analytics==1.0.0"]
+integrations = ["javascript_openai:1.0.0", "javascript_sendgrid:1.0.0", "javascript_google_analytics:1.0.0"]

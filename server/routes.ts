@@ -41,6 +41,7 @@ const getPodcastCrawlerHTML = (): string => {
   const description = "A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported.";
   const url = "https://savviwell.com/podcast";
   const image = "https://savviwell.com/images/hero-background.jpeg";
+  const favicon = "https://savviwell.com/favicon.png";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,9 @@ const getPodcastCrawlerHTML = (): string => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${description}">
+  <link rel="icon" type="image/png" href="${favicon}">
+  <link rel="shortcut icon" href="${favicon}">
+  <link rel="apple-touch-icon" href="${favicon}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
   <meta property="og:title" content="${title}">
