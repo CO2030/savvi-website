@@ -209,7 +209,7 @@ export default function InstagramGuide() {
   };
 
   const handleShare = async (platform: string) => {
-    const shareUrl = `${window.location.origin}/instagram-teen-guide`;
+    const shareUrl = `${window.location.origin}/podcast/free-guides/instagram-teen-accounts`;
     const shareText = "Every parent needs this! Free guide on Instagram's Teen Accounts — what they really do and how to keep your kids safe online.";
     
     if (platform === 'copy') {

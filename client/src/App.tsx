@@ -45,7 +45,12 @@ function Router() {
       <Route path="/3-day-meals" component={FiveDayMeals} />
       <Route path="/meal-guide" component={MealGuide} />
       <Route path="/success-preview" component={SuccessPreview} />
-      <Route path="/instagram-teen-guide" component={InstagramGuide} />
+      {/* New SEO-friendly podcast guide URLs */}
+      <Route path="/podcast/free-guides/instagram-teen-accounts" component={InstagramGuide} />
+      {/* Redirect old URL to new one */}
+      <Route path="/instagram-teen-guide">
+        <Redirect to="/podcast/free-guides/instagram-teen-accounts" />
+      </Route>
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="*" component={NotFound} />

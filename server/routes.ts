@@ -72,7 +72,7 @@ const getPodcastCrawlerHTML = (): string => {
 };
 
 // Podcast routes that should use podcast meta
-const PODCAST_ROUTES = ['/podcast', '/instagram-teen-guide'];
+const PODCAST_ROUTES = ['/podcast', '/instagram-teen-guide', '/podcast/free-guides/instagram-teen-accounts'];
 
 // Crawler meta middleware for podcast routes
 const crawlerMetaMiddleware = (req: Request, res: Response, next: NextFunction) => {

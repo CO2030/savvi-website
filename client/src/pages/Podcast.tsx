@@ -25,7 +25,7 @@ const podcastEpisodes: PodcastEpisode[] = [
     description: "A modern, practical guide for raising confident teens in a digital world. Learn how teen accounts work and how to support your child online.",
     thumbnail: "/images/podcast-instagram-teens.jpeg",
     listenUrl: "#",
-    guideUrl: "/instagram-teen-guide"
+    guideUrl: "/podcast/free-guides/instagram-teen-accounts"
   }
 ];
 
