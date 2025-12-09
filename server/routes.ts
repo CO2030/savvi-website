@@ -185,6 +185,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const existingEntry = await storage.getWaitlistEntryByEmail(validatedData.email);
 
       if (existingEntry) {
+        // Resend the guide email for returning users
+        const isInstagramGuide = validatedData.source?.includes('instagram-teen-guide');
+        try {
+          if (isInstagramGuide) {
+            await sendInstagramGuideEmail({
+              to: existingEntry.email,
+              name: existingEntry.name,
+              accessToken: existingEntry.accessToken || ''
+            });
+            console.log(`📧 Resent Instagram guide email to returning user: ${existingEntry.email}`);
+          } else {
+            await sendMealGuideEmail({
+              to: existingEntry.email,
+              name: existingEntry.name,
+              accessToken: existingEntry.accessToken || ''
+            });
+            console.log(`📧 Resent meal guide email to returning user: ${existingEntry.email}`);
+          }
+        } catch (error) {
+          console.error('Error resending guide email:', error);
+        }
+        
         return res.status(400).json({
           message: "Email already registered for the waitlist",
           alreadyRegistered: true,
