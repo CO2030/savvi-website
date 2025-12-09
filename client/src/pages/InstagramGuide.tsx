@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
 import backgroundVideo from "@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(1)_1764981652797.mp4";
+import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -374,6 +375,23 @@ export default function InstagramGuide() {
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen" style={{ backgroundColor: '#f5f0eb' }}>
+        {/* Podcast Branding Header */}
+        <div className="bg-primary py-6 px-4">
+          <div className="container mx-auto max-w-6xl flex items-center gap-4">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-white flex-shrink-0">
+              <img 
+                src={foundersImage} 
+                alt="Meara and Christina" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="text-white text-lg md:text-xl font-bold">The SavviWell Podcast</h2>
+              <p className="text-white/90 text-sm md:text-base italic">Wellbeing for Modern Life</p>
+            </div>
+          </div>
+        </div>
+
         {/* Hero Header Section with Video */}
         <div className="relative py-6 md:py-10 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-6xl">
