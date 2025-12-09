@@ -110,8 +110,20 @@ export default function InstagramGuide() {
 
   const submitMutation = useMutation({
     mutationFn: async (data: InstagramGuideFormData) => {
-      const response = await apiRequest("POST", "/api/waitlist", data);
-      return response;
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        credentials: "include"
+      });
+      const responseData = await res.json();
+      if (!res.ok) {
+        const error = new Error(responseData.message || "Request failed") as any;
+        error.accessToken = responseData.accessToken;
+        error.alreadyRegistered = responseData.alreadyRegistered;
+        throw error;
+      }
+      return responseData;
     },
     onSuccess: async (response: any) => {
       setIsSubmitted(true);

@@ -560,11 +560,10 @@ Part of Mom Connect — empowering moms with clarity, confidence, identity, and 
         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
         
         <div style="font-size: 14px; color: #666; text-align: center;">
-          <p>Best regards,<br><strong>The Mom Connect Team</strong></p>
+          <p>Best regards,<br><strong>Meara and Christina</strong><br>Co-Founders, The SavviWell Podcast</p>
           
           <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
             <p style="font-size: 12px; color: #999;">
-              Part of <strong>Mom Connect</strong> — empowering moms with clarity, confidence, identity, and community in motherhood and beyond.<br>
               <a href="mailto:hello@savviwell.com" style="color: #9333ea;">Contact us</a> | 
               <a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #9333ea;">Unsubscribe</a>
             </p>
