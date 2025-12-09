@@ -24,7 +24,7 @@ const podcastEpisodes: PodcastEpisode[] = [
     title: "Instagram & Teens: What Every Parent Needs to Know",
     description: "A modern, practical guide for raising confident teens in a digital world. Learn how teen accounts work and how to support your child online.",
     thumbnail: "/images/podcast-instagram-teens.jpeg",
-    listenUrl: "#",
+    listenUrl: "https://open.spotify.com/episode/4qKTPNUDC2Tmc0uUzPgiv8?si=XSlw8iLmQga0Vd6-wraI1Q",
     guideUrl: "/podcast/free-guides/instagram-teen-accounts"
   }
 ];
