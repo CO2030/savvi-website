@@ -166,8 +166,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(403).json({ message: 'Invalid or expired access token' });
     }
     
-    const filePath = path.join(process.cwd(), 'server/assets/Instagram-Teen-Accounts-Guide.pdf');
-    res.download(filePath, 'Instagram-Teen-Accounts-Guide.pdf', (err) => {
+    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-Instagram-Teen-Guide.pdf');
+    res.download(filePath, 'SavviWell-Instagram-Teen-Guide.pdf', (err) => {
       if (err) {
         console.error('Error downloading Instagram guide file:', err);
         res.status(500).send('Error downloading file');
