@@ -40,7 +40,7 @@ const getPodcastCrawlerHTML = (): string => {
   const title = "SavviWell Podcast | Wellbeing for Modern Life";
   const description = "A wellbeing podcast for real life with Meara and Christina. Honest conversations, practical tools, and free guides to help you feel calmer and more supported.";
   const url = "https://savviwell.com/podcast";
-  const image = "https://savviwell.com/images/hero-background.jpeg";
+  const image = "https://savviwell.com/images/podcast-share.png";
   const favicon = "https://savviwell.com/favicon.png";
 
   return `<!DOCTYPE html>
