@@ -158,6 +158,9 @@ export default function InstagramGuide() {
     },
     onError: (error: any) => {
       if (error.message?.includes("already registered")) {
+        if (error.accessToken) {
+          setAccessToken(error.accessToken);
+        }
         toast({
           title: "Already Registered",
           description: "This email is already registered. Check your inbox for the guide!",
