@@ -71,8 +71,8 @@ const getPodcastCrawlerHTML = (): string => {
 </html>`;
 };
 
-// Podcast routes that should use podcast meta
-const PODCAST_ROUTES = ['/podcast', '/instagram-teen-guide', '/podcast/free-guides/instagram-teen-accounts'];
+// Podcast routes that should use podcast meta (canonical URLs only - old paths redirect first)
+const PODCAST_ROUTES = ['/podcast', '/podcast/free-guides/instagram-teen-accounts'];
 
 // Crawler meta middleware for podcast routes
 const crawlerMetaMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -102,6 +102,11 @@ const authenticateAdmin = (req: Request, res: Response, next: NextFunction) => {
 export async function registerRoutes(app: Express): Promise<Server> {
   // Register crawler meta middleware for podcast routes (must be before catch-all)
   app.use(crawlerMetaMiddleware);
+
+  // Permanent redirect from old Instagram guide URL to new SEO-friendly URL
+  app.get('/instagram-teen-guide', (req: Request, res: Response) => {
+    return res.redirect(301, '/podcast/free-guides/instagram-teen-accounts');
+  });
 
   // Verify access token for meal guide
   app.get('/api/verify-access', async (req: Request, res: Response) => {
