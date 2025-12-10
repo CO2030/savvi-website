@@ -220,7 +220,7 @@ export default function Podcast() {
                             href={episode.watchUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 text-white font-medium text-sm py-2 px-3 rounded-md transition-colors"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-700 text-white font-medium text-sm py-2 px-3 rounded-md transition-colors"
                           >
                             <SiYoutube className="w-4 h-4" />
                             Watch
