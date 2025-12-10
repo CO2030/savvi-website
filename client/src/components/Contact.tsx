@@ -141,41 +141,7 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <Mail className="h-6 w-6 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-medium text-gray-900">Email</h4>
-                    <p className="text-gray-600">savviwell@gmail.com</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <MessageSquare className="h-6 w-6 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-medium text-gray-900">Response Time</h4>
-                    <p className="text-gray-600">We typically respond within 24 hours</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-primary/5 p-6 rounded-lg">
-              <h4 className="font-semibold text-gray-900 mb-3">Ready to Start Your Health Journey?</h4>
-              <p className="text-gray-600 mb-4">
-                Join thousands of others who are already transforming their health with personalized AI-powered nutrition.
-              </p>
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                Join the Waitlist
-              </Button>
-            </div>
-          </div>
-
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
           <Card>
             <CardHeader>
