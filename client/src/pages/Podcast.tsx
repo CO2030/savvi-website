@@ -16,6 +16,7 @@ interface PodcastEpisode {
   description: string;
   thumbnail: string;
   listenUrl: string;
+  watchUrl?: string;
   guideUrl?: string;
 }
 
@@ -26,6 +27,7 @@ const podcastEpisodes: PodcastEpisode[] = [
     description: "A modern, practical guide for raising confident teens in a digital world. Learn how teen accounts work and how to support your child online.",
     thumbnail: "/images/podcast-instagram-teens.jpeg",
     listenUrl: "https://open.spotify.com/episode/4qKTPNUDC2Tmc0uUzPgiv8?si=XSlw8iLmQga0Vd6-wraI1Q",
+    watchUrl: "https://www.youtube.com/watch?v=SayBeBrh9PA",
     guideUrl: "/podcast/free-guides/instagram-teen-accounts"
   }
 ];
@@ -190,28 +192,41 @@ export default function Podcast() {
                     <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                       {episode.description}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="flex flex-col gap-2">
                       {episode.guideUrl && (
                         <Link href={episode.guideUrl}>
                           <Button 
                             variant="default"
                             size="sm"
-                            className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white"
+                            className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                           >
                             <Download className="w-4 h-4 mr-1" />
                             Free Guide
                           </Button>
                         </Link>
                       )}
-                      <a 
-                        href={episode.listenUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center text-primary hover:text-primary/80 font-medium text-sm"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        Listen Here
-                      </a>
+                      <div className="flex gap-2">
+                        <a 
+                          href={episode.listenUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 text-white font-medium text-sm py-2 px-3 rounded-md transition-colors"
+                        >
+                          <SiSpotify className="w-4 h-4" />
+                          Listen
+                        </a>
+                        {episode.watchUrl && (
+                          <a 
+                            href={episode.watchUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 text-white font-medium text-sm py-2 px-3 rounded-md transition-colors"
+                          >
+                            <SiYoutube className="w-4 h-4" />
+                            Watch
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
