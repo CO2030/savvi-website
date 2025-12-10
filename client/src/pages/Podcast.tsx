@@ -114,7 +114,7 @@ export default function Podcast() {
                       <SiSpotify className="w-8 h-8" />
                     </a>
                     <a 
-                      href="#" 
+                      href="https://www.youtube.com/channel/UCgFchYWJnDOCSucxXlkmhLQ" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-[#FF0000] hover:text-[#cc0000] transition-colors"
