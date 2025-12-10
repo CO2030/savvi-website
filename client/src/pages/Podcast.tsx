@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { WaitlistModal } from "@/components/WaitlistModal";
 import { Link } from "wouter";
+import { SiSpotify, SiYoutube } from "react-icons/si";
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
 
 interface PodcastEpisode {
@@ -99,6 +100,29 @@ export default function Podcast() {
                   >
                     Listen Now
                   </Button>
+
+                  {/* Podcast Platform Icons */}
+                  <div className="flex items-center gap-4 mt-6 justify-center lg:justify-start">
+                    <span className="text-gray-600 text-sm">Listen on:</span>
+                    <a 
+                      href="https://open.spotify.com/show/60c3CSpgmto4AvEpcSsrgI" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#1DB954] hover:text-[#1ed760] transition-colors"
+                      aria-label="Listen on Spotify"
+                    >
+                      <SiSpotify className="w-8 h-8" />
+                    </a>
+                    <a 
+                      href="#" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#FF0000] hover:text-[#cc0000] transition-colors"
+                      aria-label="Watch on YouTube"
+                    >
+                      <SiYoutube className="w-9 h-9" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
