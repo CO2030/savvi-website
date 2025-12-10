@@ -14,6 +14,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'wouter';
 import backgroundVideo from "@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(1)_1764981652797.mp4";
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
+import instagramBrandingImage from "@assets/instagram-branding-banner.jpg";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -395,6 +396,15 @@ export default function InstagramGuide() {
               </Link>
             </nav>
           </div>
+        </div>
+
+        {/* Branding Banner Image */}
+        <div className="container mx-auto max-w-4xl px-4 pt-6">
+          <img 
+            src={instagramBrandingImage} 
+            alt="Is Instagram Safe for Teens? What Parents Need to Know" 
+            className="w-full rounded-lg shadow-lg"
+          />
         </div>
 
         {/* Hero Header Section with Video */}
