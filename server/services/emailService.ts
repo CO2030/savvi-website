@@ -493,7 +493,7 @@ export async function sendInstagramGuideEmail(emailData: EmailData): Promise<boo
   console.log(`📧 Sending Instagram guide email to: ${emailData.to}`);
 
   const mailOptions = {
-    from: `"Mom Connect" <${process.env.SMTP_USER}>`,
+    from: `"SavviWell Podcast" <${process.env.SMTP_USER}>`,
     to: emailData.to,
     subject: "📱 Your FREE Instagram Teen Accounts Guide is Here!",
     text: `Hi ${emailData.name},
@@ -514,9 +514,9 @@ Feel informed. Feel empowered. Feel connected.
 Your PDF guide is attached to this email!
 
 Best regards,
-The Mom Connect Team
+The SavviWell Podcast Team
 
-Part of Mom Connect — empowering moms with clarity, confidence, identity, and community in motherhood and beyond.
+Wellbeing for modern life — honest conversations, practical tools, and free guides to help you feel calmer and more supported.
 `,
     html: `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f5ff;">

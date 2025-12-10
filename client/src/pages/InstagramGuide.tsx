@@ -88,7 +88,7 @@ export default function InstagramGuide() {
     
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('event', 'instagram_guide_page_view', {
-        page_title: "Instagram's Teen Accounts Guide - Mom Connect",
+        page_title: "Instagram's Teen Accounts Guide - SavviWell Podcast",
         page_location: window.location.href,
         source_attribution: source,
         campaign_attribution: campaign || 'none',
@@ -249,7 +249,7 @@ export default function InstagramGuide() {
     return (
       <>
         <Helmet>
-          <title>Success! Your Guide is Ready | Mom Connect</title>
+          <title>Success! Your Guide is Ready | SavviWell Podcast</title>
         </Helmet>
         <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center p-4">
           <Card className="w-full max-w-2xl mx-auto text-center shadow-2xl border-0">
