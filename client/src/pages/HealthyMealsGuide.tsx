@@ -12,7 +12,7 @@ import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
 import { Link } from 'wouter';
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
-import tabletHeaderImage from "@assets/Tablet_Image__1767914276260.png";
+import tabletHeaderImage from "@assets/Tablet_Image_1_1767914483519.png";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -371,13 +371,24 @@ export default function HealthyMealsGuide() {
           </div>
         </div>
 
-        {/* Branding Banner Image */}
+        {/* Branding Banner Image with Text Overlay */}
         <div className="container mx-auto max-w-4xl px-4 pt-6">
-          <img 
-            src={tabletHeaderImage} 
-            alt="Nutritious, Flexible, Actually doable - even on your busiest days" 
-            className="w-full rounded-lg shadow-lg"
-          />
+          <div className="relative rounded-lg shadow-lg overflow-hidden">
+            <img 
+              src={tabletHeaderImage} 
+              alt="Healthy meals on tablet" 
+              className="w-full"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+              <div className="text-center px-4">
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg leading-tight italic">
+                  Nutritious. Flexible.<br/>
+                  Actually doable -<br/>
+                  <span className="text-green-300">even on your busiest days.</span>
+                </h2>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Hero Header Section with Guide Mockup */}
