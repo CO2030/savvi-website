@@ -380,12 +380,12 @@ export default function HealthyMealsGuide() {
               alt="Healthy meals on tablet" 
               className="w-full"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-              <div className="text-center px-4">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center px-6 py-4 bg-black/50 rounded-lg">
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg leading-tight italic">
                   Nutritious. Flexible.<br/>
                   Actually doable -<br/>
-                  <span style={{ color: '#16a34a' }}>even on your busiest days.</span>
+                  <span style={{ color: '#22c55e' }}>even on your busiest days.</span>
                 </h2>
               </div>
             </div>
