@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, Download, Utensils, ShoppingCart, Heart, Clock, Share2, Copy } from "lucide-react";
+import { CheckCircle, Download, Share2, Copy } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
@@ -451,8 +451,7 @@ export default function HealthyMealsGuide() {
 
                 <Card className="shadow-lg border-0 bg-green-50 border-l-4 border-l-green-500">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-green-700 mb-3 flex items-center gap-2">
-                      <Utensils className="w-6 h-6" />
+                    <h3 className="text-xl font-bold text-green-700 mb-3">
                       Free Guide Included
                     </h3>
                     <p className="text-gray-700 mb-4">
@@ -478,24 +477,24 @@ export default function HealthyMealsGuide() {
 
                 <Card className="shadow-lg border-0 bg-white">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
-                      🎧 In This Episode, We Cover:
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      In This Episode, We Cover:
                     </h3>
                     <ul className="space-y-2 text-gray-700">
                       <li className="flex items-start gap-2">
-                        <Heart className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                         Three easy, healthy family meals that actually work
                       </li>
                       <li className="flex items-start gap-2">
-                        <Utensils className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                         What makes a meal truly family-friendly
                       </li>
                       <li className="flex items-start gap-2">
-                        <ShoppingCart className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                         How to simplify healthy eating without overthinking it
                       </li>
                       <li className="flex items-start gap-2">
-                        <Clock className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                         Small mindset shifts that reduce the mental load around food
                       </li>
                     </ul>
@@ -508,7 +507,7 @@ export default function HealthyMealsGuide() {
                 <Card className="shadow-2xl border-0 bg-white">
                   <CardHeader className="text-center pb-2">
                     <CardTitle className="text-2xl font-bold text-gray-800">
-                      👇 Download Your Free Guide
+                      Download Your Free Guide
                     </CardTitle>
                     <p className="text-gray-600 mt-2">
                       Get instant access to 3 easy, healthy meals + grocery lists
