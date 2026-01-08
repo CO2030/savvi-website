@@ -421,13 +421,13 @@ export default function HealthyMealsGuide() {
                   <span className="text-green-700 font-medium text-sm">Free Guide for Busy Families</span>
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
-                  Wait! Don't Miss This <span className="text-green-600">Free Guide</span>
+                  A Gentle <span className="text-green-600">January Reset</span>
                 </h1>
-                <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
-                  3 Easy Healthy Meals — A Gentle Reset for Busy Families
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
+                  3 Easy Meals to Get Back Into Healthy Eating
                 </h2>
-                <p className="text-gray-600 text-lg mb-6">
-                  Simple, nutritious recipes with smart grocery lists. Less stress, more nourishment — even on your busiest days.
+                <p className="text-lg text-gray-600">
+                  Three Easy Healthy Family Meals
                 </p>
               </div>
             </div>
