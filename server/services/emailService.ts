@@ -642,10 +642,10 @@ export async function sendHealthyMealsGuideEmail(emailData: EmailData): Promise<
   const mailOptions = {
     from: `"SavviWell Podcast" <${process.env.SMTP_USER}>`,
     to: emailData.to,
-    subject: "🥗 Your FREE 3 Easy Healthy Meals Guide is Here!",
+    subject: "🥗 Your FREE Easy Healthy Meals Guide is Here!",
     text: `Hi ${emailData.name},
 
-Thank you for downloading our 3 Easy Healthy Meals Guide! A gentle January reset for busy families who want simple, healthy meals without the overwhelm.
+Thank you for downloading our Easy Healthy Meals Guide! Get back on track with simple, healthy meals for gut health, energy & balance — without the overwhelm.
 
 Inside Your Guide, You'll Find:
 ✅ Three easy, healthy family meals that actually work
@@ -669,13 +669,13 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f0fdf4;">
       <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         <h1 style="color: #16a34a; text-align: center; margin-bottom: 20px;">
-          🥗 Your FREE 3 Easy Healthy Meals Guide is Here!
+          🥗 Your FREE Easy Healthy Meals Guide is Here!
         </h1>
         
         <p style="font-size: 16px; color: #333;">Hi ${emailData.name},</p>
         
         <p style="font-size: 16px; color: #333; line-height: 1.6;">
-          Thank you for downloading our 3 Easy Healthy Meals Guide! A gentle January reset for busy families who want simple, healthy meals without the overwhelm.
+          Thank you for downloading our Easy Healthy Meals Guide! Get back on track with simple, healthy meals for gut health, energy & balance — without the overwhelm.
         </p>
         
         <div style="background-color: #dcfce7; padding: 20px; border-radius: 8px; margin: 20px 0;">
