@@ -12,6 +12,7 @@ import confetti from 'canvas-confetti';
 import { Helmet } from 'react-helmet';
 import { Link } from 'wouter';
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
+import tabletHeaderImage from "@assets/Tablet_Image__1767914276260.png";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -370,21 +371,55 @@ export default function HealthyMealsGuide() {
           </div>
         </div>
 
-        {/* Hero Section */}
-        <div className="py-8 md:py-12 px-4" style={{ backgroundColor: '#f5f0eb' }}>
-          <div className="container mx-auto max-w-4xl text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-green-100 rounded-full">
-              <span className="text-green-700 font-medium text-sm">Free Guide for Busy Families</span>
+        {/* Branding Banner Image */}
+        <div className="container mx-auto max-w-4xl px-4 pt-6">
+          <img 
+            src={tabletHeaderImage} 
+            alt="Nutritious, Flexible, Actually doable - even on your busiest days" 
+            className="w-full rounded-lg shadow-lg"
+          />
+        </div>
+
+        {/* Hero Header Section with Guide Mockup */}
+        <div className="relative py-6 md:py-10 px-4" style={{ backgroundColor: '#f5f0eb' }}>
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              {/* Guide Mockup Side - Phone/Tablet styled display */}
+              <div className="w-full flex justify-center md:justify-end">
+                <div className="max-w-[260px] md:max-w-[320px]">
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 border-4 border-gray-200">
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-6 text-center">
+                      <p className="text-green-700 font-semibold text-sm mb-2">SavviWell</p>
+                      <h3 className="text-2xl md:text-3xl font-bold text-green-800 leading-tight mb-2">
+                        3 EASY<br/>HEALTHY<br/>MEALS
+                      </h3>
+                      <p className="text-green-600 text-sm italic mb-4">for busy lives</p>
+                      <p className="text-gray-600 text-xs">Nutritious meals + wellness<br/>without the stress</p>
+                      <div className="mt-4 pt-4 border-t border-green-200">
+                        <p className="text-xs text-gray-500">Created by a</p>
+                        <p className="text-sm font-semibold text-green-700">Certified Integrative<br/>Nutritionist</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Text Side */}
+              <div className="text-center md:text-left">
+                <div className="inline-block mb-4 px-4 py-2 bg-green-100 rounded-full">
+                  <span className="text-green-700 font-medium text-sm">Free Guide for Busy Families</span>
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
+                  Wait! Don't Miss This <span className="text-green-600">Free Guide</span>
+                </h1>
+                <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
+                  3 Easy Healthy Meals — A Gentle Reset for Busy Families
+                </h2>
+                <p className="text-gray-600 text-lg mb-6">
+                  Simple, nutritious recipes with smart grocery lists. Less stress, more nourishment — even on your busiest days.
+                </p>
+              </div>
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
-              A Gentle <span className="text-green-600">January Reset</span>
-            </h1>
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
-              3 Easy Meals to Get Back Into Healthy Eating
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Three Easy Healthy Family Meals
-            </p>
           </div>
         </div>
 
