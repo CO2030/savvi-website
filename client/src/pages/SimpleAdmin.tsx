@@ -7,11 +7,13 @@ import { useToast } from "@/hooks/use-toast";
 import { WaitlistEntry, ContactSubmission, Referral, ReferralCampaign, ReferralAchievement } from "@shared/schema";
 import { Logo } from "@/components/Logo";
 import { apiRequest } from "@/lib/queryClient";
-import { Download, Trash2 } from "lucide-react";
+import { Download, Trash2, Filter } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function SimpleAdmin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
+  const [sourceFilter, setSourceFilter] = useState<string>("all");
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -281,31 +283,49 @@ export default function SimpleAdmin() {
     );
   }
 
-  // Group waitlist entries by signup type (Lead Magnet vs Instagram Guide vs Regular Waitlist)
-  const groupedWaitlist = waitlistEntries ? waitlistEntries.reduce((groups: Record<string, WaitlistEntry[]>, entry: WaitlistEntry) => {
+  // Get unique sources for filtering
+  const uniqueSources: string[] = waitlistEntries 
+    ? (Array.from(new Set(waitlistEntries.map((e: WaitlistEntry) => e.source || 'direct'))) as string[]).sort() 
+    : [];
+  
+  // Filter entries based on selected source
+  const filteredEntries: WaitlistEntry[] = waitlistEntries ? (
+    sourceFilter === 'all' 
+      ? waitlistEntries 
+      : waitlistEntries.filter((entry: WaitlistEntry) => (entry.source || 'direct') === sourceFilter)
+  ) : [];
+
+  // Group waitlist entries by signup type (Lead Magnet vs Instagram Guide vs Healthy Meals vs Regular Waitlist)
+  const groupedWaitlist = filteredEntries.reduce((groups: Record<string, WaitlistEntry[]>, entry: WaitlistEntry) => {
     const isInstagramGuide = entry.source?.includes('instagram-teen-guide');
+    const isHealthyMealsGuide = entry.source?.includes('healthy-meals-guide');
     const isLeadMagnet = entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet');
-    let signupType = '📝 Regular Waitlist';
+    let signupType = 'Regular Waitlist';
     if (isInstagramGuide) {
-      signupType = '📱 Instagram Guide Signups';
+      signupType = 'Instagram Teen Guide';
+    } else if (isHealthyMealsGuide) {
+      signupType = 'Healthy Meals Guide';
     } else if (isLeadMagnet) {
-      signupType = '🎯 Lead Magnet Signups';
+      signupType = 'Lead Magnet Signups';
     }
     if (!groups[signupType]) {
       groups[signupType] = [];
     }
     groups[signupType].push(entry);
     return groups;
-  }, {} as Record<string, WaitlistEntry[]>) : {};
+  }, {} as Record<string, WaitlistEntry[]>);
 
   // Calculate signup type stats
   const instagramGuideCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
     entry.source?.includes('instagram-teen-guide')
   ).length : 0;
+  const healthyMealsCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
+    entry.source?.includes('healthy-meals-guide')
+  ).length : 0;
   const leadMagnetCount = waitlistEntries ? waitlistEntries.filter((entry: WaitlistEntry) => 
     (entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet')) && !entry.source?.includes('instagram-teen-guide')
   ).length : 0;
-  const regularWaitlistCount = (waitlistEntries?.length || 0) - leadMagnetCount - instagramGuideCount;
+  const regularWaitlistCount = (waitlistEntries?.length || 0) - leadMagnetCount - instagramGuideCount - healthyMealsCount;
 
   // Group contact submissions by reason
   const groupedContacts = contactSubmissions ? contactSubmissions.reduce((groups: Record<string, ContactSubmission[]>, submission: ContactSubmission) => {
@@ -360,9 +380,50 @@ export default function SimpleAdmin() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {/* Waitlist Section - Grouped by User Type & Health Goal */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Waitlist Entries ({waitlistEntries?.length || 0})
-            </h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">
+                Waitlist Entries ({filteredEntries.length}{sourceFilter !== 'all' ? ` of ${waitlistEntries?.length || 0}` : ''})
+              </h2>
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4 text-gray-500" />
+                <Select value={sourceFilter} onValueChange={setSourceFilter}>
+                  <SelectTrigger className="w-[200px]">
+                    <SelectValue placeholder="Filter by source" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Sources</SelectItem>
+                    {uniqueSources.map(source => (
+                      <SelectItem key={source} value={source}>
+                        {source === 'healthy-meals-guide' ? 'Healthy Meals Guide' :
+                         source === 'instagram-teen-guide-direct' ? 'Instagram Teen Guide' :
+                         source.includes('lead-magnet') ? 'Lead Magnet' :
+                         source || 'Direct'}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            {/* Stats Summary */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-sm">
+              <div className="bg-green-50 p-2 rounded text-center">
+                <div className="font-bold text-green-700">{healthyMealsCount}</div>
+                <div className="text-green-600 text-xs">Healthy Meals</div>
+              </div>
+              <div className="bg-purple-50 p-2 rounded text-center">
+                <div className="font-bold text-purple-700">{instagramGuideCount}</div>
+                <div className="text-purple-600 text-xs">Instagram Guide</div>
+              </div>
+              <div className="bg-orange-50 p-2 rounded text-center">
+                <div className="font-bold text-orange-700">{leadMagnetCount}</div>
+                <div className="text-orange-600 text-xs">Lead Magnet</div>
+              </div>
+              <div className="bg-blue-50 p-2 rounded text-center">
+                <div className="font-bold text-blue-700">{regularWaitlistCount}</div>
+                <div className="text-blue-600 text-xs">Regular</div>
+              </div>
+            </div>
             
             {waitlistLoading ? (
               <p>Loading waitlist entries...</p>
@@ -376,27 +437,33 @@ export default function SimpleAdmin() {
                     <div className="space-y-3">
                       {entries.map((entry: WaitlistEntry) => {
                         const isLeadMagnet = entry.source?.includes('5-day-lead-magnet') || entry.source?.includes('lead-magnet');
+                        const isInstagramGuide = entry.source?.includes('instagram-teen-guide');
+                        const isHealthyMeals = entry.source?.includes('healthy-meals-guide');
+                        
+                        const getBgColor = () => {
+                          if (isHealthyMeals) return 'bg-green-50 border-green-500';
+                          if (isInstagramGuide) return 'bg-purple-50 border-purple-500';
+                          if (isLeadMagnet) return 'bg-orange-50 border-orange-400';
+                          return 'bg-blue-50 border-blue-400';
+                        };
+                        
+                        const getTypeLabel = () => {
+                          if (isHealthyMeals) return 'Healthy Meals Guide';
+                          if (isInstagramGuide) return 'Instagram Teen Guide';
+                          if (isLeadMagnet) return 'Lead Magnet';
+                          return 'Regular Waitlist';
+                        };
+                        
                         return (
-                          <div key={entry.id} className={`rounded p-3 border-l-4 ${isLeadMagnet ? 'bg-orange-50 border-orange-400' : 'bg-green-50 border-green-400'}`}>
+                          <div key={entry.id} className={`rounded p-3 border-l-4 ${getBgColor()}`}>
                             <div className="flex justify-between items-start">
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm flex-1">
                                 <div><strong>Name:</strong> {entry.name}</div>
                                 <div><strong>Email:</strong> {entry.email}</div>
-                                <div><strong>User Type:</strong> {entry.userType}</div>
-                                <div><strong>Health Goal:</strong> {entry.healthGoal}</div>
-                                <div><strong>Dietary Concern:</strong> {entry.dietaryConcern}</div>
                                 <div><strong>Source:</strong> {entry.source || 'Direct'}</div>
-                                <div className={`font-medium ${isLeadMagnet ? 'text-orange-600' : 'text-green-600'}`}>
-                                  <strong>Type:</strong> {isLeadMagnet ? '🎯 Lead Magnet' : '📝 Regular Waitlist'}
-                                </div>
                                 <div className="text-gray-500">
                                   <strong>Date:</strong> {new Date(entry.createdAt).toLocaleDateString()}
                                 </div>
-                                {isLeadMagnet && (
-                                  <div className="md:col-span-2 text-orange-600 text-xs font-medium">
-                                    ✅ User received 5-Day Meals Guide email automatically
-                                  </div>
-                                )}
                               </div>
                               <Button
                                 variant="ghost"

@@ -9,7 +9,7 @@ import {
   shareEvents, type ShareEvent, type InsertShareEvent
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -91,7 +91,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllWaitlistEntries(): Promise<WaitlistEntry[]> {
-    return await db.select().from(waitlistEntries);
+    return await db.select().from(waitlistEntries).orderBy(desc(waitlistEntries.createdAt));
   }
 
   async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
