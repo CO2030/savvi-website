@@ -88,7 +88,7 @@ export default function HealthyMealsGuide() {
     
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('event', 'healthy_meals_guide_page_view', {
-        page_title: "3 Easy Healthy Meals Guide - SavviWell Podcast",
+        page_title: "Easy Healthy Meals Guide - SavviWell Podcast",
         page_location: window.location.href,
         source_attribution: source,
         campaign_attribution: campaign || 'none',
@@ -150,7 +150,7 @@ export default function HealthyMealsGuide() {
       });
       toast({
         title: "Success!",
-        description: "Your 3 Easy Healthy Meals guide is on its way!",
+        description: "Your Easy Healthy Meals guide is on its way!",
         duration: 5000
       });
       queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
@@ -191,7 +191,7 @@ export default function HealthyMealsGuide() {
 
   const handleShare = (platform: string) => {
     const shareUrl = window.location.href;
-    const shareText = "Check out this free guide: 3 Easy Healthy Meals for busy families!";
+    const shareText = "Check out this free guide: Easy, Healthy Meals to Get Back on Track — for Gut Health, Energy & Balance!";
     
     if (platform === 'copy') {
       try {
@@ -240,7 +240,7 @@ export default function HealthyMealsGuide() {
                   You're All Set!
                 </h1>
                 <p className="text-lg text-gray-600 mb-8" data-testid="text-success-message">
-                  Your <strong>3 Easy Healthy Meals</strong> guide is being prepared and will be delivered to your inbox within the next few minutes.
+                  Your <strong>Easy Healthy Meals</strong> guide is being prepared and will be delivered to your inbox within the next few minutes.
                 </p>
                 
                 <div className="mb-8">
@@ -338,9 +338,9 @@ export default function HealthyMealsGuide() {
   return (
     <>
       <Helmet>
-        <title>3 Easy Healthy Meals - Free Guide | SavviWell Podcast</title>
+        <title>Easy, Healthy Meals to Get Back on Track After the Holidays | SavviWell Podcast</title>
         <meta name="description" content="Download your free guide with 3 easy, healthy family meals plus smart grocery lists. Simple meals, less mental load, and healthy habits without overwhelm." />
-        <meta property="og:title" content="3 Easy Healthy Meals - Free Guide | SavviWell Podcast" />
+        <meta property="og:title" content="Easy, Healthy Meals to Get Back on Track After the Holidays | SavviWell Podcast" />
         <meta property="og:description" content="Download your free guide with 3 easy, healthy family meals plus smart grocery lists. Simple meals, less mental load, and healthy habits without overwhelm." />
         <meta property="og:type" content="website" />
       </Helmet>
@@ -402,7 +402,7 @@ export default function HealthyMealsGuide() {
                   <div className="bg-white rounded-3xl shadow-2xl p-3 border-4 border-gray-200">
                     <img 
                       src={guideCoverImage} 
-                      alt="3 Easy Healthy Meals Guide Cover" 
+                      alt="Easy Healthy Meals Guide Cover" 
                       className="w-full rounded-2xl"
                     />
                   </div>
@@ -415,14 +415,11 @@ export default function HealthyMealsGuide() {
                   <span className="text-green-700 font-medium text-sm">Free Guide for Busy Families</span>
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight" data-testid="text-page-title">
-                  A Gentle <span className="text-green-600">January Reset</span>
+                  Easy, Healthy Meals to <span className="text-green-600">Get You Back on Track</span> After the Holidays
                 </h1>
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4" data-testid="text-page-subtitle">
-                  3 Easy Meals to Get Back Into Healthy Eating
+                  For Gut Health, Energy & Balance
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Three Easy Healthy Family Meals
-                </p>
               </div>
             </div>
           </div>
@@ -441,7 +438,7 @@ export default function HealthyMealsGuide() {
                       If healthy eating feels harder than it should — especially when you're cooking for a family — this guide is for you.
                     </p>
                     <p className="text-gray-700 mb-4">
-                      January doesn't have to mean restriction, perfection, or starting over. This gentle reset is about simple meals, less mental load, and getting back into healthy habits without overwhelm.
+                      Getting back on track doesn't have to mean restriction, perfection, or starting over. This gentle reset is about simple meals, less mental load, and getting back into healthy habits without overwhelm.
                     </p>
                     <p className="text-gray-700">
                       In this SavviWell podcast episode, we're sharing three easy, healthy family meals that are realistic, flexible, and designed for real life. These are the kinds of meals you can rely on during busy weeks — without complicated recipes, separate dinners, or decision fatigue.
