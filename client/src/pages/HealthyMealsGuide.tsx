@@ -385,7 +385,7 @@ export default function HealthyMealsGuide() {
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg leading-tight italic">
                   Nutritious. Flexible.<br/>
                   Actually doable -<br/>
-                  <span className="text-green-300">even on your busiest days.</span>
+                  <span style={{ color: '#16a34a' }}>even on your busiest days.</span>
                 </h2>
               </div>
             </div>
