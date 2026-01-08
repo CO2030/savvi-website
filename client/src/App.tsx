@@ -17,6 +17,7 @@ import FiveDayMeals from "@/pages/FiveDayMeals";
 import MealGuide from "@/pages/MealGuide";
 import SuccessPreview from "@/pages/SuccessPreview";
 import InstagramGuide from "@/pages/InstagramGuide";
+import HealthyMealsGuide from "@/pages/HealthyMealsGuide";
 import Podcast from "@/pages/Podcast";
 import NotFound from "@/pages/not-found";
 
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/success-preview" component={SuccessPreview} />
       {/* New SEO-friendly podcast guide URLs */}
       <Route path="/podcast/free-guides/instagram-teen-accounts" component={InstagramGuide} />
+      <Route path="/podcast/free-guides/healthy-meals" component={HealthyMealsGuide} />
       {/* Redirect old URL to new one */}
       <Route path="/instagram-teen-guide">
         <Redirect to="/podcast/free-guides/instagram-teen-accounts" />

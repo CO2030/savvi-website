@@ -612,3 +612,147 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
     return false;
   }
 }
+
+export async function sendHealthyMealsGuideEmail(emailData: EmailData): Promise<boolean> {
+  const transporter = createTransporter();
+  
+  if (!transporter) {
+    console.log('Email service not configured, skipping email send');
+    EmailReputationMonitor.logEmailSent(false);
+    return false;
+  }
+
+  if (!validateEmailFormat(emailData.to)) {
+    console.log(`⚠️ Invalid email format: ${emailData.to}`);
+    return false;
+  }
+
+  if (isDisposableEmail(emailData.to)) {
+    console.log(`⚠️ Blocked disposable email: ${emailData.to}`);
+    return false;
+  }
+
+  if (!isValidEmail(emailData.to)) {
+    console.log(`⚠️ Blocked email to fake domain: ${emailData.to}`);
+    return false;
+  }
+
+  console.log(`📧 Sending Healthy Meals guide email to: ${emailData.to}`);
+
+  const mailOptions = {
+    from: `"SavviWell Podcast" <${process.env.SMTP_USER}>`,
+    to: emailData.to,
+    subject: "🥗 Your FREE 3 Easy Healthy Meals Guide is Here!",
+    text: `Hi ${emailData.name},
+
+Thank you for downloading our 3 Easy Healthy Meals Guide! A gentle January reset for busy families who want simple, healthy meals without the overwhelm.
+
+Inside Your Guide, You'll Find:
+✅ Three easy, healthy family meals that actually work
+✅ Smart grocery lists to make planning easier
+✅ Simple recipes designed for real, busy lives
+✅ Tips to reduce the mental load around food
+
+This guide is designed to help you:
+• Feed your family without stress
+• Simplify healthy eating
+• Feel confident about what's for dinner — again
+
+Your PDF guide is attached to this email!
+
+Best regards,
+The SavviWell Podcast Team
+
+Wellbeing for modern life — honest conversations, practical tools, and free guides to help you feel calmer and more supported.
+`,
+    html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f0fdf4;">
+      <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h1 style="color: #16a34a; text-align: center; margin-bottom: 20px;">
+          🥗 Your FREE 3 Easy Healthy Meals Guide is Here!
+        </h1>
+        
+        <p style="font-size: 16px; color: #333;">Hi ${emailData.name},</p>
+        
+        <p style="font-size: 16px; color: #333; line-height: 1.6;">
+          Thank you for downloading our 3 Easy Healthy Meals Guide! A gentle January reset for busy families who want simple, healthy meals without the overwhelm.
+        </p>
+        
+        <div style="background-color: #dcfce7; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #16a34a; margin-top: 0;">Inside Your Guide, You'll Find:</h3>
+          <ul style="color: #333; line-height: 1.8;">
+            <li>✅ Three easy, healthy family meals that actually work</li>
+            <li>✅ Smart grocery lists to make planning easier</li>
+            <li>✅ Simple recipes designed for real, busy lives</li>
+            <li>✅ Tips to reduce the mental load around food</li>
+          </ul>
+        </div>
+        
+        <div style="background-color: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #16a34a; margin-top: 0;">This guide is designed to help you:</h3>
+          <ul style="color: #333; line-height: 1.8;">
+            <li>🍽️ Feed your family without stress</li>
+            <li>🥦 Simplify healthy eating</li>
+            <li>✨ Feel confident about what's for dinner — again</li>
+          </ul>
+        </div>
+        
+        <p style="font-size: 16px; color: #333; text-align: center; font-weight: bold;">
+          📎 Your PDF guide is attached to this email!
+        </p>
+        
+        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+        
+        <div style="font-size: 14px; color: #666; text-align: center;">
+          <p>Best regards,<br><strong>Meara and Christina</strong><br>Co-Founders, The SavviWell Podcast</p>
+          
+          <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+            <p style="font-size: 12px; color: #999;">
+              <a href="mailto:hello@savviwell.com" style="color: #16a34a;">Contact us</a> | 
+              <a href="${config.baseUrl}/unsubscribe?token=${emailData.accessToken}" style="color: #16a34a;">Unsubscribe</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
+    attachments: [
+      {
+        filename: 'SavviWell-Healthy-Meals-Guide.pdf',
+        path: 'server/assets/SavviWell-Healthy-Meals-Guide.pdf',
+        contentType: 'application/pdf'
+      }
+    ]
+  };
+
+  try {
+    console.log(`Attempting to send Healthy Meals guide email to ${emailData.to}...`);
+    const result = await transporter.sendMail(mailOptions);
+    console.log(`✅ Healthy Meals guide email sent successfully to ${emailData.to}`, result.messageId);
+    
+    EmailReputationMonitor.logEmailSent(true);
+    
+    return true;
+  } catch (error) {
+    console.error('❌ Error sending Healthy Meals guide email:', error);
+    console.error('SMTP Configuration:', {
+      host: process.env.SMTP_HOST,
+      port: 587,
+      user: process.env.SMTP_USER ? 'configured' : 'missing',
+      pass: process.env.SMTP_PASS ? 'configured' : 'missing'
+    });
+    
+    EmailReputationMonitor.logEmailSent(false);
+    
+    const errorString = String(error).toLowerCase();
+    if (errorString.includes('bounce') || errorString.includes('invalid') || errorString.includes('rejected')) {
+      await EmailBounceHandler.logBounce(
+        emailData.to, 
+        errorString.includes('permanent') ? 'hard' : 'soft',
+        String(error)
+      );
+    }
+    
+    return false;
+  }
+}

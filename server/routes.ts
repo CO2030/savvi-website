@@ -5,7 +5,7 @@ import { insertWaitlistSchema, insertNewsletterSchema, insertContactSchema, inse
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { submitToGoogleScript, submitContactToGoogleScript } from "./services/googleScripts";
-import { sendContactEmail, sendMealGuideEmail, sendInstagramGuideEmail } from "./services/emailService";
+import { sendContactEmail, sendMealGuideEmail, sendInstagramGuideEmail, sendHealthyMealsGuideEmail } from "./services/emailService";
 import { EmailReputationMonitor } from "./services/reputationMonitor";
 import { config } from "./config";
 import path from "path";
@@ -72,7 +72,7 @@ const getPodcastCrawlerHTML = (): string => {
 };
 
 // Podcast routes that should use podcast meta (canonical URLs only - old paths redirect first)
-const PODCAST_ROUTES = ['/podcast', '/podcast/free-guides/instagram-teen-accounts'];
+const PODCAST_ROUTES = ['/podcast', '/podcast/free-guides/instagram-teen-accounts', '/podcast/free-guides/healthy-meals'];
 
 // Crawler meta middleware for podcast routes
 const crawlerMetaMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -178,6 +178,105 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(500).send('Error downloading file');
       }
     });
+  });
+
+  // Download Healthy Meals guide PDF (requires valid access token)
+  app.get('/api/download-healthy-meals-guide', async (req: Request, res: Response) => {
+    const { token } = req.query;
+    
+    if (!token) {
+      return res.status(401).json({ message: 'Access token required' });
+    }
+    
+    // Verify the token exists in the database
+    const user = await storage.getWaitlistEntryByToken(token as string);
+    if (!user) {
+      return res.status(403).json({ message: 'Invalid or expired access token' });
+    }
+    
+    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-Healthy-Meals-Guide.pdf');
+    res.download(filePath, 'SavviWell-Healthy-Meals-Guide.pdf', (err) => {
+      if (err) {
+        console.error('Error downloading Healthy Meals guide file:', err);
+        res.status(500).send('Error downloading file');
+      }
+    });
+  });
+
+  // Healthy Meals Guide waitlist endpoint
+  app.post("/api/waitlist/healthy-meals", async (req: Request, res: Response) => {
+    try {
+      // Validate the request body
+      const validatedData = insertWaitlistSchema.parse({
+        ...req.body,
+        source: 'healthy-meals-guide'
+      });
+
+      // Check if email already exists
+      const existingEntry = await storage.getWaitlistEntryByEmail(validatedData.email);
+
+      if (existingEntry) {
+        // Resend the guide email for returning users
+        try {
+          await sendHealthyMealsGuideEmail({
+            to: existingEntry.email,
+            name: existingEntry.name,
+            accessToken: existingEntry.accessToken || ''
+          });
+          console.log(`📧 Resent Healthy Meals guide email to returning user: ${existingEntry.email}`);
+        } catch (error) {
+          console.error('Error resending Healthy Meals guide email:', error);
+        }
+        
+        return res.status(400).json({
+          message: "Email already registered for the waitlist",
+          alreadyRegistered: true,
+          accessToken: existingEntry.accessToken || ''
+        });
+      }
+
+      // Create waitlist entry in local storage
+      const newEntry = await storage.createWaitlistEntry(validatedData);
+
+      // Send Healthy Meals guide email to user
+      try {
+        console.log(`🔄 Starting Healthy Meals email send process for ${validatedData.email}`);
+        const emailSent = await sendHealthyMealsGuideEmail({
+          to: validatedData.email,
+          name: validatedData.name,
+          accessToken: newEntry.accessToken || ''
+        });
+        if (emailSent) {
+          console.log(`✅ Healthy Meals guide email successfully sent to ${validatedData.email}`);
+        } else {
+          console.log(`❌ Failed to send Healthy Meals guide email to ${validatedData.email}`);
+        }
+      } catch (error) {
+        console.error('❌ Exception while sending Healthy Meals guide email:', error);
+      }
+
+      // Submit to Google Script for backup
+      try {
+        await submitToGoogleScript({
+          ...validatedData,
+          timestamp: new Date().toISOString(),
+        });
+      } catch (error) {
+        console.log("Google Script submission skipped or failed:", error);
+      }
+
+      return res.status(201).json({
+        message: "Successfully joined waitlist",
+        accessToken: newEntry.accessToken
+      });
+    } catch (error) {
+      console.error("Waitlist error:", error);
+      if (error instanceof z.ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ message: validationError.message });
+      }
+      return res.status(500).json({ message: "Failed to join waitlist" });
+    }
   });
 
   // Waitlist endpoint
