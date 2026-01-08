@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'wouter';
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
 import tabletHeaderImage from "@assets/Tablet_Image_1_1767914483519.png";
+import guideCoverImage from "@assets/Cover_for_3_Healthy_Meals_1767914761177.png";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -395,22 +396,15 @@ export default function HealthyMealsGuide() {
         <div className="relative py-6 md:py-10 px-4" style={{ backgroundColor: '#f5f0eb' }}>
           <div className="container mx-auto max-w-6xl">
             <div className="grid md:grid-cols-2 gap-6 items-center">
-              {/* Guide Mockup Side - Phone/Tablet styled display */}
+              {/* Guide Cover Image - Phone/Tablet styled display */}
               <div className="w-full flex justify-center md:justify-end">
                 <div className="max-w-[260px] md:max-w-[320px]">
-                  <div className="bg-white rounded-3xl shadow-2xl p-4 border-4 border-gray-200">
-                    <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-6 text-center">
-                      <p className="text-green-700 font-semibold text-sm mb-2">SavviWell</p>
-                      <h3 className="text-2xl md:text-3xl font-bold text-green-800 leading-tight mb-2">
-                        3 EASY<br/>HEALTHY<br/>MEALS
-                      </h3>
-                      <p className="text-green-600 text-sm italic mb-4">for busy lives</p>
-                      <p className="text-gray-600 text-xs">Nutritious meals + wellness<br/>without the stress</p>
-                      <div className="mt-4 pt-4 border-t border-green-200">
-                        <p className="text-xs text-gray-500">Created by a</p>
-                        <p className="text-sm font-semibold text-green-700">Certified Integrative<br/>Nutritionist</p>
-                      </div>
-                    </div>
+                  <div className="bg-white rounded-3xl shadow-2xl p-3 border-4 border-gray-200">
+                    <img 
+                      src={guideCoverImage} 
+                      alt="3 Easy Healthy Meals Guide Cover" 
+                      className="w-full rounded-2xl"
+                    />
                   </div>
                 </div>
               </div>
