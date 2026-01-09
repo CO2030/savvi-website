@@ -14,6 +14,7 @@ import { Link } from 'wouter';
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
 import tabletHeaderImage from "@assets/Tablet_Image_1_1767914483519.png";
 import guideCoverImage from "@assets/Cover_for_3_Healthy_Meals_1767914761177.png";
+import podcastThumbnail from "@assets/3_easy_healthy_meals_thumbnail_podcast_1767917373141.jpeg";
 
 const getSourceFromURL = (): string => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -372,24 +373,13 @@ export default function HealthyMealsGuide() {
           </div>
         </div>
 
-        {/* Branding Banner Image with Text Overlay */}
+        {/* Podcast Episode Thumbnail Banner */}
         <div className="container mx-auto max-w-4xl px-4 pt-6">
-          <div className="relative rounded-lg shadow-lg overflow-hidden">
-            <img 
-              src={tabletHeaderImage} 
-              alt="Healthy meals on tablet" 
-              className="w-full"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-6 py-4 bg-black/50 rounded-lg">
-                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg leading-tight italic">
-                  Nutritious. Flexible.<br/>
-                  Actually doable -<br/>
-                  <span style={{ color: '#22c55e' }}>even on your busiest days.</span>
-                </h2>
-              </div>
-            </div>
-          </div>
+          <img 
+            src={podcastThumbnail} 
+            alt="Reset: 3 Easy Healthy Meals - SavviWell Podcast Episode" 
+            className="w-full rounded-lg shadow-lg"
+          />
         </div>
 
         {/* Hero Header Section with Guide Mockup */}
