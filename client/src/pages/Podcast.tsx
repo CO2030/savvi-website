@@ -188,7 +188,7 @@ export default function Podcast() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {podcastEpisodes.map((episode) => (
                 <Card key={episode.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-white">
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="aspect-video overflow-hidden">
                     <img 
                       src={episode.thumbnail} 
                       alt={episode.title}
