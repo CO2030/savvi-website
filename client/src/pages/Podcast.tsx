@@ -9,6 +9,7 @@ import { WaitlistModal } from "@/components/WaitlistModal";
 import { Link } from "wouter";
 import { SiSpotify, SiYoutube } from "react-icons/si";
 import foundersImage from "@assets/meara-christina-founders_1749580938646.png";
+import healthyMealsThumbnail from "@assets/3_easy_healthy_meals_thumbnail_podcast_1767917373141.jpeg";
 
 interface PodcastEpisode {
   id: string;
@@ -21,6 +22,15 @@ interface PodcastEpisode {
 }
 
 const podcastEpisodes: PodcastEpisode[] = [
+  {
+    id: "healthy-meals-reset",
+    title: "Reset: 3 Easy Healthy Meals",
+    description: "Easy, healthy meals to get you back on track. Simple recipes for gut health, energy & balance - designed for busy families.",
+    thumbnail: healthyMealsThumbnail,
+    listenUrl: "https://open.spotify.com/show/60c3CSpgmto4AvEpcSsrgI",
+    watchUrl: "https://www.youtube.com/channel/UCgFchYWJnDOCSucxXlkmhLQ",
+    guideUrl: "/podcast/free-guides/healthy-meals"
+  },
   {
     id: "instagram-teens",
     title: "Instagram & Teens: What Every Parent Needs to Know",
