@@ -27,7 +27,7 @@ const podcastEpisodes: PodcastEpisode[] = [
     title: "Reset: 3 Easy Healthy Meals",
     description: "Easy, healthy meals to get you back on track. Simple recipes for gut health, energy & balance - designed for busy families.",
     thumbnail: healthyMealsThumbnail,
-    listenUrl: "https://open.spotify.com/show/60c3CSpgmto4AvEpcSsrgI",
+    listenUrl: "https://open.spotify.com/episode/03KHwUFPFkp8md3FVSgIG0?si=AMw1rSmLSiu6_PEkdeibBw",
     watchUrl: "https://www.youtube.com/watch?v=seRlNHtZ1OA",
     guideUrl: "/podcast/free-guides/healthy-meals"
   },
