@@ -185,9 +185,9 @@ export default function Podcast() {
             <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
               Latest Episodes
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
               {podcastEpisodes.map((episode) => (
-                <Card key={episode.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-white">
+                <Card key={episode.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-white flex flex-col">
                   <div className="aspect-video overflow-hidden">
                     <img 
                       src={episode.thumbnail} 
@@ -195,14 +195,14 @@ export default function Podcast() {
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <CardContent className="p-5">
-                    <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2">
+                  <CardContent className="p-5 flex flex-col flex-1">
+                    <h3 className="font-bold text-lg text-gray-900 mb-2 min-h-[3.5rem]">
                       {episode.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p className="text-gray-600 text-sm mb-4 flex-1">
                       {episode.description}
                     </p>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 mt-auto">
                       {episode.guideUrl && (
                         <Link href={episode.guideUrl}>
                           <Button 
