@@ -127,7 +127,7 @@ export default function Demo() {
 
         <div className="flex-1 w-full">
           <iframe
-            src="https://mealplanningappdesigncopy-savviwell-figma-mobile-a--olofsson624.replit.app"
+            src="https://mealplanningappdesigncopy-savviwell-figma-mobile-a--olofsson624.replit.app/?auth=savviwell"
             className="w-full h-full min-h-[calc(100vh-56px)] border-0"
             title="SavviWell App Demo"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
