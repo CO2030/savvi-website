@@ -110,14 +110,30 @@ export default function Demo() {
         <title>SavviWell App Demo | Team Access</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <div className="min-h-screen">
-        <iframe
-          src="https://mealplanningappdesigncopy-savviwell-figma-mobile-a--olofsson624.replit.app/?auth=savviwell"
-          className="w-full h-screen border-0"
-          title="SavviWell App Demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+      <div className="min-h-screen flex flex-col">
+        <header className="bg-[#3a925d] py-3 px-4 shadow-lg">
+          <div className="container mx-auto flex justify-between items-center">
+            <h1 className="text-xl font-bold text-white">SavviWell App Demo</h1>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={handleSignOut}
+              className="text-[#3a925d] bg-white hover:bg-[#3a925d] hover:text-white border-2 border-white transition-colors font-semibold"
+            >
+              Sign Out
+            </Button>
+          </div>
+        </header>
+
+        <div className="flex-1 w-full">
+          <iframe
+            src="https://mealplanningappdesigncopy-savviwell-figma-mobile-a--olofsson624.replit.app/?auth=savviwell"
+            className="w-full h-full min-h-[calc(100vh-56px)] border-0"
+            title="SavviWell App Demo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
       </div>
     </>
   );
