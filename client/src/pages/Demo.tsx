@@ -111,14 +111,14 @@ export default function Demo() {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="min-h-screen flex flex-col">
-        <header className="bg-[#3a925d] py-3 px-4 shadow-lg">
+        <header className="bg-primary py-3 px-4 shadow-lg">
           <div className="container mx-auto flex justify-between items-center">
             <h1 className="text-xl font-bold text-white">SavviWell App Demo</h1>
             <Button 
               variant="ghost" 
               size="sm"
               onClick={handleSignOut}
-              className="text-[#3a925d] bg-white hover:bg-[#3a925d] hover:text-white border-2 border-white transition-colors font-semibold"
+              className="text-primary bg-white hover:bg-primary hover:text-white border-2 border-white transition-colors font-semibold"
             >
               Sign Out
             </Button>
