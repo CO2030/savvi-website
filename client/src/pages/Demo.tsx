@@ -7,7 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { WaitlistModal } from '@/components/WaitlistModal';
 import { Helmet } from 'react-helmet';
 
-const DEMO_PASSWORD = "savviwell2025";
+const DEMO_PASSWORD = "123SavviWellTeam";
 
 export default function Demo() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
