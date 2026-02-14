@@ -79,12 +79,6 @@ export function Header({ onWaitlistClick }: HeaderProps) {
             Our Story
           </button>
           <button 
-            onClick={() => scrollToSection('features')}
-            className="text-neutral-dark hover:text-primary transition-colors"
-          >
-            Member Perks
-          </button>
-          <button 
             onClick={() => setLocation('/faq')}
             className="text-neutral-dark hover:text-primary transition-colors"
           >
@@ -138,12 +132,6 @@ export function Header({ onWaitlistClick }: HeaderProps) {
               className="text-neutral-dark hover:text-primary transition-colors py-2"
             >
               Our Story
-            </button>
-            <button 
-              onClick={() => scrollToSection('features')}
-              className="text-neutral-dark hover:text-primary transition-colors py-2"
-            >
-              Member Perks
             </button>
             <button 
               onClick={() => {
