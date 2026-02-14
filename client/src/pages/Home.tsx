@@ -36,8 +36,6 @@ export default function Home() {
       <main className="font-sans">
         <Hero onWaitlistClick={openModal} />
         <About />
-
-        <FounderPerks />
         <CTASection onWaitlistClick={openModal} />
       </main>
       <Footer />
