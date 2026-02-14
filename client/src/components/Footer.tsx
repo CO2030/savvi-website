@@ -109,18 +109,6 @@ export function Footer() {
               <a href="https://www.tiktok.com/@savviwell" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                 <FaTiktok className="h-5 w-5" />
               </a>
-              <a href="https://www.pinterest.com/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
-                <FaPinterest className="h-5 w-5" />
-              </a>
-              <a href="https://whatsapp.com/channel/0029Vb6QFzD35fLvJkkAOq3N" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
-                <SiWhatsapp className="h-5 w-5" />
-              </a>
-              <a href="https://www.facebook.com/share/16RHv8a2nt/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="https://www.linkedin.com/company/savviwell/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
             </div>
           </div>
           <div>
@@ -178,46 +166,6 @@ export function Footer() {
                 <span>Thank you for subscribing!</span>
               </div>
             )}
-          </div>
-        </div>
-        {/* Share With Friends Section */}
-        <div className="border-t border-gray-800 mt-8 pt-8 pb-6">
-          <div className="text-center mb-6">
-            <h3 className="text-xl md:text-2xl font-bold mb-3 font-heading">Spread the Word</h3>
-            <p className="text-gray-300 text-sm md:text-base mx-auto max-w-lg px-4">
-              Know someone who could use less mealtime stress? Share SavviWell and help them eat better, live healthier.
-            </p>
-          </div>
-          
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 px-4">
-            <FacebookShareButton 
-              url="https://www.facebook.com/share/16RHv8a2nt/?mibextid=wwXIfr" 
-              hashtag="#SavviWell"
-              className="transition-transform hover:scale-110 active:scale-95"
-            >
-              <FacebookIcon size={44} round />
-            </FacebookShareButton>
-            
-            <LinkedinShareButton 
-              url="https://www.linkedin.com/company/savviwell/"
-              title="SavviWell - AI-Powered Nutrition"
-              summary="Personalized nutrition recommendations powered by AI. Join the waitlist for early access!" 
-              className="transition-transform hover:scale-110 active:scale-95"
-            >
-              <LinkedinIcon size={44} round />
-            </LinkedinShareButton>
-            
-            <WhatsappShareButton 
-              url={typeof window !== 'undefined' ? window.location.href : ''} 
-              title="Check out SavviWell - AI-powered nutrition recommendations!"
-              className="transition-transform hover:scale-110 active:scale-95"
-            >
-              <WhatsappIcon size={44} round />
-            </WhatsappShareButton>
-          </div>
-          
-          <div className="mt-4 text-xs md:text-sm text-center text-gray-400 px-4">
-            Sharing helps us reach more people like you!
           </div>
         </div>
         
