@@ -134,39 +134,6 @@ export function Footer() {
               <li><a href="/terms-of-service" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
           </div>
-          <div>
-            <h3 className="text-lg font-bold mb-4 font-heading">Stay Updated</h3>
-            <p className="text-gray-300 mb-4">Subscribe to our newsletter for the latest updates.</p>
-            {!isSubscribed ? (
-              <div className="flex">
-                <Input 
-                  type="email" 
-                  placeholder="Your email" 
-                  className="rounded-r-none border-gray-700 bg-gray-800 text-white"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={isSubmitting}
-                />
-                <Button 
-                  className="rounded-l-none" 
-                  size="icon" 
-                  onClick={handleSubscribe}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
-                  ) : (
-                    <Send className="h-4 w-4" />
-                  )}
-                </Button>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-2 bg-primary/20 text-white p-3 rounded-md">
-                <Check className="h-5 w-5 text-primary" />
-                <span>Thank you for subscribing!</span>
-              </div>
-            )}
-          </div>
         </div>
         
         <div className="border-t border-gray-800 pt-8 text-center text-gray-300">
