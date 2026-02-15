@@ -644,6 +644,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/waitlist/count", async (_req: Request, res: Response) => {
+    try {
+      const entries = await storage.getAllWaitlistEntries();
+      return res.status(200).json({ count: entries.length });
+    } catch (error) {
+      return res.status(200).json({ count: 0 });
+    }
+  });
+
   // Get all waitlist entries (protected admin route)
   app.get("/api/waitlist", authenticateAdmin, async (req: Request, res: Response) => {
     try {
