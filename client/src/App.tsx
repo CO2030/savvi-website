@@ -19,6 +19,7 @@ import SuccessPreview from "@/pages/SuccessPreview";
 import InstagramGuide from "@/pages/InstagramGuide";
 import HealthyMealsGuide from "@/pages/HealthyMealsGuide";
 import Podcast from "@/pages/Podcast";
+import Waitlist from "@/pages/Waitlist";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -55,6 +56,7 @@ function Router() {
       </Route>
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
+      <Route path="/waitlist" component={Waitlist} />
       <Route path="*" component={NotFound} />
     </Switch>
   );
