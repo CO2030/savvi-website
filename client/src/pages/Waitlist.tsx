@@ -423,10 +423,10 @@ export default function Waitlist() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-gray-900 py-8">
+      <footer className="bg-white border-t border-gray-100 py-8">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <Logo className="mx-auto mb-4 brightness-200" />
-          <p className="text-gray-500 text-sm">&copy; {new Date().getFullYear()} SavviWell. All rights reserved.</p>
+          <Logo className="mx-auto mb-4" />
+          <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} SavviWell. All rights reserved.</p>
         </div>
       </footer>
     </>
