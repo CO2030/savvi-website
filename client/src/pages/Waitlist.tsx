@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { useQuery } from '@tanstack/react-query';
 import { Check, Sparkles, Clock, Shield, Zap, ChevronDown, ChevronUp, Users, Star } from 'lucide-react';
+import { Footer } from '@/components/Footer';
 import appMockup from '@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(2)_1771167065630.png';
 
 function AnimatedCounter({ target }: { target: number }) {
@@ -422,13 +423,7 @@ export default function Waitlist() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-white border-t border-gray-100 py-8">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <Logo className="mx-auto mb-4" />
-          <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} SavviWell. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
