@@ -152,7 +152,7 @@ export default function Waitlist() {
 
         <div className="relative max-w-6xl mx-auto px-4 pt-8 pb-12 md:pt-16 md:pb-20">
           <div className="flex justify-center mb-8">
-            <Logo />
+            <Logo className="text-3xl md:text-4xl" />
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
