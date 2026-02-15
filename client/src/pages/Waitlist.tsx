@@ -8,7 +8,7 @@ import { apiRequest } from '@/lib/queryClient';
 import { useQuery } from '@tanstack/react-query';
 import { Check, Sparkles, Clock, Shield, Zap, ChevronDown, ChevronUp, Users, Star } from 'lucide-react';
 import { Footer } from '@/components/Footer';
-import appMockup from '@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(2)_1771167065630.png';
+import appMockup from '@assets/Green_&_Pink_Download_Free_Guide_Instagram_Post_(3)_1771167927492.png';
 
 function AnimatedCounter({ target }: { target: number }) {
   const [count, setCount] = useState(0);
@@ -234,7 +234,7 @@ export default function Waitlist() {
                 <img
                   src={appMockup}
                   alt="SavviWell AI meal planning app preview showing personalized meal suggestions"
-                  className="relative w-72 md:w-80 mix-blend-multiply"
+                  className="relative w-72 md:w-80"
                   loading="eager"
                 />
               </div>
