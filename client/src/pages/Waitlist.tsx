@@ -234,7 +234,7 @@ export default function Waitlist() {
                 <img
                   src={appMockup}
                   alt="SavviWell AI meal planning app preview showing personalized meal suggestions"
-                  className="relative w-72 md:w-80"
+                  className="relative w-80 md:w-96"
                   loading="eager"
                 />
               </div>
