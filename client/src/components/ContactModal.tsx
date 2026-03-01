@@ -73,9 +73,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const contactMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
+      const { getTrackingData } = await import('@/lib/tracking');
+      const tracking = getTrackingData();
       const dataWithSource = {
         ...data,
-        source: `contact-modal-${source}`
+        source: `contact-modal-${source}`,
+        ...tracking
       };
       const response = await fetch("/api/contact", {
         method: "POST",

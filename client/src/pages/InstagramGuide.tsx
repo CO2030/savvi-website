@@ -192,10 +192,13 @@ export default function InstagramGuide() {
     }
   });
 
-  const onSubmit = (data: InstagramGuideFormData) => {
+  const onSubmit = async (data: InstagramGuideFormData) => {
+    const { getTrackingData } = await import('@/lib/tracking');
+    const tracking = getTrackingData();
     const dataWithSource = {
       ...data,
-      source: `instagram-teen-guide-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`
+      source: `instagram-teen-guide-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`,
+      ...tracking
     };
     
     const validation = instagramGuideSchema.safeParse(dataWithSource);

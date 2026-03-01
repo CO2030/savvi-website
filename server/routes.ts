@@ -10,6 +10,12 @@ import { EmailReputationMonitor } from "./services/reputationMonitor";
 import { config } from "./config";
 import path from "path";
 
+function extractServerTracking(req: Request): { ipAddress?: string } {
+  const forwarded = req.headers['x-forwarded-for'];
+  const ipAddress = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : req.socket?.remoteAddress || undefined;
+  return { ipAddress };
+}
+
 // Common crawler/bot user agents
 const CRAWLER_USER_AGENTS = [
   'facebookexternalhit',
@@ -235,8 +241,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Create waitlist entry in local storage
-      const newEntry = await storage.createWaitlistEntry(validatedData);
+      const serverTracking = extractServerTracking(req);
+      const entryWithTracking = { ...validatedData, ...serverTracking };
+      const newEntry = await storage.createWaitlistEntry(entryWithTracking);
 
       // Send Healthy Meals guide email to user
       try {
@@ -318,8 +325,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Create waitlist entry in local storage
-      const newEntry = await storage.createWaitlistEntry(validatedData);
+      const serverTracking = extractServerTracking(req);
+      const entryWithTracking = { ...validatedData, ...serverTracking };
+      const newEntry = await storage.createWaitlistEntry(entryWithTracking);
 
       // Check if this person was referred and mark referral as completed
       try {
@@ -682,8 +690,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Create newsletter subscriber in database
-      const newSubscriber = await storage.createNewsletterSubscriber(validatedData);
+      const serverTracking = extractServerTracking(req);
+      const subscriberWithTracking = { ...validatedData, ...serverTracking };
+      const newSubscriber = await storage.createNewsletterSubscriber(subscriberWithTracking);
 
       // Send email notification immediately
       // await sendNewsletterNotification({
@@ -748,8 +757,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Validate the request body
       const validatedData = insertContactSchema.parse(req.body);
 
-      // Create contact submission in database
-      const newSubmission = await storage.createContactSubmission(validatedData);
+      const serverTracking = extractServerTracking(req);
+      const submissionWithTracking = { ...validatedData, ...serverTracking };
+      const newSubmission = await storage.createContactSubmission(submissionWithTracking);
 
       // Send email notification immediately
       await sendContactEmail({

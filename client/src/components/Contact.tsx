@@ -69,9 +69,12 @@ export function Contact() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
+      const { getTrackingData } = await import('@/lib/tracking');
+      const tracking = getTrackingData();
       const dataWithSource = {
         ...data,
-        source: `contact-${source}`
+        source: `contact-${source}`,
+        ...tracking
       };
       return apiRequest("/api/contact", {
         method: "POST",

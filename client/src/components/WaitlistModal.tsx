@@ -41,8 +41,11 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const progressPercentage = step === 5 ? 100 : step * 25;
 
   const mutation = useMutation({
-    mutationFn: (data: FormValues) => 
-      apiRequest("POST", "/api/waitlist", data),
+    mutationFn: async (data: FormValues) => {
+      const { getTrackingData } = await import('@/lib/tracking');
+      const tracking = getTrackingData();
+      return apiRequest("POST", "/api/waitlist", { ...data, ...tracking });
+    },
     onSuccess: () => {
       setSuccess(true);
 

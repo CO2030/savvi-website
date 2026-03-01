@@ -34,6 +34,7 @@ SavviWell is a comprehensive landing page and admin dashboard for an AI-powered 
 - **Drizzle ORM** for type-safe database operations
 - **Schema-first approach** with Zod validation
 - Tables: waitlist_entries, newsletter_subscribers, contact_submissions
+- **Full acquisition tracking** on all signup tables: utm_source, utm_medium, utm_campaign, utm_content, utm_term, referrer_url, landing_page, device_type, browser_name, ip_address
 
 ### External Integrations
 - **Google Apps Script** integration for spreadsheet data backup

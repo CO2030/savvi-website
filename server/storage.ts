@@ -19,18 +19,18 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
 
   // Waitlist methods
-  createWaitlistEntry(entry: InsertWaitlistEntry): Promise<WaitlistEntry>;
+  createWaitlistEntry(entry: InsertWaitlistEntry & { ipAddress?: string }): Promise<WaitlistEntry>;
   getWaitlistEntryByEmail(email: string): Promise<WaitlistEntry | undefined>;
   getWaitlistEntryByToken(token: string): Promise<WaitlistEntry | undefined>;
   getAllWaitlistEntries(): Promise<WaitlistEntry[]>;
 
   // Newsletter methods
-  createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
+  createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber & { ipAddress?: string }): Promise<NewsletterSubscriber>;
   getNewsletterSubscriberByEmail(email: string): Promise<NewsletterSubscriber | undefined>;
   getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
 
   // Contact methods
-  createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
+  createContactSubmission(submission: InsertContactSubmission & { ipAddress?: string }): Promise<ContactSubmission>;
   getAllContactSubmissions(): Promise<ContactSubmission[]>;
 
   // Referral methods
@@ -67,7 +67,7 @@ export class DatabaseStorage implements IStorage {
     return result[0];
   }
 
-  async createWaitlistEntry(insertEntry: InsertWaitlistEntry): Promise<WaitlistEntry> {
+  async createWaitlistEntry(insertEntry: InsertWaitlistEntry & { ipAddress?: string }): Promise<WaitlistEntry> {
     const accessToken = this.generateAccessToken();
     const entryWithTimestamp = {
       ...insertEntry,
@@ -94,7 +94,7 @@ export class DatabaseStorage implements IStorage {
     return await db.select().from(waitlistEntries).orderBy(desc(waitlistEntries.createdAt));
   }
 
-  async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
+  async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber & { ipAddress?: string }): Promise<NewsletterSubscriber> {
     const subscriberWithTimestamp = {
       ...subscriber,
       createdAt: new Date().toISOString()
@@ -112,7 +112,7 @@ export class DatabaseStorage implements IStorage {
     return await db.select().from(newsletterSubscribers);
   }
 
-  async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+  async createContactSubmission(insertSubmission: InsertContactSubmission & { ipAddress?: string }): Promise<ContactSubmission> {
     const submissionWithTimestamp = {
       ...insertSubmission,
       createdAt: new Date().toISOString()

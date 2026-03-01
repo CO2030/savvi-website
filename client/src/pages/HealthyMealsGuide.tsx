@@ -180,12 +180,15 @@ export default function HealthyMealsGuide() {
     }
   });
 
-  const onSubmit = (data: HealthyMealsGuideFormData) => {
+  const onSubmit = async (data: HealthyMealsGuideFormData) => {
+    const { getTrackingData } = await import('@/lib/tracking');
+    const tracking = getTrackingData();
     const enrichedData = {
       ...data,
       source: sourceData.source,
       campaign: sourceData.campaign,
-      medium: sourceData.medium
+      medium: sourceData.medium,
+      ...tracking
     };
     submitMutation.mutate(enrichedData as HealthyMealsGuideFormData);
   };

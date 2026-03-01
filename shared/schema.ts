@@ -24,7 +24,29 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   accessToken: text("access_token").unique(),
   isUnsubscribed: boolean("is_unsubscribed").default(false).notNull(),
   unsubscribedAt: text("unsubscribed_at"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  utmContent: text("utm_content"),
+  utmTerm: text("utm_term"),
+  referrerUrl: text("referrer_url"),
+  landingPage: text("landing_page"),
+  deviceType: text("device_type"),
+  browserName: text("browser_name"),
+  ipAddress: text("ip_address"),
   createdAt: text("created_at").notNull()
+});
+
+export const trackingFieldsSchema = z.object({
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  utmContent: z.string().optional(),
+  utmTerm: z.string().optional(),
+  referrerUrl: z.string().optional(),
+  landingPage: z.string().optional(),
+  deviceType: z.string().optional(),
+  browserName: z.string().optional(),
 });
 
 export const insertWaitlistSchema = z.object({
@@ -34,13 +56,23 @@ export const insertWaitlistSchema = z.object({
   healthGoal: z.enum(["energy", "gut-health", "blood-sugar", "weight-loss", "other"]),
   dietaryConcern: z.enum(["gluten-free", "vegan", "low-sugar", "none"]),
   source: z.string().optional(),
-});
+}).merge(trackingFieldsSchema);
 
 export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   id: serial("id").primaryKey(),
   email: text("email").notNull().unique(),
   name: text("name"),
   source: text("source"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  utmContent: text("utm_content"),
+  utmTerm: text("utm_term"),
+  referrerUrl: text("referrer_url"),
+  landingPage: text("landing_page"),
+  deviceType: text("device_type"),
+  browserName: text("browser_name"),
+  ipAddress: text("ip_address"),
   createdAt: text("created_at").notNull()
 });
 
@@ -51,6 +83,16 @@ export const contactSubmissions = pgTable("contact_submissions", {
   reason: text("reason").notNull(),
   message: text("message"),
   source: text("source"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  utmContent: text("utm_content"),
+  utmTerm: text("utm_term"),
+  referrerUrl: text("referrer_url"),
+  landingPage: text("landing_page"),
+  deviceType: text("device_type"),
+  browserName: text("browser_name"),
+  ipAddress: text("ip_address"),
   createdAt: text("created_at").notNull()
 });
 
@@ -58,7 +100,7 @@ export const insertNewsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   name: z.string().optional(),
   source: z.string().optional(),
-});
+}).merge(trackingFieldsSchema);
 
 export const insertContactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -66,7 +108,7 @@ export const insertContactSchema = z.object({
   reason: z.string().min(1, "Please select a reason for contacting us"),
   message: z.string().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
   source: z.string().optional(),
-});
+}).merge(trackingFieldsSchema);
 
 // Share tracking table
 export const shareEvents = pgTable("share_events", {

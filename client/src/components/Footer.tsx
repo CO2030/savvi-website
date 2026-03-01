@@ -54,12 +54,14 @@ export function Footer() {
     setIsSubmitting(true);
     
     try {
+      const { getTrackingData } = await import('@/lib/tracking');
+      const tracking = getTrackingData();
       const response = await fetch('/api/newsletter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, ...tracking })
       });
       
       const result = await response.json();

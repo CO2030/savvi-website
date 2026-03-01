@@ -227,11 +227,13 @@ export default function FiveDayMeals() {
     }
   });
 
-  const onSubmit = (data: LeadMagnetFormData) => {
-    // Add dynamic source tracking to form data
+  const onSubmit = async (data: LeadMagnetFormData) => {
+    const { getTrackingData } = await import('@/lib/tracking');
+    const tracking = getTrackingData();
     const dataWithSource = {
       ...data,
-      source: `3-day-lead-magnet-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`
+      source: `3-day-lead-magnet-${sourceData.source}${sourceData.campaign ? '-' + sourceData.campaign : ''}`,
+      ...tracking
     };
     
     // Manual validation since zodResolver isn't available

@@ -67,10 +67,13 @@ export default function Waitlist() {
 
     setIsSubmitting(true);
     try {
+      const { getTrackingData } = await import('@/lib/tracking');
+      const tracking = getTrackingData();
       await apiRequest('POST', '/api/waitlist', {
         email,
         firstName: '',
-        source: 'waitlist-page'
+        source: 'waitlist-page',
+        ...tracking
       });
       setIsSubmitted(true);
     } catch (error: any) {
