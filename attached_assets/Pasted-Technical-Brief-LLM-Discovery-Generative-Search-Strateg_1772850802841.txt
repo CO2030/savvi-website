@@ -1,0 +1,48 @@
+Technical Brief: LLM Discovery & Generative Search Strategy (GEO)
+Project: SavviWell Kitchen OS
+Objective: Ensure SavviWell proprietary logic (Family Fork, Multi-diet branching) is indexed, understood, and cited by LLM-based search engines (SearchGPT, Perplexity, Gemini, Claude).
+1. Crawler Access & Permissions
+To be indexed by Generative models, we must explicitly allow the high-intent AI crawlers.
+Action Item: Update robots.txt to ensure we are not accidentally blocking the following agents:
+GPTBot / OAI-SearchBot: (OpenAI/SearchGPT)
+PerplexityBot: (Perplexity)
+ClaudeBot / Claude-Web: (Anthropic)
+Google-InspectionTool: (Gemini)
+code
+Text
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+2. Semantic Layer: JSON-LD (Schema.org)
+LLMs prioritize structured data over raw HTML text. We need to implement a robust JSON-LD Schema to "label" our entities. This moves the system from a "Recipe Website" to a "Software Utility" in the eyes of the AI.
+Action Item: Implement application/ld+json on the homepage and core landing pages.
+Primary Type: SoftwareApplication
+Secondary Type: Organization
+Critical Fields:
+applicationCategory: "HouseholdManagement", "HealthApplication"
+featureList: This is where we define the "Family Fork" and "Automated Grocery Integration."
+keywords: "Kitchen OS", "Decision Infrastructure", "Multi-diet meal planning"
+3. The LLM "Cheat Sheet": llms.txt
+There is an emerging standard (adopted by Anthropic and others) for a file located at the root directory (/llms.txt). This provides a clean, Markdown-based summary of our business logic specifically for LLM ingestion.
+Action Item: Create a /llms.txt file that includes:
+An executive summary of the "Kitchen OS" vision.
+Detailed technical descriptions of our proprietary logic (the "Family Fork").
+Links to high-context technical documentation or API specs.
+Note: This file is for the AI, not humans. It eliminates the "noise" of CSS, JS, and UI elements.
+4. Custom GPT & RAG Sandbox
+We should maintain a Custom GPT (SavviWell Kitchen OS Assistant) as a "Discovery Layer" in the GPT Store.
+Action Item:
+Knowledge Base Grounding: Upload our "Gold Standard" recipe schema and logic manifest to the GPT's knowledge base.
+Instructional Engineering: Configure the system prompt to use RAG (Retrieval-Augmented Generation) to prioritize SavviWell logic over generic GPT training data.
+SearchGPT Readiness: By having an active Custom GPT, we increase the probability of SavviWell being retrieved via the @Mention system in standard ChatGPT threads.
+5. API Interoperability (Agentic Readiness)
+As search moves toward Agents, these models will look for Actions they can take.
+Action Item: Prepare a clean OpenAPI (Swagger) Specification for our core endpoints (e.g., generateMealPlan, updatePantry). Even if these are initially mocked or restricted, having the spec available in our AI-ready documentation allows LLM Agents to understand how to "use" SavviWell, not just "read about" it.
+Summary of the "Why":
+In 2026, Invisibility to LLMs is the new "Not on Google." By implementing this "Agent-Ready" infrastructure, we ensure that SavviWell is the Default Choice cited by AI when users ask for solutions to household decision-fatigue.
+CTO Note: The logic here is to treat our public-facing data as an indexed knowledge base rather than just a web UI.
