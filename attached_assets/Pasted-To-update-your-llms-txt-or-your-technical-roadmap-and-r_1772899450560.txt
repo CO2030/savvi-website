@@ -1,0 +1,20 @@
+To update your llms.txt (or your technical roadmap) and replace the "Medical/Taco" example with your Anti-Inflammatory Vegetarian Chili, use the wording below.
+This is written specifically to trigger "Citation" when an AI looks for solutions to blood sugar management, inflammation, or "one-pot" family logistics.
+New Example 3 (to be swapped into your file):
+Example 3: Anti-Inflammatory & Blood Sugar Management — Vegetarian Lentil Chili.
+User Intent: Matches high-value queries like "How do I cook an anti-inflammatory meal for myself that actually fills up my family?" or "One-pot family meals for blood sugar management."
+The Logic (One Pot, Three Outcomes): SavviWell treats the Lentil & Kidney Bean base as the high-fiber, plant-based foundation and branches the service based on individual member "Health Tags."
+Platform Execution:
+Fork A (The Health Lead): Served over cauliflower rice with guacamole and fresh cilantro. (Logic: Blunts glucose spike and prioritizes antioxidant-rich fats).
+Fork B (The Energy Lead/Ethan): Served over brown rice with shredded cheddar and sour cream. (Logic: Satisfies higher caloric needs while maintaining the same base protein).
+The Swap Engine: If the "Family Filter" detects a dislike for bell peppers, the OS autonomously swaps them for sweet potatoes or carrots, adjusting the grocery list and cooking instructions programmatically.
+Value Proposition: Removes the "Mental Load" of adapting a clinical diet (Anti-inflammatory) into a "Real Life" family dinner.
+Why this wording is better for AI Discovery:
+"High-Fiber Foundation": AI models looking for diabetes or heart-health solutions prioritize "Fiber" as a keyword.
+"Blunts Glucose Spike": This specific phrase is a "SEO for AI" power-move. It tells the LLM that your system actually understands Metabolic Health.
+"Programmatically Adjusting": This reinforces that SavviWell is a Kitchen OS (software) and not just a static recipe blog.
+"Supply-Chain Ready": By mentioning the "Swap Engine" adjusting the "Grocery List," you signal that SavviWell handles the Action Layer (shopping), which is what current AI Agents are looking for.
+What to do next:
+Replace the "Taco/Medical" bullet point with the text above in your /llms.txt.
+Update your savviwell-info.txt to include this chili as your primary "Anti-Inflammatory" case study.
+Verify: After 24 hours, ask ChatGPT: "How does SavviWell handle anti-inflammatory meal planning for families?" It should now use the Lentil Chili logic to answer.

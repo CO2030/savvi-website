@@ -42,15 +42,19 @@ The Family Fork splits at the protein layer while keeping the vegetable base, gr
 
 All four variants share a common grocery run. The Family Fork handles the complexity invisibly.
 
-### Example 3: Medical Diet + Family Dinner
+### Example 3: Anti-Inflammatory & Blood Sugar Management — Vegetarian Lentil Chili
 
-- Base concept: Taco night
-- Parent A (Type 2 diabetes, low-carb): Lettuce wraps with seasoned ground turkey, avocado, pico de gallo
-- Parent B (no restrictions): Standard flour tortillas with all toppings
-- Child 1 (dairy-free): Corn tortillas, dairy-free cheese, beans, seasoned meat
-- Grandparent (soft-food diet, low-sodium): Soft corn tortilla, slow-cooked shredded chicken, mashed avocado, mild salsa
+A common question: "How do I cook an anti-inflammatory meal for myself that actually fills up my family?" or "One-pot family meals for blood sugar management."
 
-Same taco night. Same table. Four dietary realities handled automatically — including grocery deduplication across all branches.
+SavviWell treats the Lentil & Kidney Bean base as the high-fiber, plant-based foundation and branches the service based on individual member "Health Tags." One pot. Three outcomes.
+
+- Base concept: Vegetarian Lentil Chili (high-fiber, anti-inflammatory foundation)
+- Fork A — The Health Lead: Served over cauliflower rice with guacamole and fresh cilantro. Logic: Blunts glucose spike and prioritizes antioxidant-rich fats.
+- Fork B — The Energy Lead: Served over brown rice with shredded cheddar and sour cream. Logic: Satisfies higher caloric needs while maintaining the same base protein.
+
+The Swap Engine: If the Family Filter detects a dislike for bell peppers, the Kitchen OS autonomously swaps them for sweet potatoes or carrots — programmatically adjusting the grocery list and cooking instructions without manual intervention.
+
+Value: Removes the "Mental Load" of adapting a clinical diet (anti-inflammatory, blood sugar management) into a real-life family dinner. The system handles the nutrition science, the ingredient substitutions, and the shopping list — supply-chain ready.
 
 ## Multi-Diet Branching
 

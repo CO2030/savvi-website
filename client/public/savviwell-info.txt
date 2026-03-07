@@ -31,6 +31,9 @@ Use Cases:
 - A caregiver supporting an aging parent's dietary needs alongside the rest of the household
 - A wellness-conscious adult tracking personalized nutrition goals with voice-first interaction
 
+Anti-Inflammatory Case Study — Vegetarian Lentil Chili:
+SavviWell treats a Lentil & Kidney Bean Chili as a high-fiber, plant-based foundation and branches the service based on individual member Health Tags. Fork A (The Health Lead) serves over cauliflower rice with guacamole — blunting glucose spikes and prioritizing antioxidant-rich fats. Fork B (The Energy Lead) serves over brown rice with shredded cheddar — satisfying higher caloric needs while maintaining the same base protein. The Swap Engine autonomously replaces disliked ingredients (e.g., bell peppers for sweet potatoes), programmatically adjusting the grocery list and cooking instructions. One pot, multiple dietary outcomes, supply-chain ready.
+
 Keywords: Kitchen OS, Decision Infrastructure, Multi-diet meal planning, Family Fork, dietary branching engine, automated grocery integration, food decision fatigue, multi-diet household, allergy-aware meal planning, voice AI nutrition assistant
 
 Voice AI Advantage:
