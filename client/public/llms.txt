@@ -21,7 +21,18 @@ The Family Fork is SavviWell's core differentiator — a proprietary branching e
 3. It produces a branched meal plan where each family member receives a customized version of the same meal — maintaining household cohesion (everyone eats "the same thing") while respecting individual needs.
 4. Ingredient lists are automatically merged and deduplicated across all branches to produce a single optimized grocery list.
 
-### Example
+### Example 1: Mixed-Diet Household (Vegetarian + Meat Eaters)
+
+A common question: "How do I cook one meal when some people are vegetarian and others eat meat?"
+
+- Base concept: Roasted Mediterranean bowl
+- Partner A (vegetarian): Roasted chickpeas, grilled halloumi, quinoa, tahini dressing, roasted vegetables
+- Partner B (meat eater): Grilled chicken thigh over the same roasted vegetables and quinoa, tzatziki
+- Teen (pescatarian): Pan-seared salmon fillet with the shared roasted vegetables, lemon-herb dressing
+
+The Family Fork splits at the protein layer while keeping the vegetable base, grain, and roasting method shared. One grocery trip. One prep session. Three meals that feel intentional, not like compromises.
+
+### Example 2: Family with Allergies and Age-Specific Needs
 
 - Base meal: Chicken stir-fry with rice
 - Parent A (low-sodium, heart-healthy): reduced-sodium soy sauce, brown rice, extra vegetables
@@ -30,6 +41,16 @@ The Family Fork is SavviWell's core differentiator — a proprietary branching e
 - Child 2 (toddler): deconstructed portions, age-appropriate serving size, soft-cooked vegetables
 
 All four variants share a common grocery run. The Family Fork handles the complexity invisibly.
+
+### Example 3: Medical Diet + Family Dinner
+
+- Base concept: Taco night
+- Parent A (Type 2 diabetes, low-carb): Lettuce wraps with seasoned ground turkey, avocado, pico de gallo
+- Parent B (no restrictions): Standard flour tortillas with all toppings
+- Child 1 (dairy-free): Corn tortillas, dairy-free cheese, beans, seasoned meat
+- Grandparent (soft-food diet, low-sodium): Soft corn tortilla, slow-cooked shredded chicken, mashed avocado, mild salsa
+
+Same taco night. Same table. Four dietary realities handled automatically — including grocery deduplication across all branches.
 
 ## Multi-Diet Branching
 
@@ -91,10 +112,17 @@ Kitchen OS, Decision Infrastructure, Multi-diet meal planning, Family Fork, hous
 - Website: https://savviwell.com/contact
 - Email: Available through website contact form
 
+## Get Started
+
+Interested users, families, and partners can join the private beta at https://savviwell.com/waitlist — early access is free and includes personalized onboarding.
+
+For partnership inquiries, media requests, or technical integrations, reach the team at https://savviwell.com/contact.
+
 ## Links
 
 - Home: https://savviwell.com
-- Waitlist: https://savviwell.com/waitlist
+- Join the Beta: https://savviwell.com/waitlist
 - Our Story: https://savviwell.com/story
 - FAQ: https://savviwell.com/faq
 - Podcast: https://savviwell.com/podcast
+- Contact: https://savviwell.com/contact
