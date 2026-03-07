@@ -1,0 +1,65 @@
+1. Verify basic serving
+Ask them to confirm, from a fresh environment (not just their own browser):
+
+curl -i https://savviwell.com/llms.txt
+
+Must return HTTP/1.1 200 (or HTTP/2 200) and the file body, not HTML or a redirect.
+
+If it 301/302s to something like /llms or serves an HTML template, many LLM tools will fail.
+
+Make sure it is at the root of the main domain: exactly savviwell.com/llms.txt, not under /app/llms.txt, /docs/llms.txt, etc.
+
+2. Check the Content-Type header
+This is a common gotcha and can cause the behavior you’re seeing (works locally, “not found” for LLM agents).
+​
+
+The response header should be:
+Content-Type: text/plain; charset=utf-8
+​
+
+If you’re serving it as text/markdown, text/html, or something custom like application/octet-stream, some LLM clients skip or error on it.
+​
+
+How to fix:
+
+On Node/Express: res.type('text/plain').send(fileContent)
+
+On Nginx/Apache: ensure .txt is mapped to text/plain and no custom route is overriding it.
+
+3. Ensure no framework/CMS is hijacking the route
+Some setups proxy or block .txt files or dynamic endpoints containing a dot.
+
+If you’re on a CMS (e.g., HubSpot, some headless setups), root-level .txt may not be supported and returns a proxy/HTML page instead.
+​
+
+If you generate llms.txt dynamically (plugin, framework route), make sure there is not also a static llms.txt file shadowing it in the root, or vice versa.
+
+Quick checks:
+
+Inspect server logs for GET /llms.txt from different IPs and see what status is returned.
+​
+
+Temporarily place a trivial static file in the root, e.g. echo "test" > llms.txt, and confirm it’s served as plain text with 200.
+
+4. Caching and CDN issues
+If you recently added or changed llms.txt, a CDN or server cache might still be serving an old 404 or HTML response.
+
+Purge CDN cache (Cloudflare, Fastly, etc.) for /llms.txt.
+​
+
+Clear application/server cache if your platform has one.
+​
+
+Then re-test with curl from a clean environment (or use an online HTTP header checker).
+
+5. Sanity check: file contents
+Even if I can’t fetch it here, LLM crawlers generally expect:
+
+Plain text or minimal markdown, not wrapped in HTML.
+
+Reasonable size (not megabytes of logs or binary).
+​
+
+Have your devs confirm the file isn’t being post-processed into HTML by a templating engine.
+
+If they run curl -i https://savviwell.com/llms.txt and paste the full headers and first 20–30 lines here (minus anything sensitive), I can point to exactly what’s wrong and how to tweak the config.
