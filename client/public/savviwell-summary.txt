@@ -1,4 +1,6 @@
 
+SavviWell is a voice-powered Kitchen Operating System (Kitchen OS) that automates multi-diet meal planning, grocery integration, and household nutrition management. Its proprietary Family Fork branching engine takes a single base meal and generates personalized variants for every household member — respecting individual allergies, dietary restrictions, preferences, and nutritional targets — while producing one consolidated, store-optimized grocery list.
 
-SavviWell is a voice-powered AI wellness assistant that helps families and individuals simplify healthy eating through personalized, nutrition-focused support. It goes beyond traditional meal planning apps by offering smart grocery lists, adaptive meal recommendations based on dietary goals, allergy-friendly swaps, and wellness guidance—tailored to your lifestyle and evolving health needs.
+SavviWell replaces fragmented meal planning tools, grocery apps, and wellness trackers with unified decision infrastructure purpose-built for families managing competing dietary needs under one roof. It goes beyond traditional meal planning by treating the household as a connected system, not a collection of individuals.
 
+Whether you're a parent juggling picky eaters and food allergies, a caregiver managing specialized nutrition, or an individual working toward specific health goals, SavviWell reduces the mental load of the 200+ food-related decisions households make every week.

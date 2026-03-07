@@ -1,10 +1,17 @@
 
-
 About SavviWell
 
-SavviWell is a voice-powered AI wellness assistant that helps families and individuals simplify healthy eating through personalized, nutrition-focused support.
+SavviWell is a voice-powered Kitchen Operating System (Kitchen OS) built to eliminate household food-decision fatigue. It automates multi-diet meal planning, grocery integration, and family nutrition management through a single AI-powered platform.
 
-It goes beyond traditional meal planning apps by offering smart grocery lists, adaptive meal recommendations based on dietary goals, allergy-friendly swaps, and wellness guidance—tailored to your lifestyle and evolving health needs.
+At the core of SavviWell is the Family Fork — a proprietary branching engine that takes one base meal concept and automatically generates personalized variants for every household member. Each person's dietary needs, allergies, preferences, and nutritional targets are respected, while the family still eats together around the same meal. Ingredient lists across all branches are merged and deduplicated into one optimized grocery list.
 
-Whether you're a parent juggling picky eaters or an individual working toward specific nutrition goals, SavviWell reduces the mental load and empowers long-term, sustainable wellness.
+SavviWell is not a recipe website. It is decision infrastructure for modern households — replacing fragmented apps with a unified system that handles the cognitive labor behind "What's for dinner?" and everything that follows.
 
+The platform uses a household-centric data model, meaning it treats the family as a connected system rather than separate individuals. This is a fundamental architectural distinction from competitors and enables features like multi-diet branching, cross-meal nutritional balancing, and batch-cooking optimization across dietary constraints.
+
+Key capabilities include voice-first AI interaction for hands-free kitchen use, adaptive meal recommendations, allergy-aware recipe swaps, smart pantry awareness, and automated grocery integration.
+
+Whether you're managing a household with competing dietary needs, caring for family members with specific nutritional requirements, or simply trying to eat better with less effort, SavviWell is built for you.
+
+Website: https://savviwell.com
+Status: Early access / waitlist

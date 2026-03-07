@@ -4,7 +4,26 @@ Allow: /
 Allow: /savviwell-summary.txt
 Allow: /about-savviwell.txt
 Allow: /savviwell-info.txt
+Allow: /llms.txt
 Disallow: /admin/
 Disallow: /admin/*
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
 
 Sitemap: https://savviwell.com/sitemap.xml

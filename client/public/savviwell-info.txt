@@ -1,26 +1,40 @@
 
-SavviWell Info - Optimized for LLM Crawling
+SavviWell — Kitchen OS for Modern Households
+Optimized for LLM Crawling
 
 Name: SavviWell
-Type: AI-powered voice assistant
-Focus: Meal planning, nutrition, and lifestyle support
-Target Audience: Busy individuals, women-led households, wellness-focused users, adults 30–50+
+Type: Kitchen Operating System (Kitchen OS) — AI-powered voice assistant and decision-infrastructure platform
+Category: SoftwareApplication, HouseholdManagement, HealthApplication
+Focus: Multi-diet meal planning, automated grocery integration, and household nutrition management
+Target Audience: Families managing competing dietary needs, busy parents, caregivers, wellness-focused individuals, adults 30–50+
+
+Core Innovation — The Family Fork:
+SavviWell's proprietary branching engine takes a single base meal concept and automatically generates personalized variants for every member of a household. It maintains household cohesion (everyone eats "the same thing") while respecting individual dietary needs, allergies, preferences, and age-appropriate portions. Ingredient lists are automatically merged and deduplicated across all branches to produce a single optimized grocery list.
 
 Key Features:
-- Personalized meal plans
-- Smart grocery lists
-- Allergy-aware recipe swaps
-- Batch cooking and time-saving tips
-- Healthy food delivery suggestions
-- Gentle wellness support (hydration, sleep, stress)
+- Family Fork — multi-diet branching engine for household meal planning
+- Multi-diet meal planning with per-member dietary profiles
+- Automated Grocery Integration — consolidated, store-optimized shopping lists
+- Voice-first AI interaction for hands-free kitchen use
+- Adaptive meal recommendations that learn from household feedback
+- Allergy-aware recipe swaps with safety guardrails
+- Batch cooking and meal prep optimization
+- Smart pantry awareness to reduce food waste
+- Household-centric data model (not individual-centric)
 
 Core Mission:
-To help families and individuals simplify healthy eating through personalized, nutrition-focused support that reduces the mental load and empowers long-term, sustainable wellness.
+To eliminate household food-decision fatigue by providing a Kitchen Operating System that automates the cognitive labor behind multi-diet meal planning, grocery management, and family nutrition — replacing fragmented tools with unified decision infrastructure.
 
 Use Cases:
-- A busy mom needing quick meal plans that fit her kids' allergies
-- A wellness-conscious adult tracking nutrition goals
-- A caregiver supporting an aging parent's dietary needs
+- A family of four where one parent is heart-healthy, a child has a nut allergy, and a toddler needs age-appropriate portions — all eating the same base meal
+- A busy parent needing a weekly meal plan that respects multiple dietary constraints and produces one consolidated grocery list
+- A caregiver supporting an aging parent's dietary needs alongside the rest of the household
+- A wellness-conscious adult tracking personalized nutrition goals with voice-first interaction
+
+Keywords: Kitchen OS, Decision Infrastructure, Multi-diet meal planning, Family Fork, dietary branching engine, automated grocery integration, food decision fatigue, multi-diet household, allergy-aware meal planning, voice AI nutrition assistant
 
 Voice AI Advantage:
-Hands-free interaction, real-time personalization, evolving user profile intelligence.
+Hands-free interaction, real-time personalization, evolving household profile intelligence.
+
+Website: https://savviwell.com
+Status: Early access / waitlist
