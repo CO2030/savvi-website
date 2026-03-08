@@ -154,7 +154,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(403).json({ message: 'Invalid or expired access token' });
     }
     
-    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-Healthy-Meals-Guide.pdf');
+    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-3-Day-Healthy-Meals.pdf');
     res.download(filePath, 'SavviWell-3-Day-Healthy-Meals.pdf', (err) => {
       if (err) {
         console.error('Error downloading file:', err);
@@ -200,8 +200,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(403).json({ message: 'Invalid or expired access token' });
     }
     
-    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-Healthy-Meals-Guide.pdf');
-    res.download(filePath, 'SavviWell-Healthy-Meals-Guide.pdf', (err) => {
+    const filePath = path.join(process.cwd(), 'server/assets/SavviWell-3-Day-Healthy-Meals.pdf');
+    res.download(filePath, 'SavviWell-3-Day-Healthy-Meals.pdf', (err) => {
       if (err) {
         console.error('Error downloading Healthy Meals guide file:', err);
         res.status(500).send('Error downloading file');

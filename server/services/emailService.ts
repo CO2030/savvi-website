@@ -422,7 +422,7 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     attachments: [
       {
         filename: 'SavviWell-3-Day-Healthy-Meals.pdf',
-        path: 'server/assets/SavviWell-Healthy-Meals-Guide.pdf',
+        path: 'server/assets/SavviWell-3-Day-Healthy-Meals.pdf',
         contentType: 'application/pdf'
       }
     ]
