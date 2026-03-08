@@ -471,7 +471,7 @@ Visit us at savviwell.com for more healthy living resources.
           <Card className="shadow-lg border-0 text-center">
             <CardContent className="p-6">
               <Utensils className="w-12 h-12 mx-auto mb-4" style={{ color: '#399E5A' }} />
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">5 Complete Recipes</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">3 Complete Recipes</h3>
               <p className="text-gray-600">Nutritious dinner plans designed by certified nutritionists</p>
             </CardContent>
           </Card>
