@@ -140,8 +140,16 @@ export default function FiveDayMeals() {
 
   const submitMutation = useMutation({
     mutationFn: async (data: LeadMagnetFormData) => {
-      const response = await apiRequest("POST", "/api/waitlist", data);
-      return response;
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok && !json.alreadyRegistered) {
+        throw new Error(json.message || "Something went wrong");
+      }
+      return json;
     },
     onSuccess: async (response: any) => {
       setIsSubmitted(true);
@@ -210,20 +218,11 @@ export default function FiveDayMeals() {
       queryClient.invalidateQueries({ queryKey: ["/api/waitlist"] });
     },
     onError: (error: any) => {
-      if (error.message?.includes("already registered")) {
-        toast({
-          title: "Already Registered",
-          description: "This email is already on our waitlist. Check your inbox for the meal guide!",
-          variant: "default"
-        });
-        setIsSubmitted(true);
-      } else {
-        toast({
-          title: "Something went wrong",
-          description: "Please try again or contact support if the issue persists.",
-          variant: "destructive"
-        });
-      }
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact support if the issue persists.",
+        variant: "destructive"
+      });
     }
   });
 
