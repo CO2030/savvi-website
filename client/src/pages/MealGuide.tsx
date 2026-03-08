@@ -268,7 +268,7 @@ export default function MealGuide() {
                   <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                     <div className="text-center text-white px-4">
                       <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                        Want Your <span style={{ color: '#399E5A' }}>FREE</span> 5-Day Meal Guide?
+                        Want Your <span style={{ color: '#399E5A' }}>FREE</span> 3-Day Meal Guide?
                       </h1>
                       <p className="text-xl md:text-2xl opacity-90">
                         Join thousands of families getting healthy, delicious meals delivered straight to their inbox!
@@ -360,7 +360,7 @@ export default function MealGuide() {
     const token = urlParams.get('token') || '';
     const a = document.createElement('a');
     a.href = `/api/download-meal-guide?token=${token}`;
-    a.download = 'SavviWell-5-Day-Meals.pdf';
+    a.download = 'SavviWell-3-Day-Healthy-Meals.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -430,7 +430,7 @@ Visit us at savviwell.com for more healthy living resources.
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Hi {userName}! Your FREE <span style={{ color: '#399E5A' }}>5-Day Healthy Meals</span> Guide
+            Hi {userName}! Your FREE <span style={{ color: '#399E5A' }}>3-Day Healthy Meals</span> Guide
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             Complete dinner plans designed to make healthy eating effortless for your family
@@ -527,7 +527,7 @@ Visit us at savviwell.com for more healthy living resources.
                 Love This Guide? Share It!
               </h3>
               <p className="text-gray-600 mb-6">
-                Help other families discover healthy eating with our FREE 5-Day Meal Guide
+                Help other families discover healthy eating with our FREE 3-Day Meal Guide
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Button 
