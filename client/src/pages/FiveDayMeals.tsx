@@ -326,10 +326,9 @@ export default function FiveDayMeals() {
               <div className="mb-8">
                 <Button 
                   onClick={() => {
-                    // Direct PDF download
                     const link = document.createElement('a');
-                    link.href = '/SavviWell-3-Day-Meals.pdf';
-                    link.download = 'SavviWell-3-Day-Meals.pdf';
+                    link.href = `/api/download-healthy-meals-guide?token=${accessToken}`;
+                    link.download = 'SavviWell-3-Day-Healthy-Meals.pdf';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
