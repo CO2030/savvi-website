@@ -10,23 +10,19 @@ interface EmailData {
 }
 
 // Create reusable transporter
-const createTransporter = () => {
+const createTransporter = (useSSL = true) => {
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
     console.warn('Email configuration missing. Emails will not be sent.');
     return null;
   }
 
-  // Try different port configurations for Hostinger
-  const configs = [
-    { port: 587, secure: false },
-    { port: 465, secure: true },
-    { port: 25, secure: false }
-  ];
+  const port = useSSL ? 465 : 587;
+  const secure = useSSL;
 
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: 587,
-    secure: false,
+    port,
+    secure,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -34,10 +30,30 @@ const createTransporter = () => {
     tls: {
       rejectUnauthorized: false
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 5000,
-    socketTimeout: 10000
+    connectionTimeout: 15000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000
   });
+};
+
+const sendWithFallback = async (mailOptions: any): Promise<any> => {
+  const transporter465 = createTransporter(true);
+  if (!transporter465) {
+    console.log('Email service not configured, skipping email send');
+    return null;
+  }
+
+  try {
+    console.log('📧 Attempting send via port 465 (SSL)...');
+    const result = await transporter465.sendMail(mailOptions);
+    return result;
+  } catch (err465: any) {
+    console.warn(`⚠️ Port 465 failed: ${err465.message}. Trying port 587...`);
+    const transporter587 = createTransporter(false);
+    if (!transporter587) return null;
+    const result = await transporter587.sendMail(mailOptions);
+    return result;
+  }
 };
 
 const generateMealGuideContent = () => {
@@ -238,13 +254,6 @@ interface ContactEmailData {
 }
 
 export async function sendContactEmail(emailData: ContactEmailData): Promise<boolean> {
-  const transporter = createTransporter();
-  
-  if (!transporter) {
-    console.log('Email service not configured, skipping email send');
-    return false;
-  }
-
   const mailOptions = {
     from: `"SavviWell" <${process.env.SMTP_USER}>`,
     to: emailData.to,
@@ -253,7 +262,8 @@ export async function sendContactEmail(emailData: ContactEmailData): Promise<boo
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    const result = await sendWithFallback(mailOptions);
+    if (!result) return false;
     console.log(`Contact email sent successfully to ${emailData.to}`);
     return true;
   } catch (error) {
@@ -271,15 +281,6 @@ function isValidEmail(email: string): boolean {
 }
 
 export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean> {
-  const transporter = createTransporter();
-  
-  if (!transporter) {
-    console.log('Email service not configured, skipping email send');
-    EmailReputationMonitor.logEmailSent(false);
-    return false;
-  }
-
-  // Enhanced email validation
   if (!validateEmailFormat(emailData.to)) {
     console.log(`⚠️ Invalid email format: ${emailData.to}`);
     return false;
@@ -290,14 +291,10 @@ export async function sendMealGuideEmail(emailData: EmailData): Promise<boolean>
     return false;
   }
 
-  // Block sending to fake email domains
   if (!isValidEmail(emailData.to)) {
     console.log(`⚠️ Blocked email to fake domain: ${emailData.to}`);
     return false;
   }
-
-  // Check if user has unsubscribed (import storage at top if needed)
-  // This check should be done at the calling level, but adding as extra protection
 
   console.log(`📧 Sending email to REAL address: ${emailData.to}`);
 
@@ -433,10 +430,13 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
 
   try {
     console.log(`Attempting to send meal guide email to ${emailData.to}...`);
-    const result = await transporter.sendMail(mailOptions);
+    const result = await sendWithFallback(mailOptions);
+    if (!result) {
+      EmailReputationMonitor.logEmailSent(false);
+      return false;
+    }
     console.log(`✅ Meal guide email sent successfully to ${emailData.to}`, result.messageId);
     
-    // Log successful email send
     EmailReputationMonitor.logEmailSent(true);
     
     return true;
@@ -444,15 +444,13 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
     console.error('❌ Error sending meal guide email:', error);
     console.error('SMTP Configuration:', {
       host: process.env.SMTP_HOST,
-      port: 587,
+      port: '465 (SSL) with 587 fallback',
       user: process.env.SMTP_USER ? 'configured' : 'missing',
       pass: process.env.SMTP_PASS ? 'configured' : 'missing'
     });
     
-    // Log failed email send and potential bounce
     EmailReputationMonitor.logEmailSent(false);
     
-    // Check if it's a bounce-related error
     const errorString = String(error).toLowerCase();
     if (errorString.includes('bounce') || errorString.includes('invalid') || errorString.includes('rejected')) {
       await EmailBounceHandler.logBounce(
@@ -467,14 +465,6 @@ P.S. Follow us for more healthy living tips and updates about our AI assistant l
 }
 
 export async function sendInstagramGuideEmail(emailData: EmailData): Promise<boolean> {
-  const transporter = createTransporter();
-  
-  if (!transporter) {
-    console.log('Email service not configured, skipping email send');
-    EmailReputationMonitor.logEmailSent(false);
-    return false;
-  }
-
   if (!validateEmailFormat(emailData.to)) {
     console.log(`⚠️ Invalid email format: ${emailData.to}`);
     return false;
@@ -583,7 +573,11 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
 
   try {
     console.log(`Attempting to send Instagram guide email to ${emailData.to}...`);
-    const result = await transporter.sendMail(mailOptions);
+    const result = await sendWithFallback(mailOptions);
+    if (!result) {
+      EmailReputationMonitor.logEmailSent(false);
+      return false;
+    }
     console.log(`✅ Instagram guide email sent successfully to ${emailData.to}`, result.messageId);
     
     EmailReputationMonitor.logEmailSent(true);
@@ -593,7 +587,7 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
     console.error('❌ Error sending Instagram guide email:', error);
     console.error('SMTP Configuration:', {
       host: process.env.SMTP_HOST,
-      port: 587,
+      port: '465 (SSL) with 587 fallback',
       user: process.env.SMTP_USER ? 'configured' : 'missing',
       pass: process.env.SMTP_PASS ? 'configured' : 'missing'
     });
@@ -614,14 +608,6 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
 }
 
 export async function sendHealthyMealsGuideEmail(emailData: EmailData): Promise<boolean> {
-  const transporter = createTransporter();
-  
-  if (!transporter) {
-    console.log('Email service not configured, skipping email send');
-    EmailReputationMonitor.logEmailSent(false);
-    return false;
-  }
-
   if (!validateEmailFormat(emailData.to)) {
     console.log(`⚠️ Invalid email format: ${emailData.to}`);
     return false;
@@ -727,7 +713,11 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
 
   try {
     console.log(`Attempting to send Healthy Meals guide email to ${emailData.to}...`);
-    const result = await transporter.sendMail(mailOptions);
+    const result = await sendWithFallback(mailOptions);
+    if (!result) {
+      EmailReputationMonitor.logEmailSent(false);
+      return false;
+    }
     console.log(`✅ Healthy Meals guide email sent successfully to ${emailData.to}`, result.messageId);
     
     EmailReputationMonitor.logEmailSent(true);
@@ -737,7 +727,7 @@ Wellbeing for modern life — honest conversations, practical tools, and free gu
     console.error('❌ Error sending Healthy Meals guide email:', error);
     console.error('SMTP Configuration:', {
       host: process.env.SMTP_HOST,
-      port: 587,
+      port: '465 (SSL) with 587 fallback',
       user: process.env.SMTP_USER ? 'configured' : 'missing',
       pass: process.env.SMTP_PASS ? 'configured' : 'missing'
     });
