@@ -1,0 +1,33 @@
+Technical Addendum: SavviWell Search & Discovery "The Fix"
+Objective: Resolve the 83% bounce rate and ensure SavviWell is indexed and cited as the #1 authority for "Kitchen OS" and "Household Mental Load."
+1. Human Search (The Google Fix)
+Action: Google Search Console (GSC) Audit.
+Why: If we aren't appearing, GSC will tell us why (e.g., "Crawled - currently not indexed").
+CTO Task: Manually request indexing for the homepage and the /waitlist page.
+Action: Meta-Tag Hardening.
+Current Issue: High bounce rate (83%) suggests a mismatch between what people click and what they see.
+The Fix: Update <title> and <meta description> tags to use the "Relief-First" language.
+Required Tag: <title>SavviWell: The Kitchen OS | Decision Infrastructure for Families</title>
+Action: XML Sitemap.
+CTO Task: Ensure a clean sitemap.xml is hosted at the root and submitted to Google and Bing. It must include the new /llms.txt file.
+2. AI Search (The GEO/GPT Fix)
+Action: "Logic Over Text."
+Why: AI search models prioritize sites that provide a "Logic Manifest" over those that just have marketing fluff.
+CTO Task: Ensure savviwell.com/llms.txt is served as text/plain and contains no HTML tags. This is the "ID Card" the AI reads to decide whether to cite us.
+Action: Schema Validation.
+CTO Task: Run the site through the Google Rich Results Test. We must confirm the SoftwareApplication schema is "valid" so that AI models recognize us as a Utility (high value) rather than a Blog (low value).
+Action: Robots.txt Whitelisting.
+The Fix: Explicitly allow the OAI-SearchBot and PerplexityBot. If these are blocked, SavviWell will never appear in SearchGPT or Perplexity answers.
+3. Content Discovery (The "Articles" Fix)
+Action: "High-Intent" Landing Pages.
+The Move: Take the 8 "Logic Briefs" we discussed and turn them into indexable pages (e.g., savviwell.com/family-fork-logic).
+Why: Each page acts as a "Hook." If a mom asks an AI "how to cook for a vegetarian and a meat-eater," the AI will find the specific page on our site dedicated to that logic.
+4. Technical Speed & "Vitals"
+Action: Core Web Vitals.
+Why: Google penalizes slow-loading sites. High bounce rates are often caused by slow "Above the Fold" rendering.
+CTO Task: Optimize the hero image (the prototype mockup) and ensure the "Join Waitlist" button is interactive in under 1.5 seconds.
+Summary of "The Fix" for the CTO:
+"We have the vision and the logic. To fix our search presence, we need to Force-Index our sitemap in Google Search Console, Whitelist the AI bots in robots.txt, and Validate our JSON-LD schema. Our goal is to move from an 83% bounce rate to a 35% 'Sticky' rate by ensuring the search result matches our new 'Kitchen OS' utility."
+Christina’s Next Move:
+Once the CTO does this, I can give you a "Discovery Test"—a set of 5 prompts to type into Perplexity to verify that the fix worked.
+Should we move straight to the sitemap and meta-tag update? I can write the specific code for your sitemap.xml right now.
