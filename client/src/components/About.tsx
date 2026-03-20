@@ -38,6 +38,7 @@ export function About() {
                   src="/images/iphone-mockup.jpeg" 
                   alt="SavviWell iPhone App Mockup" 
                   className="max-w-full h-auto"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -64,6 +65,7 @@ export function About() {
                 src="/images/iphone-mockup.jpeg" 
                 alt="SavviWell iPhone App Mockup" 
                 className="max-w-full h-auto"
+                loading="lazy"
               />
             </div>
             <div className="flex-1 p-8 bg-gray-50 flex flex-col justify-center space-y-6">
