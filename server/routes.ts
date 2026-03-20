@@ -109,6 +109,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Register crawler meta middleware for podcast routes (must be before catch-all)
   app.use(crawlerMetaMiddleware);
 
+  // Serve sitemap.xml with correct content-type
+  app.get('/sitemap.xml', (_req: Request, res: Response) => {
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://savviwell.com/</loc><lastmod>2026-03-20</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://savviwell.com/waitlist</loc><lastmod>2026-03-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://savviwell.com/demo</loc><lastmod>2026-03-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://savviwell.com/story</loc><lastmod>2026-03-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://savviwell.com/faq</loc><lastmod>2026-03-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://savviwell.com/podcast</loc><lastmod>2026-03-20</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://savviwell.com/blog</loc><lastmod>2026-03-20</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://savviwell.com/contact</loc><lastmod>2026-03-20</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://savviwell.com/llms.txt</loc><lastmod>2026-03-20</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://savviwell.com/privacy-policy</loc><lastmod>2026-03-20</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://savviwell.com/terms-of-service</loc><lastmod>2026-03-20</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+</urlset>`;
+    res.setHeader('Content-Type', 'application/xml');
+    res.send(sitemap);
+  });
+
   // Permanent redirect from old Instagram guide URL to new SEO-friendly URL
   app.get('/instagram-teen-guide', (req: Request, res: Response) => {
     return res.redirect(301, '/podcast/free-guides/instagram-teen-accounts');
