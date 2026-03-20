@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Progress } from "@/components/ui/progress";
-import { X, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -26,7 +24,6 @@ interface WaitlistModalProps {
 }
 
 export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
-  const [step, setStep] = useState(1);
   const [success, setSuccess] = useState(false);
   const [formValues, setFormValues] = useState<FormValues>({
     name: "",
@@ -37,8 +34,6 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
-
-  const progressPercentage = step === 5 ? 100 : step * 25;
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
@@ -127,23 +122,11 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     return isValid;
   };
 
-  const handleNextStep = () => {
-    if (step === 1) {
-      const nameValid = validateField('name');
-      const emailValid = validateField('email');
-
-      if (!nameValid || !emailValid) return;
-    }
-
-    setStep(step + 1);
-  };
-
-  const handlePrevStep = () => {
-    setStep(step - 1);
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const nameValid = validateField('name');
+    const emailValid = validateField('email');
+    if (!nameValid || !emailValid) return;
     mutation.mutate(formValues);
   };
 
@@ -156,7 +139,6 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   };
 
   const handleClose = () => {
-    setStep(1);
     setSuccess(false);
     setFormValues({
       name: "",
@@ -173,9 +155,6 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-md mx-auto">
         <div className="relative">
-          <div className="w-full mb-4">
-            <Progress value={progressPercentage} className="h-1" />
-          </div>
 
           {!success ? (
             <form onSubmit={handleSubmit}>
@@ -184,8 +163,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 Be among the first to experience SavviWell
               </DialogDescription>
 
-              {step === 1 && (
-                <div className="space-y-4 animate-fade-in">
+              <div className="space-y-4 animate-fade-in">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name</Label>
                     <Input 
@@ -218,144 +196,13 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   </div>
 
                   <Button 
-                    type="button" 
+                    type="submit"
                     className="w-full"
-                    onClick={handleNextStep}
+                    disabled={mutation.isPending}
                   >
-                    Continue
+                    {mutation.isPending ? "Submitting..." : "Join Waitlist"}
                   </Button>
                 </div>
-              )}
-
-              {step === 2 && (
-                <div className="space-y-4 animate-fade-in">
-                  <div className="space-y-3">
-                    <Label>Are you signing up as:</Label>
-                    <RadioGroup 
-                      onValueChange={(value) => setFormValues({...formValues, userType: value})}
-                      defaultValue={formValues.userType}
-                      className="space-y-2"
-                    >
-                      {[
-                        { value: "individual", label: "Individual" },
-                        { value: "parent", label: "Parent" },
-                        { value: "caregiver", label: "Caregiver" },
-                        { value: "older-adult", label: "Older Adult" }
-                      ].map((option) => (
-                        <div key={option.value} className="flex items-center space-x-2 border p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                          <RadioGroupItem value={option.value} id={option.value} />
-                          <Label htmlFor={option.value} className="cursor-pointer flex-1">{option.label}</Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                  </div>
-
-                  <div className="flex space-x-3">
-                    <Button 
-                      type="button" 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={handlePrevStep}
-                    >
-                      Back
-                    </Button>
-                    <Button 
-                      type="button" 
-                      className="w-full"
-                      onClick={handleNextStep}
-                    >
-                      Continue
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {step === 3 && (
-                <div className="space-y-4 animate-fade-in">
-                  <div className="space-y-3">
-                    <Label>Main health goal?</Label>
-                    <RadioGroup 
-                      onValueChange={(value) => setFormValues({...formValues, healthGoal: value})}
-                      defaultValue={formValues.healthGoal}
-                      className="space-y-2"
-                    >
-                      {[
-                        { value: "energy", label: "Energy" },
-                        { value: "gut-health", label: "Gut Health" },
-                        { value: "blood-sugar", label: "Blood Sugar" },
-                        { value: "weight-loss", label: "Weight Loss" },
-                        { value: "other", label: "Other" }
-                      ].map((option) => (
-                        <div key={option.value} className="flex items-center space-x-2 border p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                          <RadioGroupItem value={option.value} id={`health-${option.value}`} />
-                          <Label htmlFor={`health-${option.value}`} className="cursor-pointer flex-1">{option.label}</Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                  </div>
-
-                  <div className="flex space-x-3">
-                    <Button 
-                      type="button" 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={handlePrevStep}
-                    >
-                      Back
-                    </Button>
-                    <Button 
-                      type="button" 
-                      className="w-full"
-                      onClick={handleNextStep}
-                    >
-                      Continue
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {step === 4 && (
-                <div className="space-y-4 animate-fade-in">
-                  <div className="space-y-3">
-                    <Label>Dietary concerns?</Label>
-                    <RadioGroup 
-                      onValueChange={(value) => setFormValues({...formValues, dietaryConcern: value})}
-                      defaultValue={formValues.dietaryConcern}
-                      className="space-y-2"
-                    >
-                      {[
-                        { value: "gluten-free", label: "Gluten-Free" },
-                        { value: "vegan", label: "Vegan" },
-                        { value: "low-sugar", label: "Low Sugar" },
-                        { value: "none", label: "None" }
-                      ].map((option) => (
-                        <div key={option.value} className="flex items-center space-x-2 border p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                          <RadioGroupItem value={option.value} id={`diet-${option.value}`} />
-                          <Label htmlFor={`diet-${option.value}`} className="cursor-pointer flex-1">{option.label}</Label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                  </div>
-
-                  <div className="flex space-x-3">
-                    <Button 
-                      type="button" 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={handlePrevStep}
-                    >
-                      Back
-                    </Button>
-                    <Button 
-                      type="submit" 
-                      className="w-full"
-                      disabled={mutation.isPending}
-                    >
-                      {mutation.isPending ? "Submitting..." : "Join Waitlist"}
-                    </Button>
-                  </div>
-                </div>
-              )}
             </form>
           ) : (
             <div className="text-center space-y-4 animate-fade-in">
