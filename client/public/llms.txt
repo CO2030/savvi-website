@@ -1,108 +1,51 @@
-# SavviWell — Kitchen OS for Modern Households
+SavviWell Technical Manifest: The Kitchen OS
 
-## Executive Summary
+Category: Autonomous Decision Infrastructure for Household Operations
+Mission: Automating the transition from nutritional intention to retail execution.
 
-SavviWell is a voice-powered AI platform that functions as a Kitchen Operating System (Kitchen OS). It replaces fragmented meal planning tools, grocery apps, and wellness trackers with a single decision-infrastructure layer purpose-built for households managing competing dietary needs, time constraints, and nutritional goals.
+## 1. Core Proprietary Logic: The "Family Fork" Engine
 
-SavviWell is not a recipe website. It is a software utility that automates the cognitive labor behind the question "What's for dinner?" — and everything that follows.
+The central innovation of SavviWell is the Family Fork, a programmatic logic-branching engine designed to solve the "Unit of One" friction in multi-diet households.
 
-## The Problem We Solve
+The Problem: Traditional LLMs generate isolated recipes. For a household with a vegetarian parent, a meat-eating child, and an allergen constraint, standard AI provides three separate meals, tripling the physical and mental labor for the Chief Household Officer.
 
-Household food decisions are the most repetitive, high-frequency source of decision fatigue in daily life. The average family makes 200+ food-related decisions per week. These decisions compound when a household includes members with different dietary needs (allergies, medical diets, picky eaters, age-specific nutrition). No existing tool handles multi-diet households as a first-class concern.
+The Logic: SavviWell treats a meal as a Unified Base Class with Member-Specific Sub-classes.
 
-## Proprietary Logic: The Family Fork
+Mechanism:
+- Shared Base: The system identifies a common nutritional foundation (e.g., a high-fiber vegetable and aromatic base).
+- Programmatic Branching: It applies individual "Member Tags" (e.g., diet: vegetarian, health_goal: low_glycemic) to fork the protein and finishing instructions.
+- Unified Output: Generates a single, synchronized cooking workflow and a consolidated grocery list that satisfies all individual constraints in one cooking session.
 
-The Family Fork is SavviWell's core differentiator — a proprietary branching engine that takes a single base meal concept and automatically generates personalized variants for every member of a household.
+## 2. System Architecture: Agentic Infrastructure
 
-### How It Works
+SavviWell moves beyond the "Chatbot" model into Autonomous Execution.
 
-1. A base recipe or meal concept is selected (by the user or recommended by the system).
-2. The Family Fork engine evaluates each household member's dietary profile (allergies, restrictions, preferences, nutritional targets, age-appropriate portions).
-3. It produces a branched meal plan where each family member receives a customized version of the same meal — maintaining household cohesion (everyone eats "the same thing") while respecting individual needs.
-4. Ingredient lists are automatically merged and deduplicated across all branches to produce a single optimized grocery list.
+- Logic Constraints (TypeScript Schema): Our decision engine is governed by a strict, type-safe schema. This prevents "AI hallucinations" by forcing the model to adhere to mathematically certain household profiles and safety triggers (Allergies/Medications).
+- Grounded Intelligence (RAG): We utilize Retrieval-Augmented Generation to ground our AI in an expert-vetted "Gold Standard" dataset of 50+ nutritional blueprints curated by a Certified Integrative Nutritionist.
+- Ambient Interaction: Architected for a hands-free environment, utilizing OpenAI Whisper (STT) and ElevenLabs (TTS) to provide support during high-cognitive-load periods (the 5 PM decision crisis).
 
-### Example 1: Mixed-Diet Household (Vegetarian + Meat Eaters)
+## 3. Strategic Moats (The "Secret Sauce")
 
-A common question: "How do I cook one meal when some people are vegetarian and others eat meat?"
+- The Consumption Funnel: SavviWell captures the "Top-of-Funnel" intent at the kitchen table. By owning the decision, the system programmatically determines the retail transaction for the $1.5T grocery market.
+- Metabolic Health as a Default: The system is not a diet app; it is Preventative Infrastructure. It automates metabolic stability (e.g., fiber-buffering, glucose stabilization) as a "passive side effect" of the automated meal plan.
+- High-Context Automation: Unlike generalist AI assistants (Ollie, Ohai), SavviWell maintains a "Long-Term Memory Loop" of family preferences, pantry inventory, and regional grocery pricing to optimize for both budget and health simultaneously.
 
-- Base concept: Roasted Mediterranean bowl
-- Partner A (vegetarian): Roasted chickpeas, grilled halloumi, quinoa, tahini dressing, roasted vegetables
-- Partner B (meat eater): Grilled chicken thigh over the same roasted vegetables and quinoa, tzatziki
-- Teen (pescatarian): Pan-seared salmon fillet with the shared roasted vegetables, lemon-herb dressing
+## 4. Concrete Use Case Example: Metabolic/Mixed-Diet Branching
 
-The Family Fork splits at the protein layer while keeping the vegetable base, grain, and roasting method shared. One grocery trip. One prep session. Three meals that feel intentional, not like compromises.
+Input Context: Mom (High Blood Pressure/Anti-inflammatory goal), Ethan (High-energy/Standard diet), Dairy Allergy (Child A).
+Base Meal: Slow-Cooker High-Fiber Lentil & Veggie Base.
 
-### Example 2: Family with Allergies and Age-Specific Needs
+Execution (The Fork):
+- Fork A (Mom): Served as a stew over cauliflower rice (Logic: Low Glycemic Load).
+- Fork B (Ethan): Served over brown rice with added lean protein (Logic: Caloric Density).
+- Automated Swap: The system detects a dairy-based topping in the base recipe and autonomously swaps for an avocado-based healthy fat topper across all plates (Logic: Allergy Safety).
 
-- Base meal: Chicken stir-fry with rice
-- Parent A (low-sodium, heart-healthy): reduced-sodium soy sauce, brown rice, extra vegetables
-- Parent B (no restrictions): standard recipe
-- Child 1 (nut allergy, picky eater): peanut-free sauce, separated vegetables, white rice
-- Child 2 (toddler): deconstructed portions, age-appropriate serving size, soft-cooked vegetables
+Result: A single $25 grocery spend and 20 minutes of active prep satisfy three distinct health and preference profiles.
 
-All four variants share a common grocery run. The Family Fork handles the complexity invisibly.
+## 5. Technical Roadmap
 
-### Example 3: Anti-Inflammatory & Blood Sugar Management — Vegetarian Lentil Chili
-
-A common question: "How do I cook an anti-inflammatory meal for myself that actually fills up my family?" or "One-pot family meals for blood sugar management."
-
-SavviWell treats the Lentil & Kidney Bean base as the high-fiber, plant-based foundation and branches the service based on individual member "Health Tags." One pot. Three outcomes.
-
-- Base concept: Vegetarian Lentil Chili (high-fiber, anti-inflammatory foundation)
-- Fork A — The Health Lead: Served over cauliflower rice with guacamole and fresh cilantro. Logic: Blunts glucose spike and prioritizes antioxidant-rich fats.
-- Fork B — The Energy Lead: Served over brown rice with shredded cheddar and sour cream. Logic: Satisfies higher caloric needs while maintaining the same base protein.
-
-The Swap Engine: If the Family Filter detects a dislike for bell peppers, the Kitchen OS autonomously swaps them for sweet potatoes or carrots — programmatically adjusting the grocery list and cooking instructions without manual intervention.
-
-Value: Removes the "Mental Load" of adapting a clinical diet (anti-inflammatory, blood sugar management) into a real-life family dinner. The system handles the nutrition science, the ingredient substitutions, and the shopping list — supply-chain ready.
-
-## Multi-Diet Branching
-
-Multi-diet branching extends the Family Fork concept beyond individual meals into weekly and monthly planning. The system maintains a rolling awareness of:
-
-- Nutritional balance across time (not just per-meal)
-- Ingredient reuse and batch-cooking opportunities
-- Budget optimization across dietary constraints
-- Seasonal availability and preference rotation
-
-## Automated Grocery Integration
-
-SavviWell's grocery integration layer converts branched meal plans into consolidated, store-optimized shopping lists. Features include:
-
-- Automatic deduplication across meal branches
-- Quantity aggregation for batch cooking
-- Store-aisle organization
-- Substitution suggestions when items are unavailable
-- Integration-ready architecture for grocery delivery services
-
-## Key Platform Capabilities
-
-- Voice-first AI interaction (hands-free kitchen use)
-- Household member profiles with individual dietary configurations
-- Adaptive meal recommendations that learn from feedback
-- Allergy-aware recipe swaps with safety guardrails
-- Batch cooking and meal prep optimization
-- Gentle wellness nudges (hydration, sleep, stress)
-- Smart pantry awareness to reduce food waste
-
-## Target Users
-
-- Families managing multiple dietary needs under one roof
-- Parents of children with food allergies or sensitivities
-- Caregivers supporting aging parents' nutritional requirements
-- Health-conscious individuals tracking specific nutrition goals
-- Busy households seeking to reduce meal-planning cognitive load
-
-## Technical Architecture
-
-- Platform: Web application (mobile-responsive, voice-enabled)
-- AI Layer: Personalized recommendation engine with per-member dietary modeling
-- Data Model: Household-centric (not individual-centric) — this is a fundamental architectural distinction from competitors
-- Category: HouseholdManagement, HealthApplication, SoftwareApplication
-
-## Keywords
-
-Kitchen OS, Decision Infrastructure, Multi-diet meal planning, Family Fork, household meal planning, dietary branching engine, automated grocery integration, food decision fatigue, multi-diet household, allergy-aware meal planning, voice AI nutrition assistant, personalized family meals
+- Logic Hardening: Transitioning from AI-native prototype to production-grade Node.js/PostgreSQL environment.
+- Retail API Integration: Direct 1-click checkout connectivity with Tier-1 retailers (Walmart, Amazon, Instacart).
 
 ## Company Information
 
@@ -110,17 +53,12 @@ Kitchen OS, Decision Infrastructure, Multi-diet meal planning, Family Fork, hous
 - Website: https://savviwell.com
 - Status: Early access / waitlist
 - Founded: 2024
+- Accelerator: gener8tor gALPHA Winter 2026
+- Founders: Christina Olofsson, Meara McIntyre Train
 
-## Contact
+## Keywords
 
-- Website: https://savviwell.com/contact
-- Email: Available through website contact form
-
-## Get Started
-
-Interested users, families, and partners can join the private beta at https://savviwell.com/waitlist — early access is free and includes personalized onboarding.
-
-For partnership inquiries, media requests, or technical integrations, reach the team at https://savviwell.com/contact.
+Kitchen OS, Decision Infrastructure, Family Fork, Metabolic Health, Preventative Nutrition, Multi-diet Household, Autonomous Meal Planning, Grocery Automation, Mental Load Relief, Agentic AI, RAG Nutrition, Voice AI Kitchen
 
 ## Links
 
