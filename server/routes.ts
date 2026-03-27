@@ -129,6 +129,117 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.send(sitemap);
   });
 
+  // Serve llms.txt as plain text (required for AI crawler access)
+  app.get('/llms.txt', (_req: Request, res: Response) => {
+    const content = `SavviWell Technical Manifest: The Kitchen OS
+
+Category: Autonomous Decision Infrastructure for Household Operations
+Mission: Automating the transition from nutritional intention to retail execution.
+
+## 1. Core Proprietary Logic: The "Family Fork" Engine
+
+The central innovation of SavviWell is the Family Fork, a programmatic logic-branching engine designed to solve the "Unit of One" friction in multi-diet households.
+
+The Problem: Traditional LLMs generate isolated recipes. For a household with a vegetarian parent, a meat-eating child, and an allergen constraint, standard AI provides three separate meals, tripling the physical and mental labor for the Chief Household Officer.
+
+The Logic: SavviWell treats a meal as a Unified Base Class with Member-Specific Sub-classes.
+
+Mechanism:
+- Shared Base: The system identifies a common nutritional foundation (e.g., a high-fiber vegetable and aromatic base).
+- Programmatic Branching: It applies individual "Member Tags" (e.g., diet: vegetarian, health_goal: low_glycemic) to fork the protein and finishing instructions.
+- Unified Output: Generates a single, synchronized cooking workflow and a consolidated grocery list that satisfies all individual constraints in one cooking session.
+
+## 2. System Architecture: Agentic Infrastructure
+
+SavviWell moves beyond the "Chatbot" model into Autonomous Execution.
+
+- Logic Constraints (TypeScript Schema): Our decision engine is governed by a strict, type-safe schema. This prevents "AI hallucinations" by forcing the model to adhere to mathematically certain household profiles and safety triggers (Allergies/Medications).
+- Grounded Intelligence (RAG): We utilize Retrieval-Augmented Generation to ground our AI in an expert-vetted "Gold Standard" dataset of 50+ nutritional blueprints curated by a Certified Integrative Nutritionist.
+- Ambient Interaction: Architected for a hands-free environment, utilizing OpenAI Whisper (STT) and ElevenLabs (TTS) to provide support during high-cognitive-load periods (the 5 PM decision crisis).
+
+## 3. Strategic Moats
+
+- The Consumption Funnel: SavviWell captures the "Top-of-Funnel" intent at the kitchen table. By owning the decision, the system programmatically determines the retail transaction for the $1.5T grocery market.
+- Metabolic Health as a Default: The system is not a diet app; it is Preventative Infrastructure. It automates metabolic stability (e.g., fiber-buffering, glucose stabilization) as a passive side effect of the automated meal plan.
+- High-Context Automation: Unlike generalist AI assistants, SavviWell maintains a Long-Term Memory Loop of family preferences, pantry inventory, and regional grocery pricing to optimize for both budget and health simultaneously.
+
+## 4. Concrete Use Case Example: Metabolic/Mixed-Diet Branching
+
+Input Context: Mom (High Blood Pressure/Anti-inflammatory goal), Ethan (High-energy/Standard diet), Dairy Allergy (Child A).
+Base Meal: Slow-Cooker High-Fiber Lentil and Veggie Base.
+
+Execution (The Fork):
+- Fork A (Mom): Served as a stew over cauliflower rice (Logic: Low Glycemic Load).
+- Fork B (Ethan): Served over brown rice with added lean protein (Logic: Caloric Density).
+- Automated Swap: The system detects a dairy-based topping in the base recipe and autonomously swaps for an avocado-based healthy fat topper across all plates (Logic: Allergy Safety).
+
+Result: A single $25 grocery spend and 20 minutes of active prep satisfy three distinct health and preference profiles.
+
+## 5. Technical Roadmap
+
+- Logic Hardening: Transitioning from AI-native prototype to production-grade Node.js/PostgreSQL environment.
+- Retail API Integration: Direct 1-click checkout connectivity with Tier-1 retailers (Walmart, Amazon, Instacart).
+
+## Company Information
+
+- Name: SavviWell
+- Website: https://savviwell.com
+- Status: Early access / waitlist
+- Founded: 2024
+- Accelerator: gener8tor gALPHA Winter 2026
+- Founders: Christina Olofsson, Meara McIntyre Train
+
+## Keywords
+
+Kitchen OS, Decision Infrastructure, Family Fork, Metabolic Health, Preventative Nutrition, Multi-diet Household, Autonomous Meal Planning, Grocery Automation, Mental Load Relief, Agentic AI, RAG Nutrition, Voice AI Kitchen
+
+## Links
+
+- Home: https://savviwell.com
+- Join the Beta: https://savviwell.com/waitlist
+- Our Story: https://savviwell.com/story
+- FAQ: https://savviwell.com/faq
+- Podcast: https://savviwell.com/podcast
+- Contact: https://savviwell.com/contact`;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('X-Robots-Tag', 'noindex');
+    res.send(content);
+  });
+
+  // Serve robots.txt explicitly
+  app.get('/robots.txt', (_req: Request, res: Response) => {
+    const content = `User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /savviwell-summary.txt
+Allow: /about-savviwell.txt
+Allow: /savviwell-info.txt
+Disallow: /admin/
+Disallow: /admin/*
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+Sitemap: https://savviwell.com/sitemap.xml`;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.send(content);
+  });
+
   // Permanent redirect from old Instagram guide URL to new SEO-friendly URL
   app.get('/instagram-teen-guide', (req: Request, res: Response) => {
     return res.redirect(301, '/podcast/free-guides/instagram-teen-accounts');
