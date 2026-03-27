@@ -217,22 +217,57 @@ Allow: /savviwell-info.txt
 Disallow: /admin/
 Disallow: /admin/*
 
+# Google (Search + Gemini)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+# OpenAI (ChatGPT + SearchGPT)
 User-agent: GPTBot
 Allow: /
 
 User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: ChatGPT-User
 Allow: /
 
+# Anthropic (Claude)
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
-User-agent: Google-InspectionTool
+User-agent: Anthropic-AI
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Microsoft (Bing + Copilot)
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Meta (Meta AI)
+User-agent: FacebookBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+# Common Crawl (used by many AI training datasets)
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://savviwell.com/sitemap.xml`;
