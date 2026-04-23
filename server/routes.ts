@@ -429,13 +429,20 @@ Sitemap: https://savviwell.com/sitemap.xml`;
       }
 
       // Submit to Google Script for backup
-      try {
-        await submitToGoogleScript({
-          ...validatedData,
-          timestamp: new Date().toISOString(),
-        });
-      } catch (error) {
-        console.log("Google Script submission skipped or failed:", error);
+      const deploymentUrl = config.googleScriptDeploymentUrl;
+      if (deploymentUrl) {
+        try {
+          await submitToGoogleScript(deploymentUrl, {
+            name: validatedData.name,
+            email: validatedData.email,
+            userType: validatedData.userType,
+            healthGoal: validatedData.healthGoal,
+            dietaryConcern: validatedData.dietaryConcern,
+            source: validatedData.source || 'healthy-meals-guide'
+          });
+        } catch (error) {
+          console.log("Google Script submission skipped or failed:", error);
+        }
       }
 
       return res.status(201).json({
