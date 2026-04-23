@@ -515,40 +515,31 @@ Sitemap: https://savviwell.com/sitemap.xml`;
         console.log('No referral found or error checking referral:', error);
       }
 
-      // Determine which guide to send based on source
+      // Only send guide emails for specific guide signups, not regular waitlist
       const isInstagramGuide = validatedData.source?.includes('instagram-teen-guide');
-      
-      // Send appropriate guide email to user
-      try {
-        console.log(`🔄 Starting email send process for ${validatedData.email}`);
-        let emailSent = false;
-        
-        if (isInstagramGuide) {
-          emailSent = await sendInstagramGuideEmail({
-            to: validatedData.email,
-            name: validatedData.name,
-            accessToken: newEntry.accessToken || ''
-          });
-          if (emailSent) {
-            console.log(`✅ Instagram guide email successfully sent to ${validatedData.email}`);
+      const isLeadMagnetSignup = validatedData.source?.includes('lead-magnet') || validatedData.source?.includes('3-day');
+
+      if (isInstagramGuide || isLeadMagnetSignup) {
+        try {
+          console.log(`🔄 Starting email send process for ${validatedData.email}`);
+          if (isInstagramGuide) {
+            const emailSent = await sendInstagramGuideEmail({
+              to: validatedData.email,
+              name: validatedData.name,
+              accessToken: newEntry.accessToken || ''
+            });
+            console.log(emailSent ? `✅ Instagram guide email sent to ${validatedData.email}` : `❌ Failed to send Instagram guide email to ${validatedData.email}`);
           } else {
-            console.log(`❌ Failed to send Instagram guide email to ${validatedData.email}`);
+            const emailSent = await sendMealGuideEmail({
+              to: validatedData.email,
+              name: validatedData.name,
+              accessToken: newEntry.accessToken || ''
+            });
+            console.log(emailSent ? `✅ Meal guide email sent to ${validatedData.email}` : `❌ Failed to send meal guide email to ${validatedData.email}`);
           }
-        } else {
-          emailSent = await sendMealGuideEmail({
-            to: validatedData.email,
-            name: validatedData.name,
-            accessToken: newEntry.accessToken || ''
-          });
-          if (emailSent) {
-            console.log(`✅ Meal guide email successfully sent to ${validatedData.email}`);
-          } else {
-            console.log(`❌ Failed to send meal guide email to ${validatedData.email}`);
-          }
+        } catch (error) {
+          console.error('❌ Exception while sending guide email:', error);
         }
-      } catch (error) {
-        console.error('❌ Exception while sending guide email:', error);
-        // Don't fail the request if email fails
       }
 
       // Send email notification to admin with source identification
@@ -613,7 +604,7 @@ Sitemap: https://savviwell.com/sitemap.xml`;
           userType: validatedData.userType,
           healthGoal: validatedData.healthGoal,
           dietaryConcern: validatedData.dietaryConcern,
-          source: validatedData.source || 'Direct'
+          source: validatedData.source || 'Waitlist'
         });
 
         if (!googleSubmitResult.success) {
