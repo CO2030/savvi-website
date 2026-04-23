@@ -21,7 +21,7 @@ function doPost(e) {
     // CRITICAL: Replace this with your actual Google Sheets ID from the URL
     // Example: if your URL is https://docs.google.com/spreadsheets/d/1ABC123XYZ/edit
     // Then use: const spreadsheetId = '1ABC123XYZ';
-    const spreadsheetId = 'YOUR_ACTUAL_SHEETS_ID_HERE';  // ⬅️ REPLACE THIS WITH YOUR REAL ID
+    const spreadsheetId = '1jalDLHhmEk5gVXlVsKiGp5BSUKoVQ1ugnI6vpRffPPQ';
 
     // Check if spreadsheet ID is still placeholder
     if (spreadsheetId === 'PASTE_YOUR_GOOGLE_SHEETS_ID_HERE') {

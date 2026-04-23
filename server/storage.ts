@@ -8,8 +8,16 @@ import {
   referralAchievements, type ReferralAchievement,
   shareEvents, type ShareEvent, type InsertShareEvent
 } from "@shared/schema";
-import { db } from "./db";
+import { db as _db } from "./db";
 import { eq, and, desc } from "drizzle-orm";
+
+const db = _db!;
+
+function generateToken(): string {
+  return Array.from(crypto.getRandomValues(new Uint8Array(16)), byte =>
+    byte.toString(16).padStart(2, '0')
+  ).join('');
+}
 
 // modify the interface with any CRUD methods
 // you might need
@@ -351,10 +359,170 @@ export class DatabaseStorage implements IStorage {
   }
 
   private generateAccessToken(): string {
-    return Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => 
-      byte.toString(16).padStart(2, '0')
-    ).join('');
+    return generateToken();
   }
 }
 
-export const storage = new DatabaseStorage();
+export class InMemoryStorage implements IStorage {
+  private _users: User[] = [];
+  private _waitlist: WaitlistEntry[] = [];
+  private _newsletter: NewsletterSubscriber[] = [];
+  private _contact: ContactSubmission[] = [];
+  private _campaigns: ReferralCampaign[] = [];
+  private _referrals: Referral[] = [];
+  private _achievements: ReferralAchievement[] = [];
+  private _shares: ShareEvent[] = [];
+  private ids = { u: 1, w: 1, n: 1, c: 1, camp: 1, ref: 1, ach: 1, sh: 1 };
+
+  async getUser(id: number) { return this._users.find(u => u.id === id); }
+  async getUserByUsername(username: string) { return this._users.find(u => u.username === username); }
+  async createUser(user: InsertUser): Promise<User> {
+    const u = { ...user, id: this.ids.u++ };
+    this._users.push(u);
+    return u;
+  }
+
+  async createWaitlistEntry(entry: InsertWaitlistEntry & { ipAddress?: string }): Promise<WaitlistEntry> {
+    const e: WaitlistEntry = {
+      id: this.ids.w++,
+      name: entry.name,
+      email: entry.email,
+      userType: entry.userType,
+      healthGoal: entry.healthGoal,
+      dietaryConcern: entry.dietaryConcern,
+      source: entry.source ?? null,
+      accessToken: generateToken(),
+      isUnsubscribed: false,
+      unsubscribedAt: null,
+      utmSource: entry.utmSource ?? null,
+      utmMedium: entry.utmMedium ?? null,
+      utmCampaign: entry.utmCampaign ?? null,
+      utmContent: entry.utmContent ?? null,
+      utmTerm: entry.utmTerm ?? null,
+      referrerUrl: entry.referrerUrl ?? null,
+      landingPage: entry.landingPage ?? null,
+      deviceType: entry.deviceType ?? null,
+      browserName: entry.browserName ?? null,
+      ipAddress: entry.ipAddress ?? null,
+      createdAt: new Date().toISOString(),
+    };
+    this._waitlist.push(e);
+    return e;
+  }
+  async getWaitlistEntryByEmail(email: string) { return this._waitlist.find(e => e.email === email); }
+  async getWaitlistEntryByToken(token: string) { return this._waitlist.find(e => e.accessToken === token); }
+  async getAllWaitlistEntries() { return [...this._waitlist].reverse(); }
+  async deleteWaitlistEntry(id: number) { this._waitlist = this._waitlist.filter(e => e.id !== id); }
+  async unsubscribeUser(token: string): Promise<WaitlistEntry | null> {
+    const e = this._waitlist.find(e => e.accessToken === token);
+    if (!e) return null;
+    e.isUnsubscribed = true;
+    e.unsubscribedAt = new Date().toISOString();
+    return e;
+  }
+  async getUnsubscribeAnalytics() {
+    return { totalUnsubscribed: 0, totalActive: this._waitlist.length, monthlyData: [] };
+  }
+
+  async createNewsletterSubscriber(subscriber: InsertNewsletterSubscriber & { ipAddress?: string }): Promise<NewsletterSubscriber> {
+    const s: NewsletterSubscriber = {
+      id: this.ids.n++,
+      email: subscriber.email,
+      name: subscriber.name ?? null,
+      source: subscriber.source ?? null,
+      utmSource: subscriber.utmSource ?? null,
+      utmMedium: subscriber.utmMedium ?? null,
+      utmCampaign: subscriber.utmCampaign ?? null,
+      utmContent: subscriber.utmContent ?? null,
+      utmTerm: subscriber.utmTerm ?? null,
+      referrerUrl: subscriber.referrerUrl ?? null,
+      landingPage: subscriber.landingPage ?? null,
+      deviceType: subscriber.deviceType ?? null,
+      browserName: subscriber.browserName ?? null,
+      ipAddress: subscriber.ipAddress ?? null,
+      createdAt: new Date().toISOString(),
+    };
+    this._newsletter.push(s);
+    return s;
+  }
+  async getNewsletterSubscriberByEmail(email: string) { return this._newsletter.find(s => s.email === email); }
+  async getAllNewsletterSubscribers() { return [...this._newsletter].reverse(); }
+
+  async createContactSubmission(submission: InsertContactSubmission & { ipAddress?: string }): Promise<ContactSubmission> {
+    const c: ContactSubmission = {
+      id: this.ids.c++,
+      name: submission.name,
+      email: submission.email,
+      reason: submission.reason,
+      message: submission.message ?? null,
+      source: submission.source ?? null,
+      utmSource: submission.utmSource ?? null,
+      utmMedium: submission.utmMedium ?? null,
+      utmCampaign: submission.utmCampaign ?? null,
+      utmContent: submission.utmContent ?? null,
+      utmTerm: submission.utmTerm ?? null,
+      referrerUrl: submission.referrerUrl ?? null,
+      landingPage: submission.landingPage ?? null,
+      deviceType: submission.deviceType ?? null,
+      browserName: submission.browserName ?? null,
+      ipAddress: submission.ipAddress ?? null,
+      createdAt: new Date().toISOString(),
+    };
+    this._contact.push(c);
+    return c;
+  }
+  async getAllContactSubmissions() { return [...this._contact].reverse(); }
+  async deleteContactSubmission(id: number) { this._contact = this._contact.filter(c => c.id !== id); }
+
+  async createReferralCampaign(campaign: InsertReferralCampaign): Promise<ReferralCampaign> {
+    const c: ReferralCampaign = { ...campaign, id: this.ids.camp++, createdAt: new Date().toISOString() };
+    this._campaigns.push(c);
+    return c;
+  }
+  async getAllReferralCampaigns() { return [...this._campaigns]; }
+  async getActiveCampaign() { return this._campaigns.find(c => c.active); }
+
+  async createReferral(referral: InsertReferral): Promise<Referral> {
+    const r: Referral = {
+      id: this.ids.ref++,
+      campaignId: referral.campaignId ?? null,
+      referrerName: referral.referrerName,
+      referrerEmail: referral.referrerEmail,
+      referredName: referral.referredName,
+      referredEmail: referral.referredEmail,
+      signupCompleted: false,
+      source: referral.source ?? null,
+      createdAt: new Date().toISOString(),
+    };
+    this._referrals.push(r);
+    return r;
+  }
+  async getAllReferrals() { return [...this._referrals]; }
+  async getReferralsByReferrer(email: string) { return this._referrals.filter(r => r.referrerEmail === email); }
+  async markReferralAsSignedUp(referredEmail: string) {
+    const r = this._referrals.find(r => r.referredEmail === referredEmail);
+    if (r) r.signupCompleted = true;
+  }
+  async checkAndCreateAchievement(_referrerEmail: string, _campaignId: number): Promise<ReferralAchievement | null> {
+    return null;
+  }
+  async getAllAchievements() { return [...this._achievements]; }
+
+  async createShareEvent(shareEvent: InsertShareEvent): Promise<ShareEvent> {
+    const e: ShareEvent = { ...shareEvent, id: this.ids.sh++, createdAt: new Date().toISOString() };
+    this._shares.push(e);
+    return e;
+  }
+  async getShareEventsByEmail(email: string) { return this._shares.filter(e => e.sharerEmail === email); }
+  async getAllShareEvents() { return [...this._shares]; }
+  async getShareAnalytics() {
+    return {
+      totalShares: this._shares.length,
+      sharesByPlatform: {} as Record<string, number>,
+      topSharers: {} as Record<string, number>,
+      conversionTracking: { totalSharedUsers: 0, signupsFromShares: 0 },
+    };
+  }
+}
+
+export const storage = _db ? new DatabaseStorage() : new InMemoryStorage();
